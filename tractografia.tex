@@ -1,11 +1,38 @@
-Dado que las MRI convencionales basan su contraste en el tiempo de relajaci\'on
-de los tejidos, la materia blanca se ve homogenea tanto en las im\'agenes de tipo
-T1 como en las de tipo T2. 
+\section{Tractograf\'ia}
 
-En cambio, las Im\'agenes de Difusi\'on por
-Resonancia Magn\'etica (dMRI) se basan en la idea de que las particulas 
-de agua tienden a moverse en la direcci\'on de las fibras donde se encuentran.
-Por ello se cree que estimando las direcciones de difusi\'on es posible estimar
-la estructura de los axones en el cerebro.
+Dipy es una librer\'ia para python que contiene, entre otras herramientas,
+varios algor\'itmos para generar \textit{streamlines}. Un \textit{streamline} es
+uno de los posibles caminos que puede realizar una particula, comenzando desde una
+semilla en la materia blanca, siguiendo un mapa probabil\'istico de direcciones.
+El repetir este experimento es una forma posible de crear tractogramas. Para este
+trabajo eleg\'imos utilizar la implementaci\'on de \textit{LocalTracking} (LT de
+aqu\'i en mas) que se encuentra en el paquete \textit{dipy.tracking.local}; y 
+una implementaci\'on  pr\'opia (MSL de aqu\'i en mas) que utiliza la clase \textit{ProbabilisticDirectionGetter} del paquete \textit{dipy.direction} y la funci\'on
+\textit{markov\_streamlines} de \textit{dipy.tracking.markov}.
 
-\newpage
+Es importante destacar que como la interfaz del \textit{DirectionGetter} (DG) 
+no es compatible con la funci\'on \textit{markov\_streamlines} (ver documentaci\'on
+de dipy) fue necesario crear una clase que hiciera de puente entre ambas. Dicha 
+clase se encuentra en el paquete scripts.proba, y lo que hace es seleccionar 
+una direcci\'on inicial al azar entre las propuestas por DG, y la direcci\'on
+propuesta por DG luego de cada paso hasta que se sale de la mascara de materia
+blanca. 
+
+Para utilizar cada uno de estos algoritmos es necesario encuadrar la informaci\'on
+de dMRI dentro de un modelo. En este caso se utiliz\'o el modelo 
+\textit{ Constrained Spherical Deconvolve Model} para ambos.  
+Por cuestiones de \textit{performance} se gener\'o un script para computar en
+paralelo los \textit{streamlines} de cada semilla por cada algoritmo. Dicho script 
+fue ejecutado en el cluster del INRIA.
+
+\textbf{notebook: Tractograf\'ia probabil\'istica.}
+
+\subsection{Estabilidad Algoritmos}
+
+Para determinar si el tractograma medio converg\'ia se utiliz\'o un n\'umero 
+peque\~no de semillas y la t\'ecnica  estad\'istica de \textit{bootstrap}.
+En principio se comput\'o un total de 15.000 \textit{streamlines} por semilla.
+Luego por cada semilla se calcul\'o el tractograma medio y la varianza de 
+cada voxel utilizando mil submuestras aleator\'ias del mismo tama\~o. Esto se
+repitio\'o con varios tama\~nos de submuestra para ver as\'i que tan variable
+era la muestra a medida que crec\'ia.

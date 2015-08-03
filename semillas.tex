@@ -20,7 +20,14 @@ la estructura $B$ en cada voxel $v$ que vale uno de $A$, si existe un elemento
 superpuesto entre $A$ y $B$ donde $B$ vale uno y $A$ vale cero, entonces cambiar
 $v$ a cero. \\
 
-%[IMAGEN DE EROSI\'ON]  %users.utcluj.ro/~raluca/ip_2014/ipl_07e.pdf
+\begin{figure}[h!]
+                                                                                                                        
+\begin{minipage}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{img/erosion.png}
+    \caption{Ejemplo de erosi\'on en imagen binaria}
+\end{minipage} ~
+
+\end{figure}  
 
 El mapa de distancias fue generado utilizando el \textit{Fast Marching Method}. 
 \textit{FMM} es un m\'etodo para resolver num\'ericamente una versi\'on 
@@ -45,6 +52,17 @@ $u(v)$ tambi\'en representa la distancia mas corta que existe entre cualquier
 punto $v$ de la imagen y el borde de $\Omega$. \textit{FMM} resuelve este problema
 en tiempo $O(n log(n))$ \cite{Sethian2001}, siendo $n$ la cantidad de voxels de 
 la imagen.
+
+\begin{figure}[h!]
+                                                                                                                        
+\begin{minipage}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{img/fmm.png}
+    \caption{FMM sobre el hemisferio derecho, el borde la materia blanca fue
+    resaltado intensionalmente}
+\end{minipage} ~
+
+\end{figure}  
+
 
 El problema de esta primer m\'etodo es que el borde de la materia blanca calculado
 de esta manera no coincide con el borde de la corteza definido en la superficie
