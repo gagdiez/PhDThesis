@@ -1,6 +1,6 @@
 \chapter{Introducci\'on}
 
-En la neurociencia moderna existe el consentimiento general de que el cerebro
+En la neurociencia moderna existe la teor\'ia de que el cerebro
 puede ser dividido en \'areas de acuerdo a distintos criterios estructurales,
 siendo la citoarquitectura de Broadmann \cite{Brodmann1909} una de la m\'as conocidas.
 Actualmente existe evidencia de que es posible atribuir un criterio funcional
@@ -8,37 +8,40 @@ a cada una de estas regiones, como mover la mano o procesar el lenguaje
 \cite{Greicius2003}. No obstante, el c\'omo se relacionan dichas \'areas con acciones
 complejas sigue siendo un problema abierto \cite{Barch2013}. As\'i mismo, tampoco
 se conoce si esta divisi\'on es \'unica, y en tal caso, qu\'e l\'imites definen
-a cada \'area. Por ello existe la necesidad de entender c\'omo es que el cerebro
-est\'a conectado estructuralmente, esto es, entender qu\'e regiones est\'an 
-conectadas f\'isicamente por axones y cu\'anto influye esto en el aspecto funcional
-del cerebro. La relaci\'on funci\'on-estructura posee diversas aplicaciones en la
+a cada \'area. La relaci\'on funci\'on-estructura posee diversas aplicaciones en la
 medicina, como por ejemplo el planeamiento quir\'urgico \cite{Stufflebeam2011}
-\cite{Oishi2010}; asistencia durante la cirug\'ia \cite{Bello2008} y 
-rehabilitaci\'on \cite{Song2014} de pacientes. \\
+\cite{Oishi2010}; asistencia durante la cirug\'ia \cite{Bello2008} y rehabilitaci\'on
+\cite{Song2014} de pacientes. Por ello existe la necesidad de entender c\'omo es
+que el cerebro est\'a conectado estructuralmente, esto es, entender qu\'e regiones
+est\'an conectadas f\'isicamente por axones y cu\'anto influye esto en el aspecto
+funcional del cerebro. \\
 
-El reciente desarrollo de la Resonancia Magn\'etica de Difusi\'on (dMRI) ha
-aportado nuevas t\'ecnicas para estudiar la conectividad estructural.
+El cerebro puede dividirse en dos tipos de tejido: materia blanca y materia gris.
+La corteza est\'a formada por materia gris, la cual es densa en neuronas, mientras
+que la materia blanca est\'a compuesta por axones que las conectan entre si \cite{Dale2008}.
+El reciente desarrollo de la Resonancia Magn\'etica de Difusi\'on (dMRI) permiti\'o
+desarrollar nuevas t\'ecnicas para estudiar la conectividad estructural \cite{Taylor1985}. 
 En particular, el conocer la intensidad de difusi\'on que existe en cada punto del 
-cerebro permite caracterizar los axones dentro de la materia blanca. Una forma 
-de hacerlo es utilizando algoritmos de tractograf\'ia \cite{Descoteaux2009}
+cerebro permite caracterizar los axones dentro de la materia blanca \cite{Hagmann2006}.
+Una forma de hacerlo es utilizando algoritmos de tractograf\'ia \cite{Descoteaux2009}
 \cite{Jbabdi2007}, estos toman un punto del cerebro como semilla y devuelven un
 tractograma. Un tractograma es una imagen donde cada voxel representa la
-probabilidad de que ese punto del cerebro est\'e conectado a la semilla elegida.
+probabilidad de que ese punto del cerebro est\'e conectado a la semilla elegida
+mediante un conjunto de axones. 
 Las probabilidades se estiman mediante un procedimiento Monte Carlo, simulando el
 recorrido de un n\'umero de part\'iculas de agua por la materia blanca comenzando
-desde dicha semilla. Recordemos que la corteza est\'a formada
-por materia gris, la cual es densa en neuronas, mientras que la materia blanca
-est\'a compuesta por axones que las conectan entre si. Como cada neurona posee
+desde dicha semilla. Como cada neurona posee
 asociado un ax\'on, colocar semillas en la interfaz entre la materia gris y la
 blanca permite caracterizar las regiones de la corteza \cite{Mori2002}
 \cite{Anwander2006}. Distintos grupos han propuesto el agrupar estas semillas
-empleando un algoritmo de clustering para definir nuevos criterios de parcelamiento. \\
+empleando un algoritmo de clustering para definir nuevos criterios de parcelamiento
+de la corteza cerebral. \\
 
 \vspace{0.3cm}
 
-Los algoritmos de clustering son una herramienta muy conocida en los
-campos de \textit{Machine Learning} y \textit{Data Mining} ya que permiten
-agrupar objetos en base a alg\'un criterio de similitud. Ejemplos de ellos son: 
+Los algoritmos de clustering son una herramienta de an\'alisis en campos como
+\textit{Machine Learning} y \textit{Data Mining}. Permiten agrupar objetos
+en base a alg\'un criterio de similitud. Ejemplos de ellos son: 
 
 \begin{itemize}
     \item K-means: Divide $n$ vectores en $k$ clusters diferentes, siendo $k$
@@ -46,9 +49,10 @@ agrupar objetos en base a alg\'un criterio de similitud. Ejemplos de ellos son:
                    por los elementos que m\'as cerca est\'an al vector medio del
                    mismo. \cite{Hartigan1979}
     \item Agglomerative Hierarchical Clustering: Cada observaci\'on comienza en 
-                   un cluster distinto. En cada paso une dos clusters siguiendo
-                   alg\'un criterio de similitud y crea un elemento 
-                   que representa al nuevo cluster. La jerarqu\'ia resultante 
+                   un cluster distinto. Luego, el algoritmo selecciona iterativamente
+                   dos clusters siguiendo alg\'un criterio de similitud, los agrupa
+                   en un nuevo cluster y crea un elemento representativo de este.
+                   La jerarqu\'ia resultante de agrupar todos los clusters
                    es expresada como un dendrograma. \cite{Mining2009}
     \item Gaussian Mixture: Asume que todas las observaciones provienen de un 
                    n\'umero finito de distribuciones Gaussianas con par\'ametros
@@ -59,51 +63,47 @@ agrupar objetos en base a alg\'un criterio de similitud. Ejemplos de ellos son:
 Cada algoritmo utiliza distintos modelos de cluster, por lo que el espacio de
 aplicaci\'on y el resultado de cada uno var\'ia significativamente. \\
 
-Al querer utilizar el clustering de semillas para parcelar la corteza cerebral
-se deben enfrentar una serie de problemas, ya que todos los pasos involucrados
-son computacionalmente caros en t\'erminos espaciales y temporales. El primero
-es c\'omo seleccionar y posicionar correctamente las semillas a utilizar. Es 
-necesario contar con alguna manera de discriminar los voxels que solo pertenecen
-a la corteza, a su vez, en base a qu\'e tan profundo se desea que est\'en las semillas 
-en la materia blanca, ser\'a necesario implementar un algoritmo que elija las 
-posiciones teniendo en cuenta la morfolog\'ia del cerebro. Al momento de generar
-los tractogramas la performance es un factor importante a tener en cuenta. En la
-literatura actual se utilizan hasta cien mil part\'iculas \cite{Moreno-Dominguez2014}
-para generar cada tractograma, si se tiene en cuenta que en general hay mas de
-cincuenta mil semillas (ver Secci\'on) entonces es claramente necesario el paralelizar
-la creaci\'on de estos. Se debe utilizar una manera eficiente de almacenarlos, 
-dado que si se utiliza una matriz del tama\~no de la dMRI suceder\'a que entre
-el 40\% y el 80\% (ver Secci\'on X) de los valores guardados ser\'an nulos. El
-clustering en si tambi\'en es importante de analizar. Dependiendo el algoritmo,
-la m\'etrica y el tipo de \textit{linkage} que se utilice tanto los costos
-computacionales como los resultados variar\'an significativamente. Si adem\'as 
-se eligi\'o alguna estructura distinta a la implementaci\'on est\'andar de una
-matriz para representar las \textit{features} va a ser necesario modificar las
-implementaciones de clustering para que utilicen est\'as de manera eficiente.
-Finalmente, una vez que las semillas fueron agrupadas, a\'un es necesario mapear
-cada semilla con su respectivo voxel en la corteza cerebral. \\
+El primer paso a realizar para parcelar la corteza utilizando clustering
+de semillas es generar los tractogramas. 
+Seleccionar los voxels que ser\'an semilla requiere contar con alguna manera de
+discriminar entre materia blanca y materia gris en la imagen. A su vez, si se
+desea que las semillas est\'en a cierta distancia de la corteza, se debe tener
+cuidado en respetar la forma del cerebro. En la literatura actual se
+utilizan hasta veinte mil semillas por hemisferio \cite{Moreno-Dominguez2014} y
+cien mil part\'iculas por semilla \cite{Anwander2006} para generar los tractogramas.
+Realizar cada uno en paralelo es una forma de optimizar el tiempo que toma
+su creaci\'on. Al momento de representarlos es importante seleccionar la estructura
+correcta. Una matriz del tama\~no de la dMRI es la implementaci\'on mas sencilla, 
+pero solo el 30\% (ver Secci\'on X) de los valores ser\'an no nulos. Luego, para
+agrupar los tractogramas se debe seleccionar un algoritmo, una m\'etrica y 
+un tipo de \textit{linkage}. Dependiendo la representaci\'on elegida deber\'a
+adaptarse el algoritmo para obtener una mejor eficacia. Finalmente, una vez
+obtenidos los clusters, es necesario mapear cada semilla con su respectivo voxel
+en la corteza cerebral. En resumen, primero hay que situar las semillas en la
+materia blanca. Luego se deben generar los tractogramas de estas. Finalmente se
+debe aplicar el algoritmo de clustering. Todos estos pasos son caros en terminos
+computacionales y brindan distintos resultados dependiendo de las decisiones que
+se tomen. \\
 
-En los \'ultimos a\~nos se han estudiado los resultados de aplicar distintos 
-tipos de clustering sobre tractogramas para parcelar la corteza.  Por
-ejemplo Behrens et. al \cite{Behrens2003} utilizan \textit{Target-Based Clustering},
-este algoritmo define como restricci\'on que cada \'area solo puede estar
-conectada con alguna otra perteneciente a un conjunto predefinido. Anwander et.
-al \cite{Anwander2006} parcelan el \'Area de Broca utilizando \textit{k-means},
-para lo cual se necesita definir un n\'umero de parcelas a encontrar. 
-Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} sit\'uan semillas en la
-interfaz entre materia blanca y materia gris, a partir de las cuales se crean
-tractogramas. Dichos tractogramas son luego agrupados utilizando el algoritmo
-\textit{Agglomerative Hierarchical Clustering} con la distancia coseno como
-medida de similitud, y un centroide como representante de cada Cluster. La gran
-ventaja de este \'ultimo caso es que la parcelaci\'on resultante no posee
-restricciones respecto al n\'umero de parcelas a generar, o sobre como las mismas 
-deber\'ian estar conectadas. Por el contrario, dependiendo la forma en que se
-desee cortar el dendrograma se obtendr\'an distintos grados de granularidad en
-la parcelaci\'on. En resumen, se han propuesto varios m\'etodos para parcelar la
-corteza cerebral, actualmente el trabajo de Moreno-Dominguez es el que posee menor 
-cantidad de restricciones. Sin embargo pareciera haber un problema formal en \'el,
-ya que no queda claro si el criterio que utilizan para medir distancias entre
-clusters y la forma de representar la uni\'on de los mismos son compatibles. \\
+Distintos grupos han aplicado diferentes criterios en cada uno de los pasos
+nombrados para parcelar la corteza. Por ejemplo, Behrens et. al \cite{Behrens2003}
+utilizan \textit{Target-Based Clustering}, este algoritmo define como
+restricci\'on que cada \'area solo puede estar conectada con alguna otra
+perteneciente a un conjunto predefinido. Anwander et. al \cite{Anwander2006} 
+parcelan el \'Area de Broca utilizando \textit{k-means}, para lo cual se necesita
+definir un n\'umero de parcelas a encontrar. Moreno-Dominguez et al. 
+\cite{Moreno-Dominguez2014} sit\'uan semillas en la interfaz entre materia blanca
+y materia gris, a partir de las cuales se crean tractogramas. Dichos tractogramas
+son luego agrupados utilizando el algoritmo \textit{Agglomerative Hierarchical
+Clustering} con la distancia coseno como medida de similitud, y un centroide como
+representante de cada Cluster. La gran ventaja de este \'ultimo caso es que la
+parcelaci\'on resultante no posee restricciones respecto al n\'umero de parcelas
+a generar, o sobre como las mismas deber\'ian estar conectadas. Por el contrario,
+dependiendo la forma en que se desee cortar el dendrograma se obtendr\'an
+distintos grados de granularidad en la parcelaci\'on. Sin embargo pareciera haber
+un problema formal en \'el, ya que no queda claro si el criterio que utilizan para
+medir distancias entre clusters y la forma de representar la uni\'on de los mismos
+son compatibles.  \\
 
 El objetivo de este trabajo es analizar los m\'etodos de clustering jer\'arquico
 actuales para parcelar toda la corteza y proponer un nuevo enfoque. Utilizamos
