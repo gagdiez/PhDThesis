@@ -17,8 +17,9 @@ est\'an conectadas f\'isicamente por axones y cu\'anto influye esto en el aspect
 funcional del cerebro. \\
 
 El cerebro puede dividirse en dos tipos de tejido: materia blanca y materia gris.
-La corteza est\'a formada por materia gris, la cual es densa en neuronas, mientras
-que la materia blanca est\'a compuesta por axones que las conectan entre si \cite{Dale2008}.
+La corteza est\'a formada por materia gris, la cual es densa en neuronas. Estas 
+neuronas est\'an conectadas entre si mediante axones. Se denomina materia blanca
+al tejido donde la proporci\'on de axones es superior a la de neuronas \cite{Dale2008}.
 El reciente desarrollo de la Resonancia Magn\'etica de Difusi\'on (dMRI) permiti\'o
 desarrollar nuevas t\'ecnicas para estudiar la conectividad estructural \cite{Taylor1985}. 
 En particular, el conocer la intensidad de difusi\'on que existe en cada punto del 
@@ -27,12 +28,11 @@ Una forma de hacerlo es utilizando algoritmos de tractograf\'ia \cite{Descoteaux
 \cite{Jbabdi2007}, estos toman un punto del cerebro como semilla y devuelven un
 tractograma. Un tractograma es una imagen donde cada voxel representa la
 probabilidad de que ese punto del cerebro est\'e conectado a la semilla elegida
-mediante un conjunto de axones. 
-Las probabilidades se estiman mediante un procedimiento Monte Carlo, simulando el
-recorrido de un n\'umero de part\'iculas de agua por la materia blanca comenzando
-desde dicha semilla. Como cada neurona posee
-asociado un ax\'on, colocar semillas en la interfaz entre la materia gris y la
-blanca permite caracterizar las regiones de la corteza \cite{Mori2002}
+mediante un conjunto de axones. Las probabilidades se estiman mediante un 
+procedimiento Monte Carlo, simulando el recorrido de un n\'umero de part\'iculas
+de agua por la materia blanca comenzando desde dicha semilla. Como cada neurona
+posee asociado un ax\'on, colocar semillas en la interfaz entre la materia gris
+y la blanca permite caracterizar las regiones de la corteza \cite{Mori2002}
 \cite{Anwander2006}. Distintos grupos han propuesto el agrupar estas semillas
 empleando un algoritmo de clustering para definir nuevos criterios de parcelamiento
 de la corteza cerebral. \\
@@ -61,35 +61,34 @@ en base a alg\'un criterio de similitud. Ejemplos de ellos son:
 \end{itemize}
 
 Cada algoritmo utiliza distintos modelos de cluster, por lo que el espacio de
-aplicaci\'on y el resultado de cada uno var\'ia significativamente. \\
+aplicaci\'on y el resultado var\'ia significativamente de uno a otro. \\
 
-El primer paso a realizar para parcelar la corteza utilizando clustering
-de semillas es generar los tractogramas. 
-Seleccionar los voxels que ser\'an semilla requiere contar con alguna manera de
-discriminar entre materia blanca y materia gris en la imagen. A su vez, si se
-desea que las semillas est\'en a cierta distancia de la corteza, se debe tener
-cuidado en respetar la forma del cerebro. En la literatura actual se
-utilizan hasta veinte mil semillas por hemisferio \cite{Moreno-Dominguez2014} y
-cien mil part\'iculas por semilla \cite{Anwander2006} para generar los tractogramas.
-Realizar cada uno en paralelo es una forma de optimizar el tiempo que toma
-su creaci\'on. Al momento de representarlos es importante seleccionar la estructura
-correcta. Una matriz del tama\~no de la dMRI es la implementaci\'on mas sencilla, 
-pero solo el 30\% (ver Secci\'on X) de los valores ser\'an no nulos. Luego, para
-agrupar los tractogramas se debe seleccionar un algoritmo, una m\'etrica y 
-un tipo de \textit{linkage}. Dependiendo la representaci\'on elegida deber\'a
-adaptarse el algoritmo para obtener una mejor eficacia. Finalmente, una vez
-obtenidos los clusters, es necesario mapear cada semilla con su respectivo voxel
-en la corteza cerebral. En resumen, primero hay que situar las semillas en la
-materia blanca. Luego se deben generar los tractogramas de estas. Finalmente se
-debe aplicar el algoritmo de clustering. Todos estos pasos son caros en terminos
-computacionales y brindan distintos resultados dependiendo de las decisiones que
-se tomen. \\
+Como ya fue dicho, una forma de parcelar la corteza cerebral es haciendo un 
+clustering de semillas.  El primer paso para poder hacer esto es seleccionar
+la posici\'on de las mismas. Seleccionar los voxels que ser\'an semilla requiere
+contar con alguna manera de discriminar entre materia blanca y materia gris en
+la imagen. A su vez, si se desea que las semillas est\'en a cierta distancia de
+la corteza, se debe tener cuidado en respetar la forma del cerebro. En la
+literatura actual se utilizan hasta veinte mil semillas por hemisferio
+\cite{Moreno-Dominguez2014} y cien mil part\'iculas por semilla \cite{Anwander2006}
+para generar los tractogramas. Realizar cada uno en paralelo es una forma de 
+optimizar el tiempo que toma su creaci\'on. Al momento de representarlos es 
+importante seleccionar la estructura correcta. Una matriz del tama\~no de la dMRI
+es la implementaci\'on mas sencilla, pero solo el 30\% (ver Secci\'on X) de los
+valores ser\'an no nulos. Luego, para agrupar los tractogramas se debe seleccionar
+un algoritmo, una m\'etrica y un tipo de \textit{linkage}. Dependiendo la 
+representaci\'on elegida deber\'a adaptarse el algoritmo para obtener una mejor
+eficacia. Finalmente, una vez obtenidos los clusters, es necesario mapear cada
+semilla con su respectivo voxel en la corteza cerebral. En resumen, primero hay
+que situar las semillas en la materia blanca. Luego se deben generar los 
+tractogramas de estas. Finalmente se debe aplicar el algoritmo de clustering.
+Todos estos pasos son caros en t\'erminos computacionales. \\
 
-Distintos grupos han aplicado diferentes criterios en cada uno de los pasos
-nombrados para parcelar la corteza. Por ejemplo, Behrens et. al \cite{Behrens2003}
-utilizan \textit{Target-Based Clustering}, este algoritmo define como
-restricci\'on que cada \'area solo puede estar conectada con alguna otra
-perteneciente a un conjunto predefinido. Anwander et. al \cite{Anwander2006} 
+Dada la cantidad de opciones a tener en cuenta, distintos grupos han aplicado
+diferentes criterios de clustering para parcelar la corteza. Por ejemplo, Behrens
+et. al \cite{Behrens2003} utilizan \textit{Target-Based Clustering}, este algoritmo
+define como restricci\'on que cada \'area solo puede estar conectada con alguna
+otra perteneciente a un conjunto predefinido. Anwander et. al \cite{Anwander2006} 
 parcelan el \'Area de Broca utilizando \textit{k-means}, para lo cual se necesita
 definir un n\'umero de parcelas a encontrar. Moreno-Dominguez et al. 
 \cite{Moreno-Dominguez2014} sit\'uan semillas en la interfaz entre materia blanca
@@ -100,39 +99,48 @@ representante de cada Cluster. La gran ventaja de este \'ultimo caso es que la
 parcelaci\'on resultante no posee restricciones respecto al n\'umero de parcelas
 a generar, o sobre como las mismas deber\'ian estar conectadas. Por el contrario,
 dependiendo la forma en que se desee cortar el dendrograma se obtendr\'an
-distintos grados de granularidad en la parcelaci\'on. Sin embargo pareciera haber
-un problema formal en \'el, ya que no queda claro si el criterio que utilizan para
-medir distancias entre clusters y la forma de representar la uni\'on de los mismos
-son compatibles.  \\
+distintos grados de granularidad en la parcelaci\'on. Sin embargo, no queda claro
+que el criterio utilizado para medir distancias entre clusters y la forma de
+representar la uni\'on de los mismos sean compatibles. Esto provoca un problema 
+de formalidad. Entonces, si bien el m\'etodo de Moreno-Dominguez no asume 
+cuantas o como son las \'areas a encontrar, a\'un posee la formalidad suficiente.
+Por esto es importante seguir investigando nuevos modelos.  \\
 
 El objetivo de este trabajo es analizar los m\'etodos de clustering jer\'arquico
 actuales para parcelar toda la corteza y proponer un nuevo enfoque. Utilizamos
-la base de datos provista por Human Connectome Project, \'esta posee la dMRI de
-varios sujetos organizada por sexo y edad, con la ventaja de que todos los datos
-est\'an ya preprocesados. Comenzamos analizando distintos algoritmos de
-tractograf\'ia, dada la naturaleza estoc\'astica de los mismos es importante
-comprobar si el resultado se estabiliza al utilizar un n\'umero suficientemente
-grande de semillas. Tambi\'en es importante determinar si algoritmos diferentes
-convergen a una misma soluci\'on. En particular mostramos que para dos
-implementaciones distintas, ambas basadas en la librer\'ia \textit{dipy}, los
-tractogramas convergen, y lo hacen a resultados similares. Luego comparamos distintos 
-m\'etodos para posicionar las semillas dentro de la materia blanca a cierta 
-distancia de la corteza cerebral. Concluimos que el mejor m\'etodo se basa en 
-utilizar una implementaci\'on de \textit{Fast Marching Method} para generar un
-mapa de distancias con signo de cada voxel a la materia gris, respetando la estructura
-de la materia blanca. Las posiciones son entonces seleccionadas partiendo desde
-cada punto de la corteza y caminando por el gradiente del mapa de distancias una
-determinada distancia. Esto nos permite a su vez poder guardar un mapeo directo
-desde las semillas hasta la corteza cerebral. Una vez que tenemos las semillas
-procedemos a generar los tractogramas, para ello paralelizamos los experimentos
-Monte Carlo, corriendo cada uno en un nodo distinto de un cluster. Cada tractograma 
-es almacenado por su cuenta, pero al mismo tiempo se guarda una matriz de 
-dimensiones $NxM$, siendo $N$ el n\'umero de tractogramas y $M$ la longitud 
-de los mismos al transformarlos a una sola dimensi\'on. Mostramos que la mejor
-forma de almacenar los mismos es utilizando matrices ralas. Finalmente analizamos
-el m\'etodo de clustering descrito por Moreno-Dominguez y presentamos una mejora 
-utilizando una transformaci\'on entre el espacio de los tractogramas
-y un espacio vectorial donde es posible utilizar la m\'etrica euclidiana. 
+la base de datos provista por Human Connectome Project [cita], \'esta posee la
+dMRI de varios sujetos organizada por sexo y edad, con la ventaja de que todos
+los datos est\'an ya preprocesados. Esto nos permite enforcarnos en el problema
+del clustering, a la vez que permite reproducir con mayor facilidad nuestro 
+estudio. \\
+
+Comenzamos analizando distintos algoritmos de tractograf\'ia. Dada la naturaleza
+estoc\'astica de los mismos es importante comprobar si el resultado se estabiliza
+al utilizar un n\'umero suficientemente grande de semillas. Tambi\'en es
+importante determinar si algoritmos diferentes convergen a una misma soluci\'on.
+En particular mostramos que para dos implementaciones distintas, ambas basadas 
+en la librer\'ia \textit{dipy}, los tractogramas convergen. Mas a\'un, lo hacen
+a resultados similares. \\
+
+Luego comparamos distintos m\'etodos para posicionar las semillas dentro de la
+materia blanca a cierta distancia de la corteza cerebral. Concluimos que el mejor
+m\'etodo se basa en  utilizar una implementaci\'on de \textit{Fast Marching Method}
+para generar un mapa de distancias con signo de cada voxel a la materia gris,
+respetando la estructura de la materia blanca. Las posiciones son entonces 
+seleccionadas partiendo desde cada punto de la corteza y caminando por el 
+gradiente del mapa de distancias una determinada distancia. Esto nos permite a
+su vez poder guardar un mapeo directo desde las semillas hasta la corteza cerebral. \\
+
+Una vez que tenemos las semillas procedemos a generar los tractogramas, para ello
+paralelizamos los experimentos Monte Carlo, corriendo cada uno en un nodo distinto
+de un cluster. Cada tractograma es almacenado por su cuenta, pero al mismo tiempo
+se guarda una matriz de dimensiones $NxM$, siendo $N$ el n\'umero de tractogramas
+y $M$ la longitud de los mismos al transformarlos a una sola dimensi\'on.
+Mostramos que la mejor forma de almacenar los mismos es utilizando matrices ralas. \\
+
+Finalmente analizamos el m\'etodo de clustering descrito por Moreno-Dominguez y
+presentamos una mejora utilizando una transformaci\'on entre el espacio de los
+tractogramas y un espacio vectorial donde es posible utilizar la m\'etrica euclidiana. 
 Mostramos que nuestro m\'etodo permite salvar los problemas formales que el
 anterior presenta. Durante este \'ultimo paso tambi\'en presentamos una 
 implementaci\'on propia del algoritmo \textit{Agglomerative Hierarchical

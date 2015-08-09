@@ -1,14 +1,17 @@
 \section{Situando semillas}
-
+Como ya dijimos, la materia gris est\'a compuesta principalmente por neuronas,
+y la materia blanca por axones que las comunican. Por ello es com\'un situar
+las semillas en la interfaz entre las dos materias.  
 En [pedir paper a demian] muestran que la materia blanca cercana a la materia gris 
 est\'a interconectada por peque\~nos axones. Como estamos interesados en realizar
 un estudio de las conexiones entre regiones distantes del cerebro, decidimos
 situar las semillas a \textit{3mm} de la corteza, evitando as\'i el efecto de
-\'estos axones locales. 
+\'estos axones locales. El problema es que la corteza del cerebro no es uniforme,
+sino que est\'a llena de surcos y ondulaciones. Calcular la distancia entonces
+no es inmediato, necesita un m\'etodo que tome estas propiedades en cuenta. 
 
-Para seleccionar los voxels correspondientes a cada semilla representativa de la
-corteza lo primero que intentamos fue: tomar la parcelaci\'on del sujeto; 
-quedarnos solo con la materia blanca y calcular el borde de la misma; generar un
+El primer intento consisti\'o en tomar la parcelaci\'on del sujeto; quedarnos solo 
+con la materia blanca y calcular el borde de la misma; generar un
 mapa de distancias sobre la materia blanca y quedarnos con los voxels que est\'an
 a la distancia deseada. 
 
