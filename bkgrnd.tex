@@ -11,9 +11,9 @@ momento magn\'etico $\vec{\mu}$ es puesto dentro de un campo magn\'etico,
 comenzara a preceder en torno a la direcci\'on de este \'ultimo con una 
 frecuencia: 
 
-$$ \omega = \vec{\mu} \times \vec{B} = g\vec{J} \times B $$
+$$ \omega = \vec{\mu} \times \vec{B} = \gamma \vec{J} \times B $$
 
-Denominada frecuencia de Larmor, donde $\omega$ es la velocidad angular; $g$ es
+Denominada frecuencia de Larmor, donde $\omega$ es la velocidad angular; $\gamma$ es
 la relaci\'on giromagn\'etica del prot\'on; $\vec{J}$ es su momento angular y $B$
 es la fuerza del campo. A su vez, la cantidad de energ\'ia del campo determinara
 el \'angulo entre $\mu$ y el campo mientras sucede la precesi\'on
@@ -123,24 +123,25 @@ Las mol\'eculas dentro de un fluido en equilibrio no se encuentran est\'aticas,
 sino que se mueven realizando un camino aleatorio. A este fen\'omeno se lo 
 conoce con el nombre de difusi\'on.  \\
 
-En 1946 Bloch \cite{Bloch1946} demostr\'o que la variaci\'on de la magnetizaci\'on
+En 1946 Bloch \cite{Bloch1946} prueba que la variaci\'on de la magnetizaci\'on
 nuclear en el tiempo se puede expresar como:
 
-$$ \frac{dM(t)}{dt} = g M(t) \times B(t) 
+$$ \frac{dM(t)}{dt} = \gamma M(t) \times B(t) 
                       - \frac{M(t) \vec{x} + M(t)\vec{y}}{T_2}
                       - \frac{(M(t)-M(0))\vec{z}}{T1} $$
 
-Donde $B$ es la intensidad del campo magn\'etico; T1 y T2 son tiempos de
-relajaci\'on. Luego, en 1956, H.C. Torrey \cite{Torrey1956} agreg\'o a la
-ecuaci\'on      los efectos de la difusi\'on:
+Donde $\gamma$ es la relaci\'on giromagn\'etica, $B$ es la intensidad del campo
+magn\'etico y T1, T2 son tiempos de relajaci\'on. Mas tarde, en 1956, H.C. Torrey \cite{Torrey1956}
+observa que la magnetizaci\'on tambi\'en se pierde por efecto de la difusi\'on y 
+extiende la ecuaci\'on de Bloch:
 
 $$ \frac{dM(t)}{dt} = g M(t) \times B(t) 
                       - \frac{M(t) \vec{x} + M(t)\vec{y}}{T_2}
                       - \frac{(M(t)-M(0))\vec{z}}{T1} 
                       + \nabla \cdot D \nabla M(t) $$
 
-Donde a $D$ se lo conoce como el tensor de difusi\'on. Esta \'ultima relaci\'on
-es conocida como la ecuaci\'on de Bloch-Torrey.\\
+Donde $D$ es el tensor de difusi\'on. Esta relaci\'on se conoce como la
+ecuaci\'on de Bloch-Torrey.\\
 
 Imaginemos el siguiente experimento: luego de aplicar el pulso RF agregamos un
 campo gradiente $G_1=G_d$ durante un tiempo $\delta$ peque\~no. Como ya explicamos,
@@ -187,30 +188,45 @@ de la difusi\'on se traducira en perdida de se\~nal.\\
 En 1965 Stejskal y Tanner \cite{Stejskal1965} cren una secuencia denominada 
 \textit{Pulsed Gradient Spin Echo}. En la misma utilizan dos pulsos de RF y 
 un gradiente magn\'etico para generar un desfase entre los protones (ver Figura
-\ref{fig:fgp}). Bajo estas condiciones la ecuaci\'on de Bloch-Torrey tiene
-soluci\'on, y la atenuaci\'on de la se\~nal se puede expresar como:
+\ref{fig:fgp}). Luego demuestran que asumiendo un $\delta$ peque\~no la ecuaci\'on
+de Bloch-Torrey tiene soluci\'on, y la atenuaci\'on de la se\~nal se puede expresar
+como:
 
 \vspace{0.3cm}
 
-$$ E(b) = \frac{S(b)}{S_0} = e^{-b D} $$
-$$ b = -g^2 B^2 \delta^2 (\Delta^2 - \frac{\delta}{3}) $$ \\
+\begin{equation}
+    E(g, \delta, \Delta) = 
+    \frac{S(g, \delta, \Delta)}{S_0} =
+         e^{-\gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) D} 
+    \label{eq:st}
+\end{equation}
 
 \vspace{0.1cm}
- 
-Donde $E(b)$ es la atenuaci\'on de la se\~nal obtenida; $S_0$ es la se\~nal obtenida
-sin utilizar gradientes de difusi\'on; $B$ es la intensidad del gradiente de
-difusi\'on, $g$ es la relaci\'on giromagn\'etica;  $\delta$ es el tiempo que el
-gradiente de difusi\'on est\'a encendido; $\Delta$ es el tiempo entre las 
-activaciones del grediente y $D$ representa el coeficiente de difusi\'on.
-El agrupar todos los par\'ametros del experimento dentro de $b$ fue propuesto por
-Le Bihan \cite{LEBIHAN}.
-La raz\'on por la cual se divide la se\~nal obtenida por $S_0$ es porque la
-se\~nal en cada punto depende fuertemente de la densidad de protones que hay
-en el mismo, si no ponderamos dicha densidad, es imposible comparar la intensidad
-de difusi\'on en distintas regiones. \\
+  
+Donde $E(g, \delta, \Delta)$ es la atenuaci\'on de la se\~nal obtenida; 
+$g$ es la intensidad del gradiente magn\'etico; $S_0$ es la se\~nal obtenida sin
+utilizar gradientes ($g=0 T/m$); $\gamma$ es la relaci\'on giromagn\'etica del 
+prot\'on; $\delta$ es el tiempo que el gradiente est\'a encendido; $\Delta$ es el
+tiempo entre las activaciones del gradiente y $D$ representa el coeficiente de
+difusi\'on. La raz\'on por la cual se divide la se\~nal obtenida por $S_0$ es
+porque la se\~nal en cada punto depende fuertemente de la densidad de protones
+que hay en el mismo, si no ponderamos dicha densidad, es imposible comparar la
+intensidad de difusi\'on en distintas regiones. \\
 
-Basser et al. \cite{Basser1994} proponen medir la atenuaci\'on de se\~nal en
-distintas direcciones y luego aproximar el coeficiente de difusi\'on con un 
+En 1985 Le Bihan \cite{LEBIHAN} adapta esta t\'ecnica para medir la difusi\'on 
+de las part\'iculas agrupando todos los par\'ametros del experimento dentro de 
+un mismo par\'ametro $b$:
+
+$$ b = \gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) $$ 
+
+Esto simplifica la ecuaci\'on \ref{eq:st}:  
+
+$$ E(b) = \frac{S(b)}{S_0} = e^{-b D} $$
+
+Donde $b$ representa el reciproco de la intensidad de difusi\'on. \\
+
+En 1994 Basser et al. \cite{Basser1994} proponen medir la atenuaci\'on de se\~nal
+en distintas direcciones y luego aproximar el coeficiente de difusi\'on con un 
 tensor de segundo orden. Un tensor es una matriz multidimensional asociado a una
 base, que posee una ley de transformaci\'on  para indicar  c\'omo cambian los 
 componentes del tensor al cambiar de base. Esta t\'ecnica sienta las bases de lo
@@ -234,16 +250,16 @@ el cruce de fibras dentro de cada voxel dado que las caracteriza con un solo
 elipsoide.\\
 
 En 1991 Callaghan et al \cite{Callaghan1991} desarrollan el \textit{q-space analysis}.
-Demuestran que sin asumir un modelo para la distribuci\'on de desplazamiento, 
-pero tomando un $\delta$ chico, se deriva la siguiente relaci\'on entre la se\~nal
+Esto permite realizar microscop\'ia mediante dMRI. Utilizando el trabajo de Stejskal
+y Tanner prueban que es posible obtener la siguiente relaci\'on entre la se\~nal
 atenuada y una transformada de Fourier:
 
-$$E(q,t) =  \frac{S(q,t)}{S_0} = \int_{R^2}{p(r,t)e^{-2\pi i q r} dr} $$
-$$ q = \frac{g \delta B}{2\pi} $$
+$$E(q,\Delta) =  \frac{S(q,\Delta)}{S_0} = \int_{R^2}{p(r;\Delta)e^{-2\pi i q r} dr} $$
+$$ q = \frac{\gamma \delta g}{2\pi} $$
 
-Donde $q$ es una medida que relaciona $B$ con $\delta$; $t$ es el tiempo durante
-el cual se mide la se\~nal; $p(r,t)$ es la densidad de probabilidad de que una
-poblaci\'on de part\'iculas se desplace en direcci\'on $r$ durante ese tiempo $t$.\\
+Donde $p(r;t)$ es la densidad de probabilidad de que una poblaci\'on de 
+part\'iculas se desplace en direcci\'on $r$ durante un tiempo $t$. $p(r;t)$ es
+caracter\'istico del compartimiento donde se mueven las part\'iculas. \\
 
 Una de las principales ventajas de \textit{q-space} sobre DTI es que no asume
 ning\'un modelo a priori, esto permite definir distintos tipos de modelos para
