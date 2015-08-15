@@ -113,7 +113,35 @@ los datos est\'an ya preprocesados. Esto nos permite enforcanos en el problema
 del clustering, a la vez que permite reproducir con mayor facilidad nuestro 
 estudio. \\
 
-\section{Experimentos}
+Una contribuci\'on menor de nuestro trabajo es el an\'alisis de algunas 
+implementaciones exitentes de algoritmos de tractograf\'ia. Dada la naturaleza
+estoc\'astica de los mismos es importante comprobar si el resultado se estabiliza
+al utilizar un n\'umero suficientemente grande de semillas. Tambi\'en es importante
+determinar si algoritmos diferentes convergen a una misma soluci\'on.
+En particular mostramos que para dos implementaciones distintas, ambas basadas 
+en la librer\'ia \textit{dipy}, los tractogramas convergen. Mas a\'un, lo hacen
+a resultados similares. \\
+
+Luego presentamos un algoritmo para posicionar semillas dentro de la materia 
+blanca. Este algoritmo implementa una manera eficiente de seleccionar voxels a 
+cierta distancia de la corteza, respetando la forma que esta tiene. Otra de las
+ventajas de nuestro algoritmo es que permite guardar un mapeo directo desde las
+semillas hasta la corteza cerebral. Esto simplifica traducir la parcelaci\'on 
+de semillas a la parcelaci\'on de la corteza. \\
+
+La contribuci\'on principal de este estudio es el proponer una nueva forma 
+de parcelar la corteza mediante el \textit{clustering} de semillas. Nuestro
+m\'etodo consiste en transformar los tractogramas a un espacio vectorial y luego
+agruparlos con \textit{Agglomerative Hierarchical Clustering}. Utilizamos la 
+m\'etrica euclidiana como medida de similitud y el centroide como \textit{linkage}.
+Presentamos una implementaci\'on eficiente de nuestro m\'etodo. Tambi\'en el 
+como adaptarlo al uso de matrices ralas para optimizar el costo espacial.
+Comparando nuestro m\'etodo con el presentado por Moreno-Dominguez conseguimos
+parcelaciones similares. La ventaja de nuestro algoritmo es que reduce 
+significativamente el orden de complejidad temporal y espacial. \\
+
+
+\section{Experimentos para Demian, eliminar luego}
 
 \subsection{Estabilidad Tractogramas}
 \textbf{Objetivo}: Probar que el algoritmo para generar los tractogramas converge.\\
@@ -122,12 +150,11 @@ estudio. \\
                     usarlo.\\
 \textbf{Secci\'on}: Resultados.\\
                     
-                    
 \subsection{Posicionar semillas}
-\textbf{Objetivo}:  Comparar distintas formas de posicionar semillas a una distancia
+\textbf{Objetivo}:  Posicionar semillas a una distancia
                     dada del cortex, respetando la morfolog\'ia del cerebro. \\
-\textbf{M\'etodo}:  Presentar un m\'etodo y mejorarlo iterativamente. \\
-\textbf{Resultado}: Conseguimos un m\'etodo que cumple lo requerido y simplifica
+\textbf{M\'etodo}:  Presentamos un m\'etodo y lo mejoraramos iterativamente. \\
+\textbf{Resultado}: Conseguimos un algoritmo que cumple lo requerido y simplifica
                     el mapeo final entre semillas y cortex.\\
 \textbf{Secci\'on}: Resultados.\\
 
@@ -152,15 +179,19 @@ estudio. \\
                     + centroide.\\
 \textbf{M\'etodo}:  Presentar casos sencillos donde la similaridad coseno no
                     se comporta de manera correcta respecto al linkage centroid. \\
-\textbf{Resultado}: Proponer logit como soluci\'on a esto.\\
+\textbf{Resultado}: Logit mejora los casos en que los vectores son colineales,
+                    sin embargo, tambi\'en posee un contraejemplo para el 
+                    problema de metrica-linkage.\\
 \textbf{Secci\'on}: M\'etodos.\\                                        
                     
 \subsection{Broca; Nuestro M\'etodo}
 \textbf{Objetivo}:  Parcelar el \'Area de Broca.\\
 \textbf{M\'etodo}:  Presentar resultados y compararlos con Moreno-Dominguez. \\
 \textbf{Resultado}: Nuestro m\'etodo es un orden de complejidad menor. Pero 
-                    parece ser susceptible a ruido, necesitamos un
-                    threshold. Con normalizaci\'on mejora?.\\
+                    parece ser susceptible a ruido, usando un threshold de 0.25
+                    da b\'asicamente los mismos resultados que Moreno. 
+                    Si se normalizan los vectores el resultado tiene tan poco 
+                    sentido que siquiera lo agregu\'e. \\
 \textbf{Secci\'on}: Resultados.\\                    
                     
 \subsection{Parcelar Corteza}
@@ -172,39 +203,5 @@ estudio. \\
 
 
 \begin{comment}
-
-Comenzamos analizando distintos algoritmos de tractograf\'ia. Dada la naturaleza
-estoc\'astica de los mismos es importante comprobar si el resultado se estabiliza
-al utilizar un n\'umero suficientemente grande de semillas. Tambi\'en es
-importante determinar si algoritmos diferentes convergen a una misma soluci\'on.
-En particular mostramos que para dos implementaciones distintas, ambas basadas 
-en la librer\'ia \textit{dipy}, los tractogramas convergen. Mas a\'un, lo hacen
-a resultados similares. \\
-
-Luego comparamos distintos m\'etodos para posicionar las semillas dentro de la
-materia blanca a cierta distancia de la corteza cerebral. Concluimos que el mejor
-m\'etodo se basa en  utilizar una implementaci\'on de \textit{Fast Marching Method}
-para generar un mapa de distancias con signo de cada voxel a la materia gris,
-respetando la estructura de la materia blanca. Las posiciones son entonces 
-seleccionadas partiendo desde cada punto de la corteza y caminando por el 
-gradiente del mapa de distancias una determinada distancia. Esto nos permite a
-su vez poder guardar un mapeo directo desde las semillas hasta la corteza cerebral. \\
-
-Una vez que tenemos las semillas procedemos a generar los tractogramas, para ello
-paralelizamos los experimentos Monte Carlo, corriendo cada uno en un nodo distinto
-de un cluster. Cada tractograma es almacenado por su cuenta, pero al mismo tiempo
-se guarda una matriz de dimensiones $NxM$, siendo $N$ el n\'umero de tractogramas
-y $M$ la longitud de los mismos al transformarlos a una sola dimensi\'on.
-Mostramos que la mejor forma de almacenar los mismos es utilizando matrices ralas. \\
-
-Finalmente analizamos el m\'etodo de clustering descrito por Moreno-Dominguez y
-presentamos una mejora utilizando una transformaci\'on entre el espacio de los
-tractogramas y un espacio vectorial donde es posible utilizar la m\'etrica euclidiana. 
-Mostramos que nuestro m\'etodo permite salvar los problemas formales que el
-anterior presenta. Durante este \'ultimo paso tambi\'en presentamos una 
-implementaci\'on propia del algoritmo \textit{Agglomerative Hierarchical
-Clustering} que aprovecha fuertemente las propiedades de las matrices ralas tanto
-en el espacio de los tractogramas como en el espacio de la transformaci\'on, 
-optimizando as\'i el costo temporal y espacial.
 
 \end{comment}
