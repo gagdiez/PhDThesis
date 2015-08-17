@@ -1,10 +1,14 @@
 \chapter{M\'etodos}
 
-Nuestro objetivo es parcelar la corteza cerebral mediante un criterio estructural.
-En particular, utilizando una imagen de difusi\'on, queremos generar \'areas 
-mediante el agrupamiento de tractogramas. Para ello es necesario primero seleccionar
-los voxels que ser\'an utilizados como semilla de cada tractograma; luego generarlos
-y finalmente agruparlos usando alg\'un algoritmo de clustering.  \\
+En el cap\'itulo anterior presentamos los fundamentos f\'isicos de la Resonancia
+Magn\'etica Nuclear y como es posible utilizar estos para caracterizar la 
+difusi\'on en el cerebro. Nuestro objetivo ahora es parcelar la corteza cerebral
+haciendo uso de un criterio estructural. En particular, utilizando una imagen de
+difusi\'on, queremos generar \'areas mediante el agrupamiento de tractogramas. 
+Para ello es necesario primero seleccionar los voxels que ser\'an utilizados como
+semilla de cada tractograma; luego generarlos y finalmente agruparlos usando 
+alg\'un algoritmo de clustering.  \\
+
 
 \section{Adquisici\'on de datos}
 
@@ -17,9 +21,11 @@ representan la corteza, permitiendo visualizar un modelo en tres dimensiones
 de la misma sencillamente, y una representaci\'on tambi\'en en \textit{Gifti} 
 de la parcelaci\'on de dicha corteza. \\
 
+
 \input{metodos/tractografia.tex}
 
 \input{metodos/semillas.tex}
+
 
 \section{Generando tractogramas}
 
@@ -34,21 +40,17 @@ la secci\'on \ref{sec:estabilidad}, este m\'etodo posee un sesgo respecto a la
 distancia. Para evitarlo usamos la transformaci\'on propuesta en Moreno-Dominguez et
 al. \cite{Moreno-Dominguez2014}:
 
-$$ T_i = log(M_i + 1)/log(p+1) $$
+$$ T_i = \frac{ log(M_i + 1)}{log(p+1)} $$
 
 Donde $T_i$ es el valor del voxel $i$ en el tractograma resultante; $M_i$ es 
 el valor del voxel $i$ en el mapa de visitar y $p$ es el n\'umero de part\'iculas
-usadas. Dado que $M_i \leq p \forall i$ cada voxel del tractograma tendr\'a un 
-valor entre uno y cero. Uno representa que todos los \textit{streams} pasaron 
-por el voxel, mientras que cero representa que ninguno pas\'o. \\
+usadas. Dado que $M_i \leq p, \forall i \in [1..N]$ cada voxel del tractograma tendr\'a un 
+valor entre uno y cero. $T_i = 1$ representa que todos los \textit{streams} pasaron 
+por el voxel, mientras que $T_i = 0$ representa que ninguno pas\'o. \\
 
 \input{metodos/ralas.tex}
 
-\section{Implementando el m\'etodo Moreno-Dominguez}
-Ac\'a explico todo lo que hacen. Preprocesamiento de tractogramas, modificaciones
-al algoritmo de clustering, preprocesamiento del clustering, preprocesamiento
-de dendrograma.\\
-
+\input{metodos/moreno.tex}
 
 \input{metodos/logit.tex}
 

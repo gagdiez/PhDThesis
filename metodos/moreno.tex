@@ -1,0 +1,91 @@
+\section{Reproduciendo Moreno-Dominguez}
+
+Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el algoritmo
+\textit{Agglomerative Hierarchical Clustering} para agrupar los tractogramas. 
+En este algoritmo, cada \textit{feature} comienza en un cluster distinto. Luego,
+el algoritmo selecciona iterativamente dos clusters siguiendo alg\'un criterio
+de similitud; los agrupa en un nuevo cluster y crea un elemento representativo
+de este. La jerarqu\'ia resultante de agrupar todos los clusters es expresada
+como un dendrograma. En el trabajo de Moreno-Dominguez utilizan como medida de
+similitud la distancia coseno (Ecuaci\'on \ref{eq:cosine}) y como criterio de
+\textit{linkage} el centroide (Ecuaci\'on \ref{eq:centroide}).
+
+\begin{figure}[h!]
+                                                                                                                        
+\begin{minipage}[b]{0.49\textwidth}
+    \begin{equation}
+        \label{eq:cosine}
+        similarity(X,Y) = 1 - \frac{ X \cdot Y }{||X|| ||Y||}
+    \end{equation}
+\end{minipage} ~
+\hfill
+\begin{minipage}[b]{0.49\textwidth}
+    \begin{equation}
+        \label{eq:centroide}
+        centroide(X,Y) = \frac{ n_X X + n_Y Y}{n_X + n_Y}
+    \end{equation}
+    %\caption{\small $X, Y \in R^m; n_Z = #Z$}
+\end{minipage} ~
+
+\centering
+\vspace{0.5cm}
+\small{$X, Y \in R^m$, $n_z = \#z$}
+
+\end{figure}  
+
+Para mejorar los resultados del \textit{clustering} realizan distintos tipos de
+preprocesamiento en varias etapas. Aqu\'i daremos solo una breve descripci\'on 
+de los mas relevantes, para mayores detalles favor de referirse al paper. \\
+
+Una de las primeras modificaciones es al algoritmo 
+\textit{Agglomerative Hierarchical Clustering}. Dado un n\'umero $k$,
+las primeras $k$ iteraciones sean entre clusters vecinos y de tama\~no similar.
+Esto es, solo los clusters que se encuentran a menos de cierta distancia f\'isica
+en el cerebro pueden ser unidos. A su vez, solo se unen los clusters que poseen
+un tama\~no similar para que el dendrograma crezca de manera balanceada. 
+Una vez obtenido el dendrograma proceden a eliminar las inversiones dentro del
+mismo. Una inversi\'on sucede cuando se unen dos clusters con una distancia 
+interna mayor a la distancia entre ellos. Las inversiones no cambi\'an la 
+jerarqu\'ia de los clusters, sino que solo complican la interpretaci\'on visual
+de los datos \cite{Murtagh1985}. Una forma de arreglarlas es colapsando las 
+ramas que la componen en una sola jerarqu\'ia con mas de dos elementos. Un 
+ejemplo de inversi\'on y el resultado de eliminarla se muestran en las Figuras 
+\ref{fig:inversion} y \ref{fig:no_inversion} respectivamente. 
+
+
+\begin{figure}[h!]
+                                                                                                                        
+\begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{img/inversion_0.png}
+    \caption{\small Dendrograma de inversi\'on.}
+     \label{fig:inversion}
+\end{minipage} ~
+\hfill
+\begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{img/inversion_1.png}
+    \caption{\small Dendrograma con inversi\'on corregida. }
+    \label{fig:no_inversion}
+\end{minipage} ~
+
+\end{figure}  
+
+\vspace{0.1cm}
+
+Otro paso de proprocesamiento es el quitar \textit{outliers} del dendrograma.
+Esto en realidad lo hacen durante la etapa de \textit{clustering}. Evitan que los
+clusters de un solo elemento se unan a otros clusters si la (di)similitud es 
+mayor a cierto \textit{threshold}. Al hacer este paso durante el \textit{clustering}
+previenen que los \textit{ouliers} afecten la forma de los nuevos centroides.\\
+
+Una vez finalizados todos los pasos el resultado es un dendrograma. Para parecelar
+la corteza solo es necesario seleccionar una altura en la cual cortar dicho
+tractrama. Los clusters que est\'en por debajo de ese corte ser\'an las distintas
+parcelas. \\
+
+En todo el proceso el paso mas caro en terminos computacionales es el
+\textit{clustering}. En cada iteraci\'on del algoritmo es necesario comparar 
+expl\'icitamente cada nuevo centroide con todo el resto de los clusters. Por lo
+tanto, por cada iteraci\'on es necesario hacer $O(c^2 m)$ operaciones para 
+recalcular todas las distancias, donde $c$ es la cantidad de clusters y $m$ es 
+la longitud de los mismos. Dadas $n$ semillas iniciales, la cantidad de 
+iteraciones a realizar son $n-1$. La complejidad de este m\'etodo es $O(n^3 m)$.

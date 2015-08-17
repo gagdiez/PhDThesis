@@ -11,29 +11,18 @@ Es importante destacar que el estimar los tractogramas de esta manera genera un
 sesgo respecto a la distancia. Cuanto m\'as lejos est\'a un voxel mayor es el 
 n\'umero de transiciones probabil\'isticas necesarias para llegar a \'el. \\
 
-Dipy es una librer\'ia para python que contiene, entre otras herramientas,
-varios algoritmos para generar \textit{streamlines}. Para este trabajo elegimos
-utilizar la implementaci\'on de \textit{LocalTracking} (LT de aqu\'i en mas) que
-se encuentra en el paquete \textit{dipy.tracking.local}; y una implementaci\'on 
-propia (MSL de aqu\'i en m\'as). Ambos algoritmos poseen una estructura 
-similar: Encuadran la imagen de difusi\'on en un modelo; crean un objeto que les
-permita seleccionar una direcci\'on hacia donde caminar en base a la posici\'on
-actual y se mueven hasta cumplir un criterio de parada.\\
-
-En ambos casos modelamos la informaci\'on de dMRI usando el \textit{Constrained
-Spherical Deconvolve Model}. La principal diferencia entre los algoritmos surge
-en la forma en que seleccionan c\'omo avanzar. Dado el conjunto de direcciones 
-iniciales, esto es, las direcciones posibles a tomar desde la semilla,
-LT intenta en sucesivas repeticiones del experimento elegir una distinta, 
-usando as\'i todas al menos una vez. MSL por otro lado selecciona una al
-azar cada vez que repite el experimento. A su vez, LT utiliza un criterio de 
-parada basado en la anisotrop\'ia de la difusi\'on; MSL usa una mascara ya 
-predefinida. Para mayores detalles referirse al Anexo\\
+Para este trabajo elegimos utilizar una implementaci\'on de tractograf\'ia ya 
+existente llamada \textit{LocalTracking} (LT de aqu\'i en mas) y un algor\'itmo
+propio (MSL de aqu\'i en m\'as). Ambos algoritmos poseen una estructura 
+similar: Encuadran la imagen de difusi\'on en un modelo; en base a ese modelo 
+crean un mapa de transiciones probabil\'isticas entre voxels y lo recorren 
+aleatoriamente hasta cumplir un criterio de parada. Para detalles sobre la 
+implementaci\'on, por favor referirse al Anexo. \\
 
 Algunas preguntas interesantes a realizar sobre los tractogramas son: ¿Al repetir
 el experimento, podremos obtener el mismo tractograma?; ¿Cu\'antas part\'iculas son
 necesarias para ello? y ¿Qu\'e tanto difieren los resultados entre los distintos 
-algoritmos de tractograf\'ia?\\
+algoritmos de tractograf\'ia?. \\
 
 Para determinar si los algoritmos se estabilizaban y el n\'umero de part\'iculas
 necesario para que eso suceda utilizamos la t\'ecnica estad\'istica de

@@ -2,18 +2,18 @@
 
 Una forma posible de almancenar los tractogramas es convertir cada uno a un 
 vector fila y almacenarlos todos juntos en una misma matriz. En nuestro caso,
-hacer esto con los tractogramas del \'Area de Broca gener\'o una matriz de dimensiones
-$762x3587328$. Asumiendo que cada valor se representa usando $8$ Bytes en memoria, 
-esta matriz ocupa un total de aproximadamente $20$ Gigabytes. Sin embargo, solo
-un $1\%$ de los datos almancenados resultaron ser no nulos. Casi toda la matriz
-resulta ser espacio desperdiciado.\\
+hacer esto con los tractogramas del \'Area de Broca gener\'o una matriz de
+dimensiones $762\times3587328$. Asumiendo que cada valor se representa usando 
+$8$ Bytes en memoria, esta matriz ocupa un total de aproximadamente $20$ Gigabytes.
+Sin embargo, solo un $1\%$ de los datos almancenados resultaron ser no nulos. 
+Casi todo el espacio utilizado es desperdiciado.\\
 
-Es posible mejorar esto si eliminamos de la matriz las columnas que poseen solo
+Es posible mejorar esto eliminando de la matriz las columnas que poseen solo
 elementos nulos. La Figura \ref{fig:densa} muestra la matriz que resulta de aplicar
-este procedimiento a los tractogramas del \'Area de Broca. Si bien nuestra nueva
-matriz posee dimensiones $762x121045$, a\'un solo el $27\%$ de los valores 
-almacenados son no nulos. Manteniendo la representaci\'on de $8$ Bytes redujimos
-el espacio necesario de $20\%$ Gigabites a aproximadamente $700$ Megabytes.\\
+este procedimiento a los tractogramas del \'Area de Broca. Si bien la nueva
+matriz posee dimensiones $762\times121045$, a\'un solo el $27\%$ de los valores 
+almacenados son no nulos. Manteniendo la representaci\'on de $8$ Bytes es posible
+reducir el espacio necesario de $20\%$ Gigabites a aproximadamente $700$ Megabytes.\\
 
 \begin{figure}[h!]
    \centering
@@ -24,7 +24,7 @@ el espacio necesario de $20\%$ Gigabites a aproximadamente $700$ Megabytes.\\
 
 El problema de este \'ultimo m\'etodo es que a\'un desperdicia mucho espacio. En
 el caso de utilizar todas los tractogramas de un hemisferio, la matriz pasa a ser
-de dimensiones $21657x3587328$ con un $1\%$ de valores no nulos. Para almacenar
+de dimensiones $21657\times3587328$ con un $1\%$ de valores no nulos. Para almacenar
 dicha matriz es necesario utilizar $587$ Gigabytes. Por esto es necesario
 utilizar estructuras mas eficiente, como un \textit{Dictionary of Keys}, o
 una matriz \textit{Compressed Sparse Row} (CSR). \\
