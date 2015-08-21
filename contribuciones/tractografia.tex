@@ -1,0 +1,27 @@
+\section{Estudio de la Convergencia de los Tractogramas}
+
+Algunas preguntas interesantes a realizar sobre los tractogramas son: ¿Al repetir
+el experimento, podremos obtener el mismo tractograma?; ¿Cu\'antas part\'iculas son
+necesarias para ello? y ¿Qu\'e tanto difieren los resultados entre los distintos 
+algoritmos de tractograf\'ia?. \\
+
+Para responder estas preguntas tomamos una implementaci\'on de tractograf\'ia ya 
+existente llamada \textit{LocalTracking} (LT de aqu\'i en mas) y un algoritmo
+propio (MSL de aqu\'i en m\'as). Ambos algoritmos poseen una estructura 
+similar: Encuadran la imagen de difusi\'on en un modelo; en base a ese modelo 
+crean un mapa de transiciones probabil\'isticas entre voxels y lo recorren 
+de manera aleatoria hasta cumplir un criterio de parada. Para detalles sobre la 
+implementaci\'on, por favor referirse al Anexo. \\
+
+Para determinar si los algoritmos se estabilizaban y el n\'umero de part\'iculas
+necesario para que eso suceda utilizamos la t\'ecnica estad\'istica de
+\textit{bootstrap} \cite{Efron1982}. Bootstrap es una forma de aproximar la
+distribuci\'on del muestreo de un estad\'istico en base a calcular el mismo
+utilizando sucesivos remuestreos de los datos con repeticiones. Esto es
+especialmente \'util cuando el n\'umero de muestras que se posee de la poblaci\'on
+no es significativamente alto. En nuestro caso situamos mas de setecientas
+semillas en el \'Area de Broca y luego generamos quince mil \textit{streamlines}
+por cada una. Luego calculamos el tractograma medio y la varianza de cada voxel 
+utilizando mil submuestras aleatorias del mismo tama\~no. Esto se repiti\'o con 
+varios tama\~nos de submuestra para estudiar as\'i la variabilidad a medida que 
+la cantidad de part\'iculas crec\'ia.\\
