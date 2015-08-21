@@ -10,6 +10,11 @@
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
 \usepackage[font={scriptsize,it}]{caption}
 \usepackage{wrapfig}
+\usepackage[none]{hyphenat}
+\usepackage{titlesec}
+
+\titleformat*{\subsection}{\small\bfseries}
+
 \begin{document}
 
 %%%% CARATULA
@@ -54,6 +59,8 @@
 
 \input{metodos.tex}
 %\input{old.tex}
+\input{contribuciones.tex}
+
 \input{resultados.tex}
 %%%% BIBLIOGRAFIA
 \backmatter

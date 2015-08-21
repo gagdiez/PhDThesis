@@ -1,4 +1,4 @@
-\section{Reproduciendo Moreno-Dominguez}
+\section{Clustering de Semillas: Estado del Arte.}
 
 Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el algoritmo
 \textit{Agglomerative Hierarchical Clustering} para agrupar los tractogramas. 
@@ -45,11 +45,11 @@ en el cerebro pueden ser unidos. A su vez, solo se unen los clusters que poseen
 un tama\~no similar para que el dendrograma crezca de manera balanceada. 
 Una vez obtenido el dendrograma proceden a eliminar las inversiones dentro del
 mismo. Una inversi\'on sucede cuando se unen dos clusters con una distancia 
-interna mayor a la distancia entre ellos. Las inversiones no cambi\'an la 
+interna mayor a la distancia entre ellos. Las inversiones no cambian la 
 jerarqu\'ia de los clusters, sino que solo complican la interpretaci\'on visual
-de los datos \cite{Murtagh1985}. Una forma de arreglarlas es colapsando las 
+de los datos \cite{Murtagh1985}. Una forma de eliminarlas es colapsando las 
 ramas que la componen en una sola jerarqu\'ia con mas de dos elementos. Un 
-ejemplo de inversi\'on y el resultado de eliminarla se muestran en las Figuras 
+ejemplo de inversi\'on y el resultado de quitarla se muestran en las Figuras 
 \ref{fig:inversion} y \ref{fig:no_inversion} respectivamente. 
 
 
@@ -71,21 +71,13 @@ ejemplo de inversi\'on y el resultado de eliminarla se muestran en las Figuras
 
 \vspace{0.1cm}
 
-Otro paso de proprocesamiento es el quitar \textit{outliers} del dendrograma.
+Otro paso de preprocesamiento es el quitar \textit{outliers} del dendrograma.
 Esto en realidad lo hacen durante la etapa de \textit{clustering}. Evitan que los
 clusters de un solo elemento se unan a otros clusters si la (di)similitud es 
 mayor a cierto \textit{threshold}. Al hacer este paso durante el \textit{clustering}
 previenen que los \textit{ouliers} afecten la forma de los nuevos centroides.\\
 
-Una vez finalizados todos los pasos el resultado es un dendrograma. Para parecelar
+Una vez finalizados todos los pasos el resultado es un dendrograma. Para parcelar
 la corteza solo es necesario seleccionar una altura en la cual cortar dicho
-tractrama. Los clusters que est\'en por debajo de ese corte ser\'an las distintas
+dendrograma. Los clusters que est\'en por debajo de ese corte ser\'an las distintas
 parcelas. \\
-
-En todo el proceso el paso mas caro en terminos computacionales es el
-\textit{clustering}. En cada iteraci\'on del algoritmo es necesario comparar 
-expl\'icitamente cada nuevo centroide con todo el resto de los clusters. Por lo
-tanto, por cada iteraci\'on es necesario hacer $O(c^2 m)$ operaciones para 
-recalcular todas las distancias, donde $c$ es la cantidad de clusters y $m$ es 
-la longitud de los mismos. Dadas $n$ semillas iniciales, la cantidad de 
-iteraciones a realizar son $n-1$. La complejidad de este m\'etodo es $O(n^3 m)$.

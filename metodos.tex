@@ -1,58 +1,37 @@
-\chapter{M\'etodos}
+\chapter{Parcelando la Corteza Cerebral}
 
 En el cap\'itulo anterior presentamos los fundamentos f\'isicos de la Resonancia
 Magn\'etica Nuclear y como es posible utilizar estos para caracterizar la 
 difusi\'on en el cerebro. Nuestro objetivo ahora es parcelar la corteza cerebral
 haciendo uso de un criterio estructural. En particular, utilizando una imagen de
-difusi\'on, queremos generar \'areas mediante el agrupamiento de tractogramas. 
-Para ello es necesario primero seleccionar los voxels que ser\'an utilizados como
-semilla de cada tractograma; luego generarlos y finalmente agruparlos usando 
-alg\'un algoritmo de clustering.  \\
+difusi\'on, queremos generar una parcelaci\'on mediante el agrupamiento de
+tractogramas. Para ello es necesario primero seleccionar los voxels que ser\'an
+utilizados como semilla de cada tractograma; luego generarlos y finalmente 
+agruparlos usando alg\'un algoritmo de clustering. Dejamos el siguiente diagrama
+para ser utilizado como referencia de los pasos a seguir: \\
 
+\begin{figure}[h!]
 
-\section{Adquisici\'on de datos}
+\centering
+\begin{minipage}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{img/diagrama.png}
+    \caption{\small \textit{Pipeline} del proceso de parcelaci\'on }
+    \label{fig:diagrama}
+\end{minipage} ~
 
-Descargamos lo datos de X sujetos, todos (caracter\'isticas) del sitio web 
-de \textit{Human Connectome Project}. Las ventajas de utilizar estos datos son muchas:
-Tanto la imagen de difusi\'on como la anat\'omica se encuentran ya preprocesadas;
-cada sujeto posee una parcelaci\'on que entre otras cosas permite separar la materia
-blanca de la gris; cada sujeto posee un archivo en formato \textit{Gifti} que
-representan la corteza, permitiendo visualizar un modelo en tres dimensiones
-de la misma sencillamente, y una representaci\'on tambi\'en en \textit{Gifti} 
-de la parcelaci\'on de dicha corteza. \\
+\end{figure}  
 
+\section{Materiales utilizados en el estudio}
 
-\input{metodos/tractografia.tex}
+Todos nuestros experimentos fueron realizados con sujetos descargados de la base
+de datos de \textit{Human Connectome Project}. Las ventajas de utilizar estos
+datos son muchas: Tanto la imagen de difusi\'on como la anat\'omica se encuentran
+ya preprocesadas \cite{Glasser2013}; cada sujeto posee una parcelaci\'on que, entre
+otras cosas, permite separar la materia blanca de la gris; y cada sujeto posee una
+superficie que representa su corteza cerebral.\\
 
 \input{metodos/semillas.tex}
 
-
-\section{Generando tractogramas}
-
-Partiendo desde la corteza situamos semillas en la materia blanca de cada 
-sujeto a $3mm$ de profundidad. Por cada semilla simulamos el recorrido de quince
-mil part\'iculas de agua a traves de la materia blanca. En base a los \textit{streamlines}
-resultantes se crearon mapas de visitas para cada semilla. Un mapa de visitas es
-una imagen donde cada voxel posee el n\'umero de \textit{streams} que lo conectan
-con la semilla. Si uno dividiera cada valor de este mapa por la cantidad de
-part\'iculas utilizadas obtendr\'ia un tractograma. Sin embargo, por lo dicho en
-la secci\'on \ref{sec:estabilidad}, este m\'etodo posee un sesgo respecto a la
-distancia. Para evitarlo usamos la transformaci\'on propuesta en Moreno-Dominguez et
-al. \cite{Moreno-Dominguez2014}:
-
-$$ T_i = \frac{ log(M_i + 1)}{log(p+1)} $$
-
-Donde $T_i$ es el valor del voxel $i$ en el tractograma resultante; $M_i$ es 
-el valor del voxel $i$ en el mapa de visitar y $p$ es el n\'umero de part\'iculas
-usadas. Dado que $M_i \leq p, \forall i \in [1..N]$ cada voxel del tractograma tendr\'a un 
-valor entre uno y cero. $T_i = 1$ representa que todos los \textit{streams} pasaron 
-por el voxel, mientras que $T_i = 0$ representa que ninguno pas\'o. \\
-
-\input{metodos/ralas.tex}
+\input{metodos/tractografia.tex}
 
 \input{metodos/moreno.tex}
-
-\input{metodos/logit.tex}
-
-
-

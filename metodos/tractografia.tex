@@ -1,5 +1,4 @@
-\section{Estabilidad algor\'itmica}
-\label{sec:estabilidad}
+\section{Creando tractogramas a partir de las semillas}
 
 Un tractograma es una imagen donde cada voxel representa la probabilidad de que
 ese punto del cerebro est\'e conectado a la semilla elegida mediante un conjunto
@@ -9,30 +8,23 @@ cada voxel. Se denomina \textit{streamline} al camino que puede realizar una
 part\'icula de agua siguiendo un mapa probabil\'istico de transiciones entre voxels.
 Es importante destacar que el estimar los tractogramas de esta manera genera un 
 sesgo respecto a la distancia. Cuanto m\'as lejos est\'a un voxel mayor es el 
-n\'umero de transiciones probabil\'isticas necesarias para llegar a \'el. \\
+n\'umero de transiciones probabil\'isticas necesarias para llegar a \'el. Esto 
+provoca que los voxels lejanos tengan intrinsecamente valores peque\~nos. \\
 
-Para este trabajo elegimos utilizar una implementaci\'on de tractograf\'ia ya 
-existente llamada \textit{LocalTracking} (LT de aqu\'i en mas) y un algor\'itmo
-propio (MSL de aqu\'i en m\'as). Ambos algoritmos poseen una estructura 
-similar: Encuadran la imagen de difusi\'on en un modelo; en base a ese modelo 
-crean un mapa de transiciones probabil\'isticas entre voxels y lo recorren 
-aleatoriamente hasta cumplir un criterio de parada. Para detalles sobre la 
-implementaci\'on, por favor referirse al Anexo. \\
+Usando el m\'etodo descrito en la secci\'on anterior situamos semillas en la 
+materia blanca de cada sujeto a $3mm$ de profundidad. Por cada semilla simulamos
+el recorrido de quince mil part\'iculas de agua a trav\'es de la materia blanca. 
+En base a los \textit{streamlines} resultantes se crearon mapas de visitas para
+cada semilla. Un mapa de visitas es una imagen donde cada voxel posee el n\'umero
+de \textit{streams} que lo conectan con la semilla. Luego usamos la transformaci\'on
+propuesta en Moreno-Dominguez et al. \cite{Moreno-Dominguez2014}:
 
-Algunas preguntas interesantes a realizar sobre los tractogramas son: ¿Al repetir
-el experimento, podremos obtener el mismo tractograma?; ¿Cu\'antas part\'iculas son
-necesarias para ello? y ¿Qu\'e tanto difieren los resultados entre los distintos 
-algoritmos de tractograf\'ia?. \\
+$$ T_i = \frac{ log(M_i + 1)}{log(p+1)} $$
 
-Para determinar si los algoritmos se estabilizaban y el n\'umero de part\'iculas
-necesario para que eso suceda utilizamos la t\'ecnica estad\'istica de
-\textit{bootstrap} \cite{Efron1982}. Bootstrap es una forma de aproximar la
-distribuci\'on del muestreo de un estad\'istico en base a calcular el mismo
-utilizando sucesivos remuestreos de los datos con repeticiones. Esto es
-especialmente \'util cuando el n\'umero de muestras que se posee de la poblaci\'on
-no es significativamente alto. En nuestro caso situamos mas de setecientas
-semillas en el \'Area de Broca y luego generamos quince mil streamlines por cada
-una. Luego calculamos el tractograma medio y la varianza de cada voxel utilizando
-mil submuestras aleatorias del mismo tama\~no. Esto se repiti\'o con varios
-tama\~nos de submuestra para estudiar as\'i la variabilidad a medida que la
-cantidad de part\'iculas crec\'ia.\\
+Donde $T_i$ es el valor del voxel $i$ en el tractograma resultante; $M_i$ es 
+el valor del voxel $i$ en el mapa de visitar y $p$ es el n\'umero de part\'iculas
+usadas. Esto nos permite evitar el sesgo producto de la distancia que obtendr\'iamos
+al dividir por la cantidad de part\'iculas utilizadas. Dado que 
+$M_i \leq p, \forall i \in [1..N]$ cada voxel del tractograma tendr\'a un valor
+entre uno y cero. $T_i = 1$ representa que todos los \textit{streams} pasaron por
+el voxel, mientras que $T_i = 0$ representa que ninguno pas\'o. \\
