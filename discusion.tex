@@ -12,8 +12,8 @@ Luego, basandonos en su trabajo, propusimos un nuevo algoritmo de \textit{cluste
 tambi\'en basado en tractograf\'ias. En este \'ultimo capitulo discutiremos los 
 resultados obtenidos. Comenzando por la robustes del algoritmo de tractograf\'ia
 utilizado; siguiendo con una comparaci\'on entre nuestro m\'etodo y el de 
-Moreno-Dominguez; luego hablaremos de las limitaciones de este m\'etodo y 
-finalmente discutiremos sobre la validez biol\'ogica de la parcelaci\'on obtenida. \\
+Moreno-Dominguez; luego hablaremos sobre la validez biol\'ogica de la parcelaci\'on
+obtenida y propondremos objetos de futuro estudio. \\
 
 
 \section{Convergencia del algoritmo de tractograf\'ia}
@@ -42,4 +42,39 @@ siguientes estructuras son parecidas: la corteza motora y la somest\'esica;
 el lobulo frontal y occipital, as\'i como tambi\'en el \'area de Broca.
 
 
+\section{Validaci\'on anat\'omica y funcional}
 
+Dada la dificultad de comparar nuestro m\'etodo visualmente con el de Moreno-Dominguez
+buscamos otra forma de validarlo. En la figura \ref{fig:an2pa} se puede ver
+el resultado de proyectar la parcelaci\'on anat\'omica del sujeto sobre la que
+obtuvimos. En interesante notar como nuestra parcelaci\'on cre\'o \'areas dentro
+de los l\'imites de al menos 9 regiones an\'atomicas. En particular, la divisi\'on
+del \'area motora parece ser consistente con la literatura actual. Por ello 
+tambi\'en comparamos la parcelaci\'on con un estudio funcional hecho sobre el 
+sujeto \cite{Barch2013}. 
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/anatomica2parcelation.png}
+    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la parcelaci\'on obtenida (derecha)}
+    \label{fig:an2pa}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/32k_labels.png}
+    \caption{Parcelas en baja resoluci\'on}
+    \label{fig:32k}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/32k_z5.png}
+    \caption{Projecci\'on de las parcelas (izquierda) sobre activaciones funcionales (derecha)}
+    \label{fig:32k}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/32k_z7.png}
+    \caption{Projecci\'on de las parcelas (izquierda) sobre activaciones funcionales con 
+             mayor valor de z-score (derecha)}
+    \label{fig:32k}
+\end{figure}
