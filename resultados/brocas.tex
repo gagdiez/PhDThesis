@@ -1,105 +1,101 @@
-\section{Parcelando el \'area de Broca}
+\section{Parcelamiento del \'area de Broca}
 
-\subsection{Distancia coseno con centroide}
+Estos son los resultados de parcelar el \'area de Broca con un total de 
+aproximadamente $760$ semillas. 
 
-Las siguientes Figuras muestran los resultados obtenidos al parcelar el \'Area
-de Broca utilizando el m\'etodo de Moreno-Dominguez.
+\subsection{M\'etodo Moreno-Dominguez}
+
+Las figuras \ref{fig:moreno0} y \ref{fig:moreno1} muestran las parcelas obtenidas 
+usando $k=0$ a distintos niveles de profundidad del dendrogama. Las figuras 
+\ref{fig:moreno2} y \ref{fig:moreno3} muestran los resultados usando $k=400$ y $k=700$
+respectivamente.
 
 \begin{figure}[h!]
-                                                                                                                        
-\begin{minipage}[b]{\textwidth}
     \includegraphics[width=\textwidth]{img/broca/moreno_0.png}
-    \caption{M\'etodo Moreno sin preprocesamiento}
-
-\end{minipage} ~
+    \caption{M\'etodo Moreno sin restricciones}
+    \label{fig:moreno0}
+\end{figure}
                                                                                                                        
-\begin{minipage}[b]{\textwidth}
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/broca/moreno_0_deep.png}
-    \caption{M\'etodo Moreno sin preprocesamiento, mayor profundidad en el 
+    \caption{M\'etodo Moreno sin restricciones, mayor profundidad en el 
             dendrograma}
-
-\end{minipage} ~
-
-\begin{minipage}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{img/broca/moreno_400.png}
-    \caption{M\'etodo Moreno, cuatrocientos pasos de preprocesamiento}
-
-\end{minipage} ~
-
-\begin{minipage}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{img/broca/moreno_750.png}
-    \caption{M\'etodo Moreno, setecientos pasos de preprocesamiento}
-
-\end{minipage} ~
-
-\end{figure} 
-
-
-\subsection{Utilizando LogOdds}
-
-Las siguientes Figuras muestran los resultados obtenidos al parcelar el \'Area
-de Broca utilizando el m\'etodo de Moreno-Dominguez. El threshold utilizado fue
-de $0.25$. \textbf{Los resultados obtenidos luego de normalizar los vectores 
-fueron tan malos que no vale la pena incluirlos}.
+    \label{fig:moreno1}
+\end{figure}
 
 \begin{figure}[h!]
-                                                                                                                        
-\begin{minipage}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{img/broca/moreno_400.png}
+    \caption{M\'etodo Moreno, primeras cuatrocientas uniones entre vecinos}
+    \label{fig:moreno2}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/broca/moreno_750.png}
+    \caption{M\'etodo Moreno, primeras setecientas uniones entre vecinos}
+    \label{fig:moreno3}
+\end{figure}
+
+\clearpage
+
+\subsection{Parcelamiento en el espacio eucl\'ideo}
+
+Las figuras \ref{fig:nuestro0} y \ref{fig:nuestro1} muestran las parcelas obtenidas 
+usando $k=0$ a distintos niveles de profundidad del dendrogama. Las figuras 
+\ref{fig:nuestro2} y \ref{fig:nuestro3} muestran los resultados usando $k=400$ y
+$k=700$ respectivamente.
+
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/broca/logit_0.png}
-    \caption{M\'etodo Logit sin preprocesamiento}
-    \label{fig:dmri}
-\end{minipage} ~
+    \caption{Nuestro m\'etodo sin restricciones}
+    \label{fig:nuestro0}
+\end{figure}
                                                                                                                         
-\begin{minipage}[b]{\textwidth}
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/broca/logit_0_deep.png}
-    \caption{M\'etodo Logit sin preprocesamiento, mayor profundidad en el 
+    \caption{Nuestro m\'etodo sin restricciones, mayor profundidad en el 
             dendrograma}
+    \label{fig:nuestro1}
+\end{figure}
 
-\end{minipage} ~
-
-\begin{minipage}[b]{\textwidth}
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/broca/logit_400.png}
-    \caption{M\'etodo Logit, cuatrocientos pasos de preprocesamiento}
+    \caption{Nuestro m\'etodo sin preprocesamiento, cuatrocientos pasos de preprocesamiento}
+    \label{fig:nuestro2}
+\end{figure}
 
-\end{minipage} ~
-
-\begin{minipage}[b]{\textwidth}
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/broca/logit_750.png}
-    \caption{M\'etodo Logit, setecientos pasos de preprocesamiento}
-
-\end{minipage} ~
-
+    \caption{Nuestro m\'etodo sin preprocesamiento, setecientos pasos de preprocesamiento}
+    \label{fig:nuestro3}
 \end{figure}
 
+\clearpage
 
-\subsection{Lado a lado}
+\subsection{Acercamiento a ambos m\'etodos}
+\label{sec:acercamiento}
 
+Las figuras \ref{fig:ambos0}; \ref{fig:ambos1} y \ref{fig:ambos2} presentan los
+resultados de ambos m\'etodos en simultaneo para $k=0$, $k=400$ y $k=700$ respectivamente.
 
-\begin{figure}[h]
-
-\begin{minipage}[h]{\textwidth}
-    \includegraphics[width=\textwidth]{img/broca/vs_0.png}
-    \caption{M\'etodo Moreno (izquierda) y Logit (derecha) sin preprocesamiento}
-\end{minipage} ~
-
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/broca/vs_0.png}
+    \caption{M\'etodo Moreno-Dominguez (izquierda) y nuestro (derecha) sin preprocesamiento}
+    \label{fig:ambos0}
 \end{figure}
 
-\begin{figure}[h]                  
-
-\begin{minipage}[h]{\textwidth}
-    \includegraphics[width=\textwidth]{img/broca/vs_400.png}
-    \caption{M\'etodo Moreno (izquierda) y Logit (derecha). Cuatrocientos pasos de preprocesamiento}
-\end{minipage} ~
-
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/broca/vs_400.png}
+    \caption{M\'etodo Moreno-Dominguez (izquierda) y nuestro (derecha). Cuatrocientos pasos de preprocesamiento}
+    \label{fig:ambos1}    
+\end{figure}
+    
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/broca/vs_700.png}
+    \caption{M\'etodo Moreno-Dominguez (izquierda) y nuestro (derecha). Setecientos pasos de preprocesamiento}
+    \label{fig:ambos2}
 \end{figure}
 
-\begin{figure}[h]
-
-\begin{minipage}[h]{\textwidth}
-    \includegraphics[width=\textwidth]{img/broca/vs_700.png}
-    \caption{M\'etodo Moreno (izquierda) y Logit (derecha). Setecientos pasos de preprocesamiento}
-
-\end{minipage} ~
-
-\end{figure}
- 
+\clearpage

@@ -37,12 +37,17 @@ Para mejorar los resultados del \textit{clustering} realizan distintos tipos de
 preprocesamiento en varias etapas. Aqu\'i daremos solo una breve descripci\'on 
 de los mas relevantes, para mayores detalles favor de referirse al paper. \\
 
-Una de las primeras modificaciones es al algoritmo 
-\textit{Agglomerative Hierarchical Clustering}. Dado un n\'umero $k$,
-las primeras $k$ iteraciones son entre clusters vecinos y de tama\~no similar.
-Esto es, solo los clusters que se encuentran a menos de cierta distancia f\'isica
-en el cerebro pueden ser unidos. A su vez, solo se unen los clusters que poseen
-un tama\~no similar para que el dendrograma crezca de manera balanceada. \\
+Como ya fue explicado, crean los tractogramas transformando los mapas de visitas 
+mediante la ecuaci\'on \ref{eq:normalizacion}. Luego cambian a cero todos los voxels
+que poseen un valor menor a $0.4$. Si se usan 15000 part\'iculas, entonces estos
+voxels fueron visitados por menos del 0.3\% de ellas. \\
+
+Una de las primeras modificaciones es al algoritmo \textit{Agglomerative
+Hierarchical Clustering}. Dado un n\'umero $k$, las primeras $k$ iteraciones son
+entre clusters vecinos y de tama\~no similar. Esto es, solo los clusters que se
+encuentran a menos de cierta distancia f\'isica en el cerebro pueden ser unidos.
+A su vez, solo se unen los clusters que poseen un tama\~no similar para que el
+dendrograma crezca de manera balanceada. \\n
 
 
 \settowidth\mylen{procedure Clustering(}

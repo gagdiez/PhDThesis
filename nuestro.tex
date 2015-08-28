@@ -1,22 +1,26 @@
-\chapter{Parcelando la corteza con nuestro m\'etodo} 
+\chapter{Parcelando la corteza en el espacio eucl\'ideo} 
+\label{ch:nuestro}
 
 En el capitulo anterior presentamos las ventajas de transformar los tractogramas
 a un espacio eucl\'ideo. Mostramos que es posible realizar \textit{clustering} 
-con mejor complejidad espacial y temporal que el m\'etodo Moreno-Dominguez. En esta
-secci\'on explicamos todos los pasos que seguimos para parcelar la corteza. 
-Recordemos del cap\'itulo \ref{ch:metodos} que primero es necesario adquirir 
-los datos de un sujeto; luego seleccionar los voxels que ser\'an utilizados como
-semilla de cada tractograma; generar un tractograma por cada semilla y finalmente
-agruparlos usando alg\'un algoritmo de clustering. \\
+con mejor complejidad espacial y temporal que el m\'etodo Moreno-Dominguez. Ahora 
+nos proponemos explicar todos los pasos que seguimos para parcelar la corteza.
+Tambi\'en presentamos el algoritmo de clustering en su totalidad. Recordemos del
+cap\'itulo \ref{ch:metodos} que primero es necesario adquirir los datos de un
+sujeto; luego seleccionar los voxels que ser\'an utilizados como semilla de cada
+tractograma; generar un tractograma por cada semilla y finalmente agruparlos 
+usando alg\'un algoritmo de clustering. \\
 
 \section{Pre-clustering}
 
 Descargamos los datos de una mujer diestra de entre 23 y 26 a\~nos. Usando el
 m\'etodo descrito en la secci\'on \ref{sec:semillas} situamos semillas
 en la materia blanca a $3mm$ de la corteza. Por cada semilla creamos
-un tractograma utilizando el algoritmo \ref{alg:localtracking} presentado en la
-secci\'on \label{sec:convergencia}. Los tractogramas que pose\'ian solo un voxel
-visitado fueron descartados.\\
+un tractograma usando quince mil part\'iculas. Usamos el algoritmo \ref{alg:localtracking} presentado en la secci\'on \label{sec:convergencia}. Decartamos los tractogramas
+que pose\'ian solo un voxel visitado. A su vez, los voxels de cada tractograma con
+valor menor a $0.25$ fueron transformados en cero. Recordemos que los tractogramas
+provienen de la ecuaci\'on \ref{eq:normalizacion}. Esto implica que dichos voxels
+fueron visitados por menos del $0.006\%$ de las part\'iculas. \\
 
 \settowidth\mylen{procedure Parcelamiento(}
 \addtolength\mylen{\parindent}
@@ -130,16 +134,19 @@ traduce en una mayor eficiencia espacial y temporal. \\
 \end{algorithmic}
 \end{algorithm}
 
-Para empezar, el algoritmo de Moreno-Dominguez necesita mantener en memoria los
-tractogramas durante el clustering. En nuestro algoritmo basta con tener la matriz
-de distancia para realizar generar la jerarqu\'ia. Por lo visto en la secci\'on
-\ref{sec:ralas} esto implica un ahorro significativo de memoria. Supongamos un numero
-$s$ de semillas y una cantidad $m$ de voxels por cada tractograma. Nuestro algoritmo
-de clustering posee complejidad espacial $O(s^2)$ contra $O(s^2 + sm)$ del de
-Moreno-Dominguez. Recordemos que dentro de este contexto $m >> s$ \\
+El m\'etodo de Moreno-Dominguez necesita mantener en memoria los tractogramas
+durante el clustering. En nuestro algoritmo basta con tener la matriz de distancia
+para generar la jerarqu\'ia. Por lo visto en la secci\'on \ref{sec:ralas} esto
+implica un ahorro significativo de memoria. Luego, al momento de calcular las
+distancias al nuevo centroide (linea 15, algoritmo \ref{alg:nuestrometodo}) usamos
+la formula de Lance y Williams. \\
 
-Al momento de calcular las distancias al nuevo centroide (linea 15, algoritmo 
-\ref{alg:nuestrometodo}) usamos la formula de Lance y Williams. Como dijimos en 
-la secci\'on \ref{sec:modificandoClustering} esto permite reducir la complejidad
-temporal de $O(s^2m)$ a $O(s^2)$.
+Supongamos un numero $s$ de semillas y una cantidad $m$ de voxels por cada
+tractograma. Nuestro algoritmo de clustering posee complejidad espacial $O(s^2)$
+contra $O(s^2 + sm)$ del m\'etodo Moreno-Dominguez. A su vez, la complejidad 
+temporal de nuestro algoritmo es $O(s^2m)$ contra $O(s^2)$ del m\'etodo 
+Moreno-Dominguez. Recordemos de la secci\'on \ref{sec:ralas} que dentro del contexto
+de este trabajo $m >> s$. En general $s \cong 60000$ y $m \cong 3500000$, por lo 
+que nuestro m\'etodo es significativamente m\'as eficiente. \\
+
 \blankpage
