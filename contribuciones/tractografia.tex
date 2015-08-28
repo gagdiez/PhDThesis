@@ -1,27 +1,121 @@
-\section{Estudio de la Convergencia de los Tractogramas}
+\section{Estudio de la convergencia de los tractogramas}
+\label{sec:convergencia}
 
-Algunas preguntas interesantes a realizar sobre los tractogramas son: ¿Al repetir
-el experimento, podremos obtener el mismo tractograma?; ¿Cu\'antas part\'iculas son
-necesarias para ello? y ¿Qu\'e tanto difieren los resultados entre los distintos 
-algoritmos de tractograf\'ia?. \\
+Recordemos de la secci\'on \ref{sec:tractogramas} que los tractogramas se generan
+mediante un procedimiento Monte Carlo. Por ende, los tractogramas son inherentemente
+estoc\'asticos. Esto genera algunas preguntas interesantes: ¿Al repetir
+el experimento, podremos obtener el mismo tractograma? y ¿Cu\'antas part\'iculas
+son necesarias para ello?. En particular nos interesa contestar estas preguntas
+para la implementaci\'on que utilizamos. A continuaci\'on presentamos el 
+pseudoc\'odigo del algoritmo implementado. Para mayores detalles referirse 
+al anexo. \\
 
-Para responder estas preguntas tomamos una implementaci\'on de tractograf\'ia ya 
-existente llamada \textit{LocalTracking} (LT de aqu\'i en mas) y un algoritmo
-propio (MSL de aqu\'i en m\'as). Ambos algoritmos poseen una estructura 
-similar: Encuadran la imagen de difusi\'on en un modelo; en base a ese modelo 
-crean un mapa de transiciones probabil\'isticas entre voxels y lo recorren 
-de manera aleatoria hasta cumplir un criterio de parada. Para detalles sobre la 
-implementaci\'on, por favor referirse al Anexo. \\
 
-Para determinar si los algoritmos se estabilizaban y el n\'umero de part\'iculas
-necesario para que eso suceda utilizamos la t\'ecnica estad\'istica de
-\textit{bootstrap} \cite{Efron1982}. Bootstrap es una forma de aproximar la
-distribuci\'on del muestreo de un estad\'istico en base a calcular el mismo
-utilizando sucesivos remuestreos de los datos con repeticiones. Esto es
+\settowidth\mylen{procedure2 tracrograma(}
+\addtolength\mylen{\parindent}
+
+\begin{algorithm}
+\caption{Algoritmo de tractograf\'ia utilizado}\label{alg:localtracking}
+\begin{algorithmic}[1]
+
+\Procedure{tracrograma(anatomica: img. anat\'omica, \\ \hspace*{\mylen}
+                              dMRI: img. de difusi\'on, \\ \hspace*{\mylen}
+                              S: semilla, P: num. part\'iculas)}{}
+
+\State $\emph{particulas} \gets 0 $
+\State \emph{csd} $\gets$ Constrained Spherical Deconvolution Model of \emph{dMRI}. 
+
+\State \emph{mapa\_probabilistico} $\gets$ Mapa desde los coeficientes
+                                           Spherical Harmonics en \emph{csd}
+
+\State \emph{mapa\_visitas} $\gets$ matriz con mismas dimensiones que la anat\'omica
+\State \emph{mapa\_visitas[:,:]} $\gets$ \emph{0} 
+
+\While {particulas$++$ $\leq$ P}
+
+    \State \emph{posicion\_actual} $\gets$ posicion de S
+    
+    \While {posicion\_actual en materia blanca}
+
+        \State \emph{direccion\_actual} $\gets$ elegir direccion desde \emph{mapa\_probabilistico} 
+        
+        \State \emph{posicion\_actual} $\gets$ avanzar solo un voxel en \emph{direccion\_actual} 
+        
+        \State \emph{mapa\_visitas[ posicion\_actual ]} $\gets$ \emph{mapa\_visitas[ posicion\_actual ]} + 1
+    
+    \EndWhile
+\EndWhile
+
+\State \emph{tractograma} $\gets$ mapa\_visitas 
+
+\For {\emph{t} in \emph{tractograma}}
+    \State \emph{t} $\gets$ \emph{log(t+1)} / log(P+1)
+
+\EndFor
+
+\State \Return \emph{tractograma} 
+ 
+\EndProcedure
+\end{algorithmic}
+
+\end{algorithm}
+
+Este algoritmo es una instanciaci\'on del presentado en la secci\'on 
+\ref{sec:tractogramas}. La imagen de difusi\'on se enmarca en el modelo
+\textit{Constrained Spherical Deconvolution} usando la forma propuesta por 
+Aganj et al. \cite{Aganj2010}; el mapa de transiciones probabil\'isticas
+se recupera usando \textit{Spherical Harmonics} \cite{Descoteaux2007} y el 
+tractograma se calcula usando la transformaci\'on propuesta por
+Moreno-Dominguez et al. \cite{Moreno-Dominguez2014}. \\
+
+Para determinar la estabilidad de los tractogramas generados por este algoritmo
+y el n\'umero de part\'iculas necesario para que eso suceda utilizamos la t\'ecnica
+estad\'istica de \textit{bootstrap} \cite{Efron1982}. Bootstrap es una forma de
+aproximar la distribuci\'on del muestreo de un estad\'istico en base a calcular
+el mismo utilizando sucesivos remuestreos de los datos con repeticiones. Esto es
 especialmente \'util cuando el n\'umero de muestras que se posee de la poblaci\'on
-no es significativamente alto. En nuestro caso situamos mas de setecientas
-semillas en el \'Area de Broca y luego generamos quince mil \textit{streamlines}
-por cada una. Luego calculamos el tractograma medio y la varianza de cada voxel 
-utilizando mil submuestras aleatorias del mismo tama\~no. Esto se repiti\'o con 
-varios tama\~nos de submuestra para estudiar as\'i la variabilidad a medida que 
-la cantidad de part\'iculas crec\'ia.\\
+no es significativamente alto. \\
+
+En nuestro caso situamos mas de setecientas semillas en el \'Area de Broca y luego
+generamos quince mil \textit{streamlines} por cada una. Luego calculamos el 
+tractograma medio y la varianza de cada voxel utilizando mil submuestras aleatorias
+del mismo tama\~no. Repetimos esto con varios tama\~nos de submuestra para
+estudiar la variabilidad de los estad\'isticos.\\
+
+\begin{algorithm}
+\caption{Estimando estabilidad de los tractogramas}\label{alg:localtracking}
+\begin{algorithmic}[1]
+
+\Procedure{estabilidad(S: semilla)}{}
+
+\State \emph{streamlines} $\gets$ $\emptyset$
+
+\Loop{ 15000 veces }
+    \State \emph{stream} $\gets$ crear streamline desde S 
+    \State \emph{streamlines} $\gets$ agregar \emph{stream}
+\EndLoop
+
+\State \emph{medias} $\gets$ $\emptyset$
+\State \emph{varianzas} $\gets$ $\emptyset$
+
+\For{\emph{ss\_size} in [200, 500, 800, $\dots$]}
+
+    \State \emph{subsample} $\gets$ $\emptyset$
+
+    \Loop{ 10000 veces }
+        \State \emph{tractograma} $\gets$ tomar \emph{ss\_size} streams de \emph{streamlines} y crear tractograma
+        \State \emph{subsample} $\gets$ agregar \emph{tractograma} 
+    \EndLoop
+    
+    \State \emph{medias} $\gets$ agregar tractograma medio de \emph{subsample}
+    \State \emph{varianzas} $\gets$ agregar tractograma varianza de \emph{subsample}
+\EndFor
+
+\State \Return \emph{medias}, \emph{varianzas} 
+ 
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+

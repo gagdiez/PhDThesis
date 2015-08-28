@@ -2,6 +2,9 @@
 % SI NO PENSAS IMPRIMIRLO EN FORMATO LIBRO PODES USAR
 %\documentclass[11pt,a4paper]{tesis}
 
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+%\usepackage{algorithm2e}
 \usepackage{graphicx}
 \usepackage{comment}
 \usepackage{amsmath}
@@ -12,10 +15,19 @@
 \usepackage{wrapfig}
 \usepackage[none]{hyphenat}
 \usepackage{titlesec}
+\usepackage{afterpage}
 
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+    
 \titleformat*{\subsection}{\small\bfseries}
 
 \begin{document}
+
+
 
 %%%% CARATULA
 % Comentar y descomentar según corresponda
@@ -23,7 +35,7 @@
 \def\titulo{Licenciado }
 
 \def\autor{Guillermo Alejandro Gallardo Diez}
-\def\tituloTesis{T\'itulo: \mbox{tesis}}
+\def\tituloTesis{Parcelando la Corteza Cerebral a trav\'es de Resonancia Magn\'etica de Difusi\'on}
 \def\runtitulo{Subtitulo}
 \def\runtitle{Subtitle}
 \def\director{Demian Wassermann}
@@ -58,8 +70,10 @@
 \input{bkgrnd.tex}
 
 \input{metodos.tex}
-%\input{old.tex}
+
 \input{contribuciones.tex}
+
+\input{nuestro.tex}
 
 \input{resultados.tex}
 %%%% BIBLIOGRAFIA

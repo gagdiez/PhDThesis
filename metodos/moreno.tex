@@ -1,4 +1,4 @@
-\section{Clustering de Semillas: Estado del Arte.}
+\section{Clustering de semillas: Moreno-Dominguez.}
 
 Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el algoritmo
 \textit{Agglomerative Hierarchical Clustering} para agrupar los tractogramas. 
@@ -15,7 +15,7 @@ similitud la distancia coseno (Ecuaci\'on \ref{eq:cosine}) y como criterio de
 \begin{minipage}[b]{0.49\textwidth}
     \begin{equation}
         \label{eq:cosine}
-        similarity(X,Y) = 1 - \frac{ X \cdot Y }{||X|| ||Y||}
+        simil_{cos}(X,Y) = 1 - \frac{ X \cdot Y }{||X|| ||Y||}
     \end{equation}
 \end{minipage} ~
 \hfill
@@ -39,10 +39,64 @@ de los mas relevantes, para mayores detalles favor de referirse al paper. \\
 
 Una de las primeras modificaciones es al algoritmo 
 \textit{Agglomerative Hierarchical Clustering}. Dado un n\'umero $k$,
-las primeras $k$ iteraciones sean entre clusters vecinos y de tama\~no similar.
+las primeras $k$ iteraciones son entre clusters vecinos y de tama\~no similar.
 Esto es, solo los clusters que se encuentran a menos de cierta distancia f\'isica
 en el cerebro pueden ser unidos. A su vez, solo se unen los clusters que poseen
-un tama\~no similar para que el dendrograma crezca de manera balanceada. 
+un tama\~no similar para que el dendrograma crezca de manera balanceada. \\
+
+
+\settowidth\mylen{procedure Clustering(}
+\addtolength\mylen{\parindent}
+
+\begin{algorithm}[h]
+\caption{Modificaciones al algoritmo Agglomerative Hierarchical Clustering.}
+\label{alg:morenoahc}
+\begin{algorithmic}[1]
+
+\Procedure{Clustering(k\_pasos: primeros K pasos, \\ \hspace*{\mylen}
+                      tractogramas: mat. de tractogramas, \\ \hspace*{\mylen}
+                      vecinos: mat. de vecinos, \\ \hspace*{\mylen}
+                      distancias: mat. de distancia clusters ) }{}
+                      
+    \State \emph{jerarquia} $\gets \emptyset$
+                      
+\For{\emph{k} in [1, cant(\emph{tractogramas})] }
+
+    \If{\emph{k} $>$ \emph{k\_pasos}}
+
+        \State \emph{$C_x$, $C_y$} $\gets$ clusters tales que $x$ e $y$ poseen \emph{distancia} minima      
+            
+    \Else{}
+
+        \State \emph{$C_x$, $C_y$} $\gets$ $x$ e $y$ son \emph{vecinos}; 
+                                   de \emph{distancia} minima y de tama\~no similar.
+
+    \EndIf
+    
+    \State {tractogramas} $\gets$ eliminar clusters $C_x$, $C_y$
+
+    \State {centroide} $\gets$ computar explicitamente el centroide $(C_x,C_y)$ 
+
+    \State {tractogramas} $\gets$ agregar \emph{centroide}
+    
+    \State \emph{jerarquia} $\gets$ agregar la union $(C_x,C_y)$
+    
+    \For{ $C_z$ in \emph{tractogramas} }
+        \State \emph{D} $\gets$ computar explicitamente distancia coseno de $C_z$ al \emph{centroide}
+        \State \emph{distancias} $\gets$ actualizar distancia entre $(C_x,C_y)$ y \emph{centroide} con \emph{D}
+    \EndFor            
+    
+\EndFor
+
+\State \Return \emph{jerarquia} 
+ 
+\EndProcedure 
+
+\end{algorithmic}
+\end{algorithm}
+
+\vspace{1cm}
+
 Una vez obtenido el dendrograma proceden a eliminar las inversiones dentro del
 mismo. Una inversi\'on sucede cuando se unen dos clusters con una distancia 
 interna mayor a la distancia entre ellos. Las inversiones no cambian la 
@@ -81,3 +135,4 @@ Una vez finalizados todos los pasos el resultado es un dendrograma. Para parcela
 la corteza solo es necesario seleccionar una altura en la cual cortar dicho
 dendrograma. Los clusters que est\'en por debajo de ese corte ser\'an las distintas
 parcelas. \\
+
