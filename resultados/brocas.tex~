@@ -2,13 +2,13 @@
 \label{sec:parcela_broca}
 
 Decidimos comenzar parcelando solo el \'area de Broca. El ser una regi\'on
-chica permite generar resultados en poco tiempo y comparar de manera
-visual los m\'etodos implementados. Situamos semillas a $3mm$ de la
-corteza siguiendo la secci\'on \ref{sec:semillas} y generamos tractogramas
-utilizando el algoritmo \ref{alg:itract} de la secci\'on 
-\label{sec:convergencia}. En total se crearon aproximadamente $760$
-tractogramas. A continuaci\'on mostramos distintas parcelaciones obtenidas
-mediante el m\'etodo de Moreno-Dominguez y el nuestro. 
+chica permite generar resultados en poco tiempo y comparar 
+facilmente de manera visual los m\'etodos implementados. Situamos semillas
+a $3mm$ de la corteza siguiendo la secci\'on \ref{sec:semillas} y
+generamos tractogramas utilizando el algoritmo \ref{alg:itract} de la 
+secci\'on \label{sec:convergencia}. En total se crearon aproximadamente
+$760$ tractogramas. A continuaci\'on mostramos distintas parcelaciones
+obtenidas mediante el m\'etodo de Moreno-Dominguez y el nuestro. 
 
 \subsection{M\'etodo Moreno-Dominguez}
 \label{sec:moreno_broca}

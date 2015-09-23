@@ -33,35 +33,33 @@ $V(x)=1$, por lo que la ecuaci\'on se resume a:
 $$ | \nabla u(x) | = 1 , x \in \Omega $$ 
 
 $u(v)$ en este caso representa el tiempo que tarda la onda en llegar desde
-alg\'un elemento del borde hasta el punto $v$ movi\'endose a velocidad
-constante de una unidad de espacio por unidad de tiempo. Dada la forma de
-la velocidad, $u(v)$ tambi\'en representa \textbf{la distancia mas corta
-que existe entre cualquier punto $v$ de la imagen y el borde de $\Omega$}.
-Dependiendo la orientaci\'on que se elija, las distancias a los puntos
-internos de la superficie ser\'an negativas y las distancias a los puntos
-externos positivas (Figura \ref{fig:fmm}). \textit{FMM} resuelve este
-problema en tiempo $O(n log(n))$ \cite{Sethian2001}, siendo $n$ la cantidad
-de voxels de la imagen.\\
+alg\'un elemento del borde hasta el punto $v$ movi\'endose a velocidad constante
+de una unidad de espacio por unidad de tiempo. Dada la forma de la velocidad, 
+$u(v)$ tambi\'en representa \textbf{la distancia mas corta que existe entre cualquier
+punto $v$ de la imagen y el borde de $\Omega$}. Dependiendo la orientaci\'on que 
+se elija, las distancias a los puntos internos de la superficie ser\'an negativas
+y las distancias a los puntos externos positivas (Figura \ref{fig:fmm}). 
+\textit{FMM} resuelve este problema en tiempo $O(n log(n))$ \cite{Sethian2001},
+siendo $n$ la cantidad de voxels de la imagen.\\
 
 \begin{figure}[h!]
 
 \centering
 \begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\textwidth]{img/fmm.png}
-    \caption{\small FMM sobre el hemisferio derecho, el borde la materia
-                    blanca fue resaltado intensionalmente}
+    \caption{\small FMM sobre el hemisferio derecho, el borde la materia blanca fue
+    resaltado intensionalmente}
     \label{fig:fmm}
 \end{minipage} ~
 
 \end{figure}  
 
-Es posible utilizar este algoritmo para seleccionar voxels a cierta
-profundidad en la materia blanca. Usando como borde la corteza cerebral
-podemos crear un mapa de distancias en la materia blanca. El gradiente de
-este mapa de distancias es un campo vectorial donde cada vector apunta
-hacia el interior de la materia blanca. Caminar partiendo desde los puntos
-en la siguiendo este campo permite adentrarse respetando la morfolog\'ia de
-la materia blanca. Una ventaja de este m\'etodo es que permite guardar un
-mapeo entre cada coordenada de la superficie y la semilla que la
-representa. Otra ventaja es que es posible realizar todo el proceso en 
-tiempo $O(n log(n))$. \\
+Es posible utilizar este algoritmo para seleccionar voxels a cierta profundidad
+en la materia blanca. Usando como borde la corteza cerebral podemos crear un mapa
+de distancias en la materia blanca. El gradiente de este mapa de distancias es un
+campo vectorial donde cada vector apunta hacia el interior de la materia blanca.
+Caminar partiendo desde los puntos en la siguiendo este campo permite adentrarse 
+respetando la morfolog\'ia de la materia blanca. Una ventaja de este m\'etodo es
+que permite guardar un mapeo entre cada coordenada de la superficie y la semilla
+que la representa. Otra ventaja es que es posible realizar todo el proceso en tiempo
+$O(n log(n))$. \\

@@ -141,5 +141,6 @@ corteza. Por la forma en que est\'an definidos, los tractogramas son
 ineherentemente estoc\'asticos. El m\'etodo aqu\'i presentado nos permite
 estudiar la estabilidad del algoritmo de tractograf\'ia implementado. De
 esta manera podemos comprobar si dado un n\'umero suficiente de 
-part\'iculas los tractogramas de una semilla convergen a un mismo 
+part\'iculas los tractogramas de una semilla convergen a un mismo
 resultado. \\
+

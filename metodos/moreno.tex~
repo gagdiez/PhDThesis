@@ -1,5 +1,4 @@
 \section{Clustering de semillas: Moreno-Dominguez.}
-\label{sec:clustering_moreno}
 
 Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el
 algoritmo \textit{Agglomerative Hierarchical Clustering} para agrupar los

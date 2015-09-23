@@ -1,5 +1,5 @@
 \section{An\'alisis del m\'etodo Moreno-Dominguez}
-\label{sec:analisis_moreno}
+
 Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el algoritmo
 \textit{Agglomerative Hierarchical Clustering} para agrupar los tractogramas. 
 En particular utilizan como medida de similitud la distancia coseno 

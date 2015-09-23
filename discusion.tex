@@ -1,64 +1,182 @@
 \chapter{Discusi\'on} 
 
-Como explicamos al principio de este trabajo, existe evidencia de que es posible
-parcelar el cerebro mediante un criterio funcional. Esto es, dividir el cerebro
-en distintas regiones, atribuyendo una funci\'on a cada una de ellas \cite{Greicius2003}.
-A su vez, la Resonancia Magn\'etica de Difusi\'on ha permitido desarrollar nuevos 
-criterios estructurales de parcelaci\'on \cite{Taylor1985}. A lo largo de este
-trabajo nos enfocamos en estudiar el reciente aporte de Moreno-Dominguez 
-\cite{Moreno-Dominguez2014}. El mismo se basa en utilizar un algoritmo de
-tractograf\'ia y otro de \textit{clustering} para parcelar la corteza cerebral. 
-Luego, basandonos en su trabajo, propusimos un nuevo algoritmo de \textit{clustering},
-tambi\'en basado en tractograf\'ias. En este \'ultimo capitulo discutiremos los 
-resultados obtenidos. Comenzando por la robustes del algoritmo de tractograf\'ia
-utilizado; siguiendo con una comparaci\'on entre nuestro m\'etodo y el de 
-Moreno-Dominguez; luego hablaremos sobre la validez biol\'ogica de la parcelaci\'on
-obtenida y propondremos objetos de futuro estudio. \\
-
+A lo largo de este trabajo presentamos como parcelar la corteza cerebral
+en base a un criterio estructural; estudiamos una de las m\'etodos
+existentes actuales y presentamos un m\'etodo pr\'opio. En los capitulos
+1 y 2 introdujimos la parcelaci\'on estructural y sus fundamentos 
+te\'oricos. En las secciones \ref{sec:clustering_moreno} y 
+\ref{sec:analisis_moreno} analizamos el reciente aporte de 
+Moreno-Dominguez \cite{Moreno-Dominguez2014} al estado del arte. El mismo
+se basa en combinar un algoritmo de tractograf\'ia y otro de 
+\textit{clustering} para parcelar la corteza cerebral. Luego, bas\`andonos
+en su trabajo, propusimos en la secci\'on \label{ch:nuestro} un nuevo
+algoritmo de \textit{clustering}. En este \'ultimo capitulo discutiremos
+los resultados obtenidos durante este trabajo. Comenzando por la robustes
+del algoritmo de tractograf\'ia utilizado; siguiendo con una comparaci\'on
+entre nuestro m\'etodo y el de Moreno-Dominguez; continuando con la 
+validez biol\'ogica de la parcelaci\'on obtenida y propondremos objetos de
+futuro estudio. \\
 
 \section{Convergencia del algoritmo de tractograf\'ia}
 
+Creamos los tractogramas usando el algoritmo \ref{alg:itract} de la 
+secci\'on \ref{sec:convergencia}. Los tractogramas creados de esta manera
+son inherentemente estoc\'asticos. Implementamos el algoritmo 
+\ref{alg:bootstrap} de la secci\'on \ref{sec:convergencia} para estudiar
+si la creaci\'on de los tractogramas era estable. Esto es, si dado un 
+n\'umero suficientemente grande de part\'iculas el resultado converge
+a un \'unico tractograma. \\
+
 El algoritmo utilizado en el trabajo demostr\'o ser estable. Las figuras 
-\ref{fig:s1}, \ref{fig:s2} y \ref{fig:s3} muestran que la desviaci\'on estandar
-es casi nula al usar quince mil part\'iculas. A su vez, la figura \ref{fig:mv}
-muestra lo r\'apido que converge la media de tres voxels distintos. Como eran los 
-de mayor desv\'io estandar, podemos asegurar que casi no existe diferencia en 
-la media de los tractogramas creados con dos mil part\'iculas. Nuestro m\'etodo
-se basa en tractogramas, por lo que es importante contar con un algoritmo de 
-tractograf\'ia robusto.
+\ref{fig:s1}, \ref{fig:s2} y \ref{fig:s3} de la secci\'on 
+\ref{sec:resultado_estabilidad} muestran que la desviaci\'on est\'andar es
+casi nula al usar $15000$ part\'iculas. A su vez, la figura \ref{fig:mv}
+muestra lo r\'apido que converge la media de tres voxels distintos. 
+Como eran los de mayor desv\'iacion est\'andar, podemos asegurar que casi
+no existe diferencia en la media de los tractogramas creados con dos mil
+part\'iculas. \\
 
-\section{Comparaci\'on entra ambos m\'etodos}
-
-En ambos casos sucedi\'o que a mayor n\'umero $k$, menos dispersas quedaron las
-distintas parcelas. Recordemos que $k$ es la cantidad de uniones que se har\'an
-solo entre clusters vecinos. Respecto a las \'areas obtenidas, en la divisi\'on
-del \'area de Broca los resultados fueron similares. La secci\'on \ref{sec:acercamiento} 
-permite ver esto de manera explicita. Sin embargo, al pasar a la parcelaci\'on 
-del hemisferio completo resulta dif\'icil realizar una simple comparaci\'on visual.
-M\'as a\'un, es complicado encontrar cortes en los dendrogramas que generen 
-representaciones parecidas. Sin embargo, en la secci\'on \ref{sec:acercamiento_corteza}
-se puede ver que ambos resultados comparten similitudes. Por ejemplo, las 
-siguientes estructuras son parecidas: la corteza motora y la somest\'esica; 
-el lobulo frontal y occipital, as\'i como tambi\'en el \'area de Broca.
+Nuestro m\'etodo de parcelamiento se basa en el clustering de 
+tractogramas. Por ello es importante contar con un algoritmo de 
+tractograf\'ia robusto. No encontramos estudios previos donde se analizara
+este aspecto del algoritmo de tractograf\'ia usado. \\
 
 
-\section{Validaci\'on anat\'omica y funcional}
+\section{Comparaci\'on entra ambos m\'etodos de $clustering$}
 
-Dada la dificultad de comparar nuestro m\'etodo visualmente con el de Moreno-Dominguez
-buscamos otra forma de validarlo. En la figura \ref{fig:an2pa} se puede ver
-el resultado de proyectar la parcelaci\'on anat\'omica del sujeto sobre la que
-obtuvimos. En interesante notar como nuestra parcelaci\'on cre\'o \'areas dentro
-de los l\'imites de al menos 9 regiones an\'atomicas. En particular, la divisi\'on
-del \'area motora parece ser consistente con la literatura actual. Por ello 
-tambi\'en comparamos la parcelaci\'on con un estudio funcional hecho sobre el 
-sujeto \cite{Barch2013}. 
+En la secci\'on \ref{sec:clustering_moreno} presentamos el m\'etodo para
+parcelar la corteza de Moreno-Dominguez. Luego, en la secci\'on
+\label{ch:nuestro} presentamos nuestro m\'etodo. El resultado de parcelar
+el \'area de Broca con estos se pueden ver en las secciones 
+\ref{sec:moreno_broca} y \ref{sec:nuestro_broca}. En la secci\'on 
+\label{sec:acercamiento} presentamos los resultados lado a lado en detalle
+para compararlos. Los resultados son visualmente parecidos en todos los
+casos. \\
+
+Luego utilizamos ambos algoritmo para parcelar el hemisferio izquierdo del
+mismo sujeto. Los resultados se encuentran en las secciones 
+\label{sec:corteza_moreno} y \label{sec:corteza_nuestro}. En este caso 
+resulta dif\'icil comparar visualmente las parcelaciones. M\'as a\'un, es
+complicado encontrar cortes en los dendrogramas que generen
+representaciones parecidas. Dado que los arboles fueron generados
+de manera distinta, sus cortes no tienen por que corresponderse. Sin
+embargo, la secci\'on \ref{sec:acercamiento_corteza} muestra algunas
+similitudes en: la corteza motora y la somest\'esica; el l\'obulo frontal;
+el l\'obulo occipital y el \'area de Broca. \\
+
+Respecto a la eficiencia computacional, en la secci\'on 
+\ref{sec:nuestro_clustering} comparamos ambos m\'etodos. 
+Mostramos que nuestro m\'etodo permite mejorar la complejidad temporal y
+espacial en al menos un orden de magnitud. Nuestro algoritmo de clustering
+posee complejidad espacial $O(s^2)$ contra $O(s^2 + sm)$ del m\'etodo
+Moreno-Dominguez. La complejidad temporal de nuestro algoritmo es $O(s^2m)$
+contra $O(s^2)$ del m\'etodo Moreno-Dominguez. Recordemos de la secci\'on
+\ref{sec:ralas} que dentro del contexto de este trabajo $m >> s$. En
+general el n\'umero de semillas usadas es muy menor a la cantidad de
+voxels de los tractogramas. En nuestro caso particular $s \cong 22000$ y
+$m \cong 3500000$. $m$ es $159$ veces mas grande que $s$. \\
+
+
+\section{Correlato con otras parcelaciones de la literatura}
+
+Nuestro m\'etodo divide la corteza cerebral bas\'andonse en el 
+agrupamiento de tractogramas. El criterio usado es puramente estructural.
+Solo usamos informaci\'on sobre la estructura f\'sica de la materia
+blanca. En la literatura actual existen parcelaciones basadas en otros
+criterios. Desikan et al. \cite{Desikan2006} dividen la corteza usando
+como referencia las circunvoluciones del cerebro. Peinfield 
+\cite{Penfield1954} parcela la corteza en base a las respuestas a 
+est\'imulos el\'ectricos sobre la misma. La parcelaci\'on de Desikan es
+anat\'omica, mientras que la de Peinfield es funcional. Una pregunta
+interesante es si nuestra parcelaci\'on posee correlaci\'on con otras
+anat\'omicas o funcionales. La relaci\'on entre el aspecto anat\'omico o
+funcional del cerebro y su aspecto estructural es un problema abierto en
+neurociencia.  En el trabajo de Moreno-Dominguez solo hacen una breve
+comparaci\'on entre sus resultados y un mapa citoarquitect\'onico. A 
+continuaci\'on contrastaremos nuestros resultados con un atlas anat\'omico
+y un estudio funcional realizado sobre el sujeto.  \\
+
+
+\subsection{Correlaci\'on anat\'omica}
+
+En la secci\'on \label{sec:corteza_nuestro} parcelamos el hemisferio 
+izquiero de un sujeto con nuestro m\'etodo. Vamos a comparar nuestro
+resultado con el atlas anat\'omico basado en Desikan et al. 
+\cite{Desikan2006}
+La figura \ref{fig:an2pa} muestra el resultado de proyectar algunas
+regiones anat\'omicas sobre las obtenidas con nuestro m\'etodo. Nuestra
+parcelaci\'on cre\'o \'areas bien delimitadas dentro de al menos 9
+regiones anat\'omicas. Para explicar esto con mayor detalle incluimos la
+figura \ref{fig:an2pa2}. All\'i solo dejamos pintadas las regiones que 
+estaban en su contenidas mayor\'ia dentro de alguna proyecci\'on. Podemos
+ver que los bordes entre las \'areas pintadas y las proyectadas son
+similares. El $90\%$ del \'area de las 9 proyecciones est\'a pintada y 
+solo un $5\%$ del \'area de nuestras parcelas queda fuera de las
+proyecciones. Las parcelas de nuestro m\'etodo que se encuentran en una
+sola proyecci\'on representan el $88\%$ del \'area pintada. Las parcelas
+que est\'an en dos regiones representan el $12\%$ restante. Esto indica que casi todas nuestras parcelas se encuentran contenidas dentro de a lo
+sumo una proyecci\'on. \\
+
+Repetimos este procedimiento de proyectar el atlas anat\'omico sobre la
+parcelaci\'on obtenida en la figura \ref{fig:moreno_corteza2}. Dicha
+parcelaci\'on fue obtenida mediante el m\'etodo de Moreno-Dominguez.
+En este caso el $75\%$ del \'area de las 9 proyecciones est\'a pintada y 
+un $15\%$ del \'area de las parcelas quedan fuera de las proyecciones. 
+Sin embargo esto no quiere decir que el m\'etodo de Moreno-Dominguez 
+posea menor correlaci\'on con el atlas anat\'omico. La parcelaci\'on 
+resultante en ambos m\'etodos depende de la altura a la cual se decida 
+cortar el dendrograma. Cortando el mismo dendrograma a mayor profundidad
+se pueden conseguir resultados similares a los de nuestro m\'etodo.\\
+
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/anatomica2parcelation.png}
-    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la parcelaci\'on obtenida (derecha)}
+    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la 
+             parcelaci\'on obtenida (derecha). Regiones: 
+             1. \textit{pars triangularis}; 2. \textit{pars opercularis};
+             3. \textit{caudal middle frontal}; 
+             4. \textit{precentral (\'area motora)}; 
+             5. \textit{post central}; 6. \textit{superior parietal}; 
+             7. \textit{lateral occipital}; 8. \textit{fusiform};
+             9. \textit{superior temporal}.  }
     \label{fig:an2pa}
 \end{figure}
 
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{img/anatomica2parcelation2.png}
+    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la 
+             parcelaci\'on obtenida (derecha). Solo las parcelas contenidas
+             en mayor proporci\'on fueron pintadas. Regiones: 
+             1. \textit{pars triangularis}; 2. \textit{pars opercularis};
+             3. \textit{caudal middle frontal}; 
+             4. \textit{precentral (\'area motora)}; 
+             5. \textit{post central}; 6. \textit{superior parietal}; 
+             7. \textit{lateral occipital}; 8. \textit{fusiform};
+             9. \textit{superior temporal}.  }
+    \label{fig:an2pa2}
+\end{figure}
+
+\subsection{Correlaci\'on funcional}
+
+Para analizar la correlaci\'on funcional utilizamos datos provenientes
+del estudio de Bach et al. \cite{Barch2013} hecho sobre el sujeto. En el
+mismo utilizan Resonancia Magn\'etica Funcional (fMRI) para estudiar la
+respuesta sobre la corteza a ciertos est\'imulos particulares. La 
+Resonancia Magn\'etica Funcional es un tipo especial de resonancia 
+magn\'etica donde se mide el nivel de oxigeno en sangre. Nosotros nos
+enfocamos en las respuestas a los siguientes est\'imulos: mover la mano;
+mover el pie; mover la lengua; reconocer formas y caras; comprender un
+cuento y resolver problemas matem\'aticos simples. Por cada uno de estos
+est\'imulos se cuenta con un mapa de \textit{z-scores} sobre la corteza.
+Estos \textit{z-scores} representan la correlaci\'on entre la activaci\'on
+de cada punto de la corteza con el est\'imulo. La figura \ref{fig:32k}
+muestra nuestra parcelaci\'on interpolada sobre una superficie de menor
+resoluci\'on que la usada hasta aqu\'i. Algunas regiones de inter\'es
+fueron etiquetadas. La figura \ref{fig:32k_z5} muestra la proyecci\'on de
+estas regiones sobre los \textit{z-scores} $ \geq 5$ de los distintos
+mapas. La figura \ref{fig:32k_z7} muestra la proyecci\'on sobre los
+\textit{z-scores} $ \geq 7$.
+ 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_labels.png}
     \caption{Parcelas en baja resoluci\'on}
@@ -68,13 +186,110 @@ sujeto \cite{Barch2013}.
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_z5.png}
-    \caption{Projecci\'on de las parcelas (izquierda) sobre activaciones funcionales (derecha)}
-    \label{fig:32k}
+    \caption{Projecci\'on de las parcelas (izquierda) sobre los \textit{z-scores}
+    mayores a $5$ de las activaciones funcionales (derecha)}
+    \label{fig:32k_z5}
 \end{figure}
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_z7.png}
-    \caption{Projecci\'on de las parcelas (izquierda) sobre activaciones funcionales con 
-             mayor valor de z-score (derecha)}
-    \label{fig:32k}
+    \caption{Projecci\'on de las parcelas (izquierda) sobre los \textit{z-scores}
+    mayores a $7$ de las activaciones funcionales (derecha)}
+    \label{fig:32k_z7}
 \end{figure}
+
+
+Tomamos las etiquetas de la figura \ref{fig:32k}. Los resultados muestran que 
+la regi\'on $1$ es funcionalmente consistente con la resoluci\'on de problemas
+matem\'aticos. Las regiones $2-10$ son consistentes anat\'omicamente con la corteza motora. A su vez, tambi\'en son consistentes con el hom\'unculo cortical.
+
+El hom\'unculo cortical es una 
+divisi\'on funcional de la corteza motora y de la corteza somastest\'esica.
+Mapea distintas regiones del cuerpo con regiones de la corteza como puede
+verse en la figura \ref{fig:homunculo}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.8\textwidth]{img/homunculus.jpg}
+    \caption{Hom\'unculo Cortical}
+    \label{fig:homunculo}
+\end{figure}
+
+
+  La regiones $11$ y $12$ son
+consistentes anat\'omica y funcionalmente con el l\'obulo temporal superior.
+Finalmente, las regiones $13$ y $14$ son consistentes anat\'omica y funcionalmente
+con el l\'obulo occipital.
+
+
+
+\begin{table}[]
+\centering
+\label{tb:zscore5}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+   & pie   & mano  & lengua & matemática & cuento & formas \\ \hline
+1  & 0     & 0     & 0      & 0.276      & 0      & 0      \\ \hline
+2  & 0     & 0     & 0.311  & 0          & 0      & 0      \\ \hline
+3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
+4  & 0     & 0.172 & 0      & 0          & 0      & 0      \\ \hline
+5  & 0.177 & 0.321 & 0      & 0          & 0      & 0      \\ \hline
+6  & 0.201 & 0     & 0      & 0          & 0      & 0      \\ \hline
+7  & 0.231 & 0.044 & 0      & 0          & 0      & 0      \\ \hline
+8  & 0     & {\bf 0.590} & 0.139  & 0          & 0      & 0      \\ \hline
+9  & 0     & 0     & {\bf 0.610}   & 0          & 0      & 0      \\ \hline
+10 & 0.33  & 0     & 0      & 0          & 0      & 0      \\ \hline
+11 & 0     & 0     & 0      & 0          & {\bf 0.606}  & 0      \\ \hline
+12 & 0     & 0     & 0      & 0          & {\bf 0.454}  & 0      \\ \hline
+13 & 0     & 0     & 0      & 0          & 0      & {\bf 0.491}  \\ \hline
+14 & 0     & 0     & 0      & 0          & 0      & 0.154  \\ \hline
+\end{tabular}
+
+\caption{Relaci\'on entre las \'areas de cada parcela y los mapas de
+         activaci\'on con $zscore > 5$. Los valores mayores a $0.4$ fueron
+         resaltados.}
+\end{table}
+
+
+\begin{table}[]
+\centering
+
+
+\label{tb:zscore7}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+   & pie   & mano  & lengua & matemática & cuento & formas \\ \hline
+1  & 0     & 0     & 0      & {\bf 0.419} & 0     & 0      \\ \hline
+2  & 0     & 0     & 0.323  & 0          & 0      & 0      \\ \hline
+3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
+4  & 0     & 0.115 & 0      & 0          & 0      & 0      \\ \hline
+5  & 0.141 & 0.341 & 0      & 0          & 0      & 0      \\ \hline
+6  & 0.095 & 0     & 0      & 0          & 0      & 0      \\ \hline
+7  & 0.377 & 0.040 & 0      & 0          & 0      & 0      \\ \hline
+8  & 0     & {\bf 0.669} & 0.147  & 0          & 0      & 0      \\ \hline
+9  & 0     & 0     & {\bf 0.629}  & 0          & 0      & 0      \\ \hline
+10 & 0.240 & 0     & 0      & 0          & 0      & 0      \\ \hline
+11 & 0     & 0     & 0      & 0          & {\bf 0.715}  & 0      \\ \hline
+12 & 0     & 0     & 0      & 0          & {\bf 0.458}  & 0      \\ \hline
+13 & 0     & 0     & 0      & 0          & 0      & {\bf 0.428}  \\ \hline
+14 & 0     & 0     & 0      & 0          & 0      & 0.154 \\ \hline
+\end{tabular}
+
+\caption{Relaci\'on entre las \'areas de cada parcela y los mapas de
+         activaci\'on con $zscore > 7$. Los valores mayores a $0.4$ fueron
+         resaltados.}
+
+\end{table}
+
+
+\section{Trabajo Futuro}
+El m\'etodo aqu\'i propuesto ha mostrado resultados con una fuerte correlaci\'on
+anat\'omica y funcional sobre el sujeto estudiado. Dado este buen resultado es 
+importante estudiar la estabilidad del mismo sobre una poblaci\'on mayor.
+A su vez, el transformar los tractogramas a un espacio eucl\'ideo brinda la 
+capacidad de calcular tractogramas medios. Ser\'ia interesante el estudiar
+si es posible obtener una parcelaci\'on media dado un grupo de sujetos. 
+En su trabajo \cite{Moreno-Dominguez2014}, Moreno-Dominguez propone una manera
+de comparar dendrogramas para buscar diferencias entre sujetos. Contar con un
+dendrograma medio podr\'ia llevar a una nueva manera de detectar patolog\'ias
+en individuos.
+

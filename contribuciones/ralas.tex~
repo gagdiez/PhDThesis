@@ -55,7 +55,6 @@ relaci\'on:
 \label{eq:simileuc}
 simil_{euc}(X,Y) = \sqrt{X \cdot X^t - 2 X \cdot Y^t + Y \cdot Y^t} 
 \end{equation}
-
 Podemos generar la matriz de distancias usando directamente las estructuras de 
 matrices ralas. Es importante destacar que este m\'etodo generara una matriz que no 
 necesariamente es sim\'etrica. Algunos valores que deber\'ian ser iguales pueden

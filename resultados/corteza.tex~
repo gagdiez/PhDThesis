@@ -39,7 +39,6 @@ $clusters$ vecinos y de tama\~no homogeneo.
 \end{figure}
 
 \subsection{Utilizando nuestro m\'etodo}
-\label{sec:corteza_nuestro}
 
 Por \'ultimo parcelamos el hemisferio usando el m\'etodo de 
 Moreno-Dominguez. Al igual que en la secci\'on \label{ch:nuestro},

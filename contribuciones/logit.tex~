@@ -55,9 +55,9 @@ por escalares est\'an contenidos en el mismo espacio. Pohl et al.
 \cite{Pohl2007} utilizan esta propiedad para realizar operaciones lineales 
 sobre mapas probabil\'isticos. A su vez, demuestran que la suma y 
 multiplicaci\'on por escalares en el espacio eucl\'ideo poseen un significado 
-en el espacio de la distribuci\'on. Denominamos $LogOdds$ al espacio vectorial
-de llegada. La suma en el espacio $LogOdds$ representa una multiplicaci\'on
-normalizada en el espacio de origen:
+en el espacio de la distribuci\'on. Denominamos $LogOdds$ al espacio vectorial.
+La suma en el espacio $LogOdds$ representa una multiplicaci\'on normalizada en
+el espacio de origen:
 
 $$ p_1 \oplus p_2 = logit^{-1} ( logit(p_1) + logit(p_2) ) = 
    \frac{1}{ p_1 \cdot p_2 } (p1_1 p2_1, \dots, p1_n p2_n) $$
