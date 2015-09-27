@@ -1,6 +1,8 @@
 \section{Seleccionando voxels que ser\'an semillas}
 \label{sec:semillas}
 
+El segundo paso para parcelar la corteza cerebral es seleccionar que voxels
+ser\'an semillas.
 La materia gris est\'a compuesta principalmente por neuronas, y la materia
 blanca por axones que las comunican \cite{Dale2008}. Como cada
 neurona posee asociado un ax\'on, colocar semillas en la interfaz entre la
@@ -39,17 +41,19 @@ la velocidad, $u(v)$ tambi\'en representa \textbf{la distancia mas corta
 que existe entre cualquier punto $v$ de la imagen y el borde de $\Omega$}.
 Dependiendo la orientaci\'on que se elija, las distancias a los puntos
 internos de la superficie ser\'an negativas y las distancias a los puntos
-externos positivas (Figura \ref{fig:fmm}). \textit{FMM} resuelve este
-problema en tiempo $O(n log(n))$ \cite{Sethian2001}, siendo $n$ la cantidad
-de voxels de la imagen.\\
+externos positivas (figura \ref{fig:fmm}). \textit{FMM} encuentra estas 
+distancias en tiempo $O(n log(n))$ \cite{Sethian2001}, siendo $n$ la 
+cantidad de voxels de la imagen.\\
 
 \begin{figure}[h!]
 
 \centering
 \begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\textwidth]{img/fmm.png}
-    \caption{\small FMM sobre el hemisferio derecho, el borde la materia
-                    blanca fue resaltado intensionalmente}
+    \caption{\small FMM sobre el hemisferio derecho. El borde la materia
+                    blanca fue resaltado intencionalmente. Las distancias
+                    a los puntos internos son negativas y las distancias a
+                    los puntos externos positivas.}
     \label{fig:fmm}
 \end{minipage} ~
 

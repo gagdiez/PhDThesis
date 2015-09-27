@@ -1,54 +1,71 @@
 \section{An\'alisis del m\'etodo Moreno-Dominguez}
 \label{sec:analisis_moreno}
-Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} implementan el algoritmo
-\textit{Agglomerative Hierarchical Clustering} para agrupar los tractogramas. 
-En particular utilizan como medida de similitud la distancia coseno 
-(Ecuaci\'on \ref{eq:cosine}) y como criterio de \textit{linkage} el centroide 
-(Ecuaci\'on \ref{eq:centroide}).\\
 
-Utilizar \textit{Hierarchical Agglomerative Clustering} con la distancia 
-coseno y el \textit{linkage} centroide presenta algunas desventajas. 
-Primero, la distancia coseno no distingue distancias entre clusters colineales.
-Segundo, el promedio de probabilidades no necesariamente representa una
-probabilidad \cite{Pohl2007}. Esto quiere decir que el centroide de un grupo 
-de tractogramas no necesariamente representa el promedio de estos tractogramas.
-Finalmente la distancia coseno obliga a tener que comparar expl\'icitamente 
-cada centroide con los clusters existentes. Notemos que esto implica mantener
-los clusters en memoria. A continuaci\'on detallamos cada una de estas  
+El cuarto paso del diagrama en la figura \ref{fig:diagrama} es agrupar los
+tractogramas mediante un algoritmo de $clustering$. Moreno-Dominguez et
+al. \cite{Moreno-Dominguez2014} implementan el algoritmo
+\textit{Agglomerative Hierarchical Clustering} para agrupar los
+tractogramas. En particular utilizan como medida de similitud la distancia
+coseno (ecuaci\'on \ref{eq:cosine}) y como criterio de \textit{linkage} el
+centroide (ecuaci\'on \ref{eq:centroide}). Utilizar \textit{Hierarchical
+Agglomerative Clustering} con la distancia coseno y el \textit{linkage}
+centroide presenta algunas desventajas. Primero, la distancia coseno no
+distingue distancias entre clusters colineales. Segundo, el promedio de
+probabilidades no necesariamente representa una probabilidad 
+\cite{Pohl2007}. Esto quiere decir que el centroide de un grupo de
+tractogramas no necesariamente representa el promedio de estos
+tractogramas. Finalmente la distancia coseno obliga a tener que comparar
+expl\'icitamente cada centroide con los clusters existentes. Esto aumenta
+la complejidad temporal y espacial ya que es necesario mantener los
+tractogramas en memoria. A continuaci\'on detallamos cada una de estas
 desventajas. \\
 
 \subsection{Clustering de vectores colineales}
 
-La distancia coseno es una forma de medir co\-rrelaci\'on entre vectores. Por 
-ello, cuando lo que se intenta agrupar son vectores colineales el resultado es
-aleatorio. Por ejemplo, cuando se aplica el procedimiento sobre los puntos de 
-la Figura \ref{fig:3clusters} el resultado del clustering es la Figura 
-\ref{fig:3moreno}. Usando LogOdds y la m\'etrica euclidiana se consigue el
-\textit{clustering} de la Figura \ref{fig:3logit}. \\
+La distancia coseno (ecuaci\'on \ref{eq:cosine}) es una forma de medir 
+correlaci\'on entre vectores. Supongamos tenemos
+vectores aleatorios colineales donde cada componente es independiente y 
+proviene de una distribuci\'on de Bernulli. Agruparlos utilizando como
+medida de similitud la distancia coseno lleva a resultados err\'oneos. 
+Por ejemplo, agrupar los puntos de la figura \ref{fig:3clusters} usando
+el m\'etodo de Moreno-Dominguez da como resultado la figura 
+\ref{fig:3moreno}. Podemos ver que si bien ten\'iamos tres clusters bien
+definidos en el espacio el m\'etodo no logr\'o separarlos. \\
 
 \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{img/3pop.png}
-        \caption{Tres clusters colineales\-}
+        \caption{Tres $clusters$ colineales. Cada punto representa un
+                 vector aleatorio con componentes provenientes de una
+                 distribucion Bernulli. Queremos agruparlos utilizando
+                 \textit{Agglomerative Hierarchical Clustering}.}
         \label{fig:3clusters}
 \end{figure}
 
-Por la forma que posee el algoritmo \ref{alg:itract}, los tractogramas creados 
-poseen muchos voxels lejanos con valores peque\~nos. Esto surge de simular el 
-recorrido de las part\'iculas de agua sobre los mapas de transiciones.
-Los voxels cercanos a la semilla tendran intrinsecamente mayor probabilidad 
-de ser visitados. Para llegar a un voxel lejano es necesario realizar mayor 
-cantidad de transiciones. Cuanto mas lejos un voxel menor probabilidad tiene
-de ser visitado. La Figura \ref{fig:hist_tract} muestra el histograma de los 
-valores en los tractogramas del \'Area de Broca. Esta gran cantidad de voxels
-con valores tan bajos podr\'ia generar ruido en las correlaciones.  
+Tambi\'en existe otro problema. Por la forma que posee el algoritmo 
+\ref{alg:itract}, los tractogramas creados poseen muchos voxels lejanos
+con valores peque\~nos. El algoritmo simula el recorrido de part\'iculas de
+agua sobre mapas de transiciones probabil\'isticas. Cuanto mas lejano un 
+voxel mayor cantidad de transiciones se necesitan para llegar. Por lo 
+tanto, cuanto mas lejos se encuentra un voxel, menor probabilidad tiene de
+ser visitado. Para visualizar esto mejor situamos semillas en el \'area
+de Broca de un sujeto y generamos sus tractogramas. La figura 
+\ref{fig:hist_tract} muestra el histograma de los valores en los mapas de
+visitas. Cada voxel dentro de un mapa de visitas indica que cantidad de 
+part\'iculas pasaron por \'el.
+En este caso el $70\%$ de los voxels visitados fueron alcanzados por solo
+una part\'icula. Esta gran cantidad de voxel con valores tan bajos podr\'ia
+generar ruido en las correlaciones. \\
 
 \begin{figure}[h!]
 
 \centering                                                                                                          
 \begin{minipage}[b]{0.85\textwidth}
     \includegraphics[width=\textwidth]{img/3pop_moreno.png}
-    \caption{Clustering resultado de utilizar el m\'etodo Moreno}
+    \caption{$Clustering$ resultante de utilizar el m\'etodo de 
+             Moreno-Dominguez para agrupar los vectores. El algoritmo
+             agrupa la mayor\'ia de los vectores en una \'unica 
+             categor\'ia.}
     \label{fig:3moreno}
 \end{minipage} ~
 
@@ -58,8 +75,10 @@ con valores tan bajos podr\'ia generar ruido en las correlaciones.
               \centering                                                                                                          
 \begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\textwidth]{img/hist_tract.png}
-    \caption{Histograma normalizado de los valores en los tractogramas del
-             \'Area de Broca}
+    \caption{Histograma normalizado de los valores en los mapas de visitas
+             del \'area de Broca. No se muestran los valores mayores a 12.
+             La mayor parte de los voxels visitados tuvieron una \'unica
+             visita.}
     \label{fig:hist_tract}
 \end{minipage} ~
 
@@ -68,49 +87,62 @@ con valores tan bajos podr\'ia generar ruido en las correlaciones.
 
 \subsection{Relaci\'on m\'etrica-\textit{linkage}}
 
-La Figura \ref{fig:cos_cen} muestra 4 vectores aleatorios $p_i = (X_i, Y_i)$.
-Las variables $X_i$ e $Y_i$ independientes y provienen de una distribuci\'on
-Bernulli. Las posiciones en coordenadas polares de cada vector son:
-$ p_1 = (0.4, 45^\circ)$; $p_2 = (0.3, 25^\circ)$;  $p_3 = (0.4, 66^\circ)$ y
-$p_4 = (0.4, 4.5^\circ)$. \\
+Moreno-Dominguez et al. utilizan como medida de similitud la distancia
+coseno (ecuaci\'on \ref{eq:cosine}) y como criterio de \textit{linkage} el
+centroide (ecuaci\'on \ref{eq:centroide}). La medida de similitud 
+compara el \'angulo de los vectores, pero el $linkage$ crea un 
+representante minimizando la distancia eucl\'idea a ambos clusters. No
+parecieran ser compatibles. Veamos un ejemplo. La figura \ref{fig:cos_cen}
+muestra 4 vectores aleatorios $p_i = (X_i, Y_i)$. Las variables $X_i$ e
+$Y_i$ son independientes y provienen de una distribuci\'on Bernulli. Las
+posiciones en coordenadas polares de cada vector son: 
+$ p_1 = (0.4, 45^\circ)$; $p_2 = (0.3, 25^\circ)$; $p_3 = (0.4, 66^\circ)$
+y $p_4 = (0.4, 4.5^\circ)$. \\
 
-Podemos apreciar que al principio $d(p_2,p_3) < d(p_3,p_4) < d(p_1,p_2)$, siendo
-$d(x,y)$ la distancia coseno (Ecuaci\'on \ref{eq:cosine}). Sin embargo, luego 
-de utilizar el \textit{linkage centroid} (Ecuaci\'on \ref{eq:centroide}) sucede
-que $d(p_1,p_c) < d(p_4,p_c)$. $p_4$ es ahora el punto que mas lejos est\'a del
-centroide. Creando un representante $p_m$ usando el \'angulo medio entre $p_2$
-y $p_3$ esto no sucede. Este fen\'omeno se da porque la distancia coseno tiene
-en cuenta el \'angulo pero el centroide no. Por lo tanto el centroide no 
-caracteriza al punto medio respecto a la distancia coseno. \\
-
-\begin{figure}[h!]
-                                                                                                                        
-\begin{minipage}[b]{\textwidth}
+\begin{figure}[h!] 
+    \centering
     \includegraphics[width=\textwidth]{img/cosine_centroid.png}
-    \caption{El centroide no representa el punto medio respecto al \'angulo}
+    \caption{El centroide ($p_c$) de $p_2$ y $p_3$ no representa el punto
+             medio ($p_m$) respecto al \'angulo entre ellos.}
     \label{fig:cos_cen}
-\end{minipage} ~
+\end{figure} 
 
-\end{figure}  
+Podemos apreciar que al principio $d(p_2,p_3) < d(p_3,p_4) < d(p_1,p_2)$,
+siendo $d(x,y)$ la distancia coseno (ecuaci\'on \ref{eq:cosine}). Sin
+embargo, luego de utilizar el \textit{linkage centroid} 
+(ecuaci\'on \ref{eq:centroide}) sucede que $d(p_1,p_c) < d(p_4,p_c)$. $p_4$
+es ahora el punto que mas lejos est\'a del centroide. Creando un
+representante $p_m$ usando el \'angulo medio entre $p_2$ y $p_3$ esto no
+sucede. Este fen\'omeno se da porque la distancia coseno tiene en cuenta
+el \'angulo pero el centroide no. Por lo tanto el centroide no caracteriza
+al punto medio respecto a la distancia coseno. \\
+
 
 \subsection{Complejidad algor\'itmica del clustering}
+\label{sec:complejidad_moreno}
 
-El diagrama de la figura \ref{fig:diagrama} divide el proceso de parcelaci\'on
-de la corteza en varios pasos: seleccionar los voxels que ser\'an utilizados 
-como semilla de cada tractograma; luego generar cada tractograma y finalmente
-agruparlos usando alg\'un algoritmo de clustering. En todo este proceso el paso
-mas caro en t\'erminos computacionales es el \textit{clustering}. Veamos la 
-complejidad del m\'etodo propuesto por Moreno-Dominguez. En cada iteraci\'on 
-del algoritmo es necesario comparar expl\'icitamente cada nuevo centroide con
-todo el resto de los clusters. Esto es costoso computacionalmente. Por cada
-iteraci\'on es necesario hacer $O(c^2 m)$ operaciones para recalcular todas las
-distancias, donde $c$ es la cantidad de clusters y $m$ es la longitud de los
-mismos. Dadas $n$ semillas iniciales, la cantidad de iteraciones a realizar son
-$n-1$. La complejidad de este m\'etodo es $O(n^3 m)$. \\ 
+El diagrama de la figura \ref{fig:diagrama} divide el proceso de 
+parcelaci\'on de la corteza en varios pasos: seleccionar los voxels que 
+ser\'an utilizados como semilla de cada tractograma; luego generar cada
+tractograma y finalmente agruparlos usando alg\'un algoritmo de clustering.
+En todo este proceso el paso mas caro en t\'erminos computacionales es el
+\textit{clustering}. Veamos la  complejidad del m\'etodo propuesto por
+Moreno-Dominguez. En cada iteraci\'on del algoritmo es necesario calcular
+un centroide, almacenarlo y compararlo expl\'icitamente con el resto de
+los clusters. Por cada iteraci\'on es necesario hacer 
+$O(c^2 m)$ operaciones para recalcular todas las distancias, donde $c$ es
+la cantidad de clusters y $m$ es la longitud de los mismos. Dadas $s$
+semillas iniciales, la cantidad de iteraciones a realizar son $s-1$. La
+complejidad temporal de este m\'etodo es $O(s^3 m)$. Respecto a la 
+complejidad espacial, el mantener todos los clusters en memoria requiere
+$O(s m)$ espacio. Tambi\'en es necesario mantener la matriz de distancias
+entre $clusters$, la cual requiere $O(s^2)$. La complejidad espacial total
+es $O(s m + s^2)$. Podemos notar que ambas complejidades dependen de $m$.
+\\ 
 
-Podemos ver que el utilizar \textit{Hierarchical Agglomerative Clustering} 
+Resumiendo, utilizar \textit{Hierarchical Agglomerative Clustering} 
 con la distancia coseno y el \textit{linkage} centroide presenta algunas
-desventajas. La m\'etrica no pareciera ser compatible con la medida de
-similitud; es necesario mantener todos los tractogramas en memoria y no 
-permite agrupar de manera correcta clusters colineales. \\
-
+desventajas: La medida de similitud y el $linkage$ no son compatibles;
+no permite agrupar de manera correcta clusters colineales y 
+necesita mantener todos los $clusters$ en memoria as\'i como tambi\'en
+compararlos expl\'icitamente. \\

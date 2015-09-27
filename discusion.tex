@@ -3,39 +3,38 @@
 
 A lo largo de este trabajo presentamos como parcelar la corteza cerebral
 en base a un criterio estructural; estudiamos una de las m\'etodos
-existentes actuales y presentamos un m\'etodo pr\'opio. En los capitulos
+existentes actuales y presentamos un m\'etodo propio. En los cap\'itulos
 1 y 2 introdujimos la parcelaci\'on estructural y sus fundamentos 
 te\'oricos. En las secciones \ref{sec:clustering_moreno} y 
-\ref{sec:analisis_moreno} analizamos el reciente aporte de 
-Moreno-Dominguez \cite{Moreno-Dominguez2014} al estado del arte. El mismo
+\ref{sec:analisis_moreno} analizamos el m\'etodo de parcelamiento de
+Moreno-Dominguez \cite{Moreno-Dominguez2014}. El mismo
 se basa en combinar un algoritmo de tractograf\'ia y otro de 
-\textit{clustering} para parcelar la corteza cerebral. Luego, bas\`andonos
+\textit{clustering} para parcelar la corteza cerebral. Luego, bas\'andonos
 en su trabajo, propusimos en la secci\'on \label{ch:nuestro} un nuevo
-algoritmo de \textit{clustering}. En este \'ultimo capitulo discutiremos
-los resultados obtenidos durante este trabajo. Comenzando por la robustes
-del algoritmo de tractograf\'ia utilizado; siguiendo con una comparaci\'on
-entre nuestro m\'etodo y el de Moreno-Dominguez; continuando con la 
+algoritmo de \textit{clustering}. En este \'ultimo cap\'itulo vamos a discutir los resultados obtenidos. Comenzando por la robustez del
+algoritmo de tractograf\'ia utilizado; siguiendo con una comparaci\'on
+entre nuestro m\'etodo y el de Moreno-Dominguez; continuando con la
 validez biol\'ogica de la parcelaci\'on obtenida y propondremos objetos de
 futuro estudio. \\
 
 \section{Convergencia del algoritmo de tractograf\'ia}
 
-Creamos los tractogramas usando el algoritmo \ref{alg:itract} de la 
+Nuestro m\'etodo de $clustering$ se basa en agrupar tractogramas. 
+Generamos cada tractograma usando el algoritmo \ref{alg:itract} de la 
 secci\'on \ref{sec:convergencia}. Los tractogramas creados de esta manera
 son inherentemente estoc\'asticos. Implementamos el algoritmo 
 \ref{alg:bootstrap} de la secci\'on \ref{sec:convergencia} para estudiar
 si la creaci\'on de los tractogramas era estable. Esto es, si dado un 
 n\'umero suficientemente grande de part\'iculas el resultado converge
-a un \'unico tractograma. \\
-
-El algoritmo utilizado en el trabajo demostr\'o ser estable. Las figuras 
-\ref{fig:s1}, \ref{fig:s2} y \ref{fig:s3} de la secci\'on 
-\ref{sec:resultado_estabilidad} muestran que la desviaci\'on est\'andar es
-casi nula al usar $15000$ part\'iculas. A su vez, la figura \ref{fig:mv}
-muestra lo r\'apido que converge la media de tres voxels distintos. 
-Como eran los de mayor desv\'iacion est\'andar, podemos asegurar que casi
-no existe diferencia en la media de los tractogramas creados con dos mil
-part\'iculas. \\
+a un \'unico tractograma. Las figuras \ref{fig:s1}, \ref{fig:s2} y 
+\ref{fig:s3} de la secci\'on \ref{sec:resultado_estabilidad} muestran que
+la desviaci\'on est\'andar es casi nula al usar $15000$ part\'iculas. A su
+vez, la figura \ref{fig:mv} muestra lo r\'apido que converge la media de
+tres voxels distintos. 
+Como eran los de mayor desviaci\'on est\'andar, podemos asegurar que casi
+no existe diferencia en la media de los tractogramas creados con $2000$
+part\'iculas. El algoritmo utilizado en el trabajo demostr\'o ser estable.
+\\
 
 Nuestro m\'etodo de parcelamiento se basa en el clustering de 
 tractogramas. Por ello es importante contar con un algoritmo de 
@@ -56,7 +55,7 @@ casos. \\
 
 Luego utilizamos ambos algoritmo para parcelar el hemisferio izquierdo del
 mismo sujeto. Los resultados se encuentran en las secciones 
-\label{sec:corteza_moreno} y \label{sec:corteza_nuestro}. En este caso 
+\ref{sec:corteza_moreno} y \ref{sec:corteza_nuestro}. En este caso 
 resulta dif\'icil comparar visualmente las parcelaciones. M\'as a\'un, es
 complicado encontrar cortes en los dendrogramas que generen
 representaciones parecidas. Dado que los arboles fueron generados
@@ -75,14 +74,16 @@ contra $O(s^2)$ del m\'etodo Moreno-Dominguez. Recordemos de la secci\'on
 \ref{sec:ralas} que dentro del contexto de este trabajo $m >> s$. En
 general el n\'umero de semillas usadas es muy menor a la cantidad de
 voxels de los tractogramas. En nuestro caso particular $s \cong 22000$ y
-$m \cong 3500000$. $m$ es $159$ veces mas grande que $s$. \\
+$m \cong 3500000$. $m$ es $159$ veces mas grande que $s$. Esto significa
+que la complejidad de nuestro m\'etodo es significativamente menor a la
+del m\'etodo de Moreno-Dominguez. \\
 
 
 \section{Correlato con otras parcelaciones de la literatura}
 
-Nuestro m\'etodo divide la corteza cerebral bas\'andonse en el 
+Nuestro m\'etodo divide la corteza cerebral bas\'andose en el 
 agrupamiento de tractogramas. El criterio usado es puramente estructural.
-Solo usamos informaci\'on sobre la estructura f\'sica de la materia
+Solo usamos informaci\'on sobre la estructura f\'isica de la materia
 blanca. En la literatura actual existen parcelaciones basadas en otros
 criterios. Desikan et al. \cite{Desikan2006} dividen la corteza usando
 como referencia las circunvoluciones del cerebro. Peinfield 
@@ -94,16 +95,16 @@ anat\'omicas o funcionales. La relaci\'on entre el aspecto anat\'omico o
 funcional del cerebro y su aspecto estructural es un problema abierto en
 neurociencia.  En el trabajo de Moreno-Dominguez solo hacen una breve
 comparaci\'on entre sus resultados y un mapa citoarquitect\'onico. A 
-continuaci\'on contrastaremos nuestros resultados con un atlas anat\'omico
-y un estudio funcional realizado sobre el sujeto.  \\
+continuaci\'on contrastaremos nuestros resultados contra un atlas 
+anat\'omico y un estudio funcional realizado sobre el sujeto.  \\
 
 
 \subsection{Correlaci\'on anat\'omica}
 \label{sec:corr_anatomica}
 
-En la secci\'on \label{sec:corteza_nuestro} parcelamos el hemisferio 
-izquiero de un sujeto con nuestro m\'etodo. Vamos a comparar nuestro
-resultado con el atlas anat\'omico basado en Desikan et al. 
+En la secci\'on \ref{sec:corteza_nuestro} parcelamos el hemisferio 
+izquierdo de un sujeto con nuestro m\'etodo. Vamos a comparar el resultado
+obtenido con un atlas anat\'omico basado en Desikan et al. 
 \cite{Desikan2006}. La figura \ref{fig:an2pa} muestra el resultado de proyectar algunas regiones anat\'omicas sobre las obtenidas con nuestro
 m\'etodo. La figura \ref{fig:an2pa2} muestra solo las regiones que estaban
 contenidas en su mayor\'ia dentro de estas proyecciones. Luego calculamos
@@ -118,9 +119,9 @@ que casi todas nuestras parcelas se encuentran contenidas dentro de a lo
 sumo una proyecci\'on. Nuestra parcelaci\'on cre\'o \'areas bien
 delimitadas dentro de al menos 9 regiones anat\'omicas. \\
 
-Repetimos este procedimiento de proyectar el atlas anat\'omico sobre la
-parcelaci\'on obtenida en la figura \ref{fig:moreno_corteza2}. Dicha
-parcelaci\'on fue obtenida mediante el m\'etodo de Moreno-Dominguez.
+Repetimos el procedimiento con los resultados obtenidos utilizando el 
+m\'etodo de Moreno-Dominguez. Proyectamos el atlas anat\'omico sobre la
+parcelaci\'on mostrada en la figura \ref{fig:moreno_corteza2}.
 En este caso el $75\%$ del \'area de las 9 proyecciones est\'a pintada y 
 un $15\%$ del \'area de las parcelas quedan fuera de las proyecciones. 
 Sin embargo esto no quiere decir que el m\'etodo de Moreno-Dominguez 
@@ -168,29 +169,35 @@ mide el nivel de oxigeno en sangre \cite{Ogawa1990}. Nosotros nos
 enfocamos en las respuestas a los siguientes est\'imulos: mover la mano;
 mover el pie; mover la lengua; reconocer formas y caras vistas con
 anterioridad; clasificar un cuento breve dentro de dos categor\'ias y
-resolver problemas aritm\'eticos simples. Por cada uno de estos
-est\'imulos se cuenta con un mapa de \textit{z-scores} sobre la corteza.
+resolver problemas aritm\'eticos simples. Cada uno de estas tareas se 
+encuentra detallada en el trabajo de Bach et al. \cite{Barch2013}.
+Por cada uno de estos est\'imulos se cuenta con un mapa de
+\textit{z-scores} sobre la corteza.
 Estos \textit{z-scores} representan la correlaci\'on entre la activaci\'on
 de cada punto de la corteza con el est\'imulo. \\
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_labels.png}
-    \caption{Parcelas en baja resoluci\'on}
+    \caption{Parcelaci\'on obtenida utilizando nuestro m\'etodo. Se 
+             etiquetaron algunas \'areas de inter\'es para comparar
+             con un estudio funcional.}
     \label{fig:32k}
 \end{figure}
 
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_z5.png}
-    \caption{Projecci\'on de las parcelas (izquierda) sobre los \textit{z-scores}
-    mayores a $5$ de las activaciones funcionales (derecha)}
+    \caption{Proyecci\'on de 14 \'areas obtenidas con nuestro m\'etodo
+             sobre los \textit{z-scores} mayores a $5$ de las activaciones
+             funcionales.}
     \label{fig:32k_z5}
 \end{figure}
 
 \begin{figure}[h!]
     \includegraphics[width=\textwidth]{img/32k_z7.png}
-    \caption{Projecci\'on de las parcelas (izquierda) sobre los \textit{z-scores}
-    mayores a $7$ de las activaciones funcionales (derecha)}
+    \caption{Proyecci\'on de 14 \'areas obtenidas con nuestro m\'etodo
+             sobre los \textit{z-scores} mayores a $7$ de las activaciones
+             funcionales.}
     \label{fig:32k_z7}
 \end{figure}
 
@@ -222,7 +229,7 @@ mayor superficie compart\'ia con cada mapa de activaci\'on.  \\
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-   & pie   & mano  & lengua & matemática & cuento & formas \\ \hline
+   & pie   & mano  & lengua & matem\'atica & cuento & formas \\ \hline
 1  & 0     & 0     & 0      & 0.276      & 0      & 0      \\ \hline
 2  & 0     & 0     & 0.311  & 0          & 0      & 0      \\ \hline
 3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
@@ -250,7 +257,7 @@ mayor superficie compart\'ia con cada mapa de activaci\'on.  \\
 
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-   & pie   & mano  & lengua & matemática & cuento & formas \\ \hline
+   & pie   & mano  & lengua & matem\'atica & cuento & formas \\ \hline
 1  & 0     & 0     & 0      & {\bf 0.419} & 0     & 0      \\ \hline
 2  & 0     & 0     & 0.323  & 0          & 0      & 0      \\ \hline
 3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
@@ -272,14 +279,16 @@ mayor superficie compart\'ia con cada mapa de activaci\'on.  \\
 \label{tb:zscore7}         
 \end{table}
 
-En los \'items \ref{sec:corr_anatomica} y \ref{sec:corr_funcional} 
-comparamos la parcelaci\'on obtenida por nuestro m\'etodo contra
-un atlas anat\'omico y un estudio funcional del sujeto. Veamos una por 
-una las secciones etiquetadas en la figura \ref{fig:32k}. Los resultados
-muestran que la regi\'on $1$ es funcionalmente consistente con la 
-resoluci\'on de problemas matem\'aticos. Las regiones $2-10$ son consistentes anat\'omicamente con la corteza motora. A su vez, tambi\'en son consistentes con el hom\'unculo cortical .El hom\'unculo cortical,
+En el \'item \ref{sec:corr_anatomica} comparamos la parcelaci\'on obtenida
+por nuestro m\'etodo contra un atlas anat\'omico. Ahora lo comparamos con
+un estudio funcional del sujeto. Veamos una por una las secciones
+etiquetadas en la figura \ref{fig:32k} para analizarlas. La regi\'on
+etiquetada como $1$ es funcionalmente consistente
+con la resoluci\'on de problemas matem\'aticos. Las regiones $2-10$ son
+consistentes anat\'omicamente con la corteza motora. A su vez, tambi\'en
+son consistentes con el hom\'unculo cortical. El hom\'unculo cortical,
 definido por Penfield \cite{Penfield1954}, es una divisi\'on funcional de
-la corteza motora y de la corteza somastest\'esica. Mapea distintas 
+la corteza motora y de la corteza somest\'esica. Mapea distintas 
 regiones del cuerpo con regiones de la corteza como puede verse en la
 figura \ref{fig:homunculo}. Las regiones $11$ y $12$ son consistentes 
 anat\'omica y funcionalmente con el l\'obulo temporal superior.
@@ -290,7 +299,8 @@ y motivan a seguir estudiando el m\'etodo propuesto.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{img/homunculus.jpg}
-    \caption{Hom\'unculo Cortical}
+    \caption{El Hom\'unculo Cortical es una divisi\'on funcional de la 
+             corteza motora y la corteza somest\'esica }
     \label{fig:homunculo}
 \end{figure}
 
@@ -299,12 +309,13 @@ En este trabajo presentamos un nuevo m\'etodo para parcelar la corteza
 cerebral mediante el agrupamiento de tractogramas. El m\'etodo mostr\'o
 resultados con una fuerte correlaci\'on anat\'omica y funcional sobre el
 sujeto estudiado. Por eso es importante seguir estudiando algunos aspectos
-del proceso de parcelamiento. Primero, en este trabajo generamos 
-tractogramas utilizando el algoritmo \ref{alg:itract} de la secci\'on 
-\label{sec:convergencia}. Ser\'ia interesante estudiar los resultados
+del proceso de parcelamiento. Primero, los tractogramas aqu\'i utilizados
+fueron generados con el algoritmo \ref{alg:itract} de la secci\'on 
+\ref{sec:convergencia}. Ser\'ia interesante estudiar los resultados
 que se obtienen al usar otros algoritmos de tractograf\'ia. Segundo, 
-en las secciones \label{sec:clustering_moreno} y \label{sec:nuestro_clustering} se puede ver que ambos m\'etodos de $clustering$
-cuentan con un par\'ametro $k$. Este par\'ametro indica la cantidad de iteraciones a realizar uniendo solo $clusters$ vecinos y de tema\~no
+en las secciones \ref{sec:clustering_moreno} y \ref{sec:nuestro_clustering}
+se puede ver que ambos m\'etodos de $clustering$
+cuentan con un par\'ametro $k$. Este par\'ametro indica la cantidad de iteraciones a realizar uniendo solo $clusters$ vecinos y de tama\~no
 similar. En el trabajo de Moreno-Dominguez \cite{Moreno-Dominguez2014} 
 muestran una forma de calcular dicho par\'ametro para su m\'etodo. Hay
 que estudiar una forma de calcularlo para el nuestro. Tercero, habr\'ia
@@ -313,7 +324,7 @@ estabilidad. Esto es, estudiar si los resultados son igual de buenos que
 con el sujeto aqu\'i elegido. Finalmente, en la secci\'on 
 \label{sec:logit} mostramos que es posible aplicar operaciones
 lineales en el espacio $LogOdds$. Esto puede utilizarse en particular para
-calcular el tractograma medio de una poblaci\'on de sujetos. Hay que 
-analizar si esto permite crear un atlas de la corteza basado solo en
+calcular el tractograma medio de una poblaci\'on de sujetos. En estudios
+futuros analizaremos el crear un atlas de la corteza basado solo en
 informaci\'on estructural.
 

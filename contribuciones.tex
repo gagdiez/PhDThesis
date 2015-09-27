@@ -1,14 +1,15 @@
 \chapter{Contribuciones Metodol\'ogicas}
 \label{ch:contribuciones}
 
-En el cap\'itulo anterior presentamos c\'omo generar los tractogramas y el 
-estado del arte para agruparlos. En este cap\'itulo presentamos las contribuciones
-de nuestro trabajo. Comenzamos con una contribuci\'on menor que es estudiar la 
-estabilidad del algoritmo de tractograf\'ia que utilizamos. Luego hacemos
-un an\'alisis te\'orico del estado del arte y mostramos algunas de las 
-problem\'aticas que posee. Finalmente utilizamos una funci\'on para transformar
-los tractogramas al espacio eucl\'ideo y mostramos como esto permite mejorar tanto
-la complejidad espacial como temporal del algoritmo de \textit{clustering}. \\
+En el cap\'itulo anterior presentamos como generar los tractogramas y el 
+estado del arte para agruparlos. En este cap\'itulo presentamos las
+contribuciones de nuestro trabajo. Comenzamos con una contribuci\'on menor
+que es estudiar la estabilidad del algoritmo de tractograf\'ia que
+utilizamos. Luego hacemos un an\'alisis te\'orico del estado del arte y
+mostramos algunas de las problem\'aticas que posee. Finalmente utilizamos
+una funci\'on para transformar los tractogramas a un espacio vectorial y
+mostramos como esto permite mejorar tanto la complejidad espacial como
+temporal del algoritmo de \textit{clustering}. \\
 
 \input{contribuciones/tractografia.tex}
 
@@ -27,8 +28,8 @@ calcular el promedio de un grupo de tractogramas. Tambi\'en mostramos que usar
 como medida de similitud la distancia eucl\'idea mejora el $clustering$:
 Los $clusters$ colineales son agrupados correctamente y la medida de similitud
 es consistente con el $linkage$ centroide. A su vez, vimos como es posible 
-almancenar los tractogramas transformados en matrices ralas. Finalmente, 
+almacenar los tractogramas transformados en matrices ralas. Finalmente, 
 todo esto nos permite bajar en \textbf{al menos un orden la complejidad temporal
 y espacial}. No necesitamos mantener en memoria los tractogramas durante el
-clustering y podemos utilizar la formula de Lance y Williams para calcular la
-distancia entre $clusters$ de manera m\'as r\'apida. \\
+$clustering$ y podemos utilizar la formula de Lance y Williams para
+calcular la distancia entre $clusters$ de manera m\'as r\'apida. \\

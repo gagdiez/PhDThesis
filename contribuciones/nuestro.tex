@@ -1,8 +1,8 @@
-\section{Parcelando la corteza en el espacio eucl\'ideo} 
+\section{Parcelando la corteza en el espacio $LogOdds$} 
 \label{ch:nuestro}
 
 En la secci\'on anterior presentamos las ventajas de transformar los
-tractogramas a un espacio eucl\'ideo. Mostramos que es posible realizar
+tractogramas a un espacio vectorial. Mostramos que es posible realizar
 \textit{clustering} con mejor complejidad espacial y temporal que el 
 m\'etodo Moreno-Dominguez. Ahora nos proponemos explicar todos los pasos
 que seguimos para parcelar la corteza de un sujeto. Tambi\'en presentamos
@@ -78,7 +78,7 @@ funci\'on \textit{logit} presentada en la secci\'on \ref{sec:logit} y
 \ref{sec:modificandoClustering}. Luego todos fueron trasladados linealmente
 como explicamos en la secci\'on \ref{sec:ralas}. Usando cada tractograma
 como una fila creamos una matriz CSR y calculamos la matriz de distancias
-entre ellos mediante la Ecuaci\'on \label{eq:simileuc}. Finalmente,
+entre ellos mediante la ecuaci\'on \ref{eq:simileuc}. Finalmente,
 definimos como vecinos a los voxels que se encuentran a una distancia
 menor a $3mm$ entre si. \\  
 
@@ -91,9 +91,9 @@ complejidad tanto en nuestro m\'etodo como en el de Moreno-Dominguez. \\
 
 Comparando nuestro algoritmo de \textit{clustering} 
 (algoritmo \ref{alg:nuestrometodo}) con el de Moreno-Dominguez 
-(algoritmo \ref{alg:morenoahc}) se pueden ver explicitamente las
-diferencias. Veamos como nuestro m\'etodo se traduce en una mayor
-eficiencia espacial y temporal. \\
+(algoritmo \ref{alg:morenoahc}) se pueden ver expl\'icitamente las
+diferencias. A continuaci\'on las detallamos mostrando como se traducen
+en una mayor eficiencia espacial y temporal. \\
 
 \settowidth\mylen{procedure Clustering(}
 \addtolength\mylen{\parindent}
@@ -148,17 +148,19 @@ la matriz de distancia para generar la jerarqu\'ia. Por lo visto en la
 secci\'on \ref{sec:ralas} esto implica un ahorro significativo de memoria.
 Luego, al momento de calcular las distancias al nuevo centroide 
 (linea 15, algoritmo \ref{alg:nuestrometodo}) usamos la formula de Lance y
-Williams. \\
-
-Supongamos un numero $s$ de semillas y una cantidad $m$ de voxels por cada
+Williams (ecuaci\'on \ref{eq:lyw}). Esta formula nos permite mejorar a\'un 
+mas la complejidad algor\'itmica. A continuaci\'on repetimos los resultados
+del an\'alisis de complejidad hecho en la secci\'on 
+\ref{sec:modificandoClustering}. 
+Suponiendo un numero $s$ de semillas y una cantidad $m$ de voxels por cada
 tractograma. Nuestro algoritmo de clustering posee complejidad espacial 
 $O(s^2)$ contra $O(s^2 + sm)$ del m\'etodo Moreno-Dominguez. A su vez, la
 complejidad temporal de nuestro algoritmo es $O(s^2m)$ contra $O(s^2)$ del
 m\'etodo Moreno-Dominguez. Recordemos de la secci\'on \ref{sec:ralas} que
-dentro del contexto de este trabajo $m >> s$. \\
+dentro del contexto de este trabajo $m >> s$. La mejora en complejidad 
+algor\'itmica es significativa. \\
 
-Una vez finalizado el $clustering$ obtenemos como resultado un 
+Una vez finalizado el proceso de $clustering$ obtenemos como resultado un 
 dendrograma. Para parcelar la corteza solo es necesario seleccionar una
 altura en la cual cortar dicho dendrograma. Los clusters que est\'en por
-debajo de ese corte ser\'an las distintas parcelas.
-
+debajo de ese corte ser\'an las distintas parcelas. \\

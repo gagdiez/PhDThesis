@@ -1,15 +1,18 @@
 \section{Creando tractogramas a partir de las semillas}
 \label{sec:tractogramas}
 
+En la secci\'on anterior mostramos como seleccionar voxels dentro de la 
+materia blanca. El siguiente paso para parcelar la corteza cerebral es 
+generar los tractogramas de estas semillas.
 Un tractograma es una imagen donde cada voxel representa la probabilidad de
 que ese punto del cerebro est\'e conectado a la semilla elegida mediante un
 conjunto de axones. Una forma de crear el tractograma de una semilla es
 computar un mapa de transiciones probabil\'istico entre los voxels del
-cerebro; luego generar un gran n\'umero de streamlines desde la semilla y
-finalmente calcular la frecuencia de visitas por cada voxel. Se denomina
-\textit{streamline} al camino que puede realizar una part\'icula de agua
-siguiendo un mapa probabil\'is\-tico de transiciones entre voxels. El
-siguiente pseudoc\'odigo denota este proceso:\\
+cerebro; luego generar un gran n\'umero de $streamlines$ desde la semilla y
+finalmente calcular la fracci\'on de part\'iculas que pasaron por cada 
+voxel. Se denomina \textit{streamline} al camino que puede realizar una 
+part\'icula de agua siguiendo un mapa probabil\'is\-tico de transiciones
+entre voxels. El siguiente pseudoc\'odigo denota este proceso:\\
 
 \newlength\mylen
 \settowidth\mylen{procedure21 crear\_tractograma(}
@@ -25,8 +28,8 @@ siguiente pseudoc\'odigo denota este proceso:\\
                               step: tam. de paso)}{}
 
 \State \emph{mapa\_probabilistico} $\gets$ generar mapa desde \emph{dMRI} 
-\State \emph{mapa\_visitas} $\gets$ copy(\emph{anatomica})
-\State \emph{mapa\_visitas[:,:]} $\gets$ \emph{0} 
+\State \emph{mapa\_visitas} $\gets$ matriz vacia con las dimensiones 
+                                    de \emph{anatomica}
 
 \For {p in [1$\dots$P]}
 
@@ -70,10 +73,8 @@ T_i = \frac{ log(M_i + 1)}{log(p+1)}
 \end{equation}
 
 Donde $T_i$ es el valor del voxel $i$ en el tractograma resultante; $M_i$
-es el valor del voxel $i$ en el mapa de visitar y $p$ es el n\'umero de 
-part\'iculas usadas. Esto nos permite evitar el sesgo producto de la
-distancia que obtendr\'iamos al dividir por la cantidad de part\'iculas
-utilizadas. Dado que $M_i \leq p, \forall i \in [1..N]$ cada voxel del
-tractograma tendr\'a un valor entre uno y cero. $T_i = 1$ representa que
+es el valor del voxel $i$ en el mapa de visitas y $p$ es el n\'umero de 
+part\'iculas usadas. Dado que $M_i \leq p, \forall i \in [1..N]$ cada voxel
+del tractograma tendr\'a un valor entre uno y cero. $T_i = 1$ representa que
 todos los \textit{streams} pasaron por el voxel, mientras que $T_i = 0$
 representa que ninguno pas\'o. \\

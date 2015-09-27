@@ -8,7 +8,7 @@ donde cada voxel $v$ representa la probabilidad de que $v$ est\'e
 conectado a $s$ mediante un conjunto de axones. En la secci\'on 
 \ref{sec:tractogramas} presentamos una forma de crear tractogramas
 mediante un procedimiento Monte Carlo generando \textit{streamlines}. Un
-\textit{streamline} representa el movimiento aleat\'orio de una part\'icula
+\textit{streamline} representa el movimiento aleatorio de una part\'icula
 de agua dentro de la materia blanca. Los tractogramas creados de esta
 manera son inherentemente estoc\'asticos. Esto genera algunas preguntas
 interesantes: ¿Al repetir el experimento, podremos obtener el mismo
@@ -68,24 +68,28 @@ contestar estas preguntas utilizamos la t\'ecnica estad\'istica de
 \label{alg:itract}
 \end{algorithm}
 
+\vspace{0.3cm}
+
 \textit{Bootstrap} permite estimar la distribuci\'on de un estad\'istico
 en base a calcularlo sobre remuestreos con repeticiones de una 
 poblaci\'on. El m\'etodo es especialmente \'util cuando el n\'umero de
 muestras que se posee no es significativamente alto. Nosotros queremos
 estimar la distribuci\'on de la media de los \textit{tractogramas} en 
-funci\'on de la cantidad de \textit{streamlines}. Para entender mejor la
-relaci\'on entre \textit{streamlines} y tractogramas presentamos en el
-algoritmo \ref{alg:itract} el pseudoc\'odigo de la implementaci\'on de
-tractograf\'ia utilizada. \\
+funci\'on de la cantidad de \textit{streamlines}. En la literatura
+se usan hasta $100000$ \textit{streamlines} por cada semilla 
+\cite{Anwander2006}. \textit{Bootstrap} nos permite realizar este estudio
+con muchas menos. \\
 
-La técnica de generación de tractogramas presentada en el algoritmo 
-\ref{alg:itract} es una instanciaci\'on de la presentada en la secci\'on
-\ref{sec:tractogramas}. La imagen de difusi\'on se enmarca en el modelo
-\textit{Constrained Spherical Deconvolution} usando la forma propuesta por
-Aganj et al. \cite{Aganj2010}; el mapa de transiciones probabil\'isticas
-se recupera usando \textit{Spherical Harmonics} \cite{Descoteaux2007} y el
-tractograma se calcula usando la transformaci\'on propuesta por 
-Moreno-Dominguez et al. \cite{Moreno-Dominguez2014}. \\
+Para entender mejor la relaci\'on entre \textit{streamlines} y
+tractogramas presentamos en el algoritmo \ref{alg:itract} el pseudoc\'odigo
+de la implementaci\'on de tractograf\'ia utilizada. Dicho algoritmo es una
+instanciaci\'on del presentado en la secci\'on \ref{sec:tractogramas}. La
+imagen de difusi\'on se enmarca en el modelo \textit{Constrained Spherical
+Deconvolution} usando la forma propuesta por Aganj et al. 
+\cite{Aganj2010}; el mapa de transiciones probabil\'isticas se recupera
+usando \textit{Spherical Harmonics} \cite{Descoteaux2007} y el tractograma
+se calcula usando la ecuaci\'on \ref{eq:normalizacion} propuesta en el 
+trabajo de Moreno-Dominguez et al. \cite{Moreno-Dominguez2014}. \\
 
 \begin{algorithm}
 \caption{Procedimiento de \textit{Bootstraping}}\label{alg:localtracking}
@@ -138,7 +142,7 @@ estad\'istico. Este procedimiento se puede ver en el algoritmo
 
 Crear los tractogramas es uno de los pasos necesarios para parcelar la
 corteza. Por la forma en que est\'an definidos, los tractogramas son
-ineherentemente estoc\'asticos. El m\'etodo aqu\'i presentado nos permite
+inherentemente estoc\'asticos. El m\'etodo aqu\'i presentado nos permite
 estudiar la estabilidad del algoritmo de tractograf\'ia implementado. De
 esta manera podemos comprobar si dado un n\'umero suficiente de 
 part\'iculas los tractogramas de una semilla convergen a un mismo 
