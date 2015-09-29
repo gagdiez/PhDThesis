@@ -1,0 +1,58 @@
+\section{Correlato con otras parcelaciones de la literatura}
+\label{sec:cont_correlato}
+
+Nuestro m\'etodo divide la corteza cerebral bas\'andose en el 
+agrupamiento de tractogramas. El criterio usado es puramente estructural.
+Solo usamos informaci\'on sobre la estructura f\'isica de la materia
+blanca. En la literatura actual existen parcelaciones basadas en otros
+criterios. Desikan et al. \cite{Desikan2006} dividen la corteza usando
+como referencia las circunvoluciones del cerebro. Peinfield 
+\cite{Penfield1954} parcela la corteza en base a las respuestas a 
+est\'imulos el\'ectricos sobre la misma. La parcelaci\'on de Desikan es
+anat\'omica, mientras que la de Peinfield es funcional. Una pregunta
+interesante es si nuestra parcelaci\'on posee correlaci\'on con otras
+anat\'omicas o funcionales. Estudiaremos esto contrastando el resultado
+de nuestro m\'etodo contra dos parcelaciones. Una funcional basada en 
+Bach et al. \cite{Barch2013} y una anat\'omica basada en Desikan
+\cite{Desikan2006}.\\
+
+Para comparar nuestro resultado contra el atlas anat\'omico 
+proyectaremos sus parcelas sobre las nuestras. Luego estudiaremos cuantas
+de nuestras regiones quedan bien delimitadas dentro de las proyecciones.
+Esto es, que proporci\'on de las \'areas en una proyecci\'on se
+encuentran efectivamente dentro de la proyecci\'on. \\
+
+Para estudiar la relaci\'on funcional usaremos un estudio hecho por
+Bach et al. \cite{Barch2013}.
+En el mismo utilizan Resonancia Magn\'etica Funcional
+(fMRI) para estudiar la respuesta sobre la corteza a est\'imulos
+particulares. La Resonancia Magn\'etica Funcional es un tipo especial de
+resonancia magn\'etica que mide el nivel de oxigeno en sangre 
+\cite{Ogawa1990}. Nosotros nos enfocamos en las respuestas a los siguientes
+est\'imulos: mover la mano; mover el pie; mover la lengua; reconocer formas
+y caras vistas con anterioridad; clasificar un cuento breve dentro de dos
+categor\'ias y resolver problemas aritm\'eticos simples. Cada uno de estas
+tareas se encuentra detallada en el trabajo de Bach et al. \cite{Barch2013}.
+Por cada uno de estos est\'imulos se cuenta con un mapa de 
+\textit{z-scores} sobre la corteza. Estos \textit{z-scores} representan la
+correlaci\'on entre la activaci\'on de cada punto de la corteza con el 
+est\'imulo. Para comparar los resultados de este estudio con nuestra 
+parcelaci\'on estudiaremos su superposici\'on. Definimos la siguiente 
+relaci\'on: \\
+
+\begin{equation}
+\label{eq:super}
+superposicion(A,B) = \frac{ 2 * area(A \cap B) }{area(A) + area(B)}
+\end{equation}
+ 
+Dadas dos superficies $A$ y $B$ se cumple: 
+$0 \leq superposicion(A,B) \leq 1$. El $0$ representa que son superficies
+disjuntas y el $1$ que est\'an totalmente superpuestas. Si alg\'un \'area 
+posee un fuerte correlato funcional esperamos ver una superposici\'on alta
+con alg\'un mapa de \textit{z-scores}.\\
+
+Comparar las proyecciones del atlas an\'atomico con nuestras \'areas y 
+la superposici\'on de estas \'ultimas con los \textit{z-scores} del 
+estudio funcional nos permitir\'a hacer un primer acercamiento a 
+analizar la relaci\'on entre la estructura, la anat\'omia y la funcionalidad
+del cerebro.\\

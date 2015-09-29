@@ -164,3 +164,17 @@ Una vez finalizado el proceso de $clustering$ obtenemos como resultado un
 dendrograma. Para parcelar la corteza solo es necesario seleccionar una
 altura en la cual cortar dicho dendrograma. Los clusters que est\'en por
 debajo de ese corte ser\'an las distintas parcelas. \\
+
+Podemos ver que transformar los tractogramas utilizando la funci\'on 
+$logit$ presenta varias ventajas. Como vimos en la secci\'on anterior las
+operaciones lineales est\'an cerradas en el espacio $LogOdds$. Esto nos 
+permite, calcular el promedio de un grupo de tractogramas. Tambi\'en
+mostramos que usar como medida de similitud la distancia eucl\'idea mejora
+el $clustering$: Los $clusters$ colineales son agrupados correctamente;
+la medida de similitud es consistente con el $linkage$ centroide;
+no necesitamos mantener en memoria los tractogramas durante el
+$clustering$ y podemos utilizar la formula de Lance y Williams para
+calcular la distancia entre $clusters$ de manera m\'as r\'apida.
+A su vez, vimos como es posible almacenar los tractogramas transformados
+en matrices ralas. Todo esto nos permite bajar en \textbf{al menos un
+orden la complejidad temporal y espacial}.  \\

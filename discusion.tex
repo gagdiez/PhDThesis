@@ -42,7 +42,7 @@ tractograf\'ia robusto. No encontramos estudios previos donde se analizara
 este aspecto del algoritmo de tractograf\'ia usado. \\
 
 
-\section{Comparaci\'on entra ambos m\'etodos de $clustering$}
+\section{Comparaci\'on entra ambos m\'etodos de clustering}
 
 En la secci\'on \ref{sec:clustering_moreno} presentamos el m\'etodo para
 parcelar la corteza de Moreno-Dominguez. Luego, en la secci\'on
@@ -81,209 +81,51 @@ del m\'etodo de Moreno-Dominguez. \\
 
 \section{Correlato con otras parcelaciones de la literatura}
 
-Nuestro m\'etodo divide la corteza cerebral bas\'andose en el 
-agrupamiento de tractogramas. El criterio usado es puramente estructural.
-Solo usamos informaci\'on sobre la estructura f\'isica de la materia
-blanca. En la literatura actual existen parcelaciones basadas en otros
-criterios. Desikan et al. \cite{Desikan2006} dividen la corteza usando
-como referencia las circunvoluciones del cerebro. Peinfield 
-\cite{Penfield1954} parcela la corteza en base a las respuestas a 
-est\'imulos el\'ectricos sobre la misma. La parcelaci\'on de Desikan es
-anat\'omica, mientras que la de Peinfield es funcional. Una pregunta
-interesante es si nuestra parcelaci\'on posee correlaci\'on con otras
-anat\'omicas o funcionales. La relaci\'on entre el aspecto anat\'omico o
-funcional del cerebro y su aspecto estructural es un problema abierto en
-neurociencia.  En el trabajo de Moreno-Dominguez solo hacen una breve
-comparaci\'on entre sus resultados y un mapa citoarquitect\'onico. A 
-continuaci\'on contrastaremos nuestros resultados contra un atlas 
-anat\'omico y un estudio funcional realizado sobre el sujeto.  \\
+Nuestro m\'etodo divide la corteza cerebral bas\'andose en un criterio
+puramente estructural. Una pregunta interesante es si nuestra parcelaci\'on
+posee correlaci\'on con otras anat\'omicas o funcionales. La relaci\'on
+entre el aspecto anat\'omico o funcional del cerebro y su aspecto
+estructural es un problema abierto en neurociencia. En particular, 
+Moreno-Dominguez \cite{Moreno-Dominguez2014} hace 
+una breve comparaci\'on entre sus resultados y un mapa 
+citoarquitect\'onico. En nuestro caso, en las secciones 
+\ref{sec:corr_anatomica} y \ref{sec:corr_funcional} comparamos nuestro 
+resultado con una atlas anat\'omico basado en Desikan et al. 
+\cite{Desikan2006} y un estudio funcional hecho en Bach \cite{Barch2013}.
+Repetimos aqu\'i algunos de los resultados para poder discutirlos. \\
 
-
-\subsection{Correlaci\'on anat\'omica}
-\label{sec:corr_anatomica}
-
-En la secci\'on \ref{sec:corteza_nuestro} parcelamos el hemisferio 
-izquierdo de un sujeto con nuestro m\'etodo. Vamos a comparar el resultado
-obtenido con un atlas anat\'omico basado en Desikan et al. 
-\cite{Desikan2006}. La figura \ref{fig:an2pa} muestra el resultado de proyectar algunas regiones anat\'omicas sobre las obtenidas con nuestro
-m\'etodo. La figura \ref{fig:an2pa2} muestra solo las regiones que estaban
-contenidas en su mayor\'ia dentro de estas proyecciones. Luego calculamos
-que porcentaje de las parcelaciones quedaba dentro de las proyecciones;
-que porcentaje quedaba fuera y cuantas quedaban dentro de una sola 
-proyecci\'on. El $90\%$ del \'area de las 9 proyecciones est\'a pintada y
-solo un $5\%$ del \'area de nuestras parcelas queda fuera de las
-proyecciones. Las parcelas de nuestro m\'etodo que se encuentran en una
-sola proyecci\'on representan el $88\%$ del \'area pintada. Las parcelas
-que est\'an en dos regiones representan el $12\%$ restante. Esto indica
-que casi todas nuestras parcelas se encuentran contenidas dentro de a lo
-sumo una proyecci\'on. Nuestra parcelaci\'on cre\'o \'areas bien
+En la secci\'on \ref{sec:corr_anatomica} proyectamos 9 regiones del \'atlas
+anat\'omico sobre una parcelaci\'on obtenida con nuestro m\'etodo. Esto
+se puede ver en la figura \label{fig:an2pa2}. Luego
+calculamos que porcentaje de las parcelaciones quedaba dentro de las
+proyecciones; que porcentaje quedaba fuera y cuantas quedaban dentro de
+una sola proyecci\'on. El $90\%$ del \'area de las 9 proyecciones estaba
+pintada y solo un $5\%$ del \'area de nuestras parcelas quedaron fuera de
+las proyecciones. A su vez, la mayor\'ia de nuestras parcelas quedaron 
+dentro de una sola proyecci\'on. Nuestra parcelaci\'on cre\'o \'areas bien
 delimitadas dentro de al menos 9 regiones anat\'omicas. \\
 
-Repetimos el procedimiento con los resultados obtenidos utilizando el 
-m\'etodo de Moreno-Dominguez. Proyectamos el atlas anat\'omico sobre la
-parcelaci\'on mostrada en la figura \ref{fig:moreno_corteza2}.
-En este caso el $75\%$ del \'area de las 9 proyecciones est\'a pintada y 
-un $15\%$ del \'area de las parcelas quedan fuera de las proyecciones. 
+Luego repetimos el procedimiento con una parcelaci\'on obtenida con el 
+m\'etodo de Moreno-Dominguez. 
+En ese caso el $75\%$ del \'area de las 9 proyecciones estaban pintadas y 
+un $15\%$ del \'area de las parcelas quedaban fuera de las proyecciones. 
 Sin embargo esto no quiere decir que el m\'etodo de Moreno-Dominguez 
 posea menor correlaci\'on con el atlas anat\'omico. La parcelaci\'on 
 resultante en ambos m\'etodos depende de la altura a la cual se decida 
 cortar el dendrograma. Cortando el mismo dendrograma a mayor profundidad
 se pueden conseguir resultados similares a los de nuestro m\'etodo.\\
 
-\begin{figure}[h!]
-    \includegraphics[width=\textwidth]{img/anatomica2parcelation.png}
-    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la 
-             parcelaci\'on obtenida (derecha). Regiones: 
-             1. \textit{pars triangularis}; 2. \textit{pars opercularis};
-             3. \textit{caudal middle frontal}; 
-             4. \textit{precentral (\'area motora)}; 
-             5. \textit{post central}; 6. \textit{superior parietal}; 
-             7. \textit{lateral occipital}; 8. \textit{fusiform};
-             9. \textit{superior temporal}.  }
-    \label{fig:an2pa}
-\end{figure}
-
-\begin{figure}[h!]
-    \includegraphics[width=\textwidth]{img/anatomica2parcelation2.png}
-    \caption{Proyecci\'on del atlas anat\'omico (izquierda) a la 
-             parcelaci\'on obtenida (derecha). Solo las parcelas contenidas
-             en mayor proporci\'on fueron pintadas. Regiones: 
-             1. \textit{pars triangularis}; 2. \textit{pars opercularis};
-             3. \textit{caudal middle frontal}; 
-             4. \textit{precentral (\'area motora)}; 
-             5. \textit{post central}; 6. \textit{superior parietal}; 
-             7. \textit{lateral occipital}; 8. \textit{fusiform};
-             9. \textit{superior temporal}.  }
-    \label{fig:an2pa2}
-\end{figure}
-
-\subsection{Correlaci\'on funcional}
-\label{sec:corr_funcional}
-
-El sujeto de \textit{Human Connectome Project} utilizado cuenta con un 
-estudio funcional hecho por Bach et al. \cite{Barch2013}. En el mismo
-utilizan Resonancia Magn\'etica Funcional (fMRI) para estudiar la
-respuesta sobre la corteza a est\'imulos particulares. La Resonancia 
-Magn\'etica Funcional es un tipo especial de resonancia magn\'etica que
-mide el nivel de oxigeno en sangre \cite{Ogawa1990}. Nosotros nos
-enfocamos en las respuestas a los siguientes est\'imulos: mover la mano;
-mover el pie; mover la lengua; reconocer formas y caras vistas con
-anterioridad; clasificar un cuento breve dentro de dos categor\'ias y
-resolver problemas aritm\'eticos simples. Cada uno de estas tareas se 
-encuentra detallada en el trabajo de Bach et al. \cite{Barch2013}.
-Por cada uno de estos est\'imulos se cuenta con un mapa de
-\textit{z-scores} sobre la corteza.
-Estos \textit{z-scores} representan la correlaci\'on entre la activaci\'on
-de cada punto de la corteza con el est\'imulo. \\
-
-\begin{figure}[h!]
-    \includegraphics[width=\textwidth]{img/32k_labels.png}
-    \caption{Parcelaci\'on obtenida utilizando nuestro m\'etodo. Se 
-             etiquetaron algunas \'areas de inter\'es para comparar
-             con un estudio funcional.}
-    \label{fig:32k}
-\end{figure}
-
-
-\begin{figure}[h!]
-    \includegraphics[width=\textwidth]{img/32k_z5.png}
-    \caption{Proyecci\'on de 14 \'areas obtenidas con nuestro m\'etodo
-             sobre los \textit{z-scores} mayores a $5$ de las activaciones
-             funcionales.}
-    \label{fig:32k_z5}
-\end{figure}
-
-\begin{figure}[h!]
-    \includegraphics[width=\textwidth]{img/32k_z7.png}
-    \caption{Proyecci\'on de 14 \'areas obtenidas con nuestro m\'etodo
-             sobre los \textit{z-scores} mayores a $7$ de las activaciones
-             funcionales.}
-    \label{fig:32k_z7}
-\end{figure}
-
-
-Queremos comparar los mapas de \textit{z-scores} con una de las 
-parcelaciones obtenidas mediante nuestro m\'etodo. Para ello primero
-interpolamos la parcelaci\'on utilizada en la secci\'on anterior a la
-superficie en que se encuentran los mapas. El resultado de dicha 
-interpolaci\'on puede verse en la figura \ref{fig:32k}. Algunas regiones
-de inter\'es fueron etiquetadas. La figura \ref{fig:32k_z5} muestra la
-proyecci\'on de estas regiones sobre los \textit{z-scores} $ \geq 5$ de
-los distintos mapas. La figura \ref{fig:32k_z7} muestra la proyecci\'on
-sobre los \textit{z-scores} $ \geq 7$. Luego definimos la siguiente 
-m\'etrica entre superficies: \\
-
-$$ superposicion(A,B) = \frac{ 2 * area(A \cap B) }{area(A) + area(B)} $$ 
- 
-Dadas dos superficies $A$ y $B$ se cumple: 
-$0 \leq superposicion(A,B) \leq 1$. El $0$ representa que son superficies
-disjuntas y el $1$ que est\'an totalmente superpuestas. La tabla 
-\ref{tb:zscore5} muestra la superposici\'on entre las superficies de 
-nuestra parcelaci\'on y los \textit{z-scores} $ \geq 5$.  La tabla 
-\ref{tb:zscore7} muestra la superposici\'on entre las superficies de 
-nuestra parcelaci\'on y los \textit{z-scores} $ \geq 7$. En cada columna
-se resalt\'o el valor mas grande. Esto es, el valor de la parcela que
-mayor superficie compart\'ia con cada mapa de activaci\'on.  \\
- 
-\begin{table}[]
-\centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-   & pie   & mano  & lengua & matem\'atica & cuento & formas \\ \hline
-1  & 0     & 0     & 0      & 0.276      & 0      & 0      \\ \hline
-2  & 0     & 0     & 0.311  & 0          & 0      & 0      \\ \hline
-3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
-4  & 0     & 0.172 & 0      & 0          & 0      & 0      \\ \hline
-5  & 0.177 & 0.321 & 0      & 0          & 0      & 0      \\ \hline
-6  & 0.201 & 0     & 0      & 0          & 0      & 0      \\ \hline
-7  & 0.231 & 0.044 & 0      & 0          & 0      & 0      \\ \hline
-8  & 0     & {\bf 0.590} & 0.139  & 0          & 0      & 0      \\ \hline
-9  & 0     & 0     & {\bf 0.610}   & 0          & 0      & 0      \\ \hline
-10 & {\bf 0.330}  & 0     & 0      & 0          & 0      & 0      \\ \hline
-11 & 0     & 0     & 0      & 0          & {\bf 0.606}  & 0      \\ \hline
-12 & 0     & 0     & 0      & 0          & 0.454  & 0      \\ \hline
-13 & 0     & 0     & 0      & 0          & 0      & {\bf 0.491}  \\ \hline
-14 & 0     & 0     & 0      & 0          & 0      & 0.154  \\ \hline
-\end{tabular}
-\caption{Relaci\'on entre las \'areas de cada parcela y los mapas de
-         activaci\'on con $zscore > 5$. Los valores m\'aximos de cada 
-         columna fueron resaltados.}
-\label{tb:zscore5}         
-\end{table}
-
-
-\begin{table}[]
-\centering
-
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-   & pie   & mano  & lengua & matem\'atica & cuento & formas \\ \hline
-1  & 0     & 0     & 0      & {\bf 0.419} & 0     & 0      \\ \hline
-2  & 0     & 0     & 0.323  & 0          & 0      & 0      \\ \hline
-3  & 0     & 0     & 0      & 0          & 0      & 0      \\ \hline
-4  & 0     & 0.115 & 0      & 0          & 0      & 0      \\ \hline
-5  & 0.141 & 0.341 & 0      & 0          & 0      & 0      \\ \hline
-6  & 0.095 & 0     & 0      & 0          & 0      & 0      \\ \hline
-7  & {\bf 0.377} & 0.040 & 0      & 0          & 0      & 0      \\ \hline
-8  & 0     & {\bf 0.669} & 0.147  & 0          & 0      & 0      \\ \hline
-9  & 0     & 0     & {\bf 0.629}  & 0          & 0      & 0      \\ \hline
-10 & 0.240 & 0     & 0      & 0          & 0      & 0      \\ \hline
-11 & 0     & 0     & 0      & 0          & {\bf 0.715}  & 0      \\ \hline
-12 & 0     & 0     & 0      & 0          & 0.458  & 0      \\ \hline
-13 & 0     & 0     & 0      & 0          & 0      & {\bf 0.428}  \\ \hline
-14 & 0     & 0     & 0      & 0          & 0      & 0.154 \\ \hline
-\end{tabular}
-\caption{Relaci\'on entre las \'areas de cada parcela y los mapas de
-         activaci\'on con $zscore > 7$. Los valores m\'aximos de cada 
-         columna fueron resaltados.}
-\label{tb:zscore7}         
-\end{table}
-
-En el \'item \ref{sec:corr_anatomica} comparamos la parcelaci\'on obtenida
-por nuestro m\'etodo contra un atlas anat\'omico. Ahora lo comparamos con
-un estudio funcional del sujeto. Veamos una por una las secciones
-etiquetadas en la figura \ref{fig:32k} para analizarlas. La regi\'on
-etiquetada como $1$ es funcionalmente consistente
+En la secci\'on \ref{sec:corr_funcional} estudiamos la superposici\'on 
+entre la misma parcelaci\'on obtenida con nuestro m\'etodo y mapas de 
+activaci\'on funcionales. La superposici\'on entre superficies fue 
+calculada con la ecuaci\'on \ref{eq:super}. Generamos las tablas 
+\ref{tb:zscore5} y \ref{tb:zscore7}. Estas muestran los valores obtenidos
+para algunas regiones y mapas de activaci\'on a los cuales se les aplic\'o
+un $threshold$. Dichas regiones junto con los mapas de activaci\'on se 
+pueden ver en las figuras \ref{fig:32k, fig:32k_z5, fig:32k_z7}. Analicemos
+una a una las regiones marcadas en de estas figuras teniendo en cuenta el 
+la relaci\'on anat\'omica. La regi\'on etiquetada como $1$ es
+funcionalmente consistente
 con la resoluci\'on de problemas matem\'aticos. Las regiones $2-10$ son
 consistentes anat\'omicamente con la corteza motora. A su vez, tambi\'en
 son consistentes con el hom\'unculo cortical. El hom\'unculo cortical,
@@ -294,7 +136,7 @@ figura \ref{fig:homunculo}. Las regiones $11$ y $12$ son consistentes
 anat\'omica y funcionalmente con el l\'obulo temporal superior.
 Finalmente, las regiones $13$ y $14$ son consistentes anat\'omica y
 funcionalmente con el l\'obulo occipital. Estos resultados son prometedores
-y motivan a seguir estudiando el m\'etodo propuesto.
+y motivan a seguir estudiando el m\'etodo propuesto.\\fig:32k
 
 \begin{figure}[h!]
     \centering
@@ -326,5 +168,5 @@ con el sujeto aqu\'i elegido. Finalmente, en la secci\'on
 lineales en el espacio $LogOdds$. Esto puede utilizarse en particular para
 calcular el tractograma medio de una poblaci\'on de sujetos. En estudios
 futuros analizaremos el crear un atlas de la corteza basado solo en
-informaci\'on estructural.
+informaci\'on estructural.\\
 
