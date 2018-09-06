@@ -1,0 +1,57 @@
+\textbf{Assessing Information Flow During a Motor Task: A Structural Connectivity Driven Approach} \\
+%
+Guillermo Gallardo\footnote{Athena, Inria Sophia Antipolis, Mediterran\'ee France}, 
+Demian Wassermann\footnotemark[1],
+Rachid Deriche\footnotemark[1],
+Maxime Descoteaux\footnote{Universit\'e de Sherbrooke, Sherbrooke, Canada}
+and Samuel Deslauriers-Gauthier\footnotemark[2]
+\\
+\end{center}
+
+\textbf{Abstract:} Information flow between brain regions characterizes their interaction during cognitive tasks. In studying information flow, the segmentation of the cortex into regions of consistent connectivity is crucial. However, most atlases are based on cytoarchitecture or anatomical landmarks and do not consider inter region connectivity. In this work we use a connectivity driven parcellation to retrieve the information flow between brain regions during a motor task. We show that our results are consistent with fMRI information.
+
+\textbf{Introduction:}
+Current theories hold that cognitive tasks emerge from the interaction of brain regions specialized in lower level cognitive tasks [cite]. The information flow trough axonal bundles between those regions characterizes their interactions. Diffusion MRI (dMRI) enables the in vivo exploration of brain long-range physical connections trough axonal bundles, namely extrinsic connectivity, by means of tractography$^1$. However, inherent limitations of dMRI make impossible to determine axonal bundles directionality$^3$. Hence, it's impossible to determinate how different regions interact based only in dMRI information.
+
+Magnetoencephalography (MEG)$^*$ is a non-invasive method of measuring the electrical activity of the brain. However, to reconstruct the sources in the brain (the inverse problem) and detect electrical flow in the brain is challenging$^2$. In Deslauriers-Gauthier et al.$^5$, we presented a method to detect sources and the information flow between them in the white matter using a combination of diffusion MRI and EEG. The results presented were based on simulated EEG data and cortical regions obtained from an atlas. Most current atlases are based on cytoarchitecture or anatomical landmarks, lacking information about extrinsic connectivity. Using such parcellations introduce a bias in the estimation and can lead to erroneous connections and conclusions. In Gallardo et al. $^6$ we presented a technique to parcellate the whole cortex based on it's extrinsic connectivity. Here, we apply both techniques over a subject from the Human Connectome Project$^7$ to study the interaction between different brain regions during a hand-movement task. Briefly, we parcellate the subject's cortex based on it's extrinsic connectivity and then detect and estimate the information flow between parcels using connectivity and MEG data. We show that the inferred activated regions and information flow are consistent with results from functional MRI in a hand-movement task$^8$. This not only validates our electrical activity inferring technique$^5$ but also illustrates the strong relationship between axonal connectivity and functionality in hand-movement related tasks. 
+
+\textbf{Methods:} 
+We applied our proposed algorithm to subject 109123 (Male, aged 32-35) of the Human Connectome Project. The MEG data consisted of averaged evoked responses of a motor task where the subject was asked to move either his left or right hand following a visual cue. Fiber orientation distribution functions where computed using constrained spherical deconvolution$^9$.
+Probabilistic tractography was performed using 5000 streamlines per seed and using the vertices of the subject's pial mesh as seeds.
+To avoid superficial cortico-cortical fibers, we shrank the pial mesh$^{10}$ $2$mm into the white-matter prior to seeding.
+We then obtained a connectivity driven cortical parcellation of 110 regions by using the parcelling technique described in $^6$.
+This technique makes use of a Logistic Random Effects Models that transforms tractograms into a Euclidean space.
+The problem of parcelling the cortex can then be formulated as a Gaussian mixture model which is solved using hierarchical clustering.
+The resulting parcellation, which follows the assumption of shared physical connections, was used to identify the number of streamlines connecting region pairs and their average length.
+As described in Deslauriers-Gauthier et al.$^5$, the identified connections where used to build a Bayesian network which associates a probability to all possible combination of connection and cortical region states. 
+More specifically, each connection and cortical region is given a state which can be either active or inactive.
+By inserting the MEG data as evidence into this Bayesian network and maximizing its entropy[cite], we are able to obtain the posterior probability that a connection is active at any given time sample.
+
+
+
+\textbf{Results:} Figure X shows that our inferring technique$^5$ selected as
+source the parcel with the best overlap with fMRI activation. Also, 
+as Figure Y states, the inferred flow agrees with ...
+
+\includegraphics[scale=0.3]{lh.png}
+
+% * <sam.deslauriers@gmail.com> 2016-11-09T15:06:47.464Z:
+%
+% Let's assume we find information flow between the visual cortex and the motor cortex lateralized with each hand. What can we conclude? This has to be in line with the objective of the abstract. see first comment.
+%
+% ^.
+
+\textbf{Discussion and Conclusion:} Our results show provide a that our inferring
+tec
+
+\textbf{Refences}
+[2] Passingham, R. E., Stephan, K. E., Kotter, R., 2002. The anatomical
+basis of functional localization in the cortex.
+[3] S. Jbabdi and H. Johansen-Berg. Tractography - where do we go from here?
+Brain Connectivity, 1(3):169–183, 2011.
+[4] J. Phillips, R. Leahy, J. Mosher, and B. Timsari, "Imaging neural activity using meg and eeg,”
+IEEE Engineering in Medicine and Biology Magazine, vol. 16, no. 3, pp. 34–42, 1997
+[5] Samuel et al.
+[6] Gallardo G., Fick R., Wells III W., Deriche R. and Wassermann, "Groupwise
+Structural Parcellation of the Cortex: A Sound Approach Based on Logistic Models."
+CDMRI 2016, Oct 2016, Athens, Greece. <hal-01358436> 
