@@ -1,0 +1,36 @@
+Introduction:
+Due to its ill-posed nature, tractography generates a significant number of false positive connections between brain
+regions (Maier-Hein et al. 2017). To reduce the number of false positives, Daducci et al. (2015) proposed the COMMIT
+framework, which has the goal of re-establishing the link between tractography and tissue microstructure (Girard et al.
+2017). In this framework, the diffusion MRI signal is modeled as a linear combination of local models associated with
+streamlines were the weights are identified by solving a convex optimization problem. Streamlines with a weight of zero do
+not contribute to the diffusion MRI data and are assumed to be false positives. Removing these false positives yields a
+subset of streamlines supporting the anatomical data. However, COMMIT does not make use of the link between structure
+and function and thus weights all bundles equally. In this work, we propose a new strategy that enhances the COMMIT
+framework by injecting the functional information provided by functional MRI. The result is an enhanced tractogram
+filtering strategy that considers both functional and structural data.
+
+Methods:
+We randomly selected 3 subjects from the HCP500 dataset, each processed with the HCP minimal pipeline (Van Essen et
+al. 2012). For each subject, we performed probabilistic tractography using the vertices of the white matter mesh as seed
+locations. We then parcellated the cortex into 74 regions based on their extrinsic anatomical connectivity using the
+algorithm proposed by Gallardo et al. (2017). Using the resting state functional MRI of each subject, we computed the
+functional connectivity between cortical regions. For this, we first high pass-filtered the time series and computed the
+average functional MRI signal within each region. Finally, we divided the signals into windows of 100 seconds and
+computed the maximum sliding window correlation between every pair of regions. These correlation coefficients were
+used to define a regularization coefficient for each bundle of the tractogram. The regularization coefficients were designed
+to favour streamlines associated with a high correlation while penalizing but not excluding those with a low correlation.
+The rationale is that streamlines connecting regions that are functionally correlated should be favoured to explain the
+diffusion MRI data. As in the non functional COMMIT, we solved the optimization problem and removed streamlines with a
+weight of zero. For comparison, we also filtered the tractograms using equal weights for all bundles, i.e. without functional
+prior.
+
+Results:
+To measure the performance of the proposed algorithm we evaluated the quantity of candidate false positive streamlines
+that we were able to detect and the diffusion MRI signal fitting error. A filtering strategy is considered superior if it is able
+to remove more streamlines while still explaining the diffusion MRI signal. Figure 1 illustrates that including functional
+information allows us to increase the number of candidate false positives detected without affecting the data fitting error,
+therefore indicating enhanced filtering. Interestingly, the addition of functional information modified the spatial location of
+the removed bundles in a non-uniform manner. The streamlines removed by both filtering strategies and those removed
+by one or the other are illustrated in Figure 2.
+
