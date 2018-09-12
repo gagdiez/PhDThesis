@@ -1,46 +1,74 @@
-\documentclass[11pt,a4paper,twoside]{elsarticle}
+\documentclass[9pt, a4paper, twoside, twocolumn, openright]{book}
+\parindent0pt  \parskip5pt             % make block paragraphs
 
+%\usepackage{mathtools}
 %\usepackage{algorithm2e}
-\usepackage{graphicx}
-\usepackage{comment}
-\usepackage{amsmath}
-\usepackage[utf8]{inputenc}
+%\usepackage{comment}
+%\usepackage[utf8]{inputenc}
+%\usepackage{amssymb}
+%\usepackage{amsfonts}
+%\usepackage[utf8]{inputenc}
+%\usepackage{subcaption}
+%\usepackage[markers,nolists]{endfloat}
+%\captionsetup{compatibility=false}
 
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[table,xcdraw]{xcolor}
-\usepackage{subcaption}
-\captionsetup{compatibility=false}
+\usepackage{amsmath, amssymb}
 \usepackage{booktabs}
-\usepackage[markers,nolists]{endfloat}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{subfig}
+\usepackage{titlesec}
+\usepackage[english]{babel}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage[super]{natbib}
+
+\pagestyle{fancy}
+\fancyhead{}% clear headers
+\fancyfoot{}% clear footers
+
+\numberwithin{equation}{chapter}
+\fancyhead[LE,RO]{\leftmark}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter. \MakeUppercase{#1}}{}}
+\fancyfoot[RO, LE]{Page \thepage}
 
 \newcommand{\on}{\operatorname}
 \newcommand{\rv}{\tilde}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathcal{N}}
 \newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
-
 \newcommand{\argmax}{arg\,max}
 \newcommand{\argmin}{arg\,min}
 
+\titleformat{\chapter}[display]{\bfseries \LARGE}{Chapter \thechapter}{0pt}{}[\rule{\textwidth}{0.3pt}]
+\titleformat{\section}[block]{\bfseries \large}{\thesection.}{3pt}{}[\vspace{-12px}\rule{0.49\textwidth}{0.3pt}]
+\titleformat{\subsection}[block]{\bfseries \normalsize}{}{0pt}{\vspace{-10px}}[]
+
+\titlespacing{\section}{0pc}{15px}{0pc} %left top ..
+\titlespacing{\chapter}{0pc}{0px}{1pc}
+
+\title{Gallardo's Thesis}
+\author{Gallardo Guillermo}
+\date{\today}
 
 \begin{document}
+\bibliographystyle{ieeetr}
 
-\input{0.introduction/main.tex}
-\input{1.background/main.tex}
-\input{2.parcelling/main.tex}
-\input{3.matching/main.tex}
+\frontmatter
+    \maketitle
+    \tableofcontents
+    \input{0.front/main.tex}
 
-
-\cleardoublepage
+\mainmatter
+    \input{1.introduction/main.tex}
+    \input{2.background/main.tex}
+    \input{3.brain_parcellation/main.tex}
+    \input{4.structural_clustering/main.tex}
+    \input{5.matching/main.tex}
+    \input{6.multiatlas/main.tex}
+    %\input{7.conclusions/main.tex}
 
 %%%% BIBLIOGRAFIA
-\bibliographystyle{ieeetr}
-\bibliography{bibliography}
+%\bibliographystyle{ieeetr}
+%\bibliography{bibliography}
 
 \end{document}
