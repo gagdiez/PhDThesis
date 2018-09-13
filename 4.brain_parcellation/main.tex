@@ -1,15 +1,15 @@
 \chapter{Mapping the Brain: A review of the brain divisions}
 
 \section{Overview}
-Given the complexity of the brain, a dimentionality reduction is needed to
-be able to handle the data. Since its beginning, neuroscience has divided
-the brain based on different criteria. This allows to study the brain as a
-set of regions that interact, instead of a whole mess of neurons. However,
-it's not clear if there's a unique and most important division of the human
-brain. Historically, different brain parcellation has been created following
-different criteria as anatomy, cellular composition and brain function. In
-this work, we make a review of the different type of parcellations that
-exist, and explain their advantages, and when to use them.
+The brain is composed of billions of neurons interacting at the same time
+between them. Given the complexity of this network, a dimensionality reduction
+is needed in order to study its properties. Since its beginning, neuroscientist
+have divided the brain based on different criteria. This allows to study the
+brain as a set of interacting regions, allowing to abstract the underlying
+neuronal complexity. However, it's not clear that a unique and truth division
+of the human brain exists. In this chapter, we make a review of the different
+type of parcellations that exist; explain their advantages, and the best
+scenarios where to use each.
 
 \section{Introduction}
 Subdividing the brain in regions homogeneous respect to some criteria is a
@@ -65,6 +65,8 @@ The first functional maps where derived from lessions. Lessions in here
 determinated that function. Lessions in there determinated another one.
 Some activations while torturing cats also showed interesting stuff.
 Penfield + Knowledge of anatomy + broadman + broca + wernicke + etc
+There's a lot of information on diseases in the book Clinical Neuroscience,
+sounds like a good place to start
 
 \subsection{EEG}
 No idea... i have to read it.
@@ -82,7 +84,15 @@ https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
 
 https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
 
+\section{Brain Networks}
 Vinod, brain as a system
+The lobes and subcortical structures do not function in isolation, in fact they are heavily connected through the fibre bundles which compose the white matter.
+
+[VINOD]
+In his view, the human brain contains at least five major core functional networks: (i) a spatial attention network anchored in posterior parietal cortex and frontal eye fields;
+(ii) a language network anchored in Wernicke’s and Broca’s areas; (iii) an explicit memory network anchored in the hippocampal–entorhinal complex and inferior parietal cor- tex; (iv) a face-object recognition network anchored in
+midtemporal and temporopolar cortices; and (v) a working memory-executive function network anchored in prefron- tal and inferior parietal cortices. 
+
 
 Gael (which fmri clustering... in mendeley)
 https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full
@@ -92,12 +102,12 @@ Semantic parcellations try to map semantic processing to the cortex.
 In this maps, a region of the brain is ligated to a specific 'definition?/semantic'.
 
 https://www.nature.com/articles/nature17637
-% MEndeley \cite{Glover2011}
+% Mendeley \cite{Glover2011}
 Where Is the Semantic System? A Critical Review and Meta-Analysis of 120 Functional Neuroimaging Studies
 % In mendeley also
 
 \section{Structural Connectivity}
-In a structural parcellation, regions have a homogeneus pattern of connectivity
+In a structural parcellation, regions have a homogeneous pattern of connectivity
 with the rest of the brain. The first maps come from tracers in monkey. The new
 ones come from tractography. Yeah, we know that tractography is not perfect,
 but we cannot torture any more monkeys. We name all of the principal players.
@@ -109,7 +119,7 @@ Parisot.
 
 \section{Multimodal}
 Finally, more and more people is doing this. Maybe a precursor of this is
-anatomy+cythoarquitecture. But here we talk about really different modalities,
+anatomy+cytoarchitecture. But here we talk about really different modalities,
 as T1+T2+fMRI+goodknowswhat. We present at least two. I'm sure there are more.
 Parisot.
 Van Essen.
@@ -122,10 +132,26 @@ either in resolution, SNR. At the same time, we cannot study things at the
 neuron level, because we have billions of neurons in the brain. It makes a
 lot of sense that each parcellation is different, because they're based
 in different criteria. Even when trying to parcellate data coming from a
-same machine (fmri, dmri, etc), changing the hyphotesis will change the 
+same machine (fmri, dmri, etc), changing the hypothesis will change the 
 resulting parcellation. For example, in structural gradient vs structural
 parcel. The important thing is to be able to select the right parcellation
 for the right study.
 
 \section{Resume of all of the parcellations presented}
-Here I put a beautful table resuming everything.
+Here I put a beautiful table resuming everything.
+
+\section{Conclusion}
+In order to reduce the complexity of the brain many studies start by subdividing
+the brain. Depending on the hypothesis driving the study, different type
+of parcellations can be used. In this chapter we presented parcellations based
+on different criteria: cythoarquitecture; anatomy, function, semantics and
+structural. We also presented some parcellation which are driven by a mixture
+of suche criteria. Each parcellation possess its own advantages, and should be
+used in the right context. In the following chapter we will introduce the
+first contribution of this thesis: a technique to parcellate the cortex based
+on its structural connectivity. Our technique allows to create parcellations
+at the single-subject and group level, while having a good correlation with
+known divisions of the brain.
+
+
+\chapterbib

@@ -1,12 +1,15 @@
 \chapter{Solving the Cross-Subject Parcel Matching Problem using Optimal Transport}
 %
 \section{Overview}
-Matching structural parcels across different subjects is an open problem in neuroscience.
-Even when produced by the same technique, parcellations tend to differ in the number, shape, and spatial localization of parcels across subjects.
-In this work, we propose a parcel matching method based on Optimal Transport.
-We test its performance by matching parcels of the Desikan atlas, parcels based on a functional criteria and structural parcels.
-We compare our technique against three other ways to match parcels which are based on the Euclidean distance, the cosine similarity, and the Kullback-Leibler divergence.
-Our results show that our method achieves the highest number of correct matches.
+Matching structural parcels across different subjects is an open problem in
+neuroscience. Even when produced by the same technique, parcellations tend to
+differ in the number, shape, and spatial localization of parcels across subjects.
+In this chapter, we propose a parcel matching method based on Optimal Transport.
+We test its performance by matching parcels of the Desikan atlas, parcels based
+on a functional criteria and structural parcels. We compare our technique against
+three other ways to match parcels which are based on the Euclidean distance, the
+cosine similarity, and the Kullback-Leibler divergence. Our results show that
+our method achieves the highest number of correct matches.
 
 \section{Introduction}
 Brain organization displays high variability across individuals and species. Studying brain connectivity therefore faces the challenge of locating homogeneous regions while accounting for this variability. Different techniques have been proposed to parcellate the brain based on its structural connectivity. However, matching the resulting parcels across different subjects is still an open problem in neuroscience. Even when produced by the same technique, parcellations tend to differ in the number, shape, and spatial localization of parcels across subjects \cite{Jbabdi2013}. Current theories hold that long-range structural connectivity, namely, extrinsic connectivity, is strongly related to brain function \cite{Passingham2002}. Therefore, being able to match parcels with similar connectivity across subjects can help to understand brain function while also enabling the comparisons of cortical areas across different species \cite{Mars2018}.
@@ -190,10 +193,16 @@ It's important to notice that our technique achieved more than a 90\% of correct
 % The fact that OT transport performs well can also imply the kind of transformation which occurs between the connectivity fingerprints of two cross-subject parcellations. 
 
 \section{Conclusion}
-Matching structural parcels across different subjects is an open problem in neuroscience. In this work, we proposed a novel parcel matching method based on Optimal Transport. We tested its performance with four different experiments, always obtaining the highest number of correctly matched parcels, which is an improvement over the results of the currently used techniques. Our technique could have major implications in the study of brain connectivity and its relationship with brain function, allowing for the location of parcels with similar connectivity but not high spatial coherence. Also, it could help to understand the link between different brain atlases, and improve the  comparisons of cortical areas between higher primates.
+Matching structural parcels across different subjects is an open problem in
+neuroscience. In this work, we proposed a novel parcel matching method based on
+Optimal Transport. We tested its performance with four different experiments,
+always obtaining the highest number of correctly matched parcels, which is an
+improvement over the results of the currently used techniques. Our technique 
+could have major implications in the study of brain connectivity and its
+relationship with brain function, allowing for the location of parcels with
+similar connectivity but not high spatial coherence. Also, it could help to
+understand the link between different brain atlases, and improve the 
+comparisons of cortical areas between higher primates.
 
- \section*{Acknowledgements}
-This work has received funding from the European Research Council (ERC) under the Horizon 2020 research and innovation program (ERC Advanced Grant agreement No 694665 : CoBCoM), and from the ANR NeuroRef
 
-%\bibliographystyle{splncsnat}
-%\bibliography{bibtex}
+\chapterbib

@@ -2,22 +2,22 @@
 %
 %
 \section{Overview}
-Current theories hold that brain function is highly related to long-range
-physical connections through axonal bundles, namely \textit{extrinsic connectivity}.
-However, obtaining a groupwise cortical parcellation based on extrinsic connectivity
-remains challenging. Current parcellation methods are computationally expensive;
-need tuning of several parameters or rely on ad-hoc constraints. Furthermore,
-none of these methods present a model for the cortical extrinsic connectivity
-of the cortex.
-To tackle these problems, we propose a parsimonious model for the 
-extrinsic connectivity and an efficient parceling technique based on
-clustering of tractograms. Our technique allows the creation of single subject
-and groupwise parcellations of the whole cortex. The parcellations obtained with
-our technique are in agreement with structural and functional parcellations
-in the literature. In particular, the motor and sensory cortex are subdivided
-in agreement with the human homunculus of Penfield. We illustrate this by comparing
-our resulting parcels with the motor strip mapping included in the Human
-Connectome Project data.
+So far in this thesis we have introduced the necessary concepts in neuroanatomy;
+non-invasive imaging techiques to study the brain, and brain parcellation. In
+the first chapter we explained the importancy of brain connectivity and its
+relation to brain function. On the second chapter, we explained how to estimate
+brain connectivity and brain function in a non-invasive way. The third chapter
+showed the ongoing effort to find new and relevant ways to divide the brain,
+in order to improve the way to study it. In particular, all of the parcellations
+based on structural connectivity are computationally expensive; need tuning of
+several parameters or rely on ad-hoc constraints. Furthermore, none of these 
+methods present a model for the cortical extrinsic connectivity of the cortex.
+In this chapter, we propose a parsimonious model for the extrinsic connectivity
+and an efficient parceling technique based on clustering of tractograms. 
+Our technique allows the creation of single subject and groupwise parcellations
+of the whole cortex. We show that our technique creates parcellations in
+agreement with anatomical, structural and functional parcellations extant in 
+the literature.
 
 This work has been published in the journal Neuroimage \cite{Gallardo2017}
 %
@@ -863,8 +863,8 @@ mean z-scores of \citet{Glasser2016} (parcels d; e and f of  fig. \ref{fig:glass
 %
 \section{Conclusion}
 %
-Understanding how the brain is structurally organized and its relationship
-with functionality is an open question in neuroscience. Recent advances in
+Understanding how the brain is structurally organized and how it constraints
+functionality is an open question in neuroscience. Recent advances in
 acquisition and modeling techniques on dMRI have facilitated to study 
 axonal connectivity in the brain. However, parceling the whole cortex based
 on a structural criterion remained challenging. In this work we presented a 
@@ -877,15 +877,12 @@ At the same time, our technique could help to lower the gap between structural
 connectivity and brain function, since some of our pure structural parcels showed
 good overlapping with responses to functional tasks.
 
-Both our parceling tool and the obtained groupwise parcellation are or will
-be soon freely available in GitHub (https://github.com/AthenaEPI/logpar) and
-Neurovault. These tools provide a 
-sound basis for new studies on human cognition, brain development, aging 
-and disease. These tools can create fine parcellations of cortical areas, 
-improving our knowledge about cortical organization. Future comparison with 
-functional connectivity could lead to finally unraveling the link between axonal
-connectivity and brain function. \\
+However, we still are left with the open question of how to match parcels
+across subjects. Even when our results show that our technique is stable
+across groups of subjects, at the single subject level is not easy to find
+correspondence between two parcellations. The following chapter of this thesis
+will work on this problem.
 
 %\section{References}
 %\bibliographystyle{elsarticle-harv}
-%\bibliography{bibtex}
+\chapterbib

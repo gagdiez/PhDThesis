@@ -1,23 +1,17 @@
 \chapter{Inferring the Localization of White-Matter Tracts using Diffusion Driven Label Fusion}
 
 \section{Overview}
-White matter pathologies such as tumors or traumatic brain injury disrupt the
-structure of white matter. These disruptions hamper the inference of affected
-pathways using tractography. A way to overcome this is to use a label fusion
-technique. Label fusion aims to infer the localization of the brain structure
-of a subject from its localization in a group of control subjects. The most
-common technique is known as the voting rule \cite{voting}, where a structure
-is said to be present in a voxel if it's present in the majority of the voting
-subjects. Furthermore, this can be improved by weighting each vote by the
-similarity between the T1 of each voting subject and the subject to be inferred.
-However, these techniques only relay in the spatial localization of the structures.
-In this work, we introduce a way to weight the vote of each subject based on
-how the voted pathway is supported by the test subject's diffusion data. This
-is, if the diffusion data of the test subject is consistent with the direction
-of the voted pathway, the vote has a higher weight. We show that adding dMRI to
-the label fusion process achieves a similar number of true positives than the
-voting technique, with a 60\% less of false positives. However, this incurs in
-a trade-off of a 40\% false negatives.
+In the previous chapters we studied the structural organization of the brain,
+and saw that it is highly related to function. We also talk, specifically in
+chapter X, about how lesions in the cortex or white matter disrupt the normal
+functioning of the brain. Some white matter pathologies, such as tumors
+or traumatic brain injury, affect the white matter to the point were it's
+difficult to even infer which pathways are affected using tractography.
+In this chapter, we introduce a way to infer the location of pathways, even
+when it's not possible to use tractography to locate them. Our technique is
+based on a methodology named label fusion. In particular, we show how to add
+dMRI information to the label fusion in order to better estimate the location
+of white matter pathways.
 
 \section{Introduction}
 
@@ -226,9 +220,9 @@ In real data, this is reflected, by showing that diffusion voting is more
 conservative. WMM lessions.
 
 \subsection{Conclusions}
-In this work we presented a labeling fusion technique that relies on dMRI data
-to infer the localization of white-matter tracts. The results show that our
-technique is more conservative than the voting rule, which is desired when
+In this chapter we presented a labeling fusion technique that relies on dMRI
+data to infer the localization of white-matter tracts. The results show that
+our technique is more conservative than the voting rule, which is desired when
 studying pathologies, at the cost of having more false negatives.
 
 \subsubsection*{Table}
@@ -251,3 +245,5 @@ Tract       & 27932       & 2592  & 17050       & 3163      & 1.64        & 0.82
 \end{table}
 
 Figure 1. Outline of our technique. We extract the main white-matter tracts using WMQL, register them to the 'test' subject and then compute a voting rule weighted by diffusion information. For each voxel $x$ in the 'test' subject, we select the label $l$ that maximizes equation \ref{eq:argmax}, where S is the set of 'train' subjects, $t$ is the 'test' subject; $L_i(x)$ is the label of voxel $x$ for the subject $i$; $P$ are the principal directions of diffusion in the 'test' subject and $D_{sl}(x)$ are the directions of tract $l$ in the voxel $x$ of the 'train' subject $s$.
+
+\chapterbib
