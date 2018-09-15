@@ -28,7 +28,7 @@ from other subjects in order to infer the affected tracts. Assuming we know the
 location of a set of tracts in the brains of a group of healthy subjects, we
 could register them to the brain of our patient and use a label fusion technique.
 Label fusion is a family of techniques that aims to infer the localization of the
- brain structure of a subject from its localization in a group of control subjects.
+brain structure of a subject from its localization in a group of control subjects.
 One well known technique within this family is Majority Voting [cite]. Given a
 specific location, each subject is said to "vote" for one label. The inferred
 label for that location will be the one with more votes. For example, when
@@ -39,7 +39,7 @@ Majority Voting is simple to implement and has been demonstrated to yield
 accurate segmentations [reference]. However, this technique is blind both to
 registration problems and anatomical variability between subjects. To overcome
 this, it has been propose to weight the vote of each subject by some measure of
- similarity between the patient and the subject [cite]. The underlying
+similarity between the patient and the subject [cite]. The underlying
 intuition is the choosing of labels should be driven by those subjects who
 resemble the most to the one being labeled. The practical advantages of various
 strategies based on this idea have recently been demonstrated [6-sabuncu].
@@ -63,7 +63,46 @@ Voting. Our results show that adding dMRI to the label fusion process achieves a
 similar number of true positives than Majority Voting, with a 60\% less of
 false positives, incurring in a trade-off of a 40\% false negatives.
 
+This work is organized as follows: In the Methods section we make an introduction
+to label fusion techniques and present how to extend them using diffusion
+information. In the Experiments and Results section we present our results 
+both on synthetic and on HCP data. We then discuss our results and position
+ourselves with respect to the state of the art in the Discussion section. 
+Finally, in the last section we provide our conclusions.
+
 \section{Methods}
+
+\subsubsection{Majority Voting}
+Let $labels = \{l_i\}, \forall_i l_i \in N$ be the set of labels representing
+tracts and grey matter structures in one hemisphere. Let ${L_s}, s \in S$
+represent the labeling of a set of subjects $S$, where each 
+$L_s \in labels^{v\times v}$ is a 3D volume represeting the labeling of a
+specific subject. Majority Voting [Rohlfing et al. (2004)] infers the label of
+each voxel $x$ in the test subject ($L(x)$) by computing:
+
+\begin{equation}
+\label{eq:mvoting}
+\begin{aligned}
+    \hat L(x) = \argmax_{l \in labels} \sum_{s\in S} p(L(x) = l | L_s(x)),\\
+    \text{where} \\
+    p(L(x) = l | L_s(x)) =
+    \begin{cases}
+        1,& \text{if } L_s(x) = l \\
+        0,& \text{otherwise}
+    \end{cases}
+\end{aligned}
+\end{equation}
+
+In this case, it's said that each subject in the training set votes for a label
+per voxel, and the label with the most amount of votes is assigned to the test
+subject's voxel.
+
+As seen in equation \ref{eq:mvoting}, Majority Voting is solely based on
+spatial features. This is, something. In our case, we want to label tracts
+in the white-matter. We can profit of the fact that white matter is composed
+by tracts, and that their morphology shapes the acquired diffusion.
+
+\subsection{Diffusion Based Voting}
 
 Our label fusion technique takes advantage of dMRI to weight the vote of each
 subject. The vote for a specific label gets a higher weight if it's supported
@@ -93,30 +132,6 @@ In the previous section we presented how to compute and ODF from dMRI data and
 how to estimate the ODF from a tract in a voxel. Now, we introduce the Majority
 Voting technique and our improvement using dMRI.
 
-\subsubsection{Majority Voting}
-Let $labels = \{l_i\}, \forall_i l_i \in N$ be the set of labels representing
-tracts and grey matter structures in one hemisphere. Let ${L_s}, s \in S$
-represent the labeling of a set of subjects $S$, where each 
-$L_s \in labels^{v\times v}$ is a 3D volume represeting the labeling of a
-specific subject. Majority Voting [Rohlfing et al. (2004)] infers the label of
-each voxel $x$ in the test subject ($L(x)$) by computing:
-
-\begin{equation}
-\label{eq:mvoting}
-\begin{aligned}
-    \hat L(x) = \argmax_{l \in labels} \sum_{s\in S} p(L(x) = l | L_s(x)),\\
-    \text{where} \\
-    p(L(x) = l | L_s(x)) =
-    \begin{cases}
-        1,& \text{if } L_s(x) = l \\
-        0,& \text{otherwise}
-    \end{cases}
-\end{aligned}
-\end{equation}
-
-In this case, it's said that each train subject votes for a label per voxel,
-and the label with the most amount of votes is assigned to the test subject's
-voxel.
 
 \subsubsection{Diffusion based label fusion}
 We want to introduce a weight to these votes, taking into account how well the
@@ -160,7 +175,12 @@ Now, we present experiments, both in synthetic and real data, showing that
 our technique achieves better results than Mayority Voting.
 
 \subsection{Data and Preprocessing}
-We randomly selected 13 subjects from the HCP500 dataset from the Human
+For the synthetic data, we used Phantomas to create two phantom DWIs: the
+first one possess only one tract, crossing the image in the X plane. The 
+second one has a fiber crossing. See figure X. Both DWI are simulated with
+an SNR of 20 which is the standard in diffusion phantoms [CITE]. For the
+real data, 
+we randomly selected 13 subjects from the HCP500 dataset from the Human
 Connectome Project. For each subject, we computed whole-brain tractography
 using each voxel in the white-matter as a seed and simulating 8 particles per
 seed [REF]. We extracted the main tracts from the left hemisphere tractogram
