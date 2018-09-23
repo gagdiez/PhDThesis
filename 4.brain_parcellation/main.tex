@@ -12,18 +12,48 @@ type of parcellations that exist; explain their advantages, and the best
 scenarios where to use each.
 
 \section{Introduction}
-Subdividing the brain in regions homogeneous respect to some criteria is a
-necessary first step of every study in neuroscience. By doing this, it's not
-only possible to reduce dimensionality, but also to derive rules more general
-than when using the whole brain. How to divide the brain will heavily depend
-on the task desired to achieve. Using the wrong parcellation can introduce
-a bias in the results. Historically, the brain has been divided following
-different criteria. Furthermore, with every new technological advance, new
-parcellations arise. Perhaps the first parcellation to exist was the anatomical
-one. Still something from Demians thesis here. Based solely in the brain
-morphology, gross divisions of the brain can be made, as lobes and etc.
+Composed by billions of interconnected neurons, the brain is the most complex
+biological machine that we know. Untangling this network is of special importance
+to understand the underlying process of concious life. However, studying the 
+brain at the cellular level, alongside their interactions is simply not feasible.
+Existent techniques to study brain microstructure are highly invasive, and can
+only be used in postmortem tissue [cite]. Furthermore, while this techniques
+succefully help to characterize the cellular composition of the tissue, they
+do not allow to account for the interaction between cells. Specially for whole
+brain data, the obtained dataset are simply too huge to be handled [cite].
+Because of all of this, some way to reduce dimentionallity is needed.
 
+Thanks to the study of cythoarquitectonics, brain function, and tracers we know
+that neighboring neurons tend to work together [many cites]. In particular,
+the brain behaves as a small world graph. While which populations
+of neurons, and how they interact between is highly subject dependant, this
+studies give us a solid support to subdivide the brain before studying it.
+Nowadays, subdividing the brain in regions homogeneous respect to some criteria
+is a necessary first step of every study in neuroscience. By doing so, it's not
+only possible to reduce the dimensionality of the network, but also to derive
+rules more general than in the cellular case. Furthermore, having consistent
+divisions across subjects allows to infer properties from a population. The 
+problem recides in the fact that there's not a gold standard/unique division of
+the human brain. How to divide the brain will heavily depend on the task desired
+to achieve, since using the wrong parcellation can introduce a bias in the
+results. 
 
+Historically, the brain has been divided following different criteria. Furthermore,
+with every new technological advance, new parcellations arise. Perhaps the first
+parcellation to exist was the anatomical one. Still something from Demians thesis
+here. Based solely in the brain morphology, gross divisions of the brain can be
+made, as lobes and etc. Then, through the study of brain lesions, brain surgery
+and EEG allowed to study brain function, from which gross functional divisions
+arise. A couple of years later, Brodmann creates his map based on the
+cythoarchitecture. Enter MRI to improve anatomical divisions, PET/fMRI for functional
+and more recently dMRI for structural. Then, semantical, and finally, the
+multischeme ones.
+
+In this chapter, we make a review of the most important techniques of which
+we know about for each modality, giving a brief introduction to how they work
+and their main strenghts. All the reviewed parcellations are comprised in the
+table X. The chapter is divided in the following: Introduction, Parcellations
+and Discussion.
 
 \section{All}
 where I published mine:
@@ -32,57 +62,105 @@ https://www.sciencedirect.com/science/article/pii/S1053811917310091
 Surface-Based and Probabilistic Atlases of Primate Cerebral Cortex
 David, in Mendeley.
 
-\section{Cythoarquitecture}
-Cythoarquitectonic divisions of the brain are based solely in the cellular
-composition of the cortex. In this atlases, a brain region possess the same
-cells inside of it. The first and most known division is that of Brodmann.
-Brodmann divided the brain in XX regions. He showed stuff for humans and
-animals. He showed relationship with function.
-Von Economo extended this work, and did more stuff. Someone showed that 
-in this parcellation, the regions with similar cellular composition tend
-to be connected between them.
-in my mendeley \cite{Glover2011}.
-
 \section{Anatomical}
-Anatomical divisions of the brain are based on the cortical morphology/shape.. check the name.
-The most know one is Desikan. Desikan is based on detecting a set of particular
-gyris, and then divide the brain based on them. It has XX divisions per
-hemisphere, is simmetrical and can be applied in monkeys also, I think.. check it.
+The regions on an Anatomical divisions of the brain are defined by their shape
+or relative position in the brain. For example, in the Desikan atlas, the
+pars opercularis region is defined as 'the first gyrus from the precentral gyrus'.
+The division of the brain in lobes is a coarse anatomical parcellation, finer
+divisions can be created based on the sulci. AAL is one of the oldest one,
+check this. One of the most used anatomical atlases is that of Desikan~\cite{Desikan2006}.
+The desikan atlas divides each in 34 coarse structures (Fig X), and each
+area is delimited mostly by sulcus. Desikan atlas is built on the cortical surface by: projecting the cortical folding
+patters into a spherical surface, aligning them with an atlas computed from the
+average of 40 subjects, and then transfering the labels from the atlas to the
+cortical surface.
 This map was further refined by Destrieux. Destrieux works in a similar way,
 but makes further subdivisions of giry and stuff. AAL is older than them?
 Anyway, no one recomends AAL.
 
 https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
 
+
+\section{Cythoarquitecture}
+\label{sec:cyto_maps}
+Only the borders of a few architectonically defined areas show a sufficiently precise association with sulci~\cite{Amunts2007}
+As shown with modern techniques, borders between cytoarchitectonic areas are functionally relevant, to the point that many functional regions are refered using cythoarquitectonic labels.
+
+Cythoarquitectonic divisions of the brain are based solely in the cellular
+composition of the cortex. In this atlases, a brain region possess a consistent
+thickness and cellular organization. For example, Brodmann Area 4 has an unusually
+thick cortex; possess giant pyramidal cells, and lacks an internal and external
+granular layer. The pioneers in the area are Meynert [CITE4-Thiarhou],
+Campbell [CITE5] who divided the cortex into 14 areas, and Elliot Smith [CITE6]
+into 50.
+
+The most known cythoarchitectonic division of the brain is that
+of Broadmann~\cite{Brodmann1909}. Broadmann defines 52 cortical regions, based
+on the inspection trough microscope of cortical sections on post-mortem
+primates brains. In 1925 von Economo and Koskinas publish the 'Atlas of 
+Cytoarchitectonics of the Adult Human Cerebral Cortex' [CITE]. Economo and
+Koskinas [cite] recognized 54 fundamental cytoarchitectonic areas with 76
+variants and 107 modifications~\cite{Triarhou2007}. Their atlas is based in the
+examination of mentally healthy subjects in the range of 30–40 years of age
+through improved microscopes. More recent work includes the study of
+neurotransmitter receptors to map divisions in the visual cortex~\cite{Eickhoff2008},
+and the introduction of microstructural metrics, as the gray level index
+[CITE](Schleicher and Zilles, 1990), to create observer-independent parcellation
+methods.
+
+Extant cytoarchitectonic maps do not cover the complete cerebral cortex. 
+Only approximately 40\% of the cortical surface has been mapped up to now. 
+This is caused by the difficulties of: studying sections; 3D reconstructing the
+histological sections, and registration of post-mortem data to a reference space.
+This is a very time-consuming process, requiring as minimum as 1 person year for
+an area.
+
+
 \section{Functional}
+Functional parcellations of the brain denotes how different human functions 
+are localized in the brain. This is, each region is in charge of a specific
+function (i.e. movement, speach, vision), or is part of a greater system with
+a specific functional or cognitive goal. The first functional maps where derived
+from lessions. A classical example is that of Broca and Wenicke areas, related
+to meaningfull speach production and spech comprehension. The areas are named
+after Broca [CITE] and Wernicke [CITE], who in the late 1800 reported lesions in
+that region for aphasic patients. Another example is the human homunculus,
+a representation of motor and sensory functions, which Penfied [cite] mapped
+trough experimenting with electrical stimulation of different brain areas of
+patients undergoing open brain surgery.
 
-Functional subdivisions of the brain create maps of regions functionally 
-specialized. This is, each region is in charge of a specific motor/cognitive
-function, or is part of a greater system with a specific functional goal.
+As stated in the previous section (sec. \ref{sec:cytho_maps}, Cythoarchitectonic
+parcellations can be seen as functional ones, since they show close relation 
+to function. However, they do not cover the whole brain, and we can only relate
+them after many patients show specific impediments and have lesions in those
+regions. The advenment of functional MRI (fMRI) allowed to measure the level of
+oxygen in blood. Knowing that the neurons need oxygen as fuel to fire, we can
+find wich region of the brain are being activated for specific tasks. This
+allowed to refine and validate in vivo the functional specialization of 
+cythoarchitectural parcels and to better define anatomical ones as the human
+humunculus \cite{Lashkari2010, Michel2011}. Even more interesting is the fact
+that there are some regions that activate while in a resting state. From the
+no-task state (resting state), is possible to derive parcellations by seing
+which systems activate simultaneusly. While we have no idea what this means,
+people uses it. By applying different clustering algorithms to this matrix, we
+obtain different parcellations. We can use ward clustering [cites from Thirion];
+k-means clustering [cites from thirion]; spectral clustering [cites from thirion],
+and principal component analysis (PCA) [cites from thirion]. There are also
+local gradient approaches, that detect abrupt transitions in functional
+connectivity patterns \cite{Wig2014, Schaefer2017}.
 
-\subsection{Anatomical + Cythoarchitectural}
-The first functional maps where derived from lessions. Lessions in here
-determinated that function. Lessions in there determinated another one.
-Some activations while torturing cats also showed interesting stuff.
-Penfield + Knowledge of anatomy + broadman + broca + wernicke + etc
-There's a lot of information on diseases in the book Clinical Neuroscience,
-sounds like a good place to start
+add this one \cite{Craddock2011}.
 
-\subsection{EEG}
-No idea... i have to read it.
-https://www.sciencedirect.com/science/article/pii/S1053811917307474
-
-\subsection{fMRI}
-With the invention of fMRI, it was possible to measure the level of oxygen
-in blood. Knowing that the neurons need oxygen as fuel to fire, we can
-find wich region of the brain are being activated for specific tasks.
-Even more interesting is the fact that there are some regions that activate
-while in a resting state. Here we talk about many of them.
+add https://www.sciencedirect.com/science/article/pii/S1053811913002668.
 
 Good review in:
 https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
 
 https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
+
+\subsection{EEG}
+No idea... i have to read it.
+https://www.sciencedirect.com/science/article/pii/S1053811917307474
 
 \section{Brain Networks}
 Vinod, brain as a system
@@ -115,7 +193,8 @@ Gallardo.
 Moreno-Dominguez.
 Alfred Awander PCA.
 Michel Thiebaut.
-Parisot.
+Parisot. 
+https://arxiv.org/abs/1610.03809
 
 \section{Multimodal}
 Finally, more and more people is doing this. Maybe a precursor of this is
@@ -123,9 +202,17 @@ anatomy+cytoarchitecture. But here we talk about really different modalities,
 as T1+T2+fMRI+goodknowswhat. We present at least two. I'm sure there are more.
 Parisot.
 Van Essen.
+Braintome\cite{Fan2016}
 ...?
 
 \section{Discussion}
+The brain atlas concordance problem: quantitative comparison of anatomical parcellations.
+
+Here we name them, some people profile them:
+
+https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full % \cite{Thirion2014}
+Chris (the guy from stanford, that we met in many conferences) 
+
 There's not such a thing as a unique brain parcellation. While we cannot say
 that it doesn't exist. We know that all of our techniques have a limitation,
 either in resolution, SNR. At the same time, we cannot study things at the

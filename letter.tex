@@ -1,0 +1,71 @@
+\documentclass[a4paper, 10pt]{article}
+\parindent0pt  \parskip5pt             % make block paragraphs
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\begin{document}
+
+\begin{center}
+{\Large \bf {\centering Title to be defined}} \\
+{\vspace{1mm} \bf Gallardo Guillermo}
+\end{center}
+
+Composed by billions of interconnected neurons, the brain is the most complex
+biological machine that we know. Understanding how brain connectivity is 
+organized, and how this constrains brain functionality is one a key question
+of neuroscience. Recent advances in acquisition and modeling techniques on
+Diffusion Magnetic Resonance Imaging (dMRI) have facilitated to estimate and
+study axonal connectivity in vivo. In this thesis, we leverage recent advances
+in dMRI and tractography algorithms in order to study: how brain's connectivity
+is organized; how connectivity is related to anatomy and function; how to
+find correspondences when the connectivity variates across people, and how to
+infer connectivity in the presence of a brain's pathology. The thesis is
+divided in three major contributions:
+
+Our first contribution is a parsimonious model for the long-range axonal
+connectivity (extrinsic connectivity), and an efficient technique to divide the
+brain in regions with homogeneous connectivity~\cite{Gallardo2017a}. Our
+connectivity model is based on histological results obtained in the macaque
+brain, and accounts for the across-subject variability in the human brain
+connectivity. Our parceling technique uses a hierarchical clustering approach,
+letting us comprise multiple granularities of the same brain parcellation.
+Also, our technique can create both single subject and groupwise parcellations
+of the whole cortex, allowing to study brain connectivity at the single subject
+and at the population level. While our technique is solely based on the brain's
+structural connectivity, our resulting parcels are in agreement with anatomical,
+structural and functional parcellations extant in the literature. Our technique
+helps to lower the gap between structural connectivity and brain function, since
+some of our pure structural parcels show good overlapping with responses to
+functional tasks.
+
+Our second contribution is a technique to find correspondence between
+structural parcellations of different subjects~\cite{Gallardo2018}. Even when
+produced by the same technique, parcellations tend to differ in the
+number, shape, and spatial localization of parcels across subjects. Matching
+these parcels across subjects is an open problem in neuroscience. To solve
+it, we propose a parcel matching method based on Optimal Transport. We test its
+performance on different parcellations, and compare it against state of the
+art matching techniques. We show that our method achieves the highest number
+of correct matches. Our technique could help to study properties of structurally
+defined areas, when they do not have high spatial coherence across subjects.
+Also, it could help to understand the link between different brain atlases, and
+improve the comparisons of cortical areas between higher primates.
+
+Our third contribution is a multi-atlas technique to infer the location of 
+white-matter bundles in patients with a brain pathology~\cite{Guillermo2018}.
+Lesions in the cortex or white matter disrupt the normal functioning of the
+brain. Some white matter pathologies, such as tumors or traumatic brain injury,
+hampers tractography, difficulting to infer which pathways are affected. We 
+present a technique that infers the affected tracts by aggregating spatial
+information from healthy subjects while taking into account the diffusion
+information of the patient. In particular, we register the tracts of each
+healthy subject to the patient, and make each healthy patient 'vote' for a
+tract on each voxel of the DWI image of the patient. Our technique weights the
+vote of each subject based on how the voted pathway is supported by the patient's 
+diffusion data. This is, if the diffusion data of our patient is consistent with
+the direction of the voted pathway, the vote has a higher weight. We show that
+our technique achieves better results that using the simple voting.
+
+\bibliographystyle{ieeetr}
+\bibliography{bibliography}
+\end{document}
