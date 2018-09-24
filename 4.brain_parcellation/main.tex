@@ -55,28 +55,29 @@ and their main strenghts. All the reviewed parcellations are comprised in the
 table X. The chapter is divided in the following: Introduction, Parcellations
 and Discussion.
 
-\section{All}
-where I published mine:
-https://www.sciencedirect.com/science/article/pii/S1053811917310091
-
-Surface-Based and Probabilistic Atlases of Primate Cerebral Cortex
-David, in Mendeley.
+Speciall issue neuroimage \cite{The2018}1
 
 \section{Anatomical}
 The regions on an Anatomical divisions of the brain are defined by their shape
 or relative position in the brain. For example, in the Desikan atlas, the
 pars opercularis region is defined as 'the first gyrus from the precentral gyrus'.
 The division of the brain in lobes is a coarse anatomical parcellation, finer
-divisions can be created based on the sulci. AAL is one of the oldest one,
-check this. One of the most used anatomical atlases is that of Desikan~\cite{Desikan2006}.
-The desikan atlas divides each in 34 coarse structures (Fig X), and each
+divisions can be created based on the sulci. AAL\cite{Landeau2002} is the most used anatomical
+atlases. It divides the brain in 45 anatomical volumes of interest. It was
+created by manual parcellation of the spatially normalized single-subject 
+high-resolution T1 volume provided by the Montreal Neurological Institute (MNI) \cite{Collins1998}.
+One of the most used anatomical atlases is that of Desikan~\cite{Desikan2006}.
+Another anatomical atlas is the Harvard-Oxford cortical/subcortical atlases,
+distributed with the software FSL [CITE].
+The desikan atlas divides each hemisphere in 34 coarse structures (Fig X), and each
 area is delimited mostly by sulcus. Desikan atlas is built on the cortical surface by: projecting the cortical folding
 patters into a spherical surface, aligning them with an atlas computed from the
 average of 40 subjects, and then transfering the labels from the atlas to the
-cortical surface.
-This map was further refined by Destrieux. Destrieux works in a similar way,
-but makes further subdivisions of giry and stuff. AAL is older than them?
-Anyway, no one recomends AAL.
+cortical surface. Another one, Destrieux, divides the brain in 74 labels per
+hemisphere. The labeling is done following a probabilistic model that takes
+into account informationas: curvature and average convexity of the cortica
+surface, prior labeling probability for that vertex, as well as the labels
+of vertices in a local neighborhood.
 
 https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
 
@@ -102,12 +103,18 @@ Cytoarchitectonics of the Adult Human Cerebral Cortex' [CITE]. Economo and
 Koskinas [cite] recognized 54 fundamental cytoarchitectonic areas with 76
 variants and 107 modifications~\cite{Triarhou2007}. Their atlas is based in the
 examination of mentally healthy subjects in the range of 30–40 years of age
-through improved microscopes. More recent work includes the study of
-neurotransmitter receptors to map divisions in the visual cortex~\cite{Eickhoff2008},
+through improved microscopes. We also have the Jubrain~\cite{Mohlberg2012}, a
+cytoarchitectonic probabilistic maps viever, made by Juelich and Duesseldorf
+institutes by analizing the histological sections of ten human postmortem brains.
+More recent work includes the study of
+neurotransmitter receptors to map divisions in the visual cortex~\cite{Eickhoff2008}, 
 and the introduction of microstructural metrics, as the gray level index
 [CITE](Schleicher and Zilles, 1990), to create observer-independent parcellation
-methods.
+methods, 
 
+Creates an atlas of the human ventral visual stream from the postmortem brain
+of 11 subjects\cite{Rosenke2018}.
+    
 Extant cytoarchitectonic maps do not cover the complete cerebral cortex. 
 Only approximately 40\% of the cortical surface has been mapped up to now. 
 This is caused by the difficulties of: studying sections; 3D reconstructing the
@@ -141,48 +148,57 @@ cythoarchitectural parcels and to better define anatomical ones as the human
 humunculus \cite{Lashkari2010, Michel2011}. Even more interesting is the fact
 that there are some regions that activate while in a resting state. From the
 no-task state (resting state), is possible to derive parcellations by seing
-which systems activate simultaneusly. While we have no idea what this means,
-people uses it. By applying different clustering algorithms to this matrix, we
+which systems activate simultaneusly. The most common way is to computed the
+Pearson's correlation between the fMRI time series at each spatial location.
+While we have no idea what this means, people uses it. 
+
+%\cite{Power2012} use Graph analysis and subgraph detection techniques in order
+%to characterize functional subnetworks in the connectivity graph. 
+Yeo et al. [CITE] 
+Data from 1,000 subjects were registered using surface-based alignment.
+The connectivity fingerprints were modeled with a von Mises-Fisher distribution,
+then, the data points were randomly assigned to different groups and then
+iteratively reassigning the group memberships of points to maximize the
+agreement of connectivity profiles among points of the same group. The results
+yield a 7 parcels and 17 parcels network.
+
+The Cortical Area Parcellation from Resting-State Correlations dataset consists
+of 333 cortical patches segmented using resting-state fMRI (Gordon 2014).
+
+By applying different clustering algorithms to this matrix, we
 obtain different parcellations. We can use ward clustering [cites from Thirion];
 k-means clustering [cites from thirion]; spectral clustering [cites from thirion],
 and principal component analysis (PCA) [cites from thirion]. There are also
 local gradient approaches, that detect abrupt transitions in functional
-connectivity patterns \cite{Wig2014, Schaefer2017}.
+connectivity patterns \cite{Wig2014, Schaefer2017}. 
+Based on the work by Thomas Yeo et al. [CITE], Schaefer et al.  \cite{Schaefer2017}
+add further refinement by subparcellating the global networks based on a local
+gradient approach. Parcellations come in several version, breaking down the cortex
+into up to 1000 regions based on rs-fMRI.
 
-add this one \cite{Craddock2011}.
-
-add https://www.sciencedirect.com/science/article/pii/S1053811913002668.
-
-Good review in:
-https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
-
-https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
-
-\subsection{EEG}
-No idea... i have to read it.
-https://www.sciencedirect.com/science/article/pii/S1053811917307474
-
-\section{Brain Networks}
-Vinod, brain as a system
-The lobes and subcortical structures do not function in isolation, in fact they are heavily connected through the fibre bundles which compose the white matter.
-
-[VINOD]
-In his view, the human brain contains at least five major core functional networks: (i) a spatial attention network anchored in posterior parietal cortex and frontal eye fields;
-(ii) a language network anchored in Wernicke’s and Broca’s areas; (iii) an explicit memory network anchored in the hippocampal–entorhinal complex and inferior parietal cor- tex; (iv) a face-object recognition network anchored in
-midtemporal and temporopolar cortices; and (v) a working memory-executive function network anchored in prefron- tal and inferior parietal cortices. 
+Presents a multigraph K-way clustering method and applies it to obtain 
+parcellations of 50, 100, 150... maybe put in the same bag as the rest \cite{Shen2013}.
 
 
-Gael (which fmri clustering... in mendeley)
-https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full
+A fine-grained parcellations ranging form 200 to 1000 parcellations,
+using spectral clustering on rs-fMRI connectivity matrix \cite{Craddock2011}.
 
-\section{Semantic}
-Semantic parcellations try to map semantic processing to the cortex.
-In this maps, a region of the brain is ligated to a specific 'definition?/semantic'.
+Thomas Blumensath et al. makes a thousand small functionally homogeneous regions,
+and then apply hierarchical clustering to obtain the rest of the parcellations \cite{Blumensath2013}.
 
-https://www.nature.com/articles/nature17637
-% Mendeley \cite{Glover2011}
-Where Is the Semantic System? A Critical Review and Meta-Analysis of 120 Functional Neuroimaging Studies
-% In mendeley also
+Huth et al. atlas \cite{Huth2016} maps semantic selectivity across the cortex
+by using voxel-wise modelling of functional MRI (fMRI) data collected while 
+subjects listened to hours of narrative stories. This creates a map where each
+region is ligated to a specific systematically map semantic domain. In this
+maps, a region of the brain is ligated to a specific semantic domain, i.e.
+violent, temporal, proffesional \cite{Huth2016}.
+
+While we dont do EEG, you can review it here \cite{Shen2013}.
+
+%Good review in:
+%https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
+%https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
+
 
 \section{Structural Connectivity}
 In a structural parcellation, regions have a homogeneous pattern of connectivity
@@ -196,6 +212,9 @@ Michel Thiebaut.
 Parisot. 
 https://arxiv.org/abs/1610.03809
 
+(O'Muircheartaigh and Jbabdi, 2017) is entirely data-driven (based on independent component analysis) and allows one to obtain sets of white matter components with their associated gray matter networks \cite{Muircheartaigh2018}
+
+
 \section{Multimodal}
 Finally, more and more people is doing this. Maybe a precursor of this is
 anatomy+cytoarchitecture. But here we talk about really different modalities,
@@ -203,6 +222,8 @@ as T1+T2+fMRI+goodknowswhat. We present at least two. I'm sure there are more.
 Parisot.
 Van Essen.
 Braintome\cite{Fan2016}
+Structural+Functional correlation and then hierarchical clustering\cite{Diez2014}
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5054943/pdf/CNE-524-3127.pdf
 ...?
 
 \section{Discussion}
@@ -210,9 +231,9 @@ The brain atlas concordance problem: quantitative comparison of anatomical parce
 
 Here we name them, some people profile them:
 
-https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full % \cite{Thirion2014}
-Chris (the guy from stanford, that we met in many conferences) 
-
+Thirion did it for functional https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full % \cite{Thirion2014}
+Arslan did it for functional \cite{Arslan2018}
+Chris (the guy from stanford, that we met in many conferences) Gorgolewski KJ, Tambini A, Durnez J et al. Evaluation of full brain parcellation schemes using the NeuroVault database of statistical maps [version 1; not peer reviewed]. F1000Research 2017, 6:1986 (poster) (doi: 10.7490/f1000research.1115065.1) 
 There's not such a thing as a unique brain parcellation. While we cannot say
 that it doesn't exist. We know that all of our techniques have a limitation,
 either in resolution, SNR. At the same time, we cannot study things at the
