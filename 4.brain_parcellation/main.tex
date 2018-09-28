@@ -79,6 +79,8 @@ into account informationas: curvature and average convexity of the cortica
 surface, prior labeling probability for that vertex, as well as the labels
 of vertices in a local neighborhood.
 
+add MarsAtlas
+
 https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
 
 
@@ -152,6 +154,9 @@ which systems activate simultaneusly. The most common way is to computed the
 Pearson's correlation between the fMRI time series at each spatial location.
 While we have no idea what this means, people uses it. 
 
+PNAS of 2004 \cite{Johansen-Berg2004}
+
+
 %\cite{Power2012} use Graph analysis and subgraph detection techniques in order
 %to characterize functional subnetworks in the connectivity graph. 
 Yeo et al. [CITE] 
@@ -195,6 +200,8 @@ violent, temporal, proffesional \cite{Huth2016}.
 
 While we dont do EEG, you can review it here \cite{Shen2013}.
 
+add \cite{Ryali2013} https://www.ncbi.nlm.nih.gov/pubmed/23041530
+
 %Good review in:
 %https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
 %https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
@@ -202,38 +209,56 @@ While we dont do EEG, you can review it here \cite{Shen2013}.
 
 \section{Structural Connectivity}
 In a structural parcellation, regions have a homogeneous pattern of connectivity
-with the rest of the brain. The first maps come from tracers in monkey. The new
-ones come from tractography. Yeah, we know that tractography is not perfect,
-but we cannot torture any more monkeys. We name all of the principal players.
-Gallardo.
-Moreno-Dominguez.
-Alfred Awander PCA.
-Michel Thiebaut.
-Parisot. 
-https://arxiv.org/abs/1610.03809
+with the rest of the brain. This is, a region is defined as: 'all of the points
+inside are connected to some other ROIs in a similar way'. The granularity
+of the ROIs can go from coarse brain regions, defined by other atlas, to voxels.
+The first connectivity divisions came form tracers in monkey PANDIAS. Diffusion
+MRI (dMRI) enables the in vivo exploration of extrinsic connectivity on the
+human brain. As with fMRI, the most common way to generate a parcellation is
+to compute a connectivity matrix, and then parcellate it using some clustering
+technique. Given the difficulty of handling huge connectivity matrices, initial
+techniques used to divide only portions of the brain.
 
+Behrens et al.\cite{Behrens2003} thalamus Hard segmentation was performed by classifying the seed voxel as connecting to the cortical mask with the highest con- nection probability.
+Alfred Anwander performs k-means\cite{Anwander2006} in the connectivity matrix of Broca's area.
+Thiebaut de Schotten et al. divide the occipital cortex\cite{ThiebautdeSchotten2014}, frontal lobe \cite{ThiebautdeSchotten2016}
+Moreno-Dominguez et al. use a constrained hierarchical clustering to parcellate a structural matrix \cite{Moreno-Dominguez2014}
+Gallardo buils on top of this.
+They use spectral reordering to study the organization of the temporal lobe \cite{Bajada2017}
 (O'Muircheartaigh and Jbabdi, 2017) is entirely data-driven (based on independent component analysis) and allows one to obtain sets of white matter components with their associated gray matter networks \cite{Muircheartaigh2018}
 
 
-\section{Multimodal}
-Finally, more and more people is doing this. Maybe a precursor of this is
-anatomy+cytoarchitecture. But here we talk about really different modalities,
-as T1+T2+fMRI+goodknowswhat. We present at least two. I'm sure there are more.
-Parisot.
-Van Essen.
+Previous single-subject structural parcelling techniques work by refining other
+parcellations~\cite{Clarkson2010};parcelling only part of the
+cortex~\cite{Lefranc2016, Roca2009, ThiebautdeSchotten2014, ThiebautdeSchotten2016},
+perform a groupwise parcellation after constructing an average connectivity profile~\cite{Clarkson2010, Roca2010},
+
+Parisot uses ideas from cosegmentation and spectral decomposition to create consistent groupwise parcellations \cite{Paristot2015}.
+
+
+\section{Multi-modal}
+So far, all the presented methodologies were solely on one technique. In
+multi-modal parcellations, the goal is to mix two or more 
+Parisot \cite{Parisot2017}.
+Based on function, Van Essen \cite{Glasser2016}.
 Braintome\cite{Fan2016}
 Structural+Functional correlation and then hierarchical clustering\cite{Diez2014}
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5054943/pdf/CNE-524-3127.pdf
-...?
+
 
 \section{Discussion}
 The brain atlas concordance problem: quantitative comparison of anatomical parcellations.
 
 Here we name them, some people profile them:
 
-Thirion did it for functional https://www.frontiersin.org/articles/10.3389/fnins.2014.00167/full % \cite{Thirion2014}
+Thirion did it for functionali \cite{Thirion2014}
 Arslan did it for functional \cite{Arslan2018}
-Chris (the guy from stanford, that we met in many conferences) Gorgolewski KJ, Tambini A, Durnez J et al. Evaluation of full brain parcellation schemes using the NeuroVault database of statistical maps [version 1; not peer reviewed]. F1000Research 2017, 6:1986 (poster) (doi: 10.7490/f1000research.1115065.1) 
+Gorgolewski KJ, Tambini A, Durnez J et al. Evaluation of full brain parcellation schemes using the NeuroVault database of statistical maps [version 1; not peer reviewed]. F1000Research 2017, 6:1986 (poster) (doi: 10.7490/f1000research.1115065.1) 
+
+Some other reviews: Jbabdi \cite{Jbabdi2013}, \cite{Arslan2018}, 
+
+Gatherings: http://www.lead-dbs.org/helpsupport/knowledge-base/atlasesresources/cortical-atlas-parcellations-mni-space
+
+
 There's not such a thing as a unique brain parcellation. While we cannot say
 that it doesn't exist. We know that all of our techniques have a limitation,
 either in resolution, SNR. At the same time, we cannot study things at the
@@ -244,6 +269,8 @@ same machine (fmri, dmri, etc), changing the hypothesis will change the
 resulting parcellation. For example, in structural gradient vs structural
 parcel. The important thing is to be able to select the right parcellation
 for the right study.
+
+The important thing is to validate it correctly, some people do, like \cite{Gallardo}, \cite{Auzias2016}, \cite{ThiebautdeSchotten2014, ThiebautdeSchotten2016}
 
 \section{Resume of all of the parcellations presented}
 Here I put a beautiful table resuming everything.
