@@ -126,7 +126,7 @@ an area.
 
 
 \section{Functional}
-Functional parcellations of the brain denotes how different human functions 
+Functional parcellations of the brain denote how different human functions 
 are localized in the brain. This is, each region is in charge of a specific
 function (i.e. movement, speach, vision), or is part of a greater system with
 a specific functional or cognitive goal. The first functional maps where derived
@@ -222,6 +222,8 @@ techniques used to divide only portions of the brain.
 Behrens et al.\cite{Behrens2003} thalamus Hard segmentation was performed by classifying the seed voxel as connecting to the cortical mask with the highest con- nection probability.
 Alfred Anwander performs k-means\cite{Anwander2006} in the connectivity matrix of Broca's area.
 Thiebaut de Schotten et al. divide the occipital cortex\cite{ThiebautdeSchotten2014}, frontal lobe \cite{ThiebautdeSchotten2016}
+
+Braintome\cite{Fan2016} starting from Desikan, they subdivide each region based on tractography.
 Moreno-Dominguez et al. use a constrained hierarchical clustering to parcellate a structural matrix \cite{Moreno-Dominguez2014}
 Gallardo buils on top of this.
 They use spectral reordering to study the organization of the temporal lobe \cite{Bajada2017}
@@ -237,16 +239,15 @@ Parisot uses ideas from cosegmentation and spectral decomposition to create cons
 
 
 \section{Multi-modal}
-So far, all the presented methodologies were solely on one technique. In
-multi-modal parcellations, the goal is to mix two or more 
-Parisot \cite{Parisot2017}.
-Based on function, Van Essen \cite{Glasser2016}.
-Braintome\cite{Fan2016}
-Structural+Functional correlation and then hierarchical clustering\cite{Diez2014}
-
+So far, all the presented methodologies were solely on one technique. In multi-modal parcellations, the goal is to mix two or more.
+The multi-modal parcellations are, by construction, maximizing the consistency between modalities. For example,
+Diez et al. \cite{Diez2014} proceed by computing common structure-function modules (SFMs). They start by computing both a resting state and a structural connectivity matrix. Then, they find the subdivision that maximizes a cross-modularity index, that, when high, indicates that, using a given common partition, both matrices are highly modular and, at the same time, the moduli are internally wired in a similar way.
+Parisot et al. \cite{Parisot2017} compute a set of parcellations from different modalities and fuse them based on their local reliabilities. The fused parcellation is used to initialise the next iteration, forcing the parcellations to converge towards a set of mutually informed modality specific parcellations.
+Glasser et al. \cite{Glasser2016}. Architecture was measured using T1w/T2w myelin content maps plus cortical thickness maps with surface curvature regressed out5,9,10 (Supplementary Methods 1.5). Function was measured using task-fMRI responses to 7 tasks in 86 task contrasts (47 unique; 39 were sign-reversed contrasts). Effect size maps (beta maps) after correction for the receive field were used instead of Z statistic maps because we were interested in regional differences in the magnitude of the BOLD (blood oxygen level dependent) signal change induced by the tasks, rather than differences in the significance of the BOLD signal change. Neuroanatomist defined initial border areas in a semi-automated way using group average data for all of these modalities, then an automated algorithm optimized the border placement, based on areal features of each subject.
 
 \section{Discussion}
-The brain atlas concordance problem: quantitative comparison of anatomical parcellations.
+The brain atlas concordance problem: quantitative comparison of anatomical parcellations \cite{Bohland2009}.
+
 
 Here we name them, some people profile them:
 
