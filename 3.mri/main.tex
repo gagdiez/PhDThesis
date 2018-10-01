@@ -36,16 +36,14 @@ proposed a method based on gradient magnetic fields to reconstruct two dimension
 MR images~\cite{Lauterbur1973}, which with improvements of Peter
 Mansfield~\cite{Mansfield1977} lead to the development of modern MRI. In 2003,
 Lauterbur and Mansfield jointly received the Nobel Prize in Physiology and
-Medicine. 
+Medicine.
 
 In this section, we start by introducing the basic physic concepts necessary to
 understand how MRI works.
 
 \subsection{Nuclear Magnetism}
 
-Atoms are made of electrons, protons and neutrons. Electrons hold a negative
-charge and rotate around a nucleus. The nucleus is composed of protons (charged
-positively) and neurons (not charged). Atomic nucleus with a different number of
+Atomic nucleus with a different number of
 neutrons and protons are said to possess a non-zero spin, which is an intrinsic
 form of angular momentum. While there's not an actual movement, this spin can be
 interpreted as the particle spinning around its own axis~\cite{SEGALA1993},
@@ -59,8 +57,7 @@ induces what is known as a nuclear magnetic moment (Fig. \ref{fig:spin} A).
              magnetic field, the spin of the nucleus align to its direction and
              start to precess around it. (C) On a closer look, the spins are
              not exactly aligned to the magnetic field, but are precessing around
-             it. (D) Increasing the magnetic field moves the precessing towards
-             the transversal plane.}
+             it.}
     \label{fig:spin}
 \end{figure} 
 
@@ -85,27 +82,20 @@ magnetic field. $\mu$ can be decomposed in the multiplication between:
 $\gamma$, which is the gyromagnetic ratio of the atom, an intrinsic physical
 property of each atom; and $\vec{J}$, the angular momentum of the nucleus.
 
-%\begin{figure*}[h!]
-%\begin{minipage}[b]{0.49\textwidth}
-%    \includegraphics[width=\textwidth]{3.mri/img/grad0.png}
-%    \caption{\small  When protons a set of protons is placed inside an uniform magnetic field, they will all start to precess at the same velocity.}
-%     \label{fig:unif}
-%\end{minipage} ~
-%\hfill
-%\begin{minipage}[b]{0.49\textwidth}
-%    \includegraphics[width=\textwidth]{3.mri/img/grad1.png}
-%    \caption{\small If a linear gradient magnetic field is applied, the velocity at which the protons precess will variate in a predictable way.}
-%    \label{fig:grad}
-%\end{minipage} ~
-%
-%\end{figure*}
+\begin{figure}[h]
+    \includegraphics[width=0.49\textwidth, height=250px]{missing}
+    \caption{(A) The higher the strength of the magnetic field, the bigger the angle
+             between the nucleus spin and the magnetic field will be. (B) If the
+             magnetic field ceases, the spin will return to its initial angle
+             of precession. (C) Different elements relax in different ways.}
+    \label{fig:relaxation}\end{figure} 
 
 The angle at which the proton precess respect of the magnetic field depends on
 the amount of energy of the magnetic field. By increasing the energy of the
 magnetic field, its possible to 'excite' the nucleus, moving the precessing towards
-the plane transversal to the magnetic field (Fig. \ref{fig:exitation_relax} A).
+the plane transversal to the magnetic field (Fig. \ref{fig:relaxation} A).
 Once the external magnetic field goes off, the nucleus starts to 'relax'
-(Fig. \ref{fig:exitation_relax} B), and the precessing begins to move once
+(Fig. \ref{fig:relaxation} B), and the precessing begins to move once
 again parallel to the magnetic field. An important remark is that the relaxation
 does not decrease the precessing angle linearly. This is because the relaxation
 process represents a redistribution of the energy within the system. The energy that
@@ -117,69 +107,57 @@ that how the relaxation happens is governed by the composition of the nucleus
 itself, and the chemical composition of its environment.
 
 The organs in the human body are composed by different types of tissue, each
-with its own chemical composition. 
+with its own chemical composition. If we subject a human body to the effects
+of excitation and relaxation by means of a magnetic field, and place a coil
+in the transversal plane, we should be able to measure different relaxation
+signals for different types of tissue. The problem is, that the amount of 
+energy necessary to create a detectable precession would surely kill a human.
+Another way to increment the energy of the system is needed, and for this is 
+that the concept of Resonance is used.
 
+\subsection{Nuclear Magnetic Resonance}
+Resonance is a physical phenomenon in which a system or external force drives
+another system to oscillate with greater amplitude at specific frequencies.
+In our case, we are interested in introducing more energy into the human body.
+Knowing that hydrogen atoms ($^1 H$) are widely present in the body, we can
+compute their Larmor frequency (Eq. \ref{eq:larmor}), and produce energy at
+that frequency. Then, by resonance, the energy will be injected into the system. 
 
-Since different atoms possess different
-gyromagnetic ratio, following the Larmor equation (eq. \ref{eq:larmor}), each
-type of tissue will generate a different magnetic moment, and therefore,
-a different relaxation time.
+\subsection{Nuclear Magnetic Resonance Imaging}
 
+A MR scanner is a machine able to create strong magnetic fields and radio
+frequency pulses in different frequencies. Particularly, while functioning
+a MR is constantly emitting an homogeneous magnetic field referred as $B_0$
+(Fig. \ref{fig:unif}). If we use a coil in the plane transversal to the 
+magnetic field, we will be able to measure a signal coming from the different
+tissues in the body. However, this measure comes from a mixture of different
+tissues. In what we are interested is in measure the signal in different points
+on the body, in order to compare them after. The problem of disentangle the 
+different contributions of each tissue is addressed by means of slice selection. 
 
-If we place a coil in the transversal plane to measure the voltage generated
-by the magnetic moment of the nucleus during relaxation, we will measure
-a oscillating signal that decreases amplitude. Since different 
+\begin{figure*}[h]
+    \includegraphics[width=\textwidth]{missing}
+    \caption{When protons a set of protons is placed inside an uniform magnetic field, they will all start to precess at the same velocity.}
+     \label{fig:unif}
+\end{figure*}
 
-\begin{figure}[h]
-    \includegraphics[width=0.49\textwidth, height=150px]{missing}
-    \caption{(A)The higher the strength of the magnetic field, the bigger the angle
-             between the nucleus spin and the magnetic field will be. (B) If the
-             magnetic field ceases, the spin will return to its initial angle of precession.}
-    \label{fig:spin}
-\end{figure} 
+Slice selection makes use of a gradient magnetic field. A gradient is a magnetic
+field which strength varies linearly along a specific direction. Following the
+Larmor equation (eq. \ref{eq:larmor}) we can predict that, nucleus along the
+gradient will change their spin frequency in a predictable way. Particularly,
+applying a gradient $G_z$ in a specific direction $\hat z$ (Fig \ref{fig:grad}),
+will induce an frequency to the nucleus in position $z \hat z$ of:
 
-An important aspect for MRI is the fact that different types of tissue relax in
-different ways~\cite{Reichson1971}. 
+$$\omega(z) = B_z(z) g.$$
 
-The organs in the human body are composed by different types of tissue, each
-with its own chemical composition. Since different atoms possess different
-gyromagnetic ratio, following the Larmor equation (eq. \ref{eq:larmor}), each
-type of tissue will generate a different magnetic moment, and therefore,
-a different relaxation time.
-This means that if a person is placed inside of a magnetic field, different parts of the body will generate different magnetic moments.
-By placing a coil in the transversal plane, we could compare the different signals obtained.
-The problem is, that the amount of energy necessary to create a detectable precession would surely kill a human.
-Another way to increment the energy of the system is needed, and for this is that the concept of Resonance is used.
-Resonance is a phenomenon in which a system or external force drives another system to oscillate with greater amplitude at specific frequencies.
-In our case, we can generate external energy in the Larmor frecuency of water (most important component), and the effect of Resonance will inject energy in the system.
-
-voltage being measured in the transversal plane starts to evanescence.
-This is because the system starts to lose energy, and therefore, the angle between $\mu$ and $B$ decreases.
-This process is named relaxation.
-
- In this way, by placing
-a coil in the transversal plane, we could measure the voltage generated by the
-magnetic moment ($|\mu|$) (Fig. \ref{fig:signal}).
-
-
-
-\subsection{Magnetic Resonance Imaging Scanner}
-
-A MR scanner is a machine able to create strong magnetic fields and radio frequency pulses in different frequencies.
-Particularly, while functioning a MR is constantly emiting an homogeneus magnetic field refered as $B_0$ (Fig. \ref{fig:unif}).
-In order to obtain the relaxation time of a particular point in the body it uses gradient magnetic fields.
-A gradient is a magnetic field which strenght varies linearly along a specific direction.
-When a gradient is applied, all the protons along its direction vary their Larmor frequency in a predictable way.
-By applying a gradient $G_z$ in the $z$ direction (Fig \ref{fig:grad}), the angular velocity of a proton respect to its position will be:
-
-$$\omega(z) = B_z(z) g$$.
-
-This ensures us that if we apply a radio frequency (RF) pulse with a frequency of $B_z(z_o) g$, only the protons in the position $z_0$ will resonate.
-Therefore, the signal obtained by the coil will only correspond to the protons in the slice at position $z_0$.
-It's important to state that, because of hardware limitations, it's imposible to generate a RF pulse in an exact frequency.
-What actually happens is that the pulse is generated for a small slice of frequencies, meaning that the protons in a small band around $z_0$ will also resonate (Fig. X).
-This process is known as slice selection.
-
+Then if a radio frequency (RF) pulse with a frequency of $B_z(z_o) g$ is generated,
+only the protons in the position $z_0$ will start to resonate. Therefore, the
+signal obtained by the transversal coil will only correspond to the protons in
+the slice at position $z_0 \hat z $. It's important to state that, because of
+hardware limitations, it's impossible to generate a RF pulse in an exact frequency.
+What actually happens is that the pulse is generated for a small slice of
+frequencies, meaning that the protons in a small band around $z_0$ will also
+resonate (Fig. X).
 
 Once the desired slice is selected, we still need to apply two more gradients in order to recover the intensities at each point of the slide.
 So far, all of the protons inside of the slice are precessing in the same way.
