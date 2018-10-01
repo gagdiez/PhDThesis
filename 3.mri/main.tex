@@ -1,6 +1,7 @@
 \chapter{Introduction to Magnetic Resonance Imaging}
 \label{ch:intro_mri}
 
+
 \section{Overview}
 In order to infer connections running through the white-matter, or functional
 specialization in the grey-matter, neuroscientist have long relay in postmortem
@@ -19,56 +20,132 @@ is strongly based on the book Diffusion MRI~ \cite{Basser2009} and in the
 lessons of Dr. Michael L. Lipton~\cite{Lipton2014} available online. We refer
 the read to them in order to deepen on the subjects.
 
-
 \section{Magnetic Resonance Imaging}
 
-Magnetic Resonance Imaging (MRI) has its origins in 1946, when simultaneously Felix
+Magnetic Resonance Imaging (MRI) is the biggest advances in medicine of the
+last 50 years. It allows to study not only the brain, but also other internal
+organs, with an unprecedented level of resolution, and in vivo. 
+
+MRI has its origins in 1946, when simultaneously Felix
 Bloch~\cite{Bloch1946} and Edward M. Purcell~\cite{Purcell1946} formalized
 Nuclear Magnetic Resonance (NMR), work for which they would later receive the
 Nobel Prize in Physics. NMR use in medicine became promising after
 Raymond Damadian showed in 1971 that NMR could be use to differentiate healthy
-tissue from tumors~\cite{Reichson1971}. Sonn after, in 1973, Paul Lauterbur 
+tissue from tumors~\cite{Reichson1971}. Soon after, in 1973, Paul Lauterbur 
 proposed a method based on gradient magnetic fields to reconstruct two dimensional
 MR images~\cite{Lauterbur1973}, which with improvements of Peter
 Mansfield~\cite{Mansfield1977} lead to the development of modern MRI. In 2003,
 Lauterbur and Mansfield jointly received the Nobel Prize in Physiology and
 Medicine. 
 
-MRI is the biggest advances in medicine of the last 50 years. It allowed to
-study not only the brain, but also other internal organs, with an unprecedented
-level of resolution, and in vivo. In this section, we start by introducing the
-necessary physic concepts, to move after to a deeper understating of how MRI
-works.
+In this section, we start by introducing the basic physic concepts necessary to
+understand how MRI works.
 
 \subsection{Nuclear Magnetism}
-Atomic nucleus is.
-Atomic nucleus with a different number of neutrons and protons possess a non-zero spin, which is an intrinsic form of angular momentum.
-While there's not an actual movement, the spin can be interpreted as the particle spinning around its own axis~\cite{SEGALA1993}, since the spin behaves exactly like that.
-The nuclear magnetic moment is the magnetic moment of an atomic nucleus and arises from the spin of the protons and neutrons.
-If an atomic nucleus is placed inside of an external magnetic field, the spin of its protons will align with the direction of the field.
-However, because of the spin angular momentum, the proton is forced out of the perfect alignment with the magnetic field, and starts to precess around the direction of the magnetic field, with some frequency and some angle (fig. X).
-The frecuency with wich the proton precess around the magnetid field is known as the Larmor frequency [REF], as is expressed as:
+
+Atoms are made of electrons, protons and neutrons. Electrons hold a negative
+charge and rotate around a nucleus. The nucleus is composed of protons (charged
+positively) and neurons (not charged). Atomic nucleus with a different number of
+neutrons and protons are said to possess a non-zero spin, which is an intrinsic
+form of angular momentum. While there's not an actual movement, this spin can be
+interpreted as the particle spinning around its own axis~\cite{SEGALA1993},
+since the spin behaves exactly like that. This "movement" of charges in the nucleus,
+induces what is known as a nuclear magnetic moment (Fig. \ref{fig:spin} A).
+
+\begin{figure}[h]
+    \includegraphics[width=0.49\textwidth, height=150px]{missing}
+    \caption{(A) When an atomic nucleus rests under no constraints, it spins along a
+             random direction. (B) However, when it's put under the effect of a
+             magnetic field, the spin of the nucleus align to its direction and
+             start to precess around it. (C) On a closer look, the spins are
+             not exactly aligned to the magnetic field, but are precessing around
+             it. (D) Increasing the magnetic field moves the precessing towards
+             the transversal plane.}
+    \label{fig:spin}
+\end{figure} 
+
+If an atomic nucleus is placed inside of an external magnetic field, the spin
+of its protons will align with the direction of the field (Fig. \ref{fig:spin}) B).
+While the spins could align either parallel or anti-parallel to the gradient,
+the laws of thermodynamics ensure that a bigger number of spins will align
+in the parallel direction. At the same time, the fact that the nucleus is spinning,
+forces the spin to break from a perfect parallel alignment, and make the spin
+precess around the magnetic field (Fig. \ref{fig:spin} C).
+
+The frequency with which the proton precess around the magnetic field is known 
+as the Larmor frequency~\cite{Larmor1897}, and is expressed as:
 
 \begin{equation}
     \label{eq:larmor}
-    \omega = \vec{\mu} \times \vec{B} = \gamma \vec{J} \times B.
+    \omega = \vec{\mu} \times \vec{B} = \gamma \vec{J} \times \vec{B}.
 \end{equation}
 
-where $\vec{\mu}$ is the magnetic moment of the proton;
-$\gamma$ is the gyromagnetic ratio of the proton;
-$\vec{J}$ is its angular momentum and $B$ is the gradient strenght.
+where $\vec{\mu}$ is the magnetic moment of the nucleus; and $B$ is the
+magnetic field. $\mu$ can be decomposed in the multiplication between:
+$\gamma$, which is the gyromagnetic ratio of the atom, an intrinsic physical
+property of each atom; and $\vec{J}$, the angular momentum of the nucleus.
 
-The angle at which the proton precess respect of the magnetic field depends on the amount of energy of the magnetic field.
-To more energy, more angle.
-This means that, given enough energy, its possible to orientate the precessing in the direction transversal to the magnetical field.
-By placing a coil in the transversal plane, we can measure the voltage generated by the magnetic moment ($|\mu|$) (Fig. \ref{fig:signal}).
-If the external magnetic field goes off, the voltage being measured in the transversal plane starts to evanescence.
-This is because the system starts to lose energy, and therefore, the angle between $\mu$ and $B$ decreases.
-This process is named relaxation.
+%\begin{figure*}[h!]
+%\begin{minipage}[b]{0.49\textwidth}
+%    \includegraphics[width=\textwidth]{3.mri/img/grad0.png}
+%    \caption{\small  When protons a set of protons is placed inside an uniform magnetic field, they will all start to precess at the same velocity.}
+%     \label{fig:unif}
+%\end{minipage} ~
+%\hfill
+%\begin{minipage}[b]{0.49\textwidth}
+%    \includegraphics[width=\textwidth]{3.mri/img/grad1.png}
+%    \caption{\small If a linear gradient magnetic field is applied, the velocity at which the protons precess will variate in a predictable way.}
+%    \label{fig:grad}
+%\end{minipage} ~
+%
+%\end{figure*}
+
+The angle at which the proton precess respect of the magnetic field depends on
+the amount of energy of the magnetic field. By increasing the energy of the
+magnetic field, its possible to 'excite' the nucleus, moving the precessing towards
+the plane transversal to the magnetic field (Fig. \ref{fig:exitation_relax} A).
+Once the external magnetic field goes off, the nucleus starts to 'relax'
+(Fig. \ref{fig:exitation_relax} B), and the precessing begins to move once
+again parallel to the magnetic field. An important remark is that the relaxation
+does not decrease the precessing angle linearly. This is because the relaxation
+process represents a redistribution of the energy within the system. The energy that
+the system won during excitation, has to go somewhere else in order for the
+spin to go back to its initial state. In particular, spins lose energy by 
+giving it to other non excited spin of the same kind (spin-spin interaction),
+or by giving it to surrounding elements (spin-lattice interaction). This means
+that how the relaxation happens is governed by the composition of the nucleus
+itself, and the chemical composition of its environment.
+
+The organs in the human body are composed by different types of tissue, each
+with its own chemical composition. 
 
 
-The human body is composed by different types of tissue, each with its own chemical composition.
-Since different molecules possess different gyromagnetic ratio, each type of tissue will generate a different magnetic moment (eq. \ref{eq:larmor}), and therefore, a different relaxation time.
+Since different atoms possess different
+gyromagnetic ratio, following the Larmor equation (eq. \ref{eq:larmor}), each
+type of tissue will generate a different magnetic moment, and therefore,
+a different relaxation time.
+
+
+If we place a coil in the transversal plane to measure the voltage generated
+by the magnetic moment of the nucleus during relaxation, we will measure
+a oscillating signal that decreases amplitude. Since different 
+
+\begin{figure}[h]
+    \includegraphics[width=0.49\textwidth, height=150px]{missing}
+    \caption{(A)The higher the strength of the magnetic field, the bigger the angle
+             between the nucleus spin and the magnetic field will be. (B) If the
+             magnetic field ceases, the spin will return to its initial angle of precession.}
+    \label{fig:spin}
+\end{figure} 
+
+An important aspect for MRI is the fact that different types of tissue relax in
+different ways~\cite{Reichson1971}. 
+
+The organs in the human body are composed by different types of tissue, each
+with its own chemical composition. Since different atoms possess different
+gyromagnetic ratio, following the Larmor equation (eq. \ref{eq:larmor}), each
+type of tissue will generate a different magnetic moment, and therefore,
+a different relaxation time.
 This means that if a person is placed inside of a magnetic field, different parts of the body will generate different magnetic moments.
 By placing a coil in the transversal plane, we could compare the different signals obtained.
 The problem is, that the amount of energy necessary to create a detectable precession would surely kill a human.
@@ -76,21 +153,15 @@ Another way to increment the energy of the system is needed, and for this is tha
 Resonance is a phenomenon in which a system or external force drives another system to oscillate with greater amplitude at specific frequencies.
 In our case, we can generate external energy in the Larmor frecuency of water (most important component), and the effect of Resonance will inject energy in the system.
 
-\begin{figure*}[h!]
+voltage being measured in the transversal plane starts to evanescence.
+This is because the system starts to lose energy, and therefore, the angle between $\mu$ and $B$ decreases.
+This process is named relaxation.
 
-\begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{3.mri/img/spin0.png}
-    \caption{Spin under a weak electromagnetic field. The precessing happens close to the magnetic fields direction and the coil does not detect it.}
-    \label{fig:nosignal}
-\end{minipage} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
-\hfill
-\begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{3.mri/img/spin1.png}
-    \caption{After increasing the electromagnetic field, the precessing starts to move to the transversal plane, and the coil detects it.}
-    \label{fig:signal}    
-\end{minipage} ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. %(or a blank line to force the subfigure onto a new line) 
+ In this way, by placing
+a coil in the transversal plane, we could measure the voltage generated by the
+magnetic moment ($|\mu|$) (Fig. \ref{fig:signal}).
 
-\end{figure*}
+
 
 \subsection{Magnetic Resonance Imaging Scanner}
 
@@ -109,20 +180,6 @@ It's important to state that, because of hardware limitations, it's imposible to
 What actually happens is that the pulse is generated for a small slice of frequencies, meaning that the protons in a small band around $z_0$ will also resonate (Fig. X).
 This process is known as slice selection.
 
-\begin{figure*}[h!]
-\begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{3.mri/img/grad0.png}
-    \caption{\small  When protons a set of protons is placed inside an uniform magnetic field, they will all start to precess at the same velocity.}
-     \label{fig:unif}
-\end{minipage} ~
-\hfill
-\begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{3.mri/img/grad1.png}
-    \caption{\small If a linear gradient magnetic field is applied, the velocity at which the protons precess will variate in a predictable way.}
-    \label{fig:grad}
-\end{minipage} ~
-
-\end{figure*}
 
 Once the desired slice is selected, we still need to apply two more gradients in order to recover the intensities at each point of the slide.
 So far, all of the protons inside of the slice are precessing in the same way.
