@@ -1,6 +1,5 @@
-\chapter{Introduction to Magnetic Resonance Imaging}
+\chapter{Introduction to Non-invasive Imaging Techniques}
 \label{ch:intro_mri}
-
 
 \section{Overview}
 In order to infer connections running through the white-matter, or functional
@@ -9,78 +8,88 @@ studies or invasive techniques. The advent of Magnetic Resonance Imaging (MRI)
 allowed for the first time to study brain structure in vivo in a non-invasive
 way. Further developments opened the possibility to quantify which regions
 activate during a certain task (or in the absence of), and to estimate gross
-axonal connectivity. In this chapter, we start by
-introducing some concepts in quantum physics and explain how they are
-applied on MRI to study the human brain. Then, we explain how modifying the
-acquisition sequences allows to study the physical process of diffusion,
-enabling to estimate the location of tracts in the white-matter. Finally, we
-make a brief introduction to how to detect brain activation in response to
-functional or cognitive tasks in the brain using Functional MRI. This chapter
-is strongly based on the book Diffusion MRI~ \cite{Basser2009} and in the 
-lessons of Dr. Michael L. Lipton~\cite{Lipton2014} available online. We refer
-the read to them in order to deepen on the subjects.
+axonal connectivity. In this chapter, we start by introducing some concepts in
+nuclear physics and explain how they are applied in MRI to study the human
+brain. Then, we explain how modifying the acquisition sequences allows to
+study the physical process of diffusion, enabling to estimate the location
+of tracts in the white-matter. Finally, we make a brief introduction to how to
+detect brain activation in response to functional or cognitive tasks in the
+brain using Functional MRI. This chapter is strongly based on the book
+Diffusion MRI~\cite{Basser2009}, the lessons of Dr. Michael L. 
+Lipton~\cite{Lipton2014} available online, and the review paper in fMRI of 
+Gary Glover~\cite{Glover2011}. We refer the read to them in order to deepen on
+the subjects.
 
-\section{Magnetic Resonance Imaging}
+\section{A Brief History on Brain Imaging}
 
-Magnetic Resonance Imaging (MRI) is the biggest advances in medicine of the
-last 50 years. It allows to study not only the brain, but also other internal
-organs, with an unprecedented level of resolution, and in vivo. 
+Magnetic Resonance Imaging (MRI) and its derivates are the biggest advances in
+medicine of the last 50 years. They allows to study not only the brain, but also
+other internal organs, with an unprecedented level of resolution, and in vivo. 
 
-MRI has its origins in 1946, when simultaneously Felix
-Bloch~\cite{Bloch1946} and Edward M. Purcell~\cite{Purcell1946} formalized
-Nuclear Magnetic Resonance (NMR), work for which they would later receive the
-Nobel Prize in Physics. NMR use in medicine became promising after
-Raymond Damadian showed in 1971 that NMR could be use to differentiate healthy
-tissue from tumors~\cite{Reichson1971}. Soon after, in 1973, Paul Lauterbur 
-proposed a method based on gradient magnetic fields to reconstruct two dimensional
-MR images~\cite{Lauterbur1973}, which with improvements of Peter
-Mansfield~\cite{Mansfield1977} lead to the development of modern MRI. In 2003,
-Lauterbur and Mansfield jointly received the Nobel Prize in Physiology and
-Medicine.
+MRI has its origins in 1946, when Felix Bloch~\cite{Bloch1946} and Edward M.
+Purcell~\cite{Purcell1946} simultaneously formalize Nuclear Magnetic Resonance
+(NMR), work for which they would later receive the Nobel Prize in Physics. Shortly
+after, in 1950, Hahn~\cite{Hahn1950} observes that the physical process of diffusion
+influences the signals measured using NMR. To quantify this influence,
+during 1965 Stejskal and Tanner~\cite{Stejskal1965} invent the Pulse Gradient
+Spin Echo sequence that allows to measure the amount of diffusion in a specific
+directions. A couple of years later, NMR use in medicine becomes promising after
+Raymond Damadian shows in 1971 that NMR could be use to differentiate healthy
+tissue from tumors~\cite{Reichson1971}. Soon after, in 1973, Paul Lauterbur
+proposes a method based on gradient magnetic fields to reconstruct two
+dimensional MR images~\cite{Lauterbur1973}, which with improvements of Peter
+Mansfield~\cite{Mansfield1977} lead to the development of modern MRI. In 1990,
+Ogawa et al.~\cite{Ogawa1993}, inspired by Pauling and Coryell's work~\cite{Pauling1936},
+shows that MRI can be modified to be sensitive to blood flow, and therefore,
+brain activity in rats. Three years later, Ogawa et al.\cite{Ogawa1990} present
+similar results in the human brain, producing the first fMRI acquisition. In
+1994 Basser et al. \cite{Basser1994} invent Diffusion Tensor Imaging (DTI), an
+efficient way to model diffusion in the brain, allowing to start tracking
+brain pathways. In 2003, Lauterbur and Mansfield jointly receive
+the Nobel Prize in Physiology and Medicine for their contributions in MRI.
 
-In this section, we start by introducing the basic physic concepts necessary to
-understand how MRI works.
-
-\subsection{Nuclear Magnetism}
-
-Atomic nucleus with a different number of
-neutrons and protons are said to possess a non-zero spin, which is an intrinsic
-form of angular momentum. While there's not an actual movement, this spin can be
-interpreted as the particle spinning around its own axis~\cite{SEGALA1993},
-since the spin behaves exactly like that. This "movement" of charges in the nucleus,
-induces what is known as a nuclear magnetic moment (Fig. \ref{fig:spin} A).
+In the following sections we will review on a deeper way all of the non-invasive
+techniques used in this thesis. We will put special emphasis in dMRI, since our
+main interest is brain connectivity. However, in order to explain diffusion MRI
+is necessary to explain MRI and the physics behind it: Nuclear Magnetism.
 
 \begin{figure}[h]
-    \includegraphics[width=0.49\textwidth, height=150px]{missing}
-    \caption{(A) When an atomic nucleus rests under no constraints, it spins along a
-             random direction. (B) However, when it's put under the effect of a
-             magnetic field, the spin of the nucleus align to its direction and
-             start to precess around it. (C) On a closer look, the spins are
-             not exactly aligned to the magnetic field, but are precessing around
-             it.}
-    \label{fig:spin}
+\includegraphics[width=0.49\textwidth, height=150px]{missing}
+\caption{(A) When an atomic nucleus rests under no constraints, it spins along a
+         random direction. (B) However, when it's put under the effect of a
+         magnetic field, the spin of the nucleus align to its direction and
+         start to precess around it.}
+\label{fig:spin}
 \end{figure} 
 
-If an atomic nucleus is placed inside of an external magnetic field, the spin
-of its protons will align with the direction of the field (Fig. \ref{fig:spin}) B).
-While the spins could align either parallel or anti-parallel to the gradient,
-the laws of thermodynamics ensure that a bigger number of spins will align
-in the parallel direction. At the same time, the fact that the nucleus is spinning,
-forces the spin to break from a perfect parallel alignment, and make the spin
-precess around the magnetic field (Fig. \ref{fig:spin} C).
+\section{Physics Background}
 
-The frequency with which the proton precess around the magnetic field is known 
+\subsection{Nuclear Magnetism}
+\label{sec:nm}
+Atomic nuclei with a different number of neutrons and protons are said to possess
+a non-zero spin, which is an intrinsic form of angular momentum. While there is
+not an actual movement, the nucleus spin can be interpreted as the particle 
+spinning around its own axis~\cite{SEGALA1993}, since it possess all the same
+physical properties. This "movement" of charges in the nucleus, induces what is
+known as a nuclear magnetic moment (Fig. \ref{fig:spin} A).
+
+When atomic nuclei are placed inside of an external magnetic field, their spin
+will align with the field's direction and start to precess around it (Fig. \ref{fig:spin}) B).
+While the spins could align either parallel or anti-parallel to the gradient, the
+laws of thermodynamics ensure that a bigger number of spins will do it in the 
+parallel direction.
+
+The frequency with which the spin precess around the magnetic field is known 
 as the Larmor frequency~\cite{Larmor1897}, and is expressed as:
 
 \begin{equation}
     \label{eq:larmor}
-    \omega = \vec{\mu} \times \vec{B} = \gamma \vec{J} \times \vec{B}.
+    \omega = \vec{\mu} \times \vec{B} = \gamma \vec{J} \times \vec{B},
 \end{equation}
 
-where $\vec{\mu}$ is the magnetic moment of the nucleus; and $B$ is the
-magnetic field. $\mu$ can be decomposed in the multiplication between:
-$\gamma$, which is the gyromagnetic ratio of the atom, an intrinsic physical
-property of each atom; and $\vec{J}$, the angular momentum of the nucleus.
+where $\vec{\mu}$ is the magnetic moment of the nucleus; $\vec B$ is the
+magnetic field; $\gamma$ is the gyromagnetic ratio of the atom, an intrinsic
+physical property of each atom; and $\vec{J}$ is the angular momentum of the nucleus.
 
 \begin{figure}[h]
     \includegraphics[width=0.49\textwidth, height=250px]{missing}
@@ -88,24 +97,31 @@ property of each atom; and $\vec{J}$, the angular momentum of the nucleus.
              between the nucleus spin and the magnetic field will be. (B) If the
              magnetic field ceases, the spin will return to its initial angle
              of precession. (C) Different elements relax in different ways.}
-    \label{fig:relaxation}\end{figure} 
+\label{fig:relaxation}
+\end{figure} 
 
-The angle at which the proton precess respect of the magnetic field depends on
-the amount of energy of the magnetic field. By increasing the energy of the
-magnetic field, its possible to 'excite' the nucleus, moving the precessing towards
-the plane transversal to the magnetic field (Fig. \ref{fig:relaxation} A).
-Once the external magnetic field goes off, the nucleus starts to 'relax'
-(Fig. \ref{fig:relaxation} B), and the precessing begins to move once
-again parallel to the magnetic field. An important remark is that the relaxation
-does not decrease the precessing angle linearly. This is because the relaxation
+The angle at which the spin precess respect of the magnetic field depends on
+the strength of the magnetic field. At higher strength, higher the angle at
+which the precessing happens.
+
+By increasing the energy of the magnetic field, its possible to 'excite' the
+nucleus, moving the precessing towards the plane transversal to the magnetic
+field (Fig. \ref{fig:relaxation} A). However, if the external magnetic field
+goes off, the nucleus will start to 'relax' (Fig. \ref{fig:relaxation} B), and
+the precessing will begin to move once again towards the direction of the
+magnetic field. An important remark is that the precessing angle does not
+decrease linearly during the relaxation. This is because the relaxation
 process represents a redistribution of the energy within the system. The energy that
 the system won during excitation, has to go somewhere else in order for the
 spin to go back to its initial state. In particular, spins lose energy by 
 giving it to other non excited spin of the same kind (spin-spin interaction),
 or by giving it to surrounding elements (spin-lattice interaction). This means
 that how the relaxation happens is governed by the composition of the nucleus
-itself, and the chemical composition of its environment.
+itself, and the chemical composition of its environment. This process was
+mathematically formalized by Bloch in what is known as the Bloch
+Equations~\cite{Bloch1946}.
 
+\subsection{Nuclear Magnetic Resonance}
 The organs in the human body are composed by different types of tissue, each
 with its own chemical composition. If we subject a human body to the effects
 of excitation and relaxation by means of a magnetic field, and place a coil
@@ -115,169 +131,215 @@ energy necessary to create a detectable precession would surely kill a human.
 Another way to increment the energy of the system is needed, and for this is 
 that the concept of Resonance is used.
 
-\subsection{Nuclear Magnetic Resonance}
 Resonance is a physical phenomenon in which a system or external force drives
 another system to oscillate with greater amplitude at specific frequencies.
 In our case, we are interested in introducing more energy into the human body.
 Knowing that hydrogen atoms ($^1 H$) are widely present in the body, we can
 compute their Larmor frequency (Eq. \ref{eq:larmor}), and produce energy at
-that frequency. Then, by resonance, the energy will be injected into the system. 
+that frequency. By resonance, the produced energy will be injected into the
+tissue.
 
-\subsection{Nuclear Magnetic Resonance Imaging}
+\section{Nuclear Magnetic Resonance Imaging}
 
-A MR scanner is a machine able to create strong magnetic fields and radio
-frequency pulses in different frequencies. Particularly, while functioning
-a MR is constantly emitting an homogeneous magnetic field referred as $B_0$
-(Fig. \ref{fig:unif}). If we use a coil in the plane transversal to the 
-magnetic field, we will be able to measure a signal coming from the different
-tissues in the body. However, this measure comes from a mixture of different
-tissues. In what we are interested is in measure the signal in different points
-on the body, in order to compare them after. The problem of disentangle the 
-different contributions of each tissue is addressed by means of slice selection. 
-
-\begin{figure*}[h]
-    \includegraphics[width=\textwidth]{missing}
-    \caption{When protons a set of protons is placed inside an uniform magnetic field, they will all start to precess at the same velocity.}
-     \label{fig:unif}
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth, height=150px]{missing}
+    \caption{Scheme of how a MRI works. (A) Only B0. (B) Process of gradient selection by
+             using gradient fields. (C) Now the slice is selected, a frequency
+             encoding gradient is applied to put off phase the spins at each
+             column (D) a phase encoding gradient is then turned on. (E) An
+             acquisition is done and written down in the k-space.}
+     \label{fig:mri}
 \end{figure*}
+
+Having covered the necessary physical notions, we are now ready to introduce
+MRI. A MR scanner is a machine able to create strong magnetic fields and radio
+frequency pulses in different frequencies. Particularly, while functioning
+a MR scanner is constantly emitting an homogeneous magnetic field referred as $\vec B_0$
+(Fig. \ref{fig:mri} A). If we place a coil in the plane transversal to $\vec B$,
+an emit a radio frequency pulse with at the frequency of hydrogen, we will be
+able to measure a signal coming from the body. This measure will represent the
+mixture of all the signals generated by different tissues. What we are interested
+in, is in separate the signal coming from different places on the body, in order
+to compare them after. A necessary first step to disentangle the different
+contributions of each tissue is to do slice selection. 
 
 Slice selection makes use of a gradient magnetic field. A gradient is a magnetic
 field which strength varies linearly along a specific direction. Following the
 Larmor equation (eq. \ref{eq:larmor}) we can predict that, nucleus along the
 gradient will change their spin frequency in a predictable way. Particularly,
-applying a gradient $G_z$ in a specific direction $\hat z$ (Fig \ref{fig:grad}),
-will induce an frequency to the nucleus in position $z \hat z$ of:
+applying a gradient $B(z) \hat z$ in a specific direction (Fig \ref{fig:mri} B),
+will induce an frequency to the nuclei with magnetic momentum $\vec \mu$ of:
 
-$$\omega(z) = B_z(z) g.$$
+\begin{equation}
+\label{eq:gradient}
+    \omega(z) = \vec \mu \times B_z(z) \hat z.
+\end{equation}
 
-Then if a radio frequency (RF) pulse with a frequency of $B_z(z_o) g$ is generated,
-only the protons in the position $z_0$ will start to resonate. Therefore, the
-signal obtained by the transversal coil will only correspond to the protons in
+Then if a radio frequency (RF) pulse with a frequency of $w(z_0)$ is generated,
+only the spins in the position $z_0 \hat z$ will start to resonate. Therefore,
+the signal obtained by the transversal coil will only correspond to the spins in
 the slice at position $z_0 \hat z $. It's important to state that, because of
 hardware limitations, it's impossible to generate a RF pulse in an exact frequency.
 What actually happens is that the pulse is generated for a small slice of
-frequencies, meaning that the protons in a small band around $z_0$ will also
-resonate (Fig. X).
+frequencies, meaning that the spins in a small band around $z_0$ will also
+resonate (Fig. \ref{fig:mri} A).
 
-Once the desired slice is selected, we still need to apply two more gradients in order to recover the intensities at each point of the slide.
-So far, all of the protons inside of the slice are precessing in the same way.
-We can think of the slice as a two dimentional matrix, with two coordinates: $x$ being the columns and $y$ being the rows.
-The first gradient is applied for a short period of time in one of the directions, lets say $y$.
-After the gradient is shutted down, the protons in each row will return to the same precessing velocity, but they'll have a different phase [FIG].
-If then we apply a new gradient in the $x$ direction, now it will happen that:
-the protons of each row will be oscilating in a different face,
-and the protons of each column will be oscilating at a different velocity.
-This means that, in our matrix, our information is encoded by phase in the rows and by velocity in the columns [FIG].
-But when we take signal, we take signal for the whole column.
-We need to repeat this for different strenghts of phase gradient $Gx$.
-Now we have a bunch of signals, that come from different frequencies (columns) and different strenghts in the Gx, with greater and greater relative changes in phase.
-This is called k-space [REF] ($https://www.youtube.com/watch?v=wux9L8892KE$).
-Then you need to do a 2D fourier transform to recover the image.
+So far, all of the spins inside of the slice are precessing in the same way.
+We can think of the slice as a two dimensional matrix, with two coordinates:
+$\hat x$ being the rows and $\hat y$ being the columns (Fig. \ref{fig:mri} B).
+In order to retrieve the signal generated at each position, two more gradients
+are needed, a frequency encoding gradient ($\vec G_{\nu}$) and a phase encoding
+gradient ($\vec G_{\phi}$). 
 
-\begin{figure*}[h!]
-                                                                                                                        
-\begin{minipage}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{3.mri/img/kspace.png}
-    \caption{Pipeline of a Magnetic Resonance adquisition.}
-    \label{fig:kspace}
-\end{minipage} ~
+First, $\vec G_{\phi}$ is applied for a short period of time in one of
+the directions, lets say $\hat y$. Following the Larmor equation (eq. \ref{eq:larmor}),
+all of the spins along $\hat y$ start to precess at a frequency that depends
+on their position (Eq. \ref{eq:gradient}). After the gradient is shut down, the
+spins will return to precess all at the same velocity, but off phase, since they 
+where separated by the previous gradient. This is, the spins of each row will
+have the same angular velocity, but a different phase (Fig. \label{fig:mri} B).
 
+Then, $\vec G_{\nu}$ is applied in the orthogonal direction ($\hat y$).
+Now it will happen that: the spins of each row will be oscillating in a
+different phase, because of $\vec G_{\phi}$ and the spins of each row will be
+oscillating at a different velocity, following the new gradient $\vec G_{\nu}$
+(Fig. \label{fig:mri} C).
+
+If we sample the signal using a coil over the direction $\hat x$, we will obtain
+as many data points as columns. Each data point will have a the mixture of all
+the signals the rows.
+However, each data point will comprise the difference in phase and the
+difference in frequency that we applied to the matrix. By iteratively
+measuring these data points, changing only the phase encoding gradient, we
+sample what is known as the k-space\cite{Likes1981}. A space where the signal
+generated by our sample is encoded by phase in the rows, and by frequency in the
+columns. As shown by Likes et al.\cite{Likes1981}, taking the 2D Fourier
+transform of the k-space, decodes the image of the tissue being sampled.
+
+\section{Diffusion MRI}
+
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth, height=150px]{missing}
+    \caption{Scheme of how a diffusion MRI works. (A) A first diffusion gradient
+             is applied, making the nuclei go off phase between them. (B) 
+             After a $\Delta$ time, the same gradient is applied in the opposite
+             direction. (C) The difference in phase is created by the diffusion
+             process. (D) The off phase precessing is translated into lesser
+             signal.}
+     \label{fig:diffusion_gradient}
 \end{figure*}
 
-%In 1946, Bloch \cite{Bloch1946} shows that the variation in Magnetization over time is expressed as:
+While NMRI allows to visualize the different tissue composition of the brain,
+diffusion MRI aims to quantify how the water molecules diffuse in the brain.
+This is of great importance because in fibrous structure such as white matter,
+water molecules tend to diffusion along fibers. Therefore, characterizing diffusion
+can help to describe the underlying structure of the white matter. Now, we
+start by explaining the phenomenon of diffusion and its implications in MRI.
 
-%$$ \frac{dM(t)}{dt} = \gamma M(t) \times B(t) 
-%                      - \frac{M(t) \vec{x} + M(t)\vec{y}}{T_2}
-%                      - \frac{(M(t)-M(0))\vec{z}}{T1} $$
+\subsection{Brownian Motion and MRI}
+The molecules inside a fluid in equilibrium are not still, on the contrary, 
+they move randomly. This physical phenomena is known as Brownian motion~\cite{Brown1828}
+or diffusion. In 1950, Hahn~\cite{Hahn1950} observes that the signal measured
+during the relaxation period in MRI can be affected by the process of diffusion.
 
-%Where $\gamma$ is the gyromagnetic ratio, $B$ is the magnetic field intensity and T1, T2 are relaxation times.
+In order to characterize the effects of diffusion in nucleus relaxation, a
+new experiment is devised. Imagine that after applying the RF pulse to do
+slice selection, we apply two gradient fields (called diffusion gradients), one
+after the other, but in opposite directions (Fig. \ref{fig:diffusion_gradient} A).
+As explained in section \ref{sec:nm}, this will induce two phase shifts to the nuclei.
+The first gradient will make them go off phase, while the second one should
+cancel the first, and put them back in phase. However, the particles undergoing
+diffusion would have changed place, and therefore, change their phase differently
+(Fig. \ref{fig:diffusion_gradient} B). The sections of the sample with nuclei
+precessing at different phase will cause a destructive interference between them,
+resulting in a lower signal. The ratio between the signal obtained with 
+diffusion gradients and the one without them quantifies the amount of ongoing
+diffusion (Fig. \ref{fig:diffusion_gradient} D).
 
-\section{Diffusion Magnetic Resonance Imaging}
-The molecules inside a fluid in equilibrium are not still, on the contrary, they are randomly moving around.
-This physical phonomena is known as diffusion.
-Implications of diffusion in medicine.
+In 1956, H.C. Torrey \cite{Torrey1956} extends the Bloch Equations~\cite{Bloch1946}
+in order to quantify the effects of diffusion in nucleus relaxation when
+multiple diffusion gradients are used. The new equations, known as Bloch-Torrey
+equation cannot be solved analytically. It's not until 1965 that
+Stejskal and Tanner~\cite{Stejskal1965} invent the Pulsed Gradient Spin
+Echo (PGSE) sequence to measure diffusion in a specific direction. In their
+sequence, two opposite diffusion gradients are applied for $\delta$ms, with a
+separation of $\Delta$ms between them. If we assume $\delta$ to be infinitely
+narrow (i.e. the diffusion during that time is negligible), then,
+the Bloch-Torrey equations can be solved, and the signal attenuation at time
+$2\tau = 2(\delta + \Delta)$  can be expressed as:
 
-In 1956, H.C. Torrey \cite{Torrey1956} observes that the magnetization can be lost by effect of diffusion.
-Somebody comes with a new idea of how to measure diffusion by introducing two new gradients.
-Let's explain the process in a intuitive way.
+\begin{equation}
+    E(2\tau) = 
+    \frac{S(2\tau)}{S_0} =
+    e^{-\gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) D},
+\label{eq:stejskal_tanner}
+\end{equation}
 
-Imagine that after applying the RF pulse to do slice selection, we add a gradient field $G_1=G_d$ for a small time $\delta$ms.
-As explained in the previous section (sec. X), this will make the protons be off-phase between them.
-If after a $\Delta$ time we apply the same gradient, but in the opossite direction $G_2=-G_d$, also for $\delta$ms, then, the protons should go back to be in-phase [fig].
-However, the particules undergoing diffusion will have moved (fig.), for which the second gradient $G_2$ would have reach them in a different place, and therefore, change their angular velocity differently.
-In this way, a difference in the phase of the protons respect to the rest is a sign of diffusion [fig].
-Since a voxel now has protons precessing at different velocities, they create less signal.
-Max. signal is achieved when they all rotate together.
-The difference between the signal obtained with no diff. gradient and with diff. gradient reflects the amount of diffusion.
+where $g$ is the strength of the diffusion gradient, $S_0$ the
+image acquired without diffusion gradients, and $D$ the diffusion coefficient.
 
-
-\begin{figure}
-    \includegraphics[width=0.49\textwidth]{3.mri/img/dmri.png}
-    \caption{Figure explaining dMRI}
-    \label{fig:}
-\end{figure}  
-
-\subsection{Pulsed Gradient Spin Echo (PGSE)}
 \begin{figure}
     \includegraphics[width=0.49\textwidth]{3.mri/img/fgp.png}
-    \caption{Secuencia Pulsed Gradient Spin Echo.}
+    \caption{Pulsed Gradient Spin Echo sequence.}
     \label{fig:fgp}
 \end{figure}  
 
-[refrase all]
-In 1965, Stejskal and Tanner invent the PGSE sequence to measure diffusion. 
-The Stejskal-Tanner imaging sequence [Stejskal and Tanner (1965)] is used to
-measure the diffusion of water molecules in a given direction. This pulse
-sequence is illustrated in Figure 4.3. This sequence uses two gradient pulses
-in the direction g, of duration time δ, to control the diffusion-weighting.
-They are placed before and after a 180◦ degrees refocusing pulse.
-More specifically, a first 90◦ degrees RF is applied to flip the magnetization
-in the transverse plane. The first gradient pulse causes a phase shift of the
-spins whose position are now a function of time. Spin position is in fact
-assumed to stay constant during time δ. Finally, the 180◦ pulse combined with
-the second gradient pulse induces another phase shift. It is applied after a time
-∆ separating the two gradient pulses. This pulse cancels the first phase
-shift only for static spins. On the other hand, spins under Brownian motion during
-the time period ∆ separating the two pulses undergo different phase shifts by
-the two gradient pulses, resulting in a T2 signal attenuation [Cercignani and Horsfield. (2001)].
-By assuming the pulses to be infinitely narrow (narrow pulse approximation), i.e.
-if the gradient pulse duration δ is short enough for the diffusion of the water molecule
-to be negligible during that time, [Stejskal and Tanner (1965)] showed that the signal
-attenuation S(q,τ) is expressed as the 3-dimensional (3D) Fourier transform
-F of the ensemble average propagator P,
-
-[some eq?]
-
-where $E(g, \delta, \Delta)$;
-$g$ is the intensity of the gradient field;
-$S_0$ is the signal obtained with no diffusion gradient ($g=0 T/m$)
-, and $\gamma$ is the gyromagnetic ratio of water.
-Notice that we need $S_0$ in the equation, since the diffusion comes from the difference in signal between the 
-
-Assuming the pdf to be gaussian, we get:
-
-\begin{equation}
-    E(g, \delta, \Delta) = 
-    \frac{S(g, \delta, \Delta)}{S_0} =
-         e^{-\gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) D} 
-    \label{eq:st}
-\end{equation}
-
-\subsection{subsection}
-In 1985 Le Bihan \cite{LEBIHAN} proposses to gather all the parameters in a single one: 
+In 1985 Le Bihan \cite{LEBIHAN} proposed to gather all the parameters in a
+single one: 
 
 $$ b = \gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) $$ ,
 
-simplifiying the equation \ref{eq:st} to:
+simplifying the equation \ref{eq:stejskal_tanner} to:
 
-$$ E(b) = \frac{S(b)}{S_0} = e^{-b D} $$
+$$ E(2\tau) = e^{-b D} $$
 
-where $b$ represents the reciprocal of the diffusion intensity.
+where $b$ has a physical meaning, it represents the reciprocal of the diffusion
+intensity\cite{LEBIHAN}.
 
-In 1994 Basser et al. \cite{Basser1994} propose to measure the signal atenuation in different directions, and then approximate the diffusion coefficient with a second order tensor.
-A tensor is a multidimentional matrix associated to a base, which possess a transformation law indicating how the tensor components change when the base change.
-This sets the bases of what's known as DTI.
-DTI represents the diffusion as a 3-dimentional (3D) elipsoide, which can be coded in a symmetric matrix:
+In 1991 Callaghan et al. \cite{Callaghan1991} developed the q-space analysis.
+Based on the work of Stejskal and Tanner, Callaghan show that it's possible
+to express the signal attenuation as:
+
+\begin{equation}
+\label{eq:callaghan}
+E(q,\Delta) =  \frac{S(q,\tau)}{S_0} = \int_{R^2}{P(r;\tau)e^{-2\pi i q r} dr},
+\end{equation}
+
+with $q =  \gamma \delta g / 2\pi$, and $P(r|r_0, \tau)$ a probability density
+function (diffusion propagator) modeling the probability that a molecule had a
+relative displacement of $r$ in time $\tau$. One of the main advantages of
+q-space is that it does not assume any a prior model, allowing to define 
+different strategies for $p(r;t)$. More importantly, equation
+\ref{eq:callaghan} shows that the signal attenuation is the 3D Fourier
+transform $\mathcal{F}$ of the average propagator $P$. 
+
+\begin{equation}
+    \label{eq:fourier_callaghan}
+    \frac{S(q, \tau)}{S_0} =
+    \mathcal{F}[P(r|r_0, \tau)].
+\end{equation}
+
+In particular, if the diffusion propagator is assumed to be Gaussian, then the
+Fourier integral can be solved analytically, and the solution is the same
+as the one obtained by Stejskal and Tanner (Eq. \ref{eq:stejskal_tanner})
+
+\begin{figure*}[h]
+    \includegraphics[width=\textwidth, height=150px]{missing}
+    \caption{Comparison of different models in the reconstruction of diffusion
+             signal. (A) Diffusion tensor imaging models the signal as tensors.
+             (B) Constrained Spherical Deconvolution models it as the convolution
+             between a response signal, and a kernel.}
+     \label{fig:dwi_models}
+\end{figure*}
+
+\subsection{Diffusion Tensor Imaging (DTI)}
+\label{sec:dti}
+In 1994 Basser et al. \cite{Basser1994} propose to measure the signal attenuation
+in different directions, and to model the diffusion coefficient in the Stejskal and
+Tanner equation (eq. \ref{eq:stejskal_tanner}) with a second order tensor. This
+sets the bases of what is known as Diffusion Tensor Imaging. DTI represents the
+diffusion as a 3-dimensional (3D) ellipsoid, which can be coded in a symmetric
+matrix:
 
 $$
     D =
@@ -285,98 +347,130 @@ $$
              D_{xx} & D_{xy} & D_{xz} \\
              D_{xy} & D_{yy} & D_{yz} \\
              D_{xz} & D_{yz} & D_{zz}    
-    \end{pmatrix}
+    \end{pmatrix}.
 $$
 
-Therefore we need at least 6 acquisitions.
+Since the matrix has 6 unknown variables, at least 6 acquisitions in different
+directions have to be done. DTI is until today, one
+of the most used techniques to model the diffusion signal. Its main drawback
+is that it does not allow to correctly characterize the crossing of fibers. Both
+the isotropic diffusion and the crossing of fibers get modeled as spheres.
 
-One of the main limitants of this method is that it does not allow to
-represent the crossing of fibers. They get modeled as spheres.
+\subsection{High Angular Resolution Diffusion Imaging}
+\label{sec:hardi}
+Two factors drive newer imaging techniques: Callaghan's relationship~\cite{Callaghan1991}
+between the signal attenuation and the diffusion propagator 
+(Eq. ~\ref{eq:fourier_callaghan}), and the ability to acquire data across many
+different angles with different b-values. Either using one b-value (singel shell)
+or multiple b-values (multi shell), HARDI techniques rely on taking acquisitions
+across many different angles, in order to reconstruct the true diffusion propagator.
+Notable examples of HARDI are DSI~\cite{Wedeen2008},  QSI~\cite{Callaghan1991},
+Q-Ball Imaging~\cite{Tuch2004}, CHARMED~\cite{Assaf2005}, and
+Constrained Spherical Deconvolution~\cite{Tournier2004}. While each technique
+relies in different assumptions about the diffusion propagator,
+they all try to capture multiple fiber directions with in the same imaging
+voxel. HARDI acquisitions are currently being improved every day with better 
+material and better reconstruction algorithms.
 
-In 1991 Callaghan et al. \cite{Callaghan1991} developped the q-space analysis.
-This allows to make microscopy with dMRI.
-Based on the work of Stejskal and Tanner, Callaghan show that it's possible to express the signal attenuation as:
+\subsection{Estimating Axonal Connectivity}
+So far, we discussed about imaging techniques to measure diffusion. Now is time
+to present how to use such techniques in order to study the structure of white matter.
 
-$$E(q,\Delta) =  \frac{S(q,\Delta)}{S_0} = \int_{R^2}{p(r;\Delta)e^{-2\pi i q r} dr} $$
-$$ q = \frac{\gamma \delta g}{2\pi} $$
+Water particles in the white matter diffuse constrained by the axonal bundles.
+The nuclei present at any point of the white matter will be able to diffuse
+only inside a tract and along its path. If dMRI had enough resolution, we
+could trace each brain connection by simply looking at the diffusion signal.
+However, this is not the case, dMRI resolution is several orders of magnitude
+coarser than axonal diameters (millimeters vs micrometers)~\cite{VanEssen2014}.
+What is done in practice, is to fit one of the models named in previous sections
+(sec. \ref{sec:dti}, \ref{sec:hardi}), and use them to derive a probabilistic
+map of transition from each voxel to their neighbors. The resulting network can
+be used on a Monte Carlo procedure where, starting from a voxel, at each step we
+randomly select to which neighboring voxel to move, following the
+probabilistic map. This process of simulating the random walk of a water
+particles through the white matter is known as Tractography~\cite{Behrens2003a}.
 
-Where $p(r;t)$  is the probability density that a set of particles travels a distance $r$ during a time $t$.
-Because of this, $p(r;t)$ is highly related to the compartment where the particles are contained.
+The field of tractography is not exempt of problems, most state state-of-the-art
+algorithms create about four time more false‐positive tracts than true‐positive
+ones. Also, most of them suffer from gyral bias, in which tractography bundles
+are biased towards finishing in gyral crowns rather than sulcal banks~\cite{VanEssen2014}.
+However, tractography has shown to be able to being able to recover some major
+bundles in humans~\cite{Catani2008}. Also, it has been validated using high-resolution
+postmortem diffusion imaging and tractography in Old World monkeys. Particularly,
+Donahue et al.\cite{Donahue2016} found a correlation
+coefficient of ~0.58 between tractography-based and tracer-based estimates of
+connectivity; the correlation is highest for strong, short-distance pathways
+but is informative even for weak connections and widely separated areas. This
+results, encourage to use tractography, despite of its flaws.
 
-One of the main advantages of q-space over DTI is that is does not assume any a prior model, allowing to define different strategies for $p(r;t)$.
-Here we talk about \textit{Spherical Harmonics} \cite{Tuch2004} and
-\textit{Constrained Spherical Deconvolution} \cite{Tournier2004}, which are the most relevant ones for this thesis.
+\section{Brief Introduction to Functional MRI}
 
-\section{Tractography}
+Built on the contributions of Pauling and Coryell~\cite{Pauling1936}, and 
+Ogawa\cite{Ogawa1990, Ogawa1993} among others, functional MRI (fMRI) characterizes
+blood flow in the brain. Since blood flow is directly related with brain
+activity, fMRI gives us a way to study brain function. While not central to our
+thesis, we do believe that at least a brief description of how functional MRI
+(fMRI) works should be given.
 
-%TODO
-% Explain tractography as a random walk
-% Explain its problems
-%  Gyral bias
-%  Resolution
-%  No direction (Jbabdi and Beherens)
-%  False positives!!!!!
-% Explains that anyway it's the best thing we have
+When a region of the brain is activated by a cognitive task, the additional
+neural firing in a locally increased energy requirement~\cite{Glover2011}.
+The brain responds by adjusting its blood supply to the region in a process
+known as the haemodynamic response. This increase in blood flow produces an
+increase in the ratio of oxygenated hemoglobin relative to deoxygenated hemoglobin
+in that specific area (BOLD contrast). Oxygenated hemoglobin is magnetically 
+indistinguishable from brain tissue. On the contrary, deoxygenated hemoglobin
+has 4 unpaired electrons and is highly paramagnetic\cite{Glover2011}. This
+results in local gradients that dephase the nuclei around it, causing destructive
+interference in the observed MR signal. Using a special type of pulse sequence
+called gradient refocused echo~\cite{Elster1993} it is possible to make MR
+scanners sensible to this effect.
 
-Diffusion in the white matter is constrained by the tracts present on it.
-The protons present in any point of the brain will be able to diffuse only inside a tract and along its path.
-This means that, by following the diffusion signal, we should be able to trace the brain pathways.
-However, most of the methods to model diffusion signal cannot handle correctly the crossing of fibers.
-The best we can do, is to derive a probabilistic map from one voxel to another, and simulate the random movement of a water particle from one voxel to another.
-We hope that the diffusion signal + some constraints in the random walk allow us to retrieve the real pathways of the brain.
-Furthermore, if we generate a big number of this random walks, or streamlines, we hope to be able to recover the underlying tracts in a correct way by means of statistics.
-They are some issues with this.
-But there are some cool stuff about it also.
-
-[VAN ESSEN]
-Using high-resolution postmortem diffusion imaging and tractography in Old World monkeys, we found a correlation coefficient of ~0.58 between tractography-based and tracer- based estimates of connectivity;
-the correlation is highest for strong, short-distance pathways but is informative even for weak connections and widely separated areas (Donahue et al., 2016).
-We will discuss multiple reasons why tractography imperfectly reflects ground-truth neuroanatomical connectivity.
-This includes
-(i) a gyral bias in which tractography streamline within ‘gyral blades’ are biased towards gyral crowns rather than sulcal banks (Van Essen et al., 2014);
-(ii) an ‘anti-fundus’ bias in which connections to/from sulcal fundi tend to be obscured by tangential fiber bundles immediately subjacent to many sulci (Reveley et al., 2015);
-(iii) axonal branching within white matter that includes many branches at approximately right angles (Economo et al., 2016) that are inherently difficult to discriminate from crossing fibers that also occur within white matter;
-and (iv) potential dispersion or ‘defasciculation’ in the white matter axonal trajectories of pathways that interconnect widely separated gray matter parcels (Jbabdi et al., 2015).
-
-
-[MINE]
-A primary issue is the spatial resolution of diffusion imaging:
-it is several orders of magnitude coarser than axonal diameters (millimeters vs. micrometers) (Van Essen et al., 2014), making hard to infer some brain pathways.
-In addition, there is as yet no quantitative measure of the strength of connections from diffusion (Jbabdi and Behrens, 2013).
-Given a seed-point in the brain, prob- abilistic tractography creates a tractogram:
-an image where each voxel is valued with its probability of being connected to the seed through axonal bundles.
-One way of calculating these probabilities is with a Monte Carlo procedure, simulating the random walk of water particles through the white matter (Behrens et al., 2003).
-Each one of these paths is known as a streamline.
-
-[MAXIME NATURE NEUROSCIENCE?]
-we organized an open international tractography challenge, which resulted in 96 distinct submissions from 20 research groups.
-To determine the current state of the art in tractography, we organized  an  international tractography competition and employed a novel validation method based on simulated DWI of a brain‐like geometry.
-This ground truth data set represented 25 well‐known valid bundles that covered approximately 70\% of the human brain white matter.
-
-While most state‐of‐the‐art algorithms  reconstructed 90\% of ground truth bundles to at least some extent, on average they produced four times more invalid than valid  bundles. About half of the invalid bundles occurred systematically in the majority of submissions. 
-The average ratio of false‐positive to true‐positive bundles was approximately four to one.
-This ratio could not be improved by employing higher quality data or even using the gold standard field of local orientations, highlighting that current tractography approaches are fundamentally ill‐posed.
-
-
-\section{fMRI}
-\cite{Glover2011}
-All the processes of neural signaling in the brain require energy in the form of adenosine triphosphate (ATP).
-When a region of the brain is up-regulated (i.e. activated) by a cognitive task such as finger tapping, the additional neural firing and other increased signaling processes result in a locally increased energy requirement.
-The brain respondes by adjusting its blood flow to deliver nutrients such as oxygen and glucose to stressed tissues and allow them to function. Haemodynamic response (HR) allows the rapid delivery of blood to active neuronal tissues.
-The second mechanism, termed Blood Oxygenation Level Dependent (BOLD) contrast, was first demonstrated in rats48,50 and later in humans3,37,49,52, and is the contrast that is used in virtually all conventional fMRI experiments. BOLD contrast results from the change in magnetic field surrounding the red blood cells depending on the oxygen state of the hemoglobin. When fully oxygenated, HbO2 is diamagnetic and is magnetically indistinguishable from brain tissue. However, fully deoxygenated Hb has 4 unpaired electrons and is highly paramagnetic59. This paramagnetism results in local gradients in magnetic field whose strength depends on the [Hb] concentration. These endogenous gradients in turn modulate the intra- and extra-vascular blood’s T2 and T2* relaxation times through diffusion and intravoxel dephasing, respectively. Using a gradient refocused echo (GRE) MRI pulse sequence7, the acquisition is made sensitive to T2* and T2. At 1.5T and
-3T, the T2* contrast is predominant and is largest in venules61, while at higher field strength the diffusion-weighted contrast of T2 relaxation becomes more important and, because signals are generated preferentially in capillaries and tissue with spin-echo acquisitions, provides greater spatial specificity57,64. Since most fMRI is currently performed at 3 Tesla or below, BOLD fMRI utilizes primarily GRE methods because of the increased T2* contrast10.
-
-[wikipedia et al.]
-Cerebral blood flow (CBF) is the blood supply to the brain in a given period of time.[     Tolias C and Sgouros S. 2006. "Initial Evaluation and Management of CNS Injury."]
-The most common functional imaging signal is the blood-oxygen-level dependent signal (BOLD), which primarily corresponds to the concentration of deoxyhemoglobin.[12] The BOLD effect is based on the fact that when neuronal activity is increased in one part of the brain, there is also an increased amount of cerebral blood flow to that area which is the basis of haemodynamic response. This increase in blood flow produces an increase in the ratio of oxygenated hemoglobin relative to deoxygenated hemoglobin in that specific area. The difference in magnetic properties of oxygenated and deoxygenated hemoglobin is what allows fMRI imaging to produce an effective map of which neurons are active and which are not. In short, deoxygenated hemoglobin is paramagnetic while oxygenated hemoglobin is diamagnetic. Diamagnetic blood (oxyhemoglobin) interferes with the magnetic resonance (MR) signal less and this leads to an improved MR signal in that area of increased neuronal activity. However, Paramagnetic blood (deoxyhemoglobin) makes the local magnetic field inhomogenous. This has the effect of dephasing the signal emitted in this domain, causing destructive interference in the observed MR signal. Therefore, greater amounts of deoxyhemoglobin lead to less signal. Neuronal activity ultimately leads to an increase in local MR signaling corresponding to a decrease in the concentration of deoxyhemoglobin.[13]
+After obtaining the fMRI signal, it is possible to estimate which brain regions
+are being more active during the desired cognitive task by means of statistics.
+In particular, it is expected to see a high activation of the area being used
+for a task while the subject is doing such task. For example, in order to
+obtain the area to finger movement, we could ask a subject to start and stop
+moving the finger at regular intervals. The area responsible for moving the
+finger should show a regular activation pattern, correlated with the moments
+in which the finger was moving. We can compute such area by selecting the voxels
+in which the fMRI signal correlates the most with the square signal of finger
+movement (1 when the finger was moving, 0 when not).
 
 \section{Conclusion}
 This chapter introduced the imaging techniques of MRI, Diffusion MRI and
 Functional MRI. These three methods provide means to study the brain anatomy,
-structure and function in a non-invasive way. Even when each technique has its
-own limitations, either in spatial or temporal resolution, they all allowed to
-highly advance the state of the art in neuroscience. In the next chapter we
-will see how these advances in imaging allowed to parcellate the brain, making
-it easier to study brain function.
+its axonal organization and function in a non-invasive way. Even when each
+technique has its own limitations, either in spatial or temporal resolution,
+they all allowed to highly advance the state of the art in neuroscience. In
+the next chapter we will see how these advances in imaging allowed to parcellate
+the brain, making it easier to study brain function.
 
 \chapterbib
+
+
+%In 1946, Bloch \cite{Bloch1946} introduce phenomenological equations that explain
+%shows that the variation in magnetization over
+%time for a nucleus is expressed as:
+
+
+%%Where $\gamma$ is the gyromagnetic ratio, $B$ is the magnetic field intensity and T1, T2 are relaxation times.
+%In 1950, Hahn~\cite{Hahn1950} observes that the signal measured during
+%the relaxation period in MRI can be affected by the process of diffusion.
+%In 1956, H.C. Torrey \cite{Torrey1956} presents phenomenological equations that
+%incorporate this effect to the Blochs equation, creating the Bloch-Torrey equation:
+%
+%\begin{equation}
+%    \label{eq:block_torrey}
+%    \frac{dM}{dt} = \\
+%    \gamma M \times B_0 
+%    + \left( \frac{M_x}{T_2}, \frac{M_y}{T_2}, \frac{M_0-M_z}{T_1} \right)
+%    + D\bigtriangledown^2M.
+%\end{equation}
+
+%Here, $M$ is the magnetization of an excited sample placed in a static magnetic
+%field $B_0$, $\gamma$, is the gyromagnetic ratio, $M_x$, $M_y$, $M_z$ are the 
+%components of magnetization in the x, y and z directions, $M_0$ is the magnetization
+%at thermal equilibrium, $T_1$ and $T_2$ are relaxation times and $D$ is a diffusion
+%coefficient. The first two terms of equation \ref{eq:block_torrey} are the original
+%Bloch equation~\cite{Bloch1946}. The third term of equation \ref{eq:block_torrey}
+%was added by Torrey.
