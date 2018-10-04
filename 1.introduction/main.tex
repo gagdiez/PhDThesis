@@ -1,66 +1,122 @@
 \chapter{Introduction}
 
-The human brain is the most complex biological machine known in the universe.
-The brain works as a complex network of billion of neurons.
-Since this is impossible to handle, we need to subdivide the brain.
-Depending how you look at it, the brain can be divided following many different criteria (cytho, function).
-In each one of these criteria, brain connectivity is quite important and consistent.
-We know this thanks to invasive stuff.
-Since our brain is the result of biological evolution, we tortured monkeys, cats and rats in order to study and understand it.
-We cannot do that anymore, so it's difficult to study brain connectivity.
-Diffusion MRI allows to study the brain invivo without inducing pain/problems.
-But it has strong limitations: resolution in time and space, directionality, etc.
-It has been used to divide the brain, but the techniques are not good enough.
-We don't know how many parcels we need, or how to do it.
-We propose a parcellation technique that solves many of these problems.
-We show it is consistent with function.
-Now we would like to use this to study brain connectivity and function in different subjects.
-However, an interesting problem is that, for some regions, as frontal cortex, there's a lot of across subject variability.
-Turns out that it's hard to match parcels across subjects.
-Spatial overlap does not work here because of [cite].
-We need to match stuff while imposing few constraints, specially spatial ones.
-The existing techniques are nice and simple, but not sufficient.
-We propose to improve the matching by using optimal transport.
-It actually works well.
-Now that we have a way to parcellate the brain, and a way to map that across subjects, maybe we can better study the structure-function relationship.
-I would like to talk about predicting function from structure.
-This would be a negative chapter, since we were not able to predict anything from tractography.
-But, what happens when there's a pathology in the white matter?
-It's affecting brain function, but we cannot precisely predict what since it impedes tractography.
-In that case, we need to do something to infer which bundles are affected.
-We can do multi-atlas stuff.
-Since bundles are related to dmri, we can add dMRI information to the multi-atlas to improve the localization of affected bundles.
-Finally, the structure vs function in the brain does not necessarily always have to be structural connectivity vs tfmri function.
-We can also use microstructure vs cognitive, and microstructure to function (collaboration with vinod)
+Composed by billions of interconnected neurons, the brain is the most complex
+biological machine that we know. Understanding how brain connectivity is 
+organized, and how this constrains brain functionality is one a key question
+of neuroscience. Recent advances in acquisition and modeling techniques on
+Diffusion Magnetic Resonance Imaging (dMRI) have facilitated to estimate and
+study axonal connectivity in vivo. In this thesis, we leverage recent advances
+in dMRI and tractography algorithms in order to study: how brain's connectivity
+is organized; how connectivity is related to anatomy and function; how to
+find correspondences when the connectivity variates across people, and how to
+infer connectivity in the presence of a brain's pathology. The thesis is
+divided in three major contributions:
 
-\section{Organization}
-I start by making a beautiful introduction to neuroanatomy, because the reader needs to know what is a brain.
-Here we talk about sulci, giri, white matter, gray matter, cellular composition, layers, etc.
-This chapter also talks about brain function, but from an old perspective.
-Then, I move to explain the state of the art of the non-invasive techniques that we're interested in.
-Since the thesis is going to be about brain parcellation, I have to explain why we are interested on it.
-So the next chapter is about well known parcellations: cytho, broadmann areas, desikan, functional... the classical ones.
-Then, I can basically take the paper of Vinod and explain that, even when we subdivide the brain in specific areas, the brain works as a network.
-There should be a big focus on Structural connectivity since it's the main theme of the thesis.
-We start again with why structural connectivity is important.
-Then, we explain again that it's important to divide the brain based on its connectivity, so we know the basic pieces of the brain that work together.
-We present my work (CDMRI + neuroimage), this includes state of the art, and I guess stuff that was made after.
-%In the previous chapter we explained how to divide the brain based on a structural criteria.
-Now, other chapter, we discuss that there's variability in the parcellation of different subjects.
-We insist in the fact that this is ok, because we are all different humans. 
-Then we present the MICCAI paper made in collaboration with Nathalie, this includes state of the art, etc etc etc
+Our first contribution is a parsimonious model for the long-range axonal
+connectivity (extrinsic connectivity), and an efficient technique to divide the
+brain in regions with homogeneous connectivity~\cite{Gallardo2017a}. Our
+connectivity model is based on histological results obtained in the macaque
+brain, and accounts for the across-subject variability in the human brain
+connectivity. Our parceling technique uses a hierarchical clustering approach,
+letting us comprise multiple granularities of the same brain parcellation.
+Also, our technique can create both single subject and groupwise parcellations
+of the whole cortex, allowing to study brain connectivity at the single subject
+and at the population level. While our technique is solely based on the brain's
+structural connectivity, our resulting parcels are in agreement with anatomical,
+structural and functional parcellations extant in the literature. Our technique
+helps to lower the gap between structural connectivity and brain function, since
+some of our pure structural parcels show good overlapping with responses to
+functional tasks.
+
+Our second contribution is a technique to find correspondence between
+structural parcellations of different subjects~\cite{Gallardo2018}. Even when
+produced by the same technique, parcellations tend to differ in the
+number, shape, and spatial localization of parcels across subjects. Matching
+these parcels across subjects is an open problem in neuroscience. To solve
+it, we propose a parcel matching method based on Optimal Transport. We test its
+performance on different parcellations, and compare it against state of the
+art matching techniques. We show that our method achieves the highest number
+of correct matches. Our technique could help to study properties of structurally
+defined areas, when they do not have high spatial coherence across subjects.
+Also, it could help to understand the link between different brain atlases, and
+improve the comparisons of cortical areas between higher primates.
+
+Our third contribution is a multi-atlas technique to infer the location of 
+white-matter bundles in patients with a brain pathology~\cite{Guillermo2018}.
+Lesions in the cortex or white matter disrupt the normal functioning of the
+brain. Some white matter pathologies, such as tumors or traumatic brain injury,
+hampers tractography, difficulting to infer which pathways are affected. We 
+present a technique that infers the affected tracts by aggregating spatial
+information from healthy subjects while taking into account the diffusion
+information of the patient. In particular, we register the tracts of each
+healthy subject to the patient, and make each healthy patient 'vote' for a
+tract on each voxel of the DWI image of the patient. Our technique weights the
+vote of each subject based on how the voted pathway is supported by the patient's 
+diffusion data. This is, if the diffusion data of our patient is consistent with
+the direction of the voted pathway, the vote has a higher weight. We show that
+our technique achieves better results that using the simple voting.
+
+%The human brain is the most complex biological machine known in the universe.
+%The brain works as a complex network of billion of neurons.
+%Since this is impossible to handle, we need to subdivide the brain.
+%Depending how you look at it, the brain can be divided following many different criteria (cytho, function).
+%In each one of these criteria, brain connectivity is quite important and consistent.
+%We know this thanks to invasive stuff.
+%Since our brain is the result of biological evolution, we tortured monkeys, cats and rats in order to study and understand it.
+%We cannot do that anymore, so it's difficult to study brain connectivity.
+%Diffusion MRI allows to study the brain invivo without inducing pain/problems.
+%But it has strong limitations: resolution in time and space, directionality, etc.
+%It has been used to divide the brain, but the techniques are not good enough.
+%We don't know how many parcels we need, or how to do it.
+%We propose a parcellation technique that solves many of these problems.
+%We show it is consistent with function.
+%Now we would like to use this to study brain connectivity and function in different subjects.
+%However, an interesting problem is that, for some regions, as frontal cortex, there's a lot of across subject variability.
+%Turns out that it's hard to match parcels across subjects.
+%Spatial overlap does not work here because of [cite].
+%We need to match stuff while imposing few constraints, specially spatial ones.
+%The existing techniques are nice and simple, but not sufficient.
+%We propose to improve the matching by using optimal transport.
+%It actually works well.
+%Now that we have a way to parcellate the brain, and a way to map that across subjects, maybe we can better study the structure-function relationship.
+%I would like to talk about predicting function from structure.
+%This would be a negative chapter, since we were not able to predict anything from tractography.
+%But, what happens when there's a pathology in the white matter?
+%It's affecting brain function, but we cannot precisely predict what since it impedes tractography.
+%In that case, we need to do something to infer which bundles are affected.
+%We can do multi-atlas stuff.
+%Since bundles are related to dmri, we can add dMRI information to the multi-atlas to improve the localization of affected bundles.
+%Finally, the structure vs function in the brain does not necessarily always have to be structural connectivity vs tfmri function.
+%We can also use microstructure vs cognitive, and microstructure to function (collaboration with vinod)
 %
-Another chapter, this time about multiatlas.
-%\section{Structure vs Function}
-Finally, something about structure vs function.
-In the intro we explained that structure is important, and that function is driven by function.
-It's time to show that this actually happens, and in which cases.
-We can start talking about Osher and others, however this didn't work for us.
-I think it's important to say it.
-%Gaston????????????
-Then, I can include the final part of my neuroimage, where we show the parcels are functionally specialized.
-Maybe something about the work with Nathalie.
-Stanford stuff goes here I guess
+%\section{Organization}
+%I start by making a beautiful introduction to neuroanatomy, because the reader needs to know what is a brain.
+%Here we talk about sulci, giri, white matter, gray matter, cellular composition, layers, etc.
+%This chapter also talks about brain function, but from an old perspective.
+%Then, I move to explain the state of the art of the non-invasive techniques that we're interested in.
+%Since the thesis is going to be about brain parcellation, I have to explain why we are interested on it.
+%So the next chapter is about well known parcellations: cytho, broadmann areas, desikan, functional... the classical ones.
+%Then, I can basically take the paper of Vinod and explain that, even when we subdivide the brain in specific areas, the brain works as a network.
+%There should be a big focus on Structural connectivity since it's the main theme of the thesis.
+%We start again with why structural connectivity is important.
+%Then, we explain again that it's important to divide the brain based on its connectivity, so we know the basic pieces of the brain that work together.
+%We present my work (CDMRI + neuroimage), this includes state of the art, and I guess stuff that was made after.
+%%In the previous chapter we explained how to divide the brain based on a structural criteria.
+%Now, other chapter, we discuss that there's variability in the parcellation of different subjects.
+%We insist in the fact that this is ok, because we are all different humans. 
+%Then we present the MICCAI paper made in collaboration with Nathalie, this includes state of the art, etc etc etc
+%%
+%Another chapter, this time about multiatlas.
+%%\section{Structure vs Function}
+%Finally, something about structure vs function.
+%In the intro we explained that structure is important, and that function is driven by function.
+%It's time to show that this actually happens, and in which cases.
+%We can start talking about Osher and others, however this didn't work for us.
+%I think it's important to say it.
+%%Gaston????????????
+%Then, I can include the final part of my neuroimage, where we show the parcels are functionally specialized.
+%Maybe something about the work with Nathalie.
+%Stanford stuff goes here I guess
 %New experiments.
 %
 %\section{Other projects?}
