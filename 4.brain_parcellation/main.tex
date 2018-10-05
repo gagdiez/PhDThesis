@@ -3,131 +3,109 @@
 \section{Overview}
 Neuroscientist have long thought of the brain as a mosaic of interconnected
 regions. This simplification allows to abstract the complex neuronal network
-that underlies cognition. Until today, it's not clear that an unique and truth
-division of the human brain exists. This is also true even when divisions are 
-constrained to only one modality: anatomy, structure or function. In this
-chapter, we make a review of the different type of parcellations that exist;
-explain their advantages, and the best scenarios where to use each.
+that underlies cognition. Until today, it's not clear that an unique and true
+division of the human brain exists. Different modalities have been used to
+study the brain, deriving in different parcellations. In this chapter, we make
+a review of the different criteria to divide the brain; the hypothesis in
+which they are based, and present the most notable parcellations of each.
 
-%The brain is a higly complex network composed by billions of neurons interacting at the same time
-%between them. Given the complexity of this network, a dimensionality reduction
-%is needed in order to study its properties. Since its beginning, neuroscientist
-%have divided the brain based on different criteria. This allows to study the
-%brain as a set of interacting regions, allowing to abstract the underlying
-%neuronal complexity. 
 
 \section{Introduction}
 Composed by billions of interconnected neurons, the brain is the most complex
 biological machine that we know. Untangling this network is of special importance
 to understand the process underlying concious life, a task that has proven to be
 arduous. In fact, with nowadays technology, is simply not feasible
-to study the whole neural network at a cellular level. Extant techniques to
+to study the whole human neural network at cellular level. Extant techniques to
 study brain microstructure are highly invasive, and can only be used in
 postmortem brain~\cite{Swanson1982, Schmahmann2006, Amunts2007, Ding2016}.
 While useful to quantify the cellular composition of the tissue, these techniques
-do not allow to study neuronal communication (synapses) nor neuronal connectivity.
-Even when whole brain dissections are made \cite{Amunts2013, Ding2016}, the size
-of the acquired data, and the damage induced in the tissue while dissecting it,
+do not allow to study neuronal communication (synapses) nor long range axonal
+connectivity. Even when whole brain dissections are made at super high resolution\cite{Mohlberg2012, Amunts2013, Ding2016},
+the size of the acquired data, and the damage induced in the tissue while dissecting it,
 makes hard to coregister and study continuity between slices. These problems
 highlight the need to compress information from the brain in a coarser network.
 
-Studies in cytoarchitecture\cite{Brodmann1909, VonEconomo1925}, brain
+
+% Say in the next paragraph that we want to:
+% Characterize groups of neurons inside of a subject, to study their properties
+% Characterize same regions across subjects, to infer properties about the human brain
+Studies in cytoarchitecture\cite{Meynert1872, Brodmann1909, VonEconomo1925}, brain
 function\cite{Penfield1954, VonderMalsburg1994}, and tracers~\cite{Schmahmann2006, Stephan2013}
 show that neurons tend to organize and activate in spatially coherent groups.
-These studies give us evidence to support subdividing the brain before studying
-it. By doing so, it's not only possible to reduce the dimensionality of the
-cellular network, but also to derive rules for population of neurons. Furthermore,
-having consistent divisions across subjects allows to infer properties about the
-human brain in general. Then the problem is, how to subdivide the brain. Until
-today, there's not a gold standard division of the human brain. Moreover, how
-to divide the brain depends heavily on the modality being use to study it.
+This provides us with a biological basis for dividing the brain into spatially coherent
+parcels. By doing so, it's not only possible to reduce the dimensionality of the
+cellular network, but also to derive common properties for population of neurons.
+Furthermore, having consistent divisions across subjects allows to infer
+properties about the human brain in general. Then the problem is, how to
+subdivide the brain. Until today, there's not a gold standard division of the
+human brain. Moreover, how to divide the brain depends heavily on the modality
+being use to study it.
 
-%Historically, the brain has been divided following different criteria such as
-%anatomical landmarks, or cellular composition. With every new technological
-%advance, new divisions arise. Perhaps the first type of parcellations to exist
-%were the anatomical ones. Already in the year 3,000 BCE, an Egyptian papyrus
-%references anatomical landmarks in the head when talking about brain 
-%lesions\cite{Elsberg1945}. During the 17th century, studies in postmortem
-%brains helped to further identify the lobes, gyrus and sulci~\cite{Collice2008}.
-%At the end of the 1800, Broca and Wernicke define regions in the brain related
-%to speach understanding and production, making one of the first functional 
-%divisions that survives until today. In 1905 Campbell~\cite{Campbell1905} 
-%presents a cortical parcellation of the brain in 14 regions based on its cellular
-%composition, this is the first cytoarchitectural division of the brain. Four
-%years later Brodmann presents its seminal cytoarchitectural~\cite{Brodmann1909} division of the
-%brain which is still used until today. In 1954 Penfield~\cite{Penfield1954}
-%maps motor and sensory functions to the cortex and shows the consistency across
-%different subjects, defining a functional atlas over the precentral and poscentral
-%gyrus. something about tracers, maybe In 1982 Swanson et al.~\cite{Swanson1982} started 
+\begin{figure}[h!]
+    \includegraphics[width=0.49\textwidth,height=550px]{missing}
+    \caption{Anatomical Parcellation of the Brain}
+    \label{fig:brain_function}
+\end{figure}
 
-%The advent of Magnetic Resonance Imaging (MRI) allowed to rapidly
-%progress the field of brain mapping. MRI permitted to acquire massive amount
-%of brain images and create brain templates. By computing brain templates neuroscientist
-%were able to define a single brain image that is representative of the population~\cite{Talairach1988, Collins1998, Holmes1998}.
-%Since the regions defined on these templates should also be representative,
-%the parcellations defined in templates are considered atlases. functional MRI (fMRI)
-%did the same for mapping function in the brain. idem dMRI. And finally, the
-%multischeme ones.
+\begin{figure*}[t!]
+    \includegraphics[width=\textwidth,height=150px]{missing}
+    \caption{Cytoarchitectural Parcellation of the Brain}
+    \label{fig:brain_function}
+\end{figure*}
 
-Historically, the brain has been divided following different criteria such as
-anatomical landmarks, functional localization, axonal connectivity or
-cellular composition. A valid question is, why are there different parcellations?.
-Why not just use one?. The answer is because each type of parcellation incurs
-on a trade off. Based on brain landmarks, Anatomical parcellations are highly
-reproducible across subjects. This is, once the rules to define a parcel are
-set, they are easy to automatize. However, this regions tend to be coarse,
-and do not account correctly for brain function. Cytoarchitectural divisions
-of the brain are functionally relevant, to the point that many functional
-regions are referred using cytoarchitectonic labels. But, in terms of location,
-the borders of only a few cytoarchitectonically defined areas show a 
-sufficiently precise association with sulci~\cite{Amunts2007}. This highlights
-the need of cytoarchitectonic parcellations. The downside, is that the study
-of cellular composition can only be done in post-mortem brains. At the same time,
-extant cytoarchitectonic maps do not cover the complete cerebral cortex. 
-Only approximately 40\% of the cortical surface has been mapped up to now. 
-This is caused by the difficulties of: studying sections; 3D reconstructing the
-histological sections, and registration of post-mortem data to a reference space.
-This is a very time-consuming process, requiring as minimum as 1 person year for
-an area. Functional parcellations are inferred based in relative differences of
-some sort, generally a region is defined as functionally specialized because:
-it has a lesion and that function was affected; or it shows more activation 
-while the subject is doing the function. The problem of this approach, known
-as the modular paradigm, is that it does not allow to map higher cognitive
-functions to the brain~\cite{Fuster2000}. As proposed by Bressler and Menon~\cite{Bressler2010},
-is necessary to study the brain as a network, taking into account axonal
-connectivity. Structural parcellations of the brain define regions with homogeneous
-connectivity. While many studies show that the obtained parcels are functionally
-relevant, the underlying technique, tractography, is not trusted.
+Historically, the brain has been divided following criteria such as its anatomy,
+its activation during cognitive tasks, the cellular composition, and its connectivity.
+On an anatomical parcellation, a region is characterize by its shape or its
+relative position in the brain. For example, in the Desikan atlas,
+the pars opercularis region is defined as 'the first gyrus from the precentral
+gyrus'~\cite{Desikan2006}. Anatomical parcellations were most probably the first way to subdivide
+the brain in regions, since references to anatomical landmarks can be found
+in ancient texts~\cite{Elsberg1945, Collice2008}. Functional parcellations
+map cognitive function to regions in the brain. In this type of parcellation,
+each parcel is characterized by a cognitive function. A classical example is that
+of Broca and Wernicke areas, related to meaningful speech production and speech
+comprehension. While the first functional maps were infered by studying cognitive
+changes following brain injuries, modern ones are derived from neuroimaging.
+Cytoarchitectural divisions of the brain are
+based solely in the cellular composition of the cortex. In these atlases, a region
+is characterize by its thickness and cellular organization. For example,
+Brodmann Area 4 has 'an unusually thick cortex; possess giant pyramidal cells,
+and lacks both its internal and external granular layer'~\cite{Brodmann1909}.
+Currently, all extant cytoarchitectonic maps are derived from destructive
+post-mortem brain analysis.
+Finally, structural parcellations are based on patters of axonal connectivity. Parcels have an
+homogeneous pattern of connectivity respect to a predefined set of regions of
+interest. For example, area MFG-5 of the Brainnetome atlas has 'connections 
+with the major frontal subregions, the limbic area, the parietal subregions
+and the subcortical connections with the thalamus and basal ganglia subregions'\cite{Fan2016}.
 
 In recent years we witness a rapidly growing in the field
 of brain mapping, driven by advances in Magnetic Resonance Imaging (MRI) and
-computational power. Computational
-power gave us better imaging in cytoarchitecture. MRI, fMRI and
-dMRI gave us non-invasive ways to permitted to acquire massive amount
-of brain images. This opened the possibility of doing studies with big populations.
-Computational power let us use more complex methods. 
+computational power. In this chapter, we make a review of the most important
+parcellation of which we know about for each modality, giving a brief introduction
+to the their methodologies. We limit ourselves to present the parcellations without
+benchmarking them, for more information on benchmarking please refer to the
+works of Thirion et al.~\cite{Thirion2014}, and Arslan et al.~\cite{Arslan2018}.
+This review is by no means extensive, and more information can be found in
+Amunts et al.\cite{Amunts2007}, Triarhou (2007)\cite{Triarhou2007} 
+Jbabdi et al.~\cite{Jbabdi2013}, Arslan et al. \cite{Arslan2018},
+de Reus et al.~\cite{DeReus2013}, and Eichhoff et al.~\cite{Eickhoff2015}.
+ 
+\begin{figure*}[t!]
+    \includegraphics[width=\textwidth,height=150px]{missing}
+    \caption{Functional Parcellation of the Brain}
+    \label{fig:brain_function}
+\end{figure*}
 
-
-
-
-In this chapter, we make a
-review of the most important techniques of which we know about for each modality,
-giving a brief introduction to how they work and their main strenghts. All the
-reviewed parcellations are comprised in the table X. 
-
-
-
-
-\section{Anatomical}
-On an anatomical parcellation, a region is characterize by its shape or its
-relative position in the brain. For example, in the Desikan atlas, the
-pars opercularis region is defined as 'the first gyrus from the precentral gyrus'.
-
+\section{Anatomical Parcellations}
+\label{sec:anatomical}
 The first anatomical atlases of the brain where solely based on the study of
-post-mortem brains. The division of the brain in lobes can be see as a coarse
-atlas of the cerebral cortex. A notable example of post-mortem atlas is the 
-Talairach Atlas~\cite{Talairach1988}, which is based on the dissection of one
-human brain, and defines a standarized system of coordinates for neurosurgery.
+post-mortem brains. Most probably, the first anatomical division of the brain
+is that of gyrus and sulci in the 17th century~\cite{Collice2008}. Post-mortem
+segmentation are still in use today, the most notable exampe being the one
+of Talairach~\cite{Talairach1988}. This atlas is based on the dissection of one
+human brain, and defines a
+standardized system of coordinates for neurosurgery.
 
 In moderns times, the advent of MRI permitted to acquire massive amount
 of brain images and create brain templates. A brain template is an image
@@ -136,232 +114,277 @@ examples of this are the Colin27 atlas~\cite{Collins1998}, based on the average
 of 27 healthy subjects images, and the Montreal Neurological Institute (MNI) brain~\cite{Holmes1998},
 which latest version (ICBM152) is based on the average of 152 healthy subjects images.
 The parcellation of a brain templates is, by definition, anatomically
-consistent across subjects, and therefore is considered as atlases. The
+consistent across subjects, and therefore is considered an atlases. The
 most used anatomical atlas, AAL~\cite{Landeau2002}, is based on the manual
 parcellation of the MNI brain template. It divides it in 45 anatomical
 volumes of interest.
 
 When working only on the cortical surface, the most used atlas is that of
-Desikan~\cite{Desikan2006}. The atlas is based on the segmentation of a surface
+Desikan~\cite{Desikan2006}. Desikan atlas is based on the segmentation of a surface
 template, generated from the average cortical folding of 40 healthy subjects
 projected on a sphere. The template was manually segmented into 34 coarse 
 structures per hemisphere. In order to label a new subject, they cortical 
 folding is projected into the sphere and aligned to the template, then 
 the labels are mapped from the atlas to the cortical surface. The automatic
-labeling method developped by Desikan shows a great accuracy when labeling
-new subjects as shown in their paper (rand index > 0.8). The methodology
-of Destrieux~\cite{Destrieux2010} presents a finer division of the cortex in
+labeling method developed by Desikan shows a great accuracy when labeling
+new subjects~\cite{Desikan2006}. Another parcellation made by 
+Destrieux et al.~\cite{Destrieux2010} presents a finer division of the cortex in
 74 labels per hemisphere. In the case of Destrieux, not only the cortical
-folding is taken into account in order to label a region. Indeed, the
+folding is taken into account in order to label a region. Indeed, their
 underlying probabilistic model takes into account information as: curvature
-and average convexity of the cortica surface, prior labeling probability for
+and average convexity of the cortical surface, prior labeling probability for
 that vertex, as well as the labels of vertices in a local neighborhood.
 
-The MarsAtlas~\cite{Auzias2016} uses the superior temporal and inferior frontal
-sulcus as orthogonal axis to defines a grill over the cortex. The rest of the
-sulcus in the brain are aligned to this grill, and used to divide the cortical
-surface in 41 regions. They show that their parcels have a good correspondence
-with specific functional activations.
+A more modern atlas, the MarsAtlas~\cite{Auzias2016}, uses the superior temporal
+and inferior frontal sulcus as orthogonal axis to defines a grill over the cortex.
+The rest of the sulcus in the brain are aligned to this grill, and used to divide
+the cortical surface in 41 regions. As shown in their paper, the resulting parcels
+have good correspondence with some specific functional activations~\cite{Auzias2016}.
 
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth,height=150px]{missing}
+    \caption{Structural Parcellation of the Brain}
+    \label{fig:brain_function}
+\end{figure*}
 
 \section{Cytoarchitecture}
-\label{sec:cyto_maps}
+\label{sec:cytoarchitecture}
 
-Cytoarchitectonic divisions of the brain are based solely in the cellular
-composition of the cortex. In this atlases, a brain region possess a consistent
-thickness and cellular organization. For example, Brodmann Area 4 has an unusually
-thick cortex; possess giant pyramidal cells, and lacks an internal and external
-granular layer. The pioneers in the area are Meynert~\cite{Meynert1872} who
-who noted regional differences in cellular structure among different areas of the human cerebral cortex,
-Campbell~\cite{Campbell1905} who divided the cortex into 14 areas, and Elliot Smith\cite{Smith1907}
-into 50.
+Meynert~\cite{Meynert1872} is considered the first neuroanatomist who noted
+regional differences in cellular composition among different areas of the
+cerebral cortex. 30 years after, Campbell~\cite{Campbell1905} presented a
+cortical parcellation composed of 14 areas, followed shortly after by Elliot
+Smith\cite{Smith1907} with a parcellation in 50 areas.
 
-The most known cytoarchitectonic division of the brain is that
-of Broadmann~\cite{Brodmann1909}. Broadmann defines 52 cortical regions, based
+The most known cytoarchitectonic division of the brain is that of
+Broadmann~\cite{Brodmann1909}. Broadmann defines 52 cortical regions, based
 on the inspection trough microscope of cortical sections on post-mortem
-primates brains. In 1925 von Economo and Koskinas publish the 'Atlas of 
-Cytoarchitectonics of the Adult Human Cerebral Cortex' [CITE]. Economo and
-Koskinas [cite] recognized 54 fundamental cytoarchitectonic areas with 76
-variants and 107 modifications~\cite{Triarhou2007}. Their atlas is based in the
+primates brains. In 1925 von Economo and Koskinas publish
+the 'Atlas of Cytoarchitectonics of the Adult Human Cerebral Cortex'\cite{VonEconomo1925}.
+von Economo and Koskinas recognized 54 fundamental cytoarchitectonic areas with
+76 variants and 107 modifications~\cite{Triarhou2007}. Their atlas is based in the
 examination of mentally healthy subjects in the range of 30–40 years of age
-through improved microscopes. We also have the Jubrain~\cite{Mohlberg2012}, a
-cytoarchitectonic probabilistic maps viever, made by Juelich and Duesseldorf
-institutes by analizing the histological sections of ten human postmortem brains.
-More recent work includes the study of
-neurotransmitter receptors to map divisions in the visual cortex~\cite{Eickhoff2008}, 
-and the introduction of microstructural metrics, as the gray level index
-[CITE](Schleicher and Zilles, 1990), to create observer-independent parcellation
-methods, 
+through improved dissection and acquisition methodologies. von Economo and 
+Koskinas atlas is considered one of the most detailed and reproducible cytoarchitectonic
+atlas available~\cite{Peden1947}.
 
-Creates an atlas of the human ventral visual stream from the postmortem brain
-of 11 subjects\cite{Rosenke2018}.
-    
-
+More recently, Schleicher and Zilles~\cite{Schleicher1990} introduced a microstructural
+metric, the gray level index, to create observer-independent parcellation methods.
+Also, new divisions of anatomical defined regions have been defined, as the one by
+Eickhoff et al.~\cite{Eickhoff2008}, who studied neurotransmitter receptors to
+map divisions in the visual cortex, or Rosenke et al.~\cite{Rosenke2018} with
+their atlas of the human ventral visual stream based on the analysis of 11
+post-mortem brains. Finally, new atlases have been created, as the 
+Jubrain~\cite{Mohlberg2012}, a cytoarchitectonic probabilistic map base of the
+histological sections of ten post-mortem human brains; or the one by
+Ding et al.~\cite{Ding2016}, based on the manually dissection and parcellation
+of a 34 years old brain.
 
 \section{Functional}
-Functional parcellations of the brain denote how different human functions 
-are localized in the brain. This is, each region is in charge of a specific
-function (i.e. movement, speach, vision), or is part of a greater system with
-a specific functional or cognitive goal. The first functional maps where derived
-from lessions. A classical example is that of Broca and Wenicke areas, related
-to meaningfull speach production and spech comprehension. The areas are named
-after Broca and Wernicke, who in the late 1800 reported lesions in
-that region for aphasic patients~\cite{Johns}. Another example is the human homunculus,
-a representation of motor and sensory functions, which Penfied [cite] mapped
-trough experimenting with electrical stimulation of different brain areas of
-patients undergoing open brain surgery.
+\label{sec:functional}
+The first functional maps were derived from lesions. The language regions for
+example, are named after Broca and Wernicke, who in the late 1800 reported
+lesions in that region for aphasic patients~\cite{Johns}. Another example is
+that of the human homunculus, a representation of motor and sensory functions,
+which Penfied~\cite{Schleicher1990} mapped trough experimenting with electrical
+stimulation of different brain areas of patients undergoing open brain surgery.
 
-As stated in the previous section (sec. \ref{sec:cyto_maps}, Cythoarchitectonic
-parcellations can be seen as functional ones, since they show close relation 
-to function. However, they do not cover the whole brain, and we can only relate
-them after many patients show specific impediments and have lesions in those
-regions. The advenment of functional MRI (fMRI) allowed to measure the level of
-oxygen in blood. Knowing that the neurons need oxygen as fuel to fire, we can
-find wich region of the brain are being activated for specific tasks. This
-allowed to refine and validate in vivo the functional specialization of 
-cytoarchitectural parcels and to better define anatomical ones as the human
-humunculus \cite{Lashkari2010, Michel2011}. Even more interesting is the fact
-that there are some regions that activate while in a resting state. From the
-no-task state (resting state), is possible to derive parcellations by seing
-which systems activate simultaneusly. The most common way is to computed the
-Pearson's correlation between the fMRI time series at each spatial location.
-While we have no idea what this means, people uses it. 
+The advent of functional MRI (fMRI) allowed to measure the blood-oxygen level
+dependant signal. Knowing that the neurons need oxygen as fuel to activate,
+fMRI can help to characterize which region of the brain active during specific
+cognitive tasks, or during rest (resting state fMRI, rs-fmri). Many functional parceling
+techniques rely on what is known as a functional connectivity matrix, a two
+dimensional matrix that quantifies the connection between a set of regions
+in the brain. Regions can be as big as pre-defined brain region or as small as
+a single voxel. The simplest way to quantify connection between two regions is
+by means of the Pearson's correlation between the fMRI time series at each region.
 
-PNAS of 2004 \cite{Johansen-Berg2004}
+Most parceling techniques work by applying clustering algorithms to the
+functional connectivity matrix. The most popular techniques use 
+mixture models~\cite{Lashkari2010, Ryali2012}; ward clustering~\cite{Blumensath2013}cites from Thirion];
+k-means clustering~\cite{Yeo2011, Shen2013, Kahnt2012}; hierarchical clustering~\cite{Eickhoff2011, Michel2011};
+spectral clustering~\cite{Thirion2006, Craddock2011, Schaefer2017}, and
+boundary detection~\cite{Gordon2016, Wig2014, Schaefer2017}.
 
+Some widely used whole-brain atlases are those of Yeo et al.~\cite{Yeo2011},
+Power et al.~\cite{Power2011}, Craddock~\cite{Craddock2011}. 
+Yeo et al.~\cite{Yeo2011} propose to use k-means clustering on the average
+rs-fmri connectivity from 1000 subjects. The results yield two parcellations,
+with 7 parcels and 17 parcels respectively, that show to be reproducible across
+groups of subjects. Power et al.\cite{Power2011} use graph analysis and subgraph
+detection techniques in order to characterize functional subnetworks in the
+connectivity graph, creating a 264 regions atlas. Finally, Craddock et al.~\cite{Craddock2011}
+use spectral clustering on rs-fmri connectivity to create fine-grained parcellations
+ranging form 200 to 1000 parcellations.
 
-%\cite{Power2012} use Graph analysis and subgraph detection techniques in order
-%to characterize functional subnetworks in the connectivity graph. 
-Yeo et al. [CITE] 
-Data from 1,000 subjects were registered using surface-based alignment.
-The connectivity fingerprints were modeled with a von Mises-Fisher distribution,
-then, the data points were randomly assigned to different groups and then
-iteratively reassigning the group memberships of points to maximize the
-agreement of connectivity profiles among points of the same group. The results
-yield a 7 parcels and 17 parcels network.
-
-The Cortical Area Parcellation from Resting-State Correlations dataset consists
-of 333 cortical patches segmented using resting-state fMRI (Gordon 2014).
-
-By applying different clustering algorithms to this matrix, we
-obtain different parcellations. We can use ward clustering [cites from Thirion];
-k-means clustering [cites from thirion]; spectral clustering [cites from thirion],
-and principal component analysis (PCA) [cites from thirion]. There are also
-local gradient approaches, that detect abrupt transitions in functional
-connectivity patterns \cite{Wig2014, Schaefer2017}. 
-Based on the work by Thomas Yeo et al. [CITE], Schaefer et al.  \cite{Schaefer2017}
-add further refinement by subparcellating the global networks based on a local
-gradient approach. Parcellations come in several version, breaking down the cortex
-into up to 1000 regions based on rs-fMRI.
-
-Presents a multigraph K-way clustering method and applies it to obtain 
-parcellations of 50, 100, 150... maybe put in the same bag as the rest \cite{Shen2013}.
-
-
-A fine-grained parcellations ranging form 200 to 1000 parcellations,
-using spectral clustering on rs-fMRI connectivity matrix \cite{Craddock2011}.
-
-Thomas Blumensath et al. makes a thousand small functionally homogeneous regions,
-and then apply hierarchical clustering to obtain the rest of the parcellations \cite{Blumensath2013}.
-
-Huth et al. atlas \cite{Huth2016} maps semantic selectivity across the cortex
-by using voxel-wise modelling of functional MRI (fMRI) data collected while 
-subjects listened to hours of narrative stories. This creates a map where each
-region is ligated to a specific systematically map semantic domain. In this
-maps, a region of the brain is ligated to a specific semantic domain, i.e.
-violent, temporal, proffesional \cite{Huth2016}.
-
-While we dont do EEG, you can review it here \cite{Shen2013}.
-
-add \cite{Ryali2013} https://www.ncbi.nlm.nih.gov/pubmed/23041530
-
-%Good review in:
-%https://www.biorxiv.org/content/biorxiv/early/2017/06/06/135632.full.pdf
-%https://biomedia.doc.ic.ac.uk/brain-parcellation-survey/
+Other papers worth mentioning are those of Deen et al.~\cite{Deen2011} and Hurt
+et al.~\cite{Huth2016}. Deen et al.\cite{Deen2011} present a functional division
+of the insula, that has been proved to be highly reproducible across subjects
+and studies. Meanwhile, Huth et al. present an innovative atlas which maps semantic
+domains (i.e. violent, temporal, professional) across the cortex~\cite{Huth2016}.
+They use using voxel-wise modelling of functional MRI (fMRI) data collected while 
+subjects listened to hours of narrative stories.
 
 
 \section{Structural Connectivity}
-In a structural parcellation, regions have a homogeneous pattern of connectivity
-with the rest of the brain. This is, a region is defined as: 'all of the points
-inside are connected to some other ROIs in a similar way'. The granularity
-of the ROIs can go from coarse brain regions, defined by other atlas, to voxels.
-The first connectivity divisions came form tracers in monkey PANDIAS. Diffusion
-MRI (dMRI) enables the in vivo exploration of extrinsic connectivity on the
-human brain. As with fMRI, the most common way to generate a parcellation is
-to compute a connectivity matrix, and then parcellate it using some clustering
-technique. Given the difficulty of handling huge connectivity matrices, initial
-techniques used to divide only portions of the brain.
+\label{sec:structural}
+Based on Diffusion MRI (dMRI), tractography enables the in vivo exploration of
+axonal connectivity on the human brain. As with functional data, the most
+common way to generate a parcellation is by first computing a connectivity matrix
+between regions (in this case, a structural connectivity matrix), and then parcellate it using
+some clustering technique. When computing the matrix, the simplest way to estimate
+connectivity between two regions is by computing the proportion of streamlines
+that pass through them, respect to the total number of streamlines created.
 
-Behrens et al.\cite{Behrens2003} thalamus Hard segmentation was performed by classifying the seed voxel as connecting to the cortical mask with the highest con- nection probability.
-Alfred Anwander performs k-means\cite{Anwander2006} in the connectivity matrix of Broca's area.
-Thiebaut de Schotten et al. divide the occipital cortex\cite{ThiebautdeSchotten2014}, frontal lobe \cite{ThiebautdeSchotten2016}
+Given the difficulty of handling huge connectivity matrices, initial techniques
+used to divide only portions of the brain\cite{Behrens2003, Jbabdi2009, Anwander2006, ThiebautdeSchotten2014, ThiebautdeSchotten2016, Bajada2017}.
+Advances in computational power and clustering methodology allowed to create
+full brain parcellations\cite{Roca2009, Clarkson2010, Lefranc2016, Fan2016, Moreno-Dominguez2014, Muircheartaigh2018, Lefranc2016, Paristot2015, Roca2009, Gallardo2017a, Muircheartaigh2018}. 
+Notables work as those of Behrens et al.\cite{Behrens2003}, Anwander et al.~\cite{Anwander2006},
+Thiebaut et al.~\cite{ThiebautdeSchotten2016}, Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014},
+Bajada et al~\cite{Bajada2017} and Fan et al.~\cite{Fan2016}.
+Behrens et al.~\cite{Behrens2003} segments the thalamus by classifying the seed voxel as connecting to the cortical
+mask with the highest connection probability. Anwander et al.~\cite{Anwander2006}
+uses k-means clustering over the connectivity matrix of Broca's area, obtaining
+a division in 3 regions, consistent with cytoarchitectural divisions.
+Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016}
+parcellates the frontal lobe in 12 regions by means of principal components analysis,
+and shows its reproducibility across subjects and datasets.
+Moreno-Dominguez creates a hierarchical parcellation of the brain by using
+ward clustering~\cite{Moreno-Dominguez2014}, allowing to obtain a parcellation
+of the brain with different granularities. Fan et al.\cite{Fan2016} use
+spectral clustering over connectivity data to subdivide regions of the Desikan
+atlas~\cite{Desikan2006}, obtaining a parcellation with 210 cortical areas and
+36 subcortical regions. Finally, Bajada et al.~\cite{Bajada2017} take a different
+approach and use spectral reordering to create a soft parcellation over the
+temporal lobe. This allows to have parcels that diffuse into each other, instead
+of sharp boundaries dividing them.
 
-Braintome\cite{Fan2016} starting from Desikan, they subdivide each region based on tractography.
-Moreno-Dominguez et al. use a constrained hierarchical clustering to parcellate a structural matrix \cite{Moreno-Dominguez2014}
-Gallardo buils on top of this.
-They use spectral reordering to study the organization of the temporal lobe \cite{Bajada2017}
-(O'Muircheartaigh and Jbabdi, 2017) is entirely data-driven (based on independent component analysis) and allows one to obtain sets of white matter components with their associated gray matter networks \cite{Muircheartaigh2018}
+The parcellation of Gallardo et al.\cite{Gallardo2017a} will be presented in
+full detail in the following chapter.
 
-
-Previous single-subject structural parcelling techniques work by refining other
-parcellations~\cite{Clarkson2010};parcelling only part of the
-cortex~\cite{Lefranc2016, Roca2009, ThiebautdeSchotten2014, ThiebautdeSchotten2016},
-perform a groupwise parcellation after constructing an average connectivity profile~\cite{Clarkson2010, Roca2010},
-
-Parisot uses ideas from cosegmentation and spectral decomposition to create consistent groupwise parcellations \cite{Paristot2015}.
-
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth,height=150px]{missing}
+    \caption{Multi-modal Parcellation of the Brain}
+    \label{fig:brain_function}
+\end{figure*}
 
 \section{Multi-modal}
-So far, all the presented methodologies were solely on one technique. In multi-modal parcellations, the goal is to mix two or more.
-The multi-modal parcellations are, by construction, maximizing the consistency between modalities. For example,
-Diez et al. \cite{Diez2014} proceed by computing common structure-function modules (SFMs). They start by computing both a resting state and a structural connectivity matrix. Then, they find the subdivision that maximizes a cross-modularity index, that, when high, indicates that, using a given common partition, both matrices are highly modular and, at the same time, the moduli are internally wired in a similar way.
-Parisot et al. \cite{Parisot2017} compute a set of parcellations from different modalities and fuse them based on their local reliabilities. The fused parcellation is used to initialise the next iteration, forcing the parcellations to converge towards a set of mutually informed modality specific parcellations.
-Glasser et al. \cite{Glasser2016}. Architecture was measured using T1w/T2w myelin content maps plus cortical thickness maps with surface curvature regressed out5,9,10 (Supplementary Methods 1.5). Function was measured using task-fMRI responses to 7 tasks in 86 task contrasts (47 unique; 39 were sign-reversed contrasts). Effect size maps (beta maps) after correction for the receive field were used instead of Z statistic maps because we were interested in regional differences in the magnitude of the BOLD (blood oxygen level dependent) signal change induced by the tasks, rather than differences in the significance of the BOLD signal change. Neuroanatomist defined initial border areas in a semi-automated way using group average data for all of these modalities, then an automated algorithm optimized the border placement, based on areal features of each subject.
+\label{sec:multimodal}
+So far, all the presented methodologies were solely based on one criteria.
+Multi-modal parcellations are relatively new in the field of brain mapping.
+By combining information from different neuroimaging methodologies, multi-modal
+techniques create regions which boundaries are consistent with multiple
+independent neurobiological properties.
+
+Examples of multi-modal parcellations are those of Diez et al. \cite{Diez2014},
+Parisot et al. \cite{Parisot2017}. 
+Diez et al. \cite{Diez2014} merges structural connectivity and functional
+connectivity in order to compute common structure-function modules (SFMs).
+Their methodology defines a cross-modularity index, that indicates how
+modular a parcellation is respect to both matrices, and how similar is the
+internal connectivity in both modalities. By searching for the parcellation
+that maximizes this index, they obtain a cortical parcellation with 20 structure-function
+modules. Parisot et al. \cite{Parisot2017} starts by computing a set of
+parcellations from fMRI, rs-fMRI, estimations of myelin maps, and tractography.
+These parcellations are then fuse based on their local reliabilities by means of
+mixture models. The fused parcellation is iteratively refined, forcing 
+the parcellations to converge towards a set of mutually informed modality specific
+parcellations.
+
+The most notable example of multi-modal parcellations is the
+Glasser-van Essen atlas.~\cite{Glasser2016}. Glasser et al.~\cite{Glasser2016}
+divide the cortex in 180 regions which borders are consistent with: 
+myelin content maps, cortical thickness maps, and task-fMRI activations. Their
+approach combines a semi-automated prior segmentation with a machine learning
+algorithm to optimize the border placement.
 
 \section{Discussion}
-The brain atlas concordance problem: quantitative comparison of anatomical parcellations \cite{Bohland2009}.
 
+%The brain atlas concordance problem: quantitative comparison of anatomical parcellations \cite{Bohland2009}.
+The brain is a highly complex cellular network, in order to study it, some
+way of dimensionality reduction is needed. Given that neurons tend to organize
+and activate in a spatial coherent way, modeling the brain as a set of interacting
+regions seems like a valid approach. As seen in sections \ref{sec:anatomical}-\ref{sec:multimodal},
+different brain parcellations exist based on criteria such as anatomy, function,
+cytoarchitecture or extrinsic connectivity. Each criteria sees the brain in
+a different way, and relies on different acquisition methods. We find important
+to discuss their advantages and shortcomings.
 
-Here we name them, some people profile them:
+Cytoarchitectural parcellation denote the cellular composition of the brain,
+therefore, they are the perfect candidate to abstract populations of neurons.
+However, when using these parcellations is important to acknowledge their limitations.
+First, extant cytoarchitectonic maps do not cover the whole brain, in fact, only 
+approximately 40\% of the cortical surface has been mapped up to
+now~\cite{Amunts2007}. Second, all cytoarchitectonic atlases are based on just
+a few post-mortem brains, making them hard to represent a population. This is
+product of the complex process of dissecting a brain, delimiting its regions,
+and registering the results to a common space. The whole process requires in most
+cases one person year work per region. Finally, and most importantly, given the
+amount of variability~\cite{Zilles2013} in different subjects, registering a 
+cytoarchitectonic atlas to a new brain based on anatomical features does not
+guarantee the correct localization of the areas. Until now, post-mortem dissection
+remains as the only way to correctly locate cytoarchitectural areas.
 
-Thirion did it for functionali \cite{Thirion2014}
-Arslan did it for functional \cite{Arslan2018}
-Gorgolewski KJ, Tambini A, Durnez J et al. Evaluation of full brain parcellation schemes using the NeuroVault database of statistical maps [version 1; not peer reviewed]. F1000Research 2017, 6:1986 (poster) (doi: 10.7490/f1000research.1115065.1) 
+Anatomical parcellations are based on fairly common brain landmarks, making them
+highly reproducible across subjects. This incurs in the trade-off of having coarse
+brain regions, which most of the time do not account correctly for cellular
+composition, or brain function~\cite{Amunts2007}.
 
-Some other reviews: Jbabdi \cite{Jbabdi2013}, \cite{Arslan2018}, 
+Functional parcellations map cognitive functions to brain locations, and are
+a key element to understand how the brain works. Most techniques are based
+on the modular paradigm, which states that one brain region is specialized
+for one function. Therefore, regions are generally inferred based on relative
+differences of some sort, this is, a region is defined as functionally specialized
+because: many subjects with a deficiency in the cognitive function showed a
+lesion in that region; or, the region it shows more activation while the subject
+realizes the function. This has at least two heavy limitations. First, lesions
+in the brain almost never affect only one cognitive function~\cite{Fuster2000},
+making hard to decide which function to map. Second, is hard to create tasks
+that isolate a single function, in order to correlate it with in-vivo brain
+activation. Also, limitations in the time resolution of fMRI do not allow to
+infer causality interactions between regions. Finally, accumulating evidence
+suggests that the modular paradigm has serious limitations and might in fact
+be misleading~\cite{Bressler2010}. Bressler and Menon~\cite{Bressler2010}
+propose to start defining functional networks, and relate cognitive functions
+to the interactions between such networks.
 
-Gatherings: http://www.lead-dbs.org/helpsupport/knowledge-base/atlasesresources/cortical-atlas-parcellations-mni-space
-            https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases
+Structural parcellations define regions with homogeneous axonal connectivity.
+While many studies show structural parcels are functionally
+relevant~\cite{Gallardo2017a, Anwander2006, ThiebautdeSchotten2016},
+more studies on reproducibility are needed\cite{Zilles2013}. Another
+important downside, is that the underlying technique, tractography, is still
+not mature enough. In fact, recent studies show that state-of-the-art
+tractography algorithms create four times more false positives than true
+positives.
 
+Multi-modal parcellations combine information from different neuroimaging methodologies,
+in order to create regions consistent with multiple neurobiological properties.
+Their main limitation is that sometimes, regions tend to overrepresent one
+modality. A clear example is the subdivision of the precentral and poscentral
+gyrus in the atlas of Glasser et al.~\cite{Glasser2016}. Even when motor tasks
+are used during the construction of the atlas, the resulting subdivisions of
+both motor and sensory cortex appear to be driven by myelination. This
+result is inconsistent with the well known functional subdivision of both motor
+and sensory cortex.
 
-There's not such a thing as a unique brain parcellation. While we cannot say
-that it doesn't exist. We know that all of our techniques have a limitation,
-either in resolution, SNR. At the same time, we cannot study things at the
-neuron level, because we have billions of neurons in the brain. It makes a
-lot of sense that each parcellation is different, because they're based
-in different criteria. Even when trying to parcellate data coming from a
-same machine (fmri, dmri, etc), changing the hypothesis will change the 
-resulting parcellation. For example, in structural gradient vs structural
-parcel. The important thing is to be able to select the right parcellation
-for the right study.
-
-The important thing is to validate it correctly, some people do, like \cite{Gallardo}, \cite{Auzias2016}, \cite{ThiebautdeSchotten2014, ThiebautdeSchotten2016}
-
-\section{Resume of all of the parcellations presented}
-Here I put a beautiful table resuming everything.
+If a true and unique parcellation of the brain exists, it has not been found yet.
+Meanwhile, different atlases and techniques to divide the brain coexist. In this
+review, we discussed the most common criteria to parcellate the brain, alongside
+their underlying biological hyphotesis, and present different parcellations 
+for each one. We hope our discussion helped to highlight that, which parcellation
+to use in practice will heavily depend on the hypothesis and the goal of the
+study to be done.
 
 \section{Conclusion}
 In order to reduce the complexity of the brain many studies start by subdividing
 the brain. Depending on the hypothesis driving the study, different type
 of parcellations can be used. In this chapter we presented parcellations based
-on different criteria: cytoarchitecture; anatomy, function, semantics and
-structural. We also presented some parcellation which are driven by a mixture
-of suche criteria. Each parcellation possess its own advantages, and should be
-used in the right context. In the following chapter we will introduce the
-first contribution of this thesis: a technique to parcellate the cortex based
-on its structural connectivity. Our technique allows to create parcellations
-at the single-subject and group level, while having a good correlation with
-known divisions of the brain.
-
+on different criteria: cytoarchitecture; anatomy; function, and axonal connectivity.
+We also presented some parcellation which are driven by a mixture of such
+criteria. In the following chapter we will introduce the first contribution of
+this thesis: a technique to parcellate the cortex based on its structural
+connectivity. Our technique allows to create parcellations at the single-subject
+and group level, while having a good correlation with known divisions of the brain.
 
 \chapterbib
