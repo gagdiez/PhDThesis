@@ -2,11 +2,12 @@
 
 \section{Overview}
 In the previous chapters we studied the structural organization of the brain,
-and saw that it is highly related to function. We also talk, specifically in
-chapter X, about how lesions in the cortex or white matter disrupt the normal
-functioning of the brain. Some white matter pathologies, such as tumors
-or traumatic brain injury, affect the white matter to the point were it's
-difficult to even infer which pathways are affected using tractography.
+and saw that it is highly related to function. Some white matter pathologies,
+such as tumors or traumatic brain injury, affect the white matter to the point
+were it's impossible to use tractography. Therefore, we cannot tell which
+tracts are affected. Given the relationship between brain and function, it's
+important to determinate which tracts were affected in order to prevent
+which function will be affected.
 In this chapter, we introduce a way to infer the location of pathways, even
 when it's not possible to use tractography to locate them. Our technique is
 based on a methodology named label fusion. In particular, we show how to add
@@ -17,34 +18,46 @@ This work was presented as part of OHBM 2018~\cite{Guillermo2018}.
 
 \section{Introduction}
 
-White matter pathologies such as tumors or traumatic brain injury disrupt the
-structure of white matter. These disruptions hamper the inference of affected
-pathways using tractography. Furthermore, for some pathologies as tumors or
-edemas, estimating brain pathways using tractography becomes impossible [cite].
-For such pathologies, it's not possible to use Diffusion Magnetic Resonance
-Imaging (dMRI) to tract within or around the lesion. Given the nature of the
-lesions, the tracking results in interrupted or erroneous tracts. This situation
-makes hard to infer which pathways are directly affect by the pathology. One
+Pathologies such as brain tumors or edemas disrupt the structure of white
+matter. The diffusion of water particles, which is constrained by the
+tracts traversing the white matter, is expected to be affected. This makes
+diffusion MRI (dMRI), which quantifies how water diffuses in the brain, a well
+suited modality to characterize tumors. Pictorial et al.\cite{Pictorial2004}
+identify four major type of patterns that can be found when tracking in the
+presence of tumors. 
+
+The first pattern consists of normal Fractional Anisotropy (FA), with tract
+displacement. In this case, a bundle was displaced by the tumor, without
+interrupting it, which results in a track goign around the tumor. The second
+pattern is substantially decreased FA with no displacement, this represents an
+edema and sometimes is possible to track on it. The third pattern is substantially
+decreased FA with some lost of directionality, for which tracking becomes hard.
+Finally, the fourth pattern consists of isotropic diffusion, which causes 
+a disruption of the tracts, making impossible to infer which tract were affected.
+
+The third and fourth patter present a situation in which the tracking results in
+interrupted or erroneous tracts, making hard to infer which pathways are directly
+affect by the pathology. One
 possible way to overcome this issue, is by aggregating spatial information
 from other subjects in order to infer the affected tracts. Assuming we know the
 location of a set of tracts in the brains of a group of healthy subjects, we
 could register them to the brain of our patient and use a label fusion technique.
 Label fusion is a family of techniques that aims to infer the localization of the
 brain structure of a subject from its localization in a group of control subjects.
-One well known technique within this family is Majority Voting [cite]. Given a
+One well known technique within this family is Majority Voting~\cite{Xu1992}. Given a
 specific location, each subject is said to "vote" for one label. The inferred
 label for that location will be the one with more votes. For example, when
 labeling a volume, each voxel receives the label voted by the majority of the
 control subjects.
 
 Majority Voting is simple to implement and has been demonstrated to yield
-accurate segmentations [reference]. However, this technique is blind both to
+accurate segmentations~\cite{Asman2013}. However, this technique is blind both to
 registration problems and anatomical variability between subjects. To overcome
 this, it has been propose to weight the vote of each subject by some measure of
-similarity between the patient and the subject [cite]. The underlying
+similarity between the patient and the subject~\cite{Pictorial2004}. The underlying
 intuition is the choosing of labels should be driven by those subjects who
 resemble the most to the one being labeled. The practical advantages of various
-strategies based on this idea have recently been demonstrated [6-sabuncu].
+strategies based on this idea have recently been demonstrated~\cite{Artaechevarria2009}.
 
 The techniques described so far relay only on anatomical information, not taking 
 into account the structure of white matter. In the case of white matter pathways,
@@ -180,30 +193,77 @@ our technique achieves better results than Mayority Voting.
 For the synthetic data, we used Phantomas to create two phantom DWIs: the
 first one possess only one tract, crossing the image in the X plane. The 
 second one has a fiber crossing. See figure X. Both DWI are simulated with
-an SNR of 20 which is the standard in diffusion phantoms [CITE]. For the
+an SNR of 20. For the
 real data, 
 we randomly selected 13 subjects from the HCP500 dataset from the Human
 Connectome Project. For each subject, we computed whole-brain tractography
 using each voxel in the white-matter as a seed and simulating 8 particles per
-seed [REF]. We extracted the main tracts from the left hemisphere tractogram
-(18 tracts in total) using the implementation of the white-matter query
-language (WMQL),(Wasserman et al. 2016). For each pair of subjects, we
-registered they tracts to each others brain.
+seed. We extracted the main tracts from the left
+hemisphere tractogram (18 tracts in total) using the implementation of the
+white-matter query language (WMQL)~\cite{Wassermann2016}. For each pair of
+subjects, we registered they tracts to each others brain.
 
-\subsection{Assessing goodness of the technique in synthetic data}
-The dwi of TEST has one tract. We have two types of subjects, ST who votes for
-a tract, and S0 who votes for no tracts. ST starts with a completely aligned
-tract, and we go rotation it until 90 deg. Then, we compute the weight of
-each vote. The proportion between them, tells us how many subjects we need to
-get either one or the other label. We show that, when we have subjects voting
-for the right tract, their weight go up, allowing to only 30\% of them to win.
-But when the tract is not aligned, then they lose, except if they're the 70\%.
-In between.. stuff.
-But, when the GT is NO-TRACT, we always need more than 60\% of the people.
-Something similar happens with crossing, I hope.
-This is better than the 50\% of voting.
 
-\subsection{Assessing goodness of the techniques in real data}
+\subsection{Test in Syntethic data}
+
+Having the ability to create a synthetic dataset allows us to test the
+methodology in a controled environment. 
+
+
+
+\subsubsection{Study on the voting weight obtained when no lesions are present}
+
+\begin{figure}[h]
+    \includegraphics[width=0.49\textwidth, height=150px]{missing.png}
+    \caption{Phantoms created to test how our technique weights the votes.
+             (A) Only one tract in the white matter (B) No tracts, free diffusion.}
+    \label{fig:pha_exp_1}
+\end{figure}
+
+Our method is a weighted majority voting. In particular, the vote that each
+vote receives is related to how much it looks like the underlying diffusion
+information. A desired property is that votes for tracts which directionality
+is in agreement with that of the diffusion receive higher votes. In order to
+quantify how our technique weights votes, we created two DWI phantoms, one with 
+a single straight tract (Fig. \ref{fig:pha_exp_1} A) and one with only free
+diffusion. Using the first phantom, we computed 1000 streamlines, in order
+to have a realistic representation of the straight tract present in the first
+phantom. Then, in the central voxel, we computed the weight that a vote for
+that tract would receive. We repeated the experiment while rotating the streamlines
+over one plane until reaching 90 degrees. Figure \ref{fig:weight_exp_1} shows
+the weights obtained at different degrees when the underlying diffusion is a
+single straight tract in the x direction (Fig. \ref{fig:weight_exp_1} A), and
+when the diffusion is isotropic (Fig. \ref{fig:weight_exp_1} B).
+
+\begin{figure}[h]
+    \includegraphics[width=0.49\textwidth, height=150px]{missing.png}
+    \caption{Weights obtained when a subject votes for each structure.
+             (A) Only one tract in the white matter (B) No tracts, free diffusion.}
+    \label{fig:weight_exp_1}
+\end{figure}
+
+The weights obtained in figure \ref{fig:weight_exp_1} A show that, the more
+similar is the structure being voted, the higher is its weight. After reaching
+an angle of 20 degrees, the weight starts to drop rapidly. Meanwhile,
+figure \ref{fig:weight_exp_1} B shows that the weight a tract receives when
+the DWI has isotropic diffusion.
+
+Since our method is based on a weighted majority voting, the final result of
+the parcellation will depend not only on the weights, but also on the amount of
+subjects voting for each structure.
+Having the ability to compute the weights received by a structure allow us to
+examine what would happen in particular scenarios. Lets assume that only two types
+of subjects are voting, one type of subjects votes for a specific tract, and
+the other type of subjects votes for 'no tract'. The dotted lines in figure
+\ref{fig:weight_exp_1} show which proportion of subjects are needed to vote
+for the 'tract' in order for it to appear in the final segmentation. For
+example, in the phantom with one tract, the weight for the 'tract' with 0 degrees
+is such that only a 30\% of the subjects are needed to vote for it. Meanwhile,
+for tracts at 90 degrees, 70\% of the subjects are needed to vote for it. 
+In the phantom case when there's only isotropic DWI, we always need more than
+50\% of the subjects. These results show a good behaviour of our technique. 
+
+\subsubsection{Assessing goodness of the techniques in real data}
 To assess the "goodness" of our technique we made a leave-one-out
 cross-validation. At each step, we selected one of the subjects as test and 
 used the rest as train subjects. Using the registered tracts of the train
@@ -218,11 +278,11 @@ less of false positives in average. This incurs on a trade-off of having 39\%
 more false negatives and 18\% less true positives in average, underlying that
 our technique a more conservative.\\
 
-\subsection{Simulating Lesions in the White-Matter}
-To test how our technique would behave in a injured brain, we simulate a tumor in the white matter of one of our subjects. We place the tumor to interrupt the ILF. We do so by selecting a set of neighboring voxels where the ILF passes by, and mix their signal with diffusion signal from random voxels in the ventricles. This is, for each selected voxel $x$ in the brain, we chose a random voxel $v$ in the ventricle and mix their signals:
-$$S(x) = S(x)(1-\alpha) + S(v)\alpha, \alpha \in [0,1]$$.
-Since the ventricles are regions filled with cerebrospinal fluid (CSF), they diffusion is approximately isotropic. We compute for which values of $\alpha$ WMQL stops being able to detect the ILF, and for which values our technique stops being able to detecting it. Since the Major Voting does not rely on diffusion data, this experiment does not affect the results obtained in the previous experiment for Major Voting.
-WMQL stops detecting the ILF at... and our technique stops detecting it in the voxels at .... 
+%\subsection{Simulating Lesions in the White-Matter}
+%To test how our technique would behave in a injured brain, we simulate a tumor in the white matter of one of our subjects. We place the tumor to interrupt the ILF. We do so by selecting a set of neighboring voxels where the ILF passes by, and mix their signal with diffusion signal from random voxels in the ventricles. This is, for each selected voxel $x$ in the brain, we chose a random voxel $v$ in the ventricle and mix their signals:
+%$$S(x) = S(x)(1-\alpha) + S(v)\alpha, \alpha \in [0,1]$$.
+%Since the ventricles are regions filled with cerebrospinal fluid (CSF), they diffusion is approximately isotropic. We compute for which values of $\alpha$ WMQL stops being able to detect the ILF, and for which values our technique stops being able to detecting it. Since the Major Voting does not rely on diffusion data, this experiment does not affect the results obtained in the previous experiment for Major Voting.
+%WMQL stops detecting the ILF at... and our technique stops detecting it in the voxels at .... 
 
 \subsection{Discussion}
 We want to infer the position of tracts in the white matter.
