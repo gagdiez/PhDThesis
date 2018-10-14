@@ -17,42 +17,34 @@ of white matter pathways.
 This work was presented as part of OHBM 2018~\cite{Guillermo2018}.
 
 \section{Introduction}
-%
-
-%%To reduce the impact of erroneous mapping of voxels, and consequent
-%misparcellation  of  target  structures,  multi-atlas approaches have
-%been postulated. Suppose that the hippocampus is defined in N different
-%atlases and each atlas is warped to a  to-be-parcellated subject image,
-%then the N definitions (labels) of the hippocampus are casted to the
-%subject space, which can be fused  (a.k.a ‘‘label fusion’’) based upon
-%pre-defined algorithms such as those proposed by [7,36–42]. If the mis-registration of each atlas causes random errors, the errors should be reduced by integrating N definitions.  
-
-Pathologies such as brain tumors or edemas disrupt the structure of white
-matter, resulting in cognitive deficits. Depending on the type and severity
-of the pathology, fiber bundles can be displaced, infiltrated or directly
-interrupted. Inferring which pathways are affected, or surround the tumor
-is key for both pre and post-surgical planning. With this knowledge, neurosurgeons
-attempt to remove as much damaged tissue as possible while minimizing damage to
-functional white matter networks~\cite{McGirt2009}. Diffusion MRI allows to
+Pathologies such as traumatic brain injuries, brain tumors or edemas disrupt
+the structure of white matter, resulting in cognitive deficits. Depending on
+the type and severity of the pathology, fiber bundles can be displaced,
+infiltrated or directly interrupted~\cite{Schonberg2006, Huisman2009, Won2016}.
+Inferring which pathways are affected, or surround the pathology is key for both
+pre and post-treatment planning. With this knowledge, neurologists and
+neurosurgeons can decide if a lesion should be treated more aggressively or 
+conservatively~\cite{Huisman2009, McGirt2009}. Diffusion MRI allows to
 non-invasively reconstruct white matter tracts by means of tractography. In
 healthy brains, tractography is able to recover the major fiber bundles in the
 brain~\cite{Catani2008}. However, in the presence of pathologies, tracking
 through the white-matter becomes challenging.
 
-Pictorial et al.\cite{Pictorial2004} identify four types of patterns found
-in major bundles and diffusion information affected by the 
-presence of tumors. The first pattern consists of normal Fractional Anisotropy
-(FA), a measure derived from dMRI, with tract displacement. In this case, a
+Four types of patters can be identified in major tracts and diffusion
+information affected by a brain pathologies~\cite{Pictorial2004} . The first
+pattern consists of normal Fractional Anisotropy (FA)~\cite{Basser1996}, and
+tract displacement~\cite{Pictorial2004}. In this case, a
 bundle is displaced by the tumor, without interrupting it. The second pattern
-is substantially decreased FA with no tract displacement, this represents an
-edema, and sometimes it is possible to track through it~\cite{Deslauriers-Gauthier2018}.
+is substantially decreased FA with no tract displacement, this could be
+an edema or small tumor\cite{Schonberg2006, Huisman2009}.
 The third pattern is substantially decreased FA with some lost of directionality,
-for which tracking becomes hard. Finally, the fourth pattern consists of
-isotropic diffusion within the tumor, which causes a disruption of the tracts.
+for which tracking becomes hard~\cite{Schonberg2006, Pictorial2004}. Finally,
+the fourth pattern consists of isotropic diffusion within the pathology,
+which causes a disruption of the tracts~\cite{Pictorial2004}.
 In this last case, it's possible to track until, and after the tumor, but not
 within it.
 
-The third and fourth patterns presented by Pictorial et al.\cite{Pictorial2004}
+The third and fourth patterns presented 
 denote situations in which the tracking results in interrupted or erroneous
 tracts. The incorrect shape of the resulting tracts, or its lack of continuity
 makes hard to infer which pathways are directly affect by the pathology. In these
@@ -63,6 +55,12 @@ register them to the brain of our patient and combine them using a label fusion
 technique. Label fusion is a family of techniques which aim is to infer the
 localization of a structure in a target subject, based on its
 localization in a group of control subjects.
+
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth,height=150px]{missing}
+    \caption{Graphical explanation of the voting process}
+    \label{fig:weighted_diffusion}
+\end{figure*}
 
 One well known label-fusion technique is Majority Voting~\cite{Xu1992}. Given a
 voxel on a brain image, each subject is said to "vote" for a label. The resulting
@@ -87,14 +85,15 @@ data. This is, if the diffusion data of the test subject is consistent with the
 direction of the voted pathway, the vote has a higher weight. Our technique also
 allows to work with crossing tracts, by modeling multiple labels per voxel.
 
-We validate our technique in 13 subjects of the Human Connectome Project (HCP).
-For each subject, we infer the location of 18 left hemisphere tracts using
+We validate our technique in 9 subjects of the Human Connectome Project (HCP).
+For each subject, we infer the location of 4 left hemisphere tracts using
 whole-brain tractography and an implementation of the white matter query language
 (WMQL). We use this results as ground truth to compare against inferring the
-tracts from using the other 12 subjects with our proposed technique and Majority
-Voting. Our results show that adding dMRI to the label fusion process achieves a
-similar number of true positives than Majority Voting, with a 60\% less of
-false positives, incurring in a trade-off of a 40\% false negatives.
+tracts from using the other 8 subjects with our proposed technique and Majority
+Voting. Our results show that our proposed techniques achieves a higher level
+of precision. This is, our technique is able to give a more trustable labeling,
+incurring in the trade-off of labeling less voxels. We also show that our technique
+is able to label around simulated brain lesions.
 
 This work is organized as follows: In the Methods section we make an introduction
 to label fusion techniques and present how to extend them using diffusion
@@ -102,6 +101,8 @@ information. In the Experiments and Results section we present our results
 both on synthetic and on HCP data. We then discuss our results and position
 ourselves with respect to the state of the art in the Discussion section. 
 Finally, in the last section we provide our conclusions.
+
+
 
 \section{Methods}
 \label{sec:methods}
@@ -132,7 +133,6 @@ per voxel, and the label with the most amount of votes is assigned to the target
 voxel.
 
 \subsection{Diffusion Based Voting}
-
 Our label fusion technique takes advantage of dMRI to weight the vote of each
 subject. The vote for a specific label gets a higher weight if it's supported
 by the diffusion data of the subject being labeled. In this section, we first
@@ -146,13 +146,6 @@ model, it's possible to estimate a fiber orientation density function\cite{Tourn
 The fiber ODF $F_x(\theta, \phi)$ represents the estimated fraction of fibers
 within the voxel $x$ that are aligned along the direction $(\theta, \phi)$,
 expressed in spherical coordinates.
-
-\begin{figure*}[t]
-    \includegraphics[width=\textwidth,height=150px]{missing}
-    \caption{A. Estimation of tract directionality within a voxel. B. etc}
-    \label{fig:weighted_diffusion}
-\end{figure*}
-
 
 \subsubsection{Fiber Orientation Density Function from Tractography.}
 A tract can be described as a set of streamlines, were a streamline is a
@@ -222,9 +215,14 @@ no-tract, representing the background or a gray matter structure.
 By computing the inner product between ODFs, we can estimate how much they look
 alike. This allow us to weight the votes of each subject, while accounting for
 the white-matter structure of both the voting subjects and the target.
+\begin{figure*}[t]
+    \includegraphics[height=150px]{7.multiatlas/img/phantoms.png}
+    \caption{Phantoms created to test how our technique weights the votes.
+             (A) Only one tract in the white matter (B) Two tracts crossing. (C) No tracts, free diffusion.}
+    \label{fig:pha_exp_1}
+\end{figure*}
 
 \section{Experiments and Results}
-
 In section \ref{sec:methods} we presented how to add diffusion information to
 Majority Voting (Eq. \ref{eq:mvoting_weighted}). This allow us to weight each
 vote by how much the diffusion of the target supports it. Now, we present
@@ -259,15 +257,17 @@ registered the tracts between every pair of subjects.
 
 For both the phantom DWIs and the HCP subjects, we estimated their fiber ODFs
 using the implementation of CSD in Dipy~\cite{Garyfallidis2014}. The ODFs were
-discretize on a sphere with $n=100$ vertices. A uniform distribution over the sphere
+discretrize on a sphere with $n=100$ vertices. A uniform distribution over the sphere
 was created by assigning to each vertex the value $\sqrt(n)/n$, making $<U, U> = 1$.
 
-\begin{figure*}[h]
-    \includegraphics[width=\textwidth, height=150px]{missing.png}
-    \caption{Phantoms created to test how our technique weights the votes.
-             (A) Only one tract in the white matter (B) No tracts, free diffusion.}
+
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth]{7.multiatlas/img/weights.png}
+    \caption{We started with an horizontal tract and start rotating it. We computed
+             the weight a subject would get when voting for the tract. 
+             (A) Weights in phantom A (B) Weights in phantom B (C) in C.}
     \label{fig:pha_exp_1}
-\end{figure*}
+\end{figure*} 
 
 \subsection{Assessing the Correctness of Voting Weights in Synthetic Data}
 In order to study how the tract's directionality influences its vote weight,
@@ -307,7 +307,6 @@ diffusion matches better with the uniform ODF. Finally, figure \ref{fig:pha_exp_
 shows always a higher weight for the 'non-tract' than for any tract, consistent
 with the isotropic diffusion of our third phantom.
 
-
 %Since our method is based on a weighted majority voting, the final result of
 %the parcellation will depend not only on the weights, but also on the amount of
 %subjects voting for each structure.
@@ -323,33 +322,87 @@ with the isotropic diffusion of our third phantom.
 %In the phantom case when there's only isotropic DWI, we always need more than
 %50\% of the subjects. These results show a good behaviour of our technique. 
 
-\subsubsection{Assessing goodness of the techniques in real data}
-To assess the "goodness" of our technique we made a leave-one-out
-cross-validation. At each step, we selected one of the subjects as test and 
-used the rest as train subjects. Using the registered tracts of the train
-subjects, we computed parcellations using both the voting rule and our technique.
-Since we also have the tracts of each test subject, we compute a 'ground truth'
-parcellation of they white matter. Finally, we computed the confusion matrix of
-both the Majority Voting and our technique. A confusion matrix is a matrix of 
-size labels by labels where the entry (i,j) is the number of times the label in
-the ground truth was i and the technique labeled j. Table 1 shows that our
-proposed achieves a similar number of false negatives while obtaining a 64\%
-less of false positives in average. This incurs on a trade-off of having 39\%
-more false negatives and 18\% less true positives in average, underlying that
-our technique a more conservative.\\
+\subsubsection{Inferring Tracts in Human Connectome Project Subjects}
+To validate our technique in a more realistic but yet controlled scenario, we
+inferred single tracts in the HCP subjects. We selected the following tracts to
+work with: inferior part of the Superior Longitudinal Fasciculus (SLF1),
+Inferior Longitudinal Fasciculus (ILF), middle part of the
+Corpus Callosum (CC2), and External Capsule (EC). These four tracts provide
+a fair diversity of directionality, shape, and position in the brain.
 
-%\subsection{Simulating Lesions in the White-Matter}
-%To test how our technique would behave in a injured brain, we simulate a tumor in the white matter of one of our subjects. We place the tumor to interrupt the ILF. We do so by selecting a set of neighboring voxels where the ILF passes by, and mix their signal with diffusion signal from random voxels in the ventricles. This is, for each selected voxel $x$ in the brain, we chose a random voxel $v$ in the ventricle and mix their signals:
-%$$S(x) = S(x)(1-\alpha) + S(v)\alpha, \alpha \in [0,1]$$.
-%Since the ventricles are regions filled with cerebrospinal fluid (CSF), they diffusion is approximately isotropic. We compute for which values of $\alpha$ WMQL stops being able to detect the ILF, and for which values our technique stops being able to detecting it. Since the Major Voting does not rely on diffusion data, this experiment does not affect the results obtained in the previous experiment for Major Voting.
+For each tract we performed a leave-one-out cross-validation. At each step, we
+inferred the tract of one subject from the registered tracts of the others
+using both Majority Voting and our technique. Using as 'ground truth' the
+target's bundle computed by means of tractography and WMQL, we quantified the
+performance of both techniques. In particular, we computed their confusion matrix.
+A confusion matrix is a matrix $M \in \R^(2\times2)$, where each the entry $M_{ij}$
+represents the number of times the label in the ground truth was i and the
+technique labeled j. Finally, we computed the sensitivity, and precision on
+each confusion matrix [cite]. Sensitivity measures the proportion of voxels
+in the ground-truth tract that were 'discovered'. Precision measures the proportion
+of voxels that were correctly labeled, over all the labeled voxels. Table 1 shows
+the results obtained for each technique and tract. In all of the tracts, our
+technique achieves a lower sensitivity than Majority Voting. This means that
+we label a smaller portion of the ground-truth bundle. On the other hand,
+our diffusion weighted label-fusion always achieve a higher precision. This
+is, if we only look at the labels created by the techniques, our technique
+has the highest proportion of correct ones. Another way to phrase it is, our
+technique has a lower number of false positives.
+Therefore, our technique is discovering less voxels, but those which are labeled
+can be trusted more. Figure \ref{fig:labeling} shows a visual example of this.
+
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth]{7.multiatlas/img/pathology.png}
+    \caption{Test of tract retrieval when a lesion (red circle) is present.
+             Lesions were simulated by mixing the signal with isotropic data,
+             following eq. \ref{eq:mixing}. (A) $\alpha=0.2$
+             (B) $\alpha=0.5$ (C) $\alpha=0.75$ (D) $\alpha=1$. Our technique
+             labels less voxels as alpha increases.}
+    \label{fig:labeling}
+\end{figure*}
+
+\subsubsection{Inferring Tracts in the Presence of Simulated Lesions}
+To test how our technique behaves on an injured brain, we simulated
+lesions at different degrees of severity in the white matter of one of our subjects.
+Given that some brain lesions directly affect FA~\cite{Schonberg2006, Huisman2009},
+we simulated lesions by adding isotropic signal to a set of voxels, therefore
+lowering their FA. We targeted the SIF bundle, in order to compare how the labeling
+changes. We did so by selecting a spherical region of $4mm$ where the SIF passes by, and mix
+the diffusion signal there with signal from he ventricles. Since the ventricles
+are regions filled with cerebrospinal fluid (CSF), their diffusion is approximately
+isotropic. In particular, for each voxel $x$ in the lesioned region, we chose a
+voxel $v$ in the ventricle and mix their signals ($S(\cdot)$) as follows:
+
+\begin{equation}
+    \label{eq:mixing}
+S(x) = S(x)(1-\alpha) + S(v)\alpha, \alpha \in [0,1],
+\end{equation}
+where $\alpha$ manages the severity of the lesion. $\alpha=0$ represents healthy
+tissue, and $alpha=1$ represents a total disruption of the white-matter,
+resulting in pure isotropic diffusion. Figure \ref{fig:} shows that, at higher
+alpha (lower FA), less voxels are labeled within the lesion. This is a
+good behaviour, since by lowering the FA we make the diffusion more isotropic,
+loosing the underlying tract. In particular, for $\alpha=1$, the diffusion
+is completely isotropic, meaning that there's no tract, therefore, it's correct
+to not label it. Since our technique still labels the surroundings of the
+pathology, it allows to correctly identify the affected tract.
+
 %WMQL stops detecting the ILF at... and our technique stops detecting it in the voxels at .... 
 
 \subsection{Discussion}
-We want to infer the position of tracts in the white matter.
-Since we do not have many subjects, we cannot relay on Deep Learning techniques.
-We decide to use Label Fusion techniques.
-Some people showed that Mayority Voting works well for this things.
-The problem is that majority voting relies only on the spatial location.
+In this work we presented a label-fusion techniques to infer white-matter
+structures in the brain. In particular, we introduce diffusion weights to Majority
+Voting~\cite{Xu1992}, a technique that has been demonstrated to yield accurate
+segmentations~\cite{Asman2013} from few subjects. Being able to infer information
+from few subjects is a major advantage,  to be able to ting is that it can be used with a low number of
+registered subjects. The main advantage of our technique is
+that it weights Majority Voting using diffusion information. In particular, our technique
+weights the votes based on the similarity between the voted structure and the
+diffusion of the target subject. By doing so, our technique does not rely only
+on spatial features, as Majority Voting does.
+
+
+
 Problems of registration.
 We introduce a new way to take into account the diffusion information.
 This makes a lot of sense, since we are trying to infer tracts, and the 
@@ -387,6 +440,33 @@ then the label 'no-trac' is the one that receives the highest weight. These
 results show that our technique is able to correctly weight each label based
 on white-matter features, as diffusion directionality.
 
+\subsubsection{Our Technique Incurred in a Trade-off Between the Amount of
+               Labeled Voxels and Their Correctness.}
+To test our technique in realistic data, we registered tracts between different
+subjects of the HCP. Using these registered tracts, we inferred the position
+of individual tracts in each subject. Table \ref{table:sensitivity} shows that
+in each inferred tract, our technique achieved a lower sensitivity but a higher
+precision. In fact, the precision, except for the External Capsule, is always
+higher than 0.7. This means that our technique was able to discover less voxels,
+but those who are labeled are mostly correct. Figure \ref{fig:labeling} shows
+this in a visual way. Based on both the table and the figure, it's possible
+to assess that Majority Voting is having a higher sensitivity just because
+it's labeling more voxels. This is also what is causing it to have a precision
+lower than 0.41 in all the tracts. Also, visually, our tracts are more spatially consistnt.
+
+
+\subsubsection{Our Technique Behaves Correctly in the Presence of Pathologies}
+We focused
+in two types of pathologies: edema-like pathology, or tumor-like with no
+deformation of the white-matter around it. As explained in the introduction, the
+edema-like pathologies are characterized by a decreased FA. Meanwhile, the
+tumor-like with no tract displacement are characterized by isotropic diffusion.
+In order to simulate both lessons, we 
+
+
+We are not taking into account mass effect
+
+
 
 \subsection{Conclusions}
 In this chapter we presented a labeling fusion technique that relies on dMRI
@@ -394,24 +474,28 @@ data to infer the localization of white-matter tracts. The results show that
 our technique is more conservative than the voting rule, which is desired when
 studying pathologies, at the cost of having more false negatives.
 
-\subsubsection*{Table}
 
-\begin{table}[]
+\begin{table*}[]
+    \label{table:sensitivity}
 \centering
-\caption{Confusion matrix for both techniques and the ratio between them}
+    \caption{Sensitivity and precision of our proposed
+             method (Weighted) and Majority Voting (Majority) when inferring single
+             bundles in 9 subjects. The inferred bundles are: Superior Longitudinal
+             Fasciculus (SLF), Inferior Longitudinal Fasciculus (ILF), Corpus
+             Callosum (CC), and the External Capsule (EC).}
 \label{my-label}
-\begin{tabular}{|l||l|l||l|l||l|l|}
+\begin{tabular}{|l||c|c||c|c||c|c||c|c|}
 \hline
-      & \multicolumn{2}{c||}{Diffusion} & \multicolumn{2}{c||}{Voting} &  \multicolumn{2}{|c|}{Diffusion / Voting} \\ 
-      \hline
-            & Background  & Tract & Background  & Tract     & Background  & Tract \\
-      \hline
-Background  & 3658350     & 11849 & 3568123     & 24619     & 1.00        & 0.48   \\
-      \hline
-Tract       & 27932       & 2592  & 17050       & 3163      & 1.64        & 0.82   \\
+ & \multicolumn{2}{c||}{SLF} & \multicolumn{2}{c||}{ILF} & \multicolumn{2}{|c||}{CC} & \multicolumn{2}{|c|}{EC}\\ 
+ \hline
+            &  Weighted & Majority & Weighted & Majority & Weighted & Majority & Weighted & Majority \\
+  \hline
+Sensitivity & 0.19      & \bf{0.30}   & 0.33      & \bf{0.47}   & 0.53      & \bf{0.64}   & 0.06      & \bf{0.27} \\
+  \hline
+Precision   & \bf{0.70}      & 0.58   & \bf{0.74}      & 0.41   & \bf{0.91}      & 0.82   & \bf{0.42}      & 0.31 \\
 \hline
 \end{tabular}
-\end{table}
+\end{table*}
 
 Figure 1. Outline of our technique. We extract the main white-matter tracts using WMQL, register them to the 'test' subject and then compute a voting rule weighted by diffusion information. For each voxel $x$ in the 'test' subject, we select the label $l$ that maximizes equation \ref{eq:argmax}, where S is the set of 'train' subjects, $t$ is the 'test' subject; $L_i(x)$ is the label of voxel $x$ for the subject $i$; $P$ are the principal directions of diffusion in the 'test' subject and $D_{sl}(x)$ are the directions of tract $l$ in the voxel $x$ of the 'train' subject $s$.
 
