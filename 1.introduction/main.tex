@@ -1,16 +1,39 @@
 \chapter{Introduction}
 
-Composed by billions of interconnected neurons, the brain is the most complex
-biological machine that we know. Understanding how brain connectivity is 
-organized, and how this constrains brain functionality is one a key question
-of neuroscience. Recent advances in acquisition and modeling techniques on
-Diffusion Magnetic Resonance Imaging (dMRI) have facilitated to estimate and
-study axonal connectivity in vivo. In this thesis, we leverage recent advances
-in dMRI and tractography algorithms in order to study: how brain's connectivity
-is organized; how connectivity is related to anatomy and function; how to
-find correspondences when the connectivity variates across people, and how to
-infer connectivity in the presence of a brain's pathology. The thesis is
-divided in three major contributions:
+Composed of billions of interconnected neurons, the brain is a highly complex
+biological machine. Understanding how the brain connectivity is organized,
+and how cognition emerges from it, is a key problem in neuroscience. Given
+current technological limitations, it is not feasible to study the brain at
+cellular level. Instead, the brain is parcelled, and the bast network or neurons
+is abstracted as a network of interacting parcels. Different brain parcellations
+exist based on criteria such as anatomy, cytoarchitecture or functional
+specialization~\cite{Brodmann1909, Collins1998, Yeo2011}. Studying the
+agreement between existent parcellations is a hot topic in neuroscience.
+So far, accumulating evidence suggest a strong relationship between brain
+connectivity, cytoarchitecture, and brain function~\citep{Passingham2002, Johansen-Berg2004, Honey2009, Eickhoff2010}
+Therefore, understanding how axonal connectivity is arranged can provide key
+information in unraveling the mystery of concious life.
+
+Cerebral dissections~\cite{Meynert1872, Brodmann1909, Gray1918},
+and the injection of chemical markers~\cite{Schmahmann2006, Stephan2013} used to
+be the only way to map brain axonal connectivity. Such methodologies are highly
+invasive and can only be use in post-mortem studies. Nowadays, the advent of
+Diffusion Magnetic Resonance Imaging (dMRI) allows to non-invasively quantify
+the diffusion of water molecules in live tissue as the white-matter. Under
+normal unhindered conditions, water particles diffuse randomly in a process
+known as Brownian motion. However, in the white matter, water molecules are
+constrained, and can only diffuse inside and along axonal bundles. Due to this
+phenomenon, dMRI is able to capture information about the structural organization
+of the brain. Building on top of this, tractography algorithms reconstruct
+white matter bundles in the brain, allowing to estimate the brain's axonal
+connectivity.
+
+
+In this thesis, we leverage recent advances in dMRI and tractograpgt algorithms
+in order to: study how the brain connectivity is organized; study the relationship
+between brain connectivity, anatomy, and function; find correspondences between 
+structurally-defined regions of different subjects, and infer connectivity in
+the presence of a brain’s pathology. We present three major contributions.
 
 Our first contribution is a parsimonious model for the long-range axonal
 connectivity (extrinsic connectivity), and an efficient technique to divide the
@@ -56,40 +79,70 @@ diffusion data. This is, if the diffusion data of our patient is consistent with
 the direction of the voted pathway, the vote has a higher weight. We show that
 our technique achieves better results that using the simple voting.
 
-%The human brain is the most complex biological machine known in the universe.
-%The brain works as a complex network of billion of neurons.
-%Since this is impossible to handle, we need to subdivide the brain.
-%Depending how you look at it, the brain can be divided following many different criteria (cytho, function).
-%In each one of these criteria, brain connectivity is quite important and consistent.
-%We know this thanks to invasive stuff.
-%Since our brain is the result of biological evolution, we tortured monkeys, cats and rats in order to study and understand it.
-%We cannot do that anymore, so it's difficult to study brain connectivity.
-%Diffusion MRI allows to study the brain invivo without inducing pain/problems.
-%But it has strong limitations: resolution in time and space, directionality, etc.
-%It has been used to divide the brain, but the techniques are not good enough.
-%We don't know how many parcels we need, or how to do it.
-%We propose a parcellation technique that solves many of these problems.
-%We show it is consistent with function.
-%Now we would like to use this to study brain connectivity and function in different subjects.
-%However, an interesting problem is that, for some regions, as frontal cortex, there's a lot of across subject variability.
-%Turns out that it's hard to match parcels across subjects.
-%Spatial overlap does not work here because of [cite].
-%We need to match stuff while imposing few constraints, specially spatial ones.
-%The existing techniques are nice and simple, but not sufficient.
-%We propose to improve the matching by using optimal transport.
-%It actually works well.
-%Now that we have a way to parcellate the brain, and a way to map that across subjects, maybe we can better study the structure-function relationship.
-%I would like to talk about predicting function from structure.
-%This would be a negative chapter, since we were not able to predict anything from tractography.
-%But, what happens when there's a pathology in the white matter?
-%It's affecting brain function, but we cannot precisely predict what since it impedes tractography.
-%In that case, we need to do something to infer which bundles are affected.
-%We can do multi-atlas stuff.
-%Since bundles are related to dmri, we can add dMRI information to the multi-atlas to improve the localization of affected bundles.
-%Finally, the structure vs function in the brain does not necessarily always have to be structural connectivity vs tfmri function.
-%We can also use microstructure vs cognitive, and microstructure to function (collaboration with vinod)
-%
-%\section{Organization}
+\section*{Organization of this Thesis}
+
+This thesis is divided in two parts: Background and Contributions. In the
+Background chapters we give a brief introduction to neuroanatomy, non-invasive
+imaging techniques, and brain parcellation. In the Contributions chapters we
+introduce our parceling technique, our matching technique and our multi-atlas
+technique. We now present the outline of each chapter.
+
+\subsection{Part I: Background}
+
+\subsubsection{Chapter \ref{ch:intro_anato}: Introduction to Brain Cytoarchitecture, Neuroanatomy and Brain Function.}
+In this chapter we cover the basic aspects of cellular composition, morphology
+and function of the human brain. We start with a brief introduction to the
+human nervous system, in order to understand the biological context of the brain.
+Then, we study the brain from both a microscopic and a macroscopic view. In the
+microscopic view, we explain the cellular composition of the brain and how it’s
+organized. In the macroscopic view, we zoom out and make a review of the most 
+important divisions and anatomical landmarks of the brain. Finally, we describe
+the functional role of some of these gross anatomical divisions.
+
+\subsubsection{Chapter \ref{ch:intro_mri}: Introduction to Non-invasive Imaging Techniques.}
+In this chapter, we start by introducing some concepts in
+nuclear physics and explain how they are applied in MRI to study the human
+brain. Then, we explain how modifying the acquisition sequences allows to
+study the physical process of diffusion, enabling to estimate the location
+of tracts in the white-matter. Finally, we make a brief introduction to how to
+detect brain activation in response to functional or cognitive tasks in the
+brain using Functional MRI.
+
+\subsubsection{Chapter \ref{ch:brain_mapping}: Mapping the Brain: A review of brain parcellations.}
+Neuroscientist have long thought of the brain as a mosaic of interconnected
+regions. This simplification allows to abstract the complex neuronal network
+that underlies cognition. Until today, it's not clear that an unique and true
+division of the human brain exists. Different modalities have been used to
+study the brain, deriving in different parcellations. In this chapter, we make
+a review of the different criteria to divide the brain; the hypothesis in
+which they are based, and present the most notable parcellations of each.
+
+\subsection{Part II: Contributions}
+
+\subsubsection{Chapter \ref{ch:structural_parcellation}: Groupwise Structural Parcellation of the Whole Cortex: A Logistic Random Effects Model Based Approach}
+In this chapter, we propose a parsimonious model for the extrinsic connectivity
+and an efficient parceling technique based on clustering of tractograms. 
+Our technique allows the creation of single subject and groupwise parcellations
+of the whole cortex. We show that our technique creates parcellations in
+agreement with anatomical, structural and functional parcellations extant in 
+the literature.
+
+\subsubsection{Chapter \ref{ch:matching}: Solving the Cross-Subject Parcel Matching Problem using Optimal Transport.}
+In this chapter, we propose a parcel matching method based on Optimal Transport.
+We test its performance by matching parcels of the Desikan atlas, parcels based
+on a functional criteria and structural parcels. We compare our technique against
+three other ways to match parcels which are based on the Euclidean distance, the
+cosine similarity, and the Kullback-Leibler divergence. Our results show that
+our method achieves the highest number of correct matches.
+
+\subsubsection{Chapter \ref{ch:multiatlas}: Inferring the Localization of White-Matter Tracts using Diffusion Driven Label Fusion}
+In this chapter, we introduce a way to infer the location of pathways, even
+when it is not possible to use tractography to locate them. Our technique is
+based on a methodology named label fusion. In particular, we show how to add
+dMRI information to the label fusion in order to better estimate the location
+of white matter pathways.
+
+
 %I start by making a beautiful introduction to neuroanatomy, because the reader needs to know what is a brain.
 %Here we talk about sulci, giri, white matter, gray matter, cellular composition, layers, etc.
 %This chapter also talks about brain function, but from an old perspective.
@@ -178,3 +231,4 @@ our technique achieves better results that using the simple voting.
 %Stanford vwfa? RTOP? Harvard? No idea...
 %
 %\section{Conclusions}
+\chapterbib
