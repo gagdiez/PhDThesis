@@ -1,0 +1,245 @@
+\chapter{Conclusion}
+
+\section{Overview}
+In this thesis we tackled the problem of parceling the brain based on its axonal
+connectivity, estimated by means of Diffusion MRI. First, we presented a parceling
+technique that creates both single subject and groupwise multi-scale parcellations
+of the brain~\cite{Gallardo2017a} based on long range connectivity. Then, we proposed
+a new method to find correspondence between structural parcellations of different 
+subjects~\cite{Gallardo2018}. Finally, we introduced a new label fusion technique
+to infer the location of  white-matter bundles in patients with brain pathology~\cite{Guillermo2018}.
+In this last chapter, we discuss the three contributions of this thesis,
+and provide some perspectives for the field.
+
+\section{Discussion}
+Brain parcellation is a way of dimensionality reduction. Parceling the brain
+allows us to abstract the interaction between billions of neurons into a tractable
+number of interacting regions. Accumulating evidence suggest that regions with
+distinct function or cytoarchitecture also possess distinct axonal connectivity~\citep{Passingham2002, Johansen-Berg2004, Honey2009, Eickhoff2010}.
+Hence, understanding how the cortex is arranged based on its axonal connectivity
+could provide key information in unraveling brain organization. This motivates
+the first contribution of our thesis.
+
+\subsection{Structural Connectivity Based Parcellation}
+Our first contribution is a parsimonious model for the long-range axonal
+connectivity (extrinsic connectivity), and an efficient technique to divide the
+brain in regions with homogeneous extrinsic connectivity~\cite{Gallardo2017a}.
+Our model assumes that the cortex is divided in patches of homogeneous extrinsic
+connectivity and, using logistic random effects, accounts for intra-patch and
+across subject variability in the connections.
+
+Leveraging our proposed model, we presented an efficient technique to parcellate
+the cortex based on its extrinsic connectivity. Our parceling technique presents
+many advantages. First, it works directly with the dMRI information, not needing
+to rely on an initial parcellation. Second, our technique can create both
+single subject and groupwise parcellations of the whole cortex. Third, inspired
+by Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014}, our technique uses Hierarchical
+Clustering to comprise multiple granularities of the same parcellation in a
+dendrogram. This allows us to overcome the need to specify an expected number
+of clusters. Fourth, thanks to our model, we can retrieve a parcellation from
+the dendrogram using a simple technique: horizontal cut~\cite{Murtagh2011}.
+Finally, also thanks to our model, our technique works with tractograms
+in the Euclidean space~\cite{Pohl2007}, which allows us to use Ward clustering
+to compute clusters with minimum intra-cluster variance.
+
+It is important to also point the trade-offs in which our technique incurs. First,
+our groupwise parcellation technique relies on anatomical seed-correspondence across
+subjects. Given anatomical differences across-subjects, a purely anatomical
+matching of seeds is probably sub-optimal. However, this allows us to compute
+single and groupwise parcellations independently, without the need to impose
+constraints between both. Second, in comparing high-dimensional vectors with the
+Euclidean distance, we are probably affected by the dimensionality curse~\cite{Beyer1999}.
+This is the price to pay to use Ward's Hierarchical method, and generate cluster
+with minimum intra-cluster variance. 
+
+The biggest limitations of our technique come from tractography, the tool
+we used to estimate the brain's extrinsic connectivity. Tractography suffers
+from at least three big problems: gyral bias, distance bias and false positives.
+The gyral bias refers to the fact that streamlines tend to terminate preferentially
+in gyri, in contrast with the general widely distributed connections obtained with
+tracers~\cite{VanEssen2014}. The distance bias reflects that connectivity strength
+that is usually inferred from tractography tends to decrease with distance
+between the source and target area~\cite{Jbabdi2013}. Finally, recent studies
+show that state-of-the-art tractography algorithms create four times more false
+positives than true positives~\cite{Hein2016}. However, these limitations do not
+imply that tractography is plain wrong~\cite{Asimov1988}. In fact, it has been
+shown that tractography can recover major white matter bundles~\cite{Catani2008}.
+Also, studies found correlation tractography-based tracts and tracer-based
+ones in Old World monkeys~\cite{Donahue2016}.
+
+The most important point to highlight about our parceling technique, is that
+it created parcels consistent with brain function. Particularly, some of our
+parcels showed a high spatial overlap with responses to functional and cognitive
+tasks measured with functional MRI. This was specially the case with motor functions as
+hand movement, foot movement and tongue movement. Other cognitive functions that
+show a good overlap were: face recognition, shape recognition and short-story
+categorization. These results reflect the strong relationship between extrinsic
+connectivity and functional specialization in the human brain cortex. 
+
+Something noticeable in our resulting parcels is that the single subject parcellations
+show big variability across subjects. This is in fact not specific of our methodology,
+brain parcellations tend to differ in the number, shape, and spatial localization
+across subjects~\cite{Jbabdi2013}. This does not necessarily reflect a problem
+with the parceling methodology, human brains are different from each other,
+and ``individual variability is not noise''~\cite{Zilles2013}. Studying brain
+connectivity therefore faces the challenge of locating homogeneous regions while
+accounting for this variability. This motivates our second contribution.
+
+\subsection{Matching Structural Parcels Across-Subjects}
+Our second contribution, is a method to find correspondence between structural
+parcellations based on Optimal Transport. Given two parcellations, we try to
+find the mapping between the parcels in both brains, based on their connectivity
+fingerprints. Particularly, our method tries to find the optimal way to transport
+connectivity fingerprints in one brain to the other. In this way, parcels with
+similar connectivity fingerprints are matched.
+
+Our technique allows matching two parcels based on how they are connected,
+no matter if they do not spatially overlap after registration. The main advantages
+of our method is that it is highly performant, and outperforms state-of-the-art
+matching techniques in our experiments. Using Optimal Transport has an important
+advantage over existent matching techniques. Existing matching techniques define
+a similarity (e.g. euclidean or cosine), and match a parcel to that with the
+most similar connectivity fingerprint. Optimal Transport does the same, while
+taking into account all the parcels at the same time. In this way, the
+obtained match is that which maximizes the similarity between parcels globally.
+
+The major limitation of our technique is the necessity to define coherent
+fingerprints across subjects. In order to compare two connectivity fingerprints,
+both have to be defined over the same target regions. If the first fingerprint
+is a 3-dimensional vector representing the connectivity to regions A, B and C,
+then the second fingerprint must represent the same. This limitation is not
+specific to our method. All current techniques that we know of have it. However,
+studies have shown how to define such correspondences, allowing even to match
+fingerprints across species~\cite{Mars2016, Mars2018}.
+
+\subsection{Inferring White-Matter Tracts in the Presence of Pathology}
+Our third contribution is a label-fusion techniques that leverages dMRI information
+in order to infer white matter structures in the brain. We profit of the fact
+that water particles diffuse along white matter bundles to improve Majority
+Voting~\cite{Xu1992}. More specifically, we weight each vote based on how the voted pathway
+is supported by the target's diffusion data. In this way, voted
+pathways that better resemble the white matter of the target subject obtain a 
+higher weight.
+
+Our technique presents many advantages. First, our technique can achieve accurate
+segmentations even when inferring from few subjects. Second, our technique
+allows infering white matter pathways without the need of tracking. This is of
+special importance in the presence of brain pathology. Third, while we weight the
+votes of each tract based on dMRI information, we do not need to register
+DWIs. Registering DWIs is a highly time consuming task~\cite{ODonnell2017}.
+Instead, we register tracts across subjects and use them to estimate the diffusion
+information. Fourth, our technique obtains a higher precision than Majority
+Voting, as a trade-off, our technique possess a lower sensitivity. This is,
+our technique has less false positives at the cost of more true negatives.
+Fifth, in our simulated experiments, out technique did not label regions with
+severe pathologies.
+
+As with every label-fusion technique, the main limitation of our technique
+is the necessity to do registration. While registration of healthy subjects
+is a well known and studied task, registering subject with a brain pathology
+is still an open problem. Most registering algorithms fail or return inaccurate
+registrations, hampered by the pathology~\cite{Lutkenhoff2014}. In such cases
+were the registration is highly inaccurate, or technique will most probably fail.
+
+\section{Perspectives}
+
+We believe that some contributions from the thesis can now be applied
+to answer more neuroscientific questions. Our parcellation technique divides
+the brain in regions of homogeneous extrinsic connectivity. This can give
+a sound basis for studies based on connectivity. One example is the collaboration
+with Samuel Deslauriers-Gauthier, from Inria. Briefly, we parcelled a subject's
+cortex based on its extrinsic connectivity and then detect and estimate the information
+flow between parcels using connectivity and MEG data~\cite{Gallardo2017b}.
+Given that information flows through axons, our structural parcellation is suitable to predefine the
+interconnected regions through which information flows. Another example is the
+collaboration with Mateo Frigo et al., from Inria. We parcelled 3 subjects
+and used the resulting parcels to filter false positives streamlines using a
+functionally informed COMMIT~\cite{Frigo2018}. A final example is our collaboration
+with Gaston Zanitti, student from the University of Buenos Aires. The aim of
+our work is to study if specific responses to functional activation measured
+with fMRI can be predicted using structural connectivity. For this, we define
+cortical regions with our parcellation technique, and see if the structural
+connectivity of the vertices within a region can predict its functional activation.
+
+Aside these applications we expect to be able to use our parceling technique to
+further characterize the relationship between brain structure and brain function.
+In particular, in further work we will try to estimate the overlap between
+our parcels and more functional activations from fMRI. We will also focus on
+studying the functional properties of the structural networks derived from
+our parcellation. That means, we will see if the structural and functional
+connections between regions generated by our technique are correlated. 
+As a long term project, we expect that improvements in tractography as well as
+in dMRI acquisition allow us to infer an atlas of human connections in the brain.
+We believe this to be a doable yet arduous task, hindered presently by the
+limitations of tractography.
+
+Our matching technique could have major implications in the study of brain
+connectivity and its relationship with brain function, allowing for the location
+of parcels with similar connectivity but not high spatial coherence. Also, it
+could improve results in the areas where matching techniques are
+being used. This is, our matching technique could help to better understand
+the link between different brain atlases, and improve the comparisons of cortical
+areas between higher primates.
+
+Finally, our label-fusion technique needs more test in clinical data before
+being able to use it to infer bundles affected by pathologies. Future work
+will aim to keep developing tests with which to benchmark our technique.
+
+\section{Conclusion}
+In this thesis we tackle the problem of brain parcellation based on structural
+connectivity. During the whole thesis, We putted emphasis on the importance
+of the structural connectivity, and how it is strongly related to brain function.
+However, we fell important to conclude the thesis reminding the reader that,
+if a universal parcellation of the brain exists, it has not been found yet.
+Presently, different atlases and techniques to divide the brain coexist, each
+one with different and disadvantages. At the end, which parcellation to use in
+practice will heavily depend on the hypothesis and the goal of the study to be
+done.
+
+
+% intro
+%
+% there are many parcellations, but this is ok
+% we propose a parcellation, it has all of this good
+% but in the single subject level we cannot match subjects
+% we propose how to match subjects
+% we propose how to find tracts in the presence of lesions
+%
+% the problem of brain atlas is not finished
+% the problem of the connectivity atlas is not finished
+% we need new parcellations, its not only important to be reproducible, also we need relationship
+% microstructure maybe can give new parcellations
+% we need better ways to characterize function vs structure
+% 
+
+%In Chapter \ref{ch:brain_mapping} we reviewed Cytoarchitectonic, Anatomical, Functional,
+%Structural, and Multi-modal parcellations, highlighting their advantages and disadvantages.
+%Cytoarchitectonic parcellations denote the brain's cellular composition,
+%making them perfect to abstract populations
+%of neurons. However, they can only be estimated post mortem and require years
+%of work~\cite{Amunts2007}. Anatomical parcellations are highly reproducible across
+%subjects, but incur in the trade-off of having coarse regions. Functional
+%parcellations map cognitive functions into the brain. This has the limitation
+%of having to define and isolate cognitive functions before being mapped, which
+%could impossible~\cite{Bressler2010}. Structural parcellations are based on
+%axonal connectivity, which is strongly related to cytoarchitecture and function~\citep{Passingham2002,Muircheartaigh2018}.
+%The main downside is that tractography, the underlying technique of structural
+%parcellations, is dominated by false positives~\cite{Hein2016}. Finally, Multi-modal
+%parcellations combine information from different neuroimaging methodologies.
+%Their main limitation is that sometimes, regions tend to over represent one modality.
+%
+
+%Brain parcellation is a way of dimensionality reduction. Parceling the brain
+%allows us to abstract the interaction between billions of neurons into a tractable
+%number of interacting regions. Such abstraction is supported by diverse studies
+%showing that neurons tend to organize and activate in spatially coherent regions~\cite{Meynert1872, Brodmann1909, VonEconomo1925, Penfield1954, VonderMalsburg1994, Schmahmann2006, Stephan2013}.
+%Brain regions can be defined based on criteria such as cytoarchitecture, function,
+%anatomy or structural connectivity. Accumulating evidence suggest that there is
+%a strong relationship between brain cytoarchitecture, brain function and brain
+%structure. Particularly, regions with distinct
+%function or cytoarchitecture also possess distinct structural connectivity~\citep{Passingham2002, Johansen-Berg2004, Honey2009, Eickhoff2010}.
+%Therefore, understanding how the cortex is arranged based on its structural
+%connectivity could provide a great insight on brain organization.
+
+
+\chapterbib
