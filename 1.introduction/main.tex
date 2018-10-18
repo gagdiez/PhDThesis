@@ -1,18 +1,22 @@
 \chapter{Introduction}
 
 Composed of billions of interconnected neurons, the brain is a highly complex
-biological machine. Understanding how the brain connectivity is organized,
-and how cognition emerges from it, is a key problem in neuroscience. Given
-current technological limitations, it is not feasible to study the brain at
-cellular level. Instead, the brain is parcelled, and the bast network or neurons
-is abstracted as a network of interacting parcels. Different brain parcellations
-exist based on criteria such as anatomy, cytoarchitecture or functional
-specialization~\cite{Brodmann1909, Collins1998, Yeo2011}. Studying the
-agreement between existent parcellations is a hot topic in neuroscience.
-So far, accumulating evidence suggest a strong relationship between brain
-connectivity, cytoarchitecture, and brain function~\citep{Passingham2002, Johansen-Berg2004, Honey2009, Eickhoff2010}
-Therefore, understanding how axonal connectivity is arranged can provide key
-information in unraveling the mystery of concious life.
+biological machine. Untangling this network is the main goal of neuroscience,
+a task that has proven to be arduous. The problem is two fold. First, it is
+not feasible to characterize cellular function or axonal connectivity at the
+scale of the brain with current approaches. Second, even if we could characterize
+the neural network at a cellular level, studying it is unrealistic given the
+huge amount of neurons in the brain.
+These current technical limitations highlight the need to abstract the complexity
+of the brain's neuronal network before studying it.
+
+Brain parcellation is a way of dimensionality reduction. Parceling the brain
+allows us to abstract the interaction between billions of neurons into a tractable
+number of interacting regions. Accumulating evidence suggest that regions with
+distinct function or cytoarchitecture also possess distinct axonal connectivity~\citep{Passingham2002, Johansen-Berg2004, Honey2009, Eickhoff2010}.
+Hence, understanding how the cortex is arranged based on its axonal connectivity
+could provide key information in unraveling brain organization. 
+
 
 Cerebral dissections~\cite{Meynert1872, Brodmann1909, Gray1918},
 and the injection of chemical markers~\cite{Schmahmann2006, Stephan2013} used to
@@ -28,15 +32,15 @@ of the brain. Building on top of this, tractography algorithms reconstruct
 white matter bundles in the brain, allowing to estimate the brain's axonal
 connectivity.
 
-In this thesis, we leverage recent advances in dMRI and tractograpgt algorithms
+In this thesis, we leverage recent advances in dMRI and tractography algorithms
 in order to: study how the brain connectivity is organized; study the relationship
 between brain connectivity, anatomy, and function; find correspondences between 
 structurally-defined regions of different subjects, and infer connectivity in
 the presence of a brain’s pathology. We present three major contributions.
 
-Our first contribution is a parsimonious model for the long-range axonal
+The first contribution is a parsimonious model for the long-range axonal
 connectivity (extrinsic connectivity), and an efficient technique to divide the
-brain in regions with homogeneous connectivity~\cite{Gallardo2017a}. Our
+brain in regions with homogeneous extrinsic connectivity~\cite{Gallardo2017a}. Our
 connectivity model is based on histological results obtained in the macaque
 brain, and accounts for the across-subject variability in the human brain
 connectivity. Our parceling technique uses a hierarchical clustering approach,
@@ -50,7 +54,7 @@ helps to lower the gap between structural connectivity and brain function, since
 some of our pure structural parcels show good overlapping with responses to
 functional tasks.
 
-Our second contribution is a technique to find correspondence between
+The second contribution is a technique to find correspondence between
 structural parcellations of different subjects~\cite{Gallardo2018}. Even when
 produced by the same technique, parcellations tend to differ in the
 number, shape, and spatial localization of parcels across subjects. Matching
@@ -63,7 +67,7 @@ defined areas, when they do not have high spatial coherence across subjects.
 Also, it could help to understand the link between different brain atlases, and
 improve the comparisons of cortical areas between higher primates.
 
-Our third contribution is a multi-atlas technique to infer the location of 
+The third contribution is a multi-atlas technique to infer the location of 
 white-matter bundles in patients with a brain pathology~\cite{Guillermo2018}.
 Lesions in the cortex or white matter disrupt the normal functioning of the
 brain. Some white matter pathologies, such as tumors or traumatic brain injury,
@@ -76,7 +80,8 @@ tract on each voxel of the DWI image of the patient. Our technique weights the
 vote of each subject based on how the voted pathway is supported by the patient's 
 diffusion data. This is, if the diffusion data of our patient is consistent with
 the direction of the voted pathway, the vote has a higher weight. We show that
-our technique achieves better results that using the simple voting.
+our technique achieves higher precision than Majority Voting at the cost of
+having lower sensitivity.
 
 \section*{Organization of this Thesis}
 
@@ -110,7 +115,7 @@ brain using Functional MRI.
 \subsubsection{Chapter \ref{ch:brain_mapping}: Mapping the Brain: A review of brain parcellations.}
 Neuroscientist have long thought of the brain as a mosaic of interconnected
 regions. This simplification allows to abstract the complex neuronal network
-that underlies cognition. Until today, it's not clear that an unique and true
+that underlies cognition. Until today, it's not clear that a unique and true
 division of the human brain exists. Different modalities have been used to
 study the brain, deriving in different parcellations. In this chapter, we make
 a review of the different criteria to divide the brain; the hypothesis in
@@ -135,11 +140,14 @@ cosine similarity, and the Kullback-Leibler divergence. Our results show that
 our method achieves the highest number of correct matches.
 
 \subsubsection{Chapter \ref{ch:multiatlas}: Inferring the Localization of White-Matter Tracts using Diffusion Driven Label Fusion}
-In this chapter, we introduce a way to infer the location of pathways, even
-when it is not possible to use tractography to locate them. Our technique is
-based on a methodology named label fusion. In particular, we show how to add
-dMRI information to the label fusion in order to better estimate the location
-of white matter pathways.
+In this chapter, we introduce a label-fusion technique to infer the location of
+brain pathways on a target subject by aggregating information of template subjects.
+Our technique weights the vote on a Majority Voting based on how the
+voted pathway is supported by the target's diffusion data. This is, if the
+diffusion data of our target is consistent with the direction of the voted pathway,
+the vote has a higher weight. We show that
+our technique achieves higher precision than Majority Voting at the cost of
+having lower sensitivity.
 
 
 %I start by making a beautiful introduction to neuroanatomy, because the reader needs to know what is a brain.

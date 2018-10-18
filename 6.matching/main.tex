@@ -1,5 +1,6 @@
 \chapter{Solving the Cross-Subject Parcel Matching Problem using Optimal Transport}
-%
+\label{ch:matching}
+
 \section{Overview}
 Matching structural parcels across different subjects is an open problem in
 neuroscience. Even when produced by the same technique, parcellations tend to
@@ -14,12 +15,39 @@ our method achieves the highest number of correct matches.
 This work was presented as part of the MICCAI 2018~\cite{Gallardo2018}.
 
 \section{Introduction}
-Brain organization displays high variability across individuals and species. Studying brain connectivity therefore faces the challenge of locating homogeneous regions while accounting for this variability. Different techniques have been proposed to parcellate the brain based on its structural connectivity. However, matching the resulting parcels across different subjects is still an open problem in neuroscience. Even when produced by the same technique, parcellations tend to differ in the number, shape, and spatial localization of parcels across subjects \cite{Jbabdi2013}. Current theories hold that long-range structural connectivity, namely, extrinsic connectivity, is strongly related to brain function \cite{Passingham2002}. Therefore, being able to match parcels with similar connectivity across subjects can help to understand brain function while also enabling the comparisons of cortical areas across different species \cite{Mars2018}.
+Brain organization displays high variability across individuals and species.
+Studying brain connectivity therefore faces the challenge of locating homogeneous
+regions while accounting for this variability. Different techniques have been
+proposed to parcellate the brain based on its structural connectivity. However,
+matching the resulting parcels across different subjects is still an open
+problem in neuroscience. Even when produced by the same technique, parcellations
+tend to differ in the number, shape, and spatial localization of parcels across
+subjects \cite{Jbabdi2013}. Current theories hold that long-range structural 
+connectivity, namely, extrinsic connectivity, is strongly related to brain
+function \cite{Passingham2002}. Therefore, being able to match parcels with
+similar connectivity across subjects can help to understand brain function while
+also enabling the comparisons of cortical areas across different
+species \cite{Mars2018}.
 % Sam: In MIC, one of the interest is image segmentation/registration. Can you make a very clear link to this?
 
-Most of the current methods to match parcels across subjects are strongly linked to the technique used to create them. For example, Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} seek correspondences between dendrograms created by means of Hierarchical Clustering. Parisot et al. \cite{Paristot2015} impose the consistence of parcels across subjects while creating the parcellation. In recent works Mars et al. propose to use the Manhattan distance, cosine similarity \cite{Mars2016} or the Kullback–Leibler (KL) divergence \cite{Mars2018} to compare and match connectivity fingerprints, successfully identifying common areas across humans and primates.
+Most of the current methods to match parcels across subjects are strongly
+linked to the technique used to create them. For example,
+Moreno-Dominguez et al. \cite{Moreno-Dominguez2014} seek correspondences between
+dendrograms created by means of Hierarchical Clustering. 
+Parisot et al. \cite{Paristot2015} impose the consistence of parcels across
+subjects while creating the parcellation. In recent works Mars et al. propose
+to use the Manhattan distance, cosine similarity \cite{Mars2016} or the
+Kullback–Leibler (KL) divergence \cite{Mars2018} to compare and match connectivity
+fingerprints, successfully identifying common areas across humans and primates.
 
-In this work, we propose to match parcels based on their extrinsic connectivity fingerprint using Optimal Transportation theory. Optimal Transport (OT) is a technique that seeks the optimal way to transport mass between probability distributions. While KL divergence computes the difference between two distributions, OT computes a matching between them. In particular, our method adopts a discrete regularized version of Optimal Transport (OT), which has been presented in Gayraud et al.~\cite{nathalie} and Courty et al.~\cite{remi} as a solution to the domain adaptation problem.
+In this work, we propose to match parcels based on their extrinsic connectivity
+fingerprint using Optimal Transportation theory. Optimal Transport (OT) is a
+technique that seeks the optimal way to transport mass between probability
+distributions. While KL divergence computes the difference between two
+distributions, OT computes a matching between them. In particular, our method
+adopts a discrete regularized version of Optimal Transport (OT), which has been
+presented in Gayraud et al.~\cite{nathalie} and Courty et al.~\cite{remi} as a
+solution to the domain adaptation problem.
 
 \begin{figure*}[t!]
 \centering
@@ -28,9 +56,28 @@ In this work, we propose to match parcels based on their extrinsic connectivity 
 \label{fig:method}
 \end{figure*}
 
-We validate our method with four different experiments. In the first experiment, we test the feasibility of our method by generating parcels with synthetic connectivity fingerprints and matching them. In the second one, we show that our technique is able to match parcels of the same atlas across subjects. We use the anatomical atlas of Desikan \cite{Desikan2006} as its parcels have high spatial coherence and consistent connectivity profiles across subjects \cite{DeReus2013}. Finally, we show the capacity of our method to match parcels generated with the same criteria but have some spatial cross-subject variability. We assess this for two different situations. In the first one, we derive the parcels from functional activations~\cite{Barch2013}. We use responses to motor and visual stimuli since they have been shown to be strongly related to structural connectivity~\cite{Osher2016, Penfield1954}. In the second one, we divide the Lateral Occipital Gyrus in 3 parcels using a structurally-based parcellation technique  \cite{Gallardo2017a}. We use the Lateral Occipital Gyrus since it has been shown to have a consistent parcellation across subjects \cite{ThiebautdeSchotten2016, Gallardo2017a}. The outline of the last three experiments can be seen in Figure~\ref{fig:method}.
+We validate our method with four different experiments. In the first experiment,
+we test the feasibility of our method by generating parcels with synthetic
+connectivity fingerprints and matching them. In the second one, we show that
+our technique is able to match parcels of the same atlas across subjects. We
+use the anatomical atlas of Desikan \cite{Desikan2006} as its parcels have
+high spatial coherence and consistent connectivity profiles across
+subjects \cite{DeReus2013}. Finally, we show the capacity of our method to
+match parcels generated with the same criteria but have some spatial
+cross-subject variability. We assess this for two different situations. In the
+first one, we derive the parcels from functional activations~\cite{Barch2013}.
+We use responses to motor and visual stimuli since they have been shown to be
+strongly related to structural connectivity~\cite{Osher2016, Penfield1954}. 
+In the second one, we divide the Lateral Occipital Gyrus in 3 parcels using
+a structurally-based parcellation technique  \cite{Gallardo2017a}. We use
+the Lateral Occipital Gyrus since it has been shown to have a consistent
+parcellation across subjects \cite{ThiebautdeSchotten2016, Gallardo2017a}.
+The outline of the last three experiments can be seen in Figure~\ref{fig:method}.
 
-In each experiment, we compare our technique against three other ways to match parcels based on the Euclidean distance; the cosine similarity; and the Kullback-Leibler divergence. Our results on real data show that our method based on OT always achieves the highest number of correct matches.
+In each experiment, we compare our technique against three other ways to match
+parcels based on the Euclidean distance; the cosine similarity; and the
+Kullback-Leibler divergence. Our results on real data show that our method
+based on OT always achieves the highest number of correct matches.
 
 
 \section{Methods}
@@ -43,14 +90,31 @@ More formally, let $X^a = \{x^a_i\}_{i=1}^{N_a}$, $x^a_i \in \Omega^a \subset \m
 
 % Sam: How do you represent a matching? A permutation matrix? Nath: originaly yes, but it didn't fit. Is the structure that represents the matching important? Sam: well, this paragraph sounds like a problem statement, but at the end I still don't now what you are trying to find.
 
-In this section, we start by formulating our  regularized discrete OT-based method and proceed by presenting three ways of computing this matching that are based on the Euclidean distance; the cosine similarity; and the KL-divergence.
+In this section, we start by formulating our regularized discrete OT-based method
+and proceed by presenting three ways of computing this matching that are based
+on the Euclidean distance; the cosine similarity; and the KL-divergence.
 
 \subsection{Discrete Regularized Optimal Transport}
 
-Optimal Transport (OT) theory boils down to finding the optimal way to  transport or redistribute mass from one probability distribution to another with respect to some cost function.
-In this work, since the datasets $X^a$ and $X^b$ are discrete datasets, we use their empirical probability distributions and apply the discrete formulation of OT~\cite{nathalie,remi} to solve the parcel matching problem. A simplified example of how our method proceeds is presented in Figure~\ref{fig:otprob}.
+Optimal Transport (OT) theory boils down to finding the optimal way to transport
+or redistribute mass from one probability distribution to another with respect
+to some cost function. In this work, since the datasets $X^a$ and $X^b$ are
+discrete datasets, we use their empirical probability distributions and apply
+the discrete formulation of OT~\cite{nathalie,remi} to solve the parcel matching
+problem. A simplified example of how our method proceeds is presented in
+Figure~\ref{fig:otprob}.
 
-Assume that $X^a$ and $X^b$ follow probability distributions $p_a(x^a)$ and $p_b(x^b)$, respectively. We suppose that $X^a$ has undergone a transformation $\mathbf{T}:\Omega^a \rightarrow \Omega^b$, such that $p_b(\mathbf{T}(x^a)) = p_b(x^b)$. We wish to recover $\mathbf{T}$ and use it to match the parcels of $X^a$ and $X^b$. Using discrete regularized OT we compute a transport plan $\gamma_0$ between these two probability distributions. This transport plan is a doubly stochastic matrix which minimizes a certain transportation cost $C$ over the vectors of $X^a$ and $X^b$. In other words, it defines the optimal exchange of mass between the two probability distributions. We use $\gamma_0$ to compute an estimation $\hat{\mathbf{T}}$ by selecting the pairs of vectors, i.e., parcels that exchange the most mass. 
+Assume that $X^a$ and $X^b$ follow probability distributions $p_a(x^a)$ and
+$p_b(x^b)$, respectively. We suppose that $X^a$ has undergone a transformation
+$\mathbf{T}:\Omega^a \rightarrow \Omega^b$, such that
+$p_b(\mathbf{T}(x^a)) = p_b(x^b)$. We wish to recover $\mathbf{T}$ and use it
+to match the parcels of $X^a$ and $X^b$. Using discrete regularized OT we 
+compute a transport plan $\gamma_0$ between these two probability distributions.
+This transport plan is a doubly stochastic matrix which minimizes a certain
+transportation cost $C$ over the vectors of $X^a$ and $X^b$. In other words,
+it defines the optimal exchange of mass between the two probability distributions.
+We use $\gamma_0$ to compute an estimation $\hat{\mathbf{T}}$ by selecting the
+pairs of vectors, i.e., parcels that exchange the most mass. 
 % Sam: I think this requires a bit more detail. What do you mean by a transport plan? I am guessing its
 % related to T. Then, how does that transport plan give you a matching 
 %Nath: Hopefully it is better explained now
@@ -115,9 +179,13 @@ Let $d(x^a_i,x^b_j)$ be some dissimilarity measure between the elements of $X^a$
 % \begin{equation*}
 % d_{KL}(x^a_i,x^b_j) = \sum_{l=1}^d \tilde{x}^a_i(l) \log\frac{\tilde{x}^a_i(l)}{\tilde{x}^b_j(l)}.
 % \end{equation*}
-First, we use the Euclidean distance, which  can be interpreted as matching the parcel $i$ to the parcel $j$ whose feature vector $x^b_j$ is the closest to $x^a_i$.
-Then, we use the cosine similarity, which is minimized when two feature vectors are colinear. 
-Lastly, we use the Kullback-Leibler divergence, which measures the difference between two probability distributions in terms of their relative entropy. Note that we need to convert our vectors into probability vectors in order to evaluate $d_{KL}$. 
+First, we use the Euclidean distance, which  can be interpreted as matching
+the parcel $i$ to the parcel $j$ whose feature vector $x^b_j$ is the closest
+to $x^a_i$. Then, we use the cosine similarity, which is minimized when two
+feature vectors are colinear. Lastly, we use the Kullback-Leibler divergence,
+which measures the difference between two probability distributions in terms
+of their relative entropy. Note that we need to convert our vectors into
+probability vectors in order to evaluate $d_{KL}$. 
 
 % We therefore normalize each feature vector $x$ such that $\tilde{x} = \frac{x}{\rVert x \lVert_\infty}$, thus $\sum_{l=1}^d \tilde{x}(l) = 1$, where $\tilde{x}(l)$ is the $l$-th coordinate of $\tilde{x}$.
 
@@ -125,10 +193,28 @@ Lastly, we use the Kullback-Leibler divergence, which measures the difference be
 
 \subsection{Data and Preprocessing}
 \label{sec:fingerprint}
-For this work we randomly selected 20 subjects from the S500 group of the Human Connectome Project (HCP), all preprocessed with the HCP minimum pipeline~\cite{Glasser2013}. Fiber orientation distributions functions where computed using spherical constrained deconvolution with a spherical harmonic order of 8. Probabilistic tractography was then performed using 1000 seeds per vertex of the cortical mesh provided with the HCP data. For each subject, we computed a connectivity matrix by counting the number of streamlines that connect each pair of vertices of the cortical mesh. Each row in the matrix is a vertex connectivity vector, representing the probability that a connection exists between a surface vertex and the rest of the surface's vertices.
+For this work we randomly selected 20 subjects from the S500 group of the Human
+Connectome Project (HCP), all preprocessed with the HCP minimum
+pipeline~\cite{Glasser2013}. Fiber orientation distributions functions where
+computed using spherical constrained deconvolution with a spherical harmonic
+order of 8. Probabilistic tractography was then performed using 1000 seeds per
+vertex of the cortical mesh provided with the HCP data. For each subject, we
+computed a connectivity matrix by counting the number of streamlines that
+connect each pair of vertices of the cortical mesh. Each row in the matrix is
+a vertex connectivity vector, representing the probability that a connection
+exists between a surface vertex and the rest of the surface's vertices.
 %\subsection{Computing a parcel's connectivity fingerprint}
 
-Given a whole brain cortical parcellation, we compute the connectivity fingerprint of each parcel by averaging the connectivity fingerprint of its vertices. Because the mesh's vertices are coregistered across subjects~\cite{Glasser2013}, we are able to compare the connectivity fingerprints across subjects. The criterion to compute the parcel matching between two subjects is the similarity between connectivity fingerprints. That is, we match two parcels if they are connected to the rest of the brain in a similar manner. Due to the distance bias that occurs in tractography, a parcel tends to be highly connected to the vertices that compose it. To prevent the matching to be influenced by this bias, we disconnect each parcel from its own vertices.
+Given a whole brain cortical parcellation, we compute the connectivity fingerprint
+of each parcel by averaging the connectivity fingerprint of its vertices. Because
+the mesh's vertices are coregistered across subjects~\cite{Glasser2013}, we are
+able to compare the connectivity fingerprints across subjects. The criterion to
+compute the parcel matching between two subjects is the similarity between
+connectivity fingerprints. That is, we match two parcels if they are connected
+to the rest of the brain in a similar manner. Due to the distance bias that
+occurs in tractography, a parcel tends to be highly connected to the vertices
+that compose it. To prevent the matching to be influenced by this bias, we
+disconnect each parcel from its own vertices.
 
 %The main advantages of using this public data base are the following. First, each subject possess a dense mesh representing their cortical surface, which we use to create seed-points for tractography. Then, all the mesh's vertices are coregistered across subjects, a property that allows us to compare connectivity fingerprints across subjects. Additionally, each subject possess the Desikan Atlas~\cite{Desikan2006} parcellation already computed over their cortical mesh. Finally, for each cortical mesh, there are also different z-score maps representing the response to different stimuli obtained with functional MRI (fMRI)~\cite{Barch2013}. These z-score maps are used to compute a functional parcellation for each subject.
  
@@ -182,17 +268,41 @@ Figure \ref{fig:real} shows that OT performs best with an average of 98\%$\pm$6\
 For each subject, we first mask their Lateral Occipital Gyrus using the Desikan atlas. Then, we divide it into 3 parcels using the structural based parcellation technique of Gallardo et al.~\cite{Gallardo2017a}. Once more, we can see on Figure \ref{fig:real} that optimal transport has the highest average accuracy, equal to 92\%$\pm$16\%. It is followed by the cosine similarity, the KL divergence, and the Euclidean distance, whose average accuracies equal 85\%$\pm$17\%, 84\%$\pm$17\%, and 75\%$\pm$17\%
 
 \section{Discussion}
-In this work we proposed a method to match parcels across subjects based on the connectivity fingerprint of a parcel. 
+In this work we proposed a method to match parcels across subjects based on the
+connectivity fingerprint of a parcel. 
 
-We tested our method with four different experiments. In the first experiment our technique correctly matched connectivity fingerprints created in a synthetic way. Specifically, each entry in a fingerprint was sampled from a Binomial distribution, whose parameter was chosen as the corresponding value of a ground truth connectivity matrix. This can be thought as a simulation of the process of tracking in tractography with different number of streamlines. 
+We tested our method with four different experiments. In the first experiment
+our technique correctly matched connectivity fingerprints created in a synthetic
+way. Specifically, each entry in a fingerprint was sampled from a Binomial
+distribution, whose parameter was chosen as the corresponding value of a
+ground truth connectivity matrix. This can be thought as a simulation of the
+process of tracking in tractography with different number of streamlines.
 %This choice of simulation was motivated by the results in Paquette et al. \cite{Paquette2006} which shows that neither additive nor multiplicative noise are adequate cross-subject variability models.
 
-Our second experiment shows that we can correctly match parcels of the Desikan atlas across subjects with a 98\% of correct matches. The parcels of the Desikan atlas are known to have high spatial coherence and consistent connectivity profiles across subjects \cite{DeReus2013}. We therefore use this experiment as a reference point to benchmark our technique.
-The last two experiments show that our technique can match parcels generated with a same criteria, even when they have some spatial variability across-subjects. The first experiment uses parcels created from the functional response to specific motor and visual stimuli, known to be strongly linked to functional connectivity \cite{Osher2016, Penfield1954}. The second one, parcels created from the structural parcellation of the Lateral Occipital Gyrus, a structure documented to have a consistent structural division \cite{ThiebautdeSchotten2016, Gallardo2017a}. 
+Our second experiment shows that we can correctly match parcels of the Desikan
+atlas across subjects with a 98\% of correct matches. The parcels of the Desikan
+atlas are known to have high spatial coherence and consistent connectivity
+profiles across subjects \cite{DeReus2013}. We therefore use this experiment
+as a reference point to benchmark our technique.
+The last two experiments show that our technique can match parcels generated
+with a same criteria, even when they have some spatial variability across-subjects.
+The first experiment uses parcels created from the functional response to specific
+motor and visual stimuli, known to be strongly linked to functional
+connectivity \cite{Osher2016, Penfield1954}. The second one, parcels created
+from the structural parcellation of the Lateral Occipital Gyrus, a structure
+documented to have a consistent structural division \cite{ThiebautdeSchotten2016, Gallardo2017a}. 
 
-It's important to notice that our technique achieved more than a 90\% of correct matches in every experiment with real data. Given that we used 20 subjects, this represents a total of 20x19=380 cross-subject matches. In the case of the Desikan atlas, which possesses 64 parcels, this translates into a total of 24320 matches, from which 98\% where correctly matched. Furthermore, when tested with a paired t-test to compare the number of correct matches, our method always performs significantly better than the other three ($p<10^{-256}$).
+It's important to notice that our technique achieved more than a 90\% of correct
+matches in every experiment with real data. Given that we used 20 subjects, this
+represents a total of 20x19=380 cross-subject matches. In the case of the Desikan
+atlas, which possesses 64 parcels, this translates into a total of 24320 matches,
+from which 98\% where correctly matched. Furthermore, when tested with a paired
+t-test to compare the number of correct matches, our method always performs
+significantly better than the other three ($p<10^{-256}$).
 
-% The fact that OT transport performs well can also imply the kind of transformation which occurs between the connectivity fingerprints of two cross-subject parcellations. 
+% The fact that OT transport performs well can also imply the kind of
+% transformation which occurs between the connectivity fingerprints of two
+%cross-subject parcellations. 
 
 \section{Conclusion}
 In this chapter, we proposed a novel parcel matching method based on Optimal
