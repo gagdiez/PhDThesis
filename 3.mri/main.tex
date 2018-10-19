@@ -22,9 +22,10 @@ the subjects.
 
 \section{A Brief History on Brain Imaging}
 
-Magnetic Resonance Imaging (MRI) and its derivates are the biggest advances in
-medicine of the last 50 years. They allows to study not only the brain, but also
-other internal organs, with an unprecedented level of resolution, and in vivo. 
+Magnetic Resonance Imaging (MRI) and its derivates are among the biggest advances,
+if not the biggest, in medicine of the last 50 years. They allows to study not
+only the brain, but also other internal organs, with an unprecedented level of
+resolution, and in vivo. 
 
 MRI has its origins in 1946, when Felix Bloch~\cite{Bloch1946} and Edward M.
 Purcell~\cite{Purcell1946} simultaneously formalize Nuclear Magnetic Resonance
@@ -34,7 +35,7 @@ influences the signals measured using NMR. To quantify this influence,
 during 1965 Stejskal and Tanner~\cite{Stejskal1965} invent the Pulse Gradient
 Spin Echo sequence that allows to measure the amount of diffusion in a specific
 directions. A couple of years later, NMR use in medicine becomes promising after
-Raymond Damadian shows in 1971 that NMR could be use to differentiate healthy
+Raymond Damadian shows in 1971 that NMR could be used to differentiate healthy
 tissue from tumors~\cite{Reichson1971}. Soon after, in 1973, Paul Lauterbur
 proposes a method based on gradient magnetic fields to reconstruct two
 dimensional MR images~\cite{Lauterbur1973}, which with improvements of Peter
@@ -54,11 +55,11 @@ main interest is brain connectivity. However, in order to explain diffusion MRI
 is necessary to explain MRI and the physics behind it: Nuclear Magnetism.
 
 \begin{figure}[h]
-\includegraphics[width=0.49\textwidth, height=150px]{missing}
-\caption{(A) When an atomic nucleus rests under no constraints, it spins along a
-         random direction. (B) However, when it's put under the effect of a
-         magnetic field, the spin of the nucleus align to its direction and
-         start to precess around it.}
+\includegraphics[width=0.49\textwidth]{3.mri/img/spin.png}
+\caption{(A) When atomic nuclei rest under no constraints, they spins along
+         random directions. (B) However, when putted under the effect of a
+         magnetic field, the spin of the nuclei will align to the magnetic
+         field's direction and start to precess around it.}
 \label{fig:spin}
 \end{figure} 
 
@@ -92,21 +93,20 @@ magnetic field; $\gamma$ is the gyromagnetic ratio of the atom, an intrinsic
 physical property of each atom; and $\vec{J}$ is the angular momentum of the nucleus.
 
 \begin{figure}[h]
-    \includegraphics[width=0.49\textwidth, height=250px]{missing}
+    \includegraphics[width=0.49\textwidth]{3.mri/img/relaxation.png}
     \caption{(A) The higher the strength of the magnetic field, the bigger the angle
              between the nucleus spin and the magnetic field will be. (B) If the
              magnetic field ceases, the spin will return to its initial angle
-             of precession. (C) Different elements relax in different ways.}
+             of precession.}
 \label{fig:relaxation}
 \end{figure} 
 
-The angle at which the spin precess respect of the magnetic field depends on
-the strength of the magnetic field. At higher strength, higher the angle at
-which the precessing happens.
-
-By increasing the energy of the magnetic field, its possible to 'excite' the
-nucleus, moving the precessing towards the plane transversal to the magnetic
-field (Fig. \ref{fig:relaxation} A). However, if the external magnetic field
+The angle formed between the precessing spin and the magnetic field is driven
+by the strength of the magnetic field. The angle between the spin and the magnetic
+field increases as the strength of the magnetic field does (Fig. \ref{fig:relaxation} A).
+In fact, by increasing the energy of the magnetic field enough, it is possible
+to 'excite' the nucleus, moving the precessing towards the plane transversal to
+the magnetic field. However, if the external magnetic field
 goes off, the nucleus will start to 'relax' (Fig. \ref{fig:relaxation} B), and
 the precessing will begin to move once again towards the direction of the
 magnetic field. An important remark is that the precessing angle does not
@@ -142,12 +142,18 @@ tissue.
 \section{Nuclear Magnetic Resonance Imaging}
 
 \begin{figure*}[t]
-    \includegraphics[width=\textwidth, height=150px]{missing}
-    \caption{Scheme of how a MRI works. (A) Only B0. (B) Process of gradient selection by
-             using gradient fields. (C) Now the slice is selected, a frequency
-             encoding gradient is applied to put off phase the spins at each
-             column (D) a phase encoding gradient is then turned on. (E) An
-             acquisition is done and written down in the k-space.}
+    \includegraphics[width=\textwidth]{3.mri/img/mri.png}
+    \caption{Simplified scheme of a MRI acquisition. (A) A MRI scanner is constantly
+             emitting an homogeneous magnetic field $\vec B_0$ an atomic nuclei
+             are precessing around it. (B) A gradient magnetic field is emitted
+             in order to change in a predictable way the frequency of the nuclei.
+             (C) A radio frequency pulse is generated, making certain nuclei to
+             resonate and moving their precession to the transversal plane.
+             (D) Now the slice is selected, a frequency encoding gradient is
+             briefly applied to dephase nuclei in different vertical positions.
+             (E) A phase encoding gradient is then turned on, to change in a predictable
+             way the frequency in every horizontal position. (F) An acquisition
+             is done and written down in the k-space.}
      \label{fig:mri}
 \end{figure*}
 
@@ -156,10 +162,10 @@ MRI. A MR scanner is a machine able to create strong magnetic fields and radio
 frequency pulses in different frequencies. Particularly, while functioning
 a MR scanner is constantly emitting an homogeneous magnetic field referred as $\vec B_0$
 (Fig. \ref{fig:mri} A). If we place a coil in the plane transversal to $\vec B$,
-an emit a radio frequency pulse with at the frequency of hydrogen, we will be
+and emit a radio frequency pulse at the frequency of hydrogen, we will be
 able to measure a signal coming from the body. This measure will represent the
 mixture of all the signals generated by different tissues. What we are interested
-in, is in separate the signal coming from different places on the body, in order
+in, is to separate the signal coming from different places on the body, in order
 to compare them after. A necessary first step to disentangle the different
 contributions of each tissue is to do slice selection. 
 
@@ -167,8 +173,8 @@ Slice selection makes use of a gradient magnetic field. A gradient is a magnetic
 field which strength varies linearly along a specific direction. Following the
 Larmor equation (eq. \ref{eq:larmor}) we can predict that, nucleus along the
 gradient will change their spin frequency in a predictable way. Particularly,
-applying a gradient $B(z) \hat z$ in a specific direction (Fig \ref{fig:mri} B),
-will induce an frequency to the nuclei with magnetic momentum $\vec \mu$ of:
+applying a gradient $B(z) \hat z$ in a specific direction (Fig. \ref{fig:mri} B),
+will induce a frequency to the nuclei with magnetic momentum $\vec \mu$ of:
 
 \begin{equation}
 \label{eq:gradient}
@@ -178,11 +184,11 @@ will induce an frequency to the nuclei with magnetic momentum $\vec \mu$ of:
 Then if a radio frequency (RF) pulse with a frequency of $w(z_0)$ is generated,
 only the spins in the position $z_0 \hat z$ will start to resonate. Therefore,
 the signal obtained by the transversal coil will only correspond to the spins in
-the slice at position $z_0 \hat z $. It's important to state that, because of
+the slice at position $z_0 \hat z $ (Fig. \ref{fig:mri} C) . It's important to state that, because of
 hardware limitations, it's impossible to generate a RF pulse in an exact frequency.
 What actually happens is that the pulse is generated for a small slice of
 frequencies, meaning that the spins in a small band around $z_0$ will also
-resonate (Fig. \ref{fig:mri} A).
+resonate.
 
 So far, all of the spins inside of the slice are precessing in the same way.
 We can think of the slice as a two dimensional matrix, with two coordinates:
@@ -197,17 +203,17 @@ all of the spins along $\hat y$ start to precess at a frequency that depends
 on their position (Eq. \ref{eq:gradient}). After the gradient is shut down, the
 spins will return to precess all at the same velocity, but off phase, since they 
 where separated by the previous gradient. This is, the spins of each row will
-have the same angular velocity, but a different phase (Fig. \label{fig:mri} B).
+have the same angular velocity, but a different phase (Fig. \ref{fig:mri} D).
 
 Then, $\vec G_{\nu}$ is applied in the orthogonal direction ($\hat y$).
 Now it will happen that: the spins of each row will be oscillating in a
 different phase, because of $\vec G_{\phi}$ and the spins of each row will be
 oscillating at a different velocity, following the new gradient $\vec G_{\nu}$
-(Fig. \label{fig:mri} C).
+(Fig. \ref{fig:mri} E).
 
 If we sample the signal using a coil over the direction $\hat x$, we will obtain
-as many data points as columns. Each data point will have a the mixture of all
-the signals the rows.
+as many data points as columns. Each data point will have a mixture of all
+the signals the rows (Fig. \ref{fig:mri} F).
 However, each data point will comprise the difference in phase and the
 difference in frequency that we applied to the matrix. By iteratively
 measuring these data points, changing only the phase encoding gradient, we
@@ -219,13 +225,18 @@ transform of the k-space, decodes the image of the tissue being sampled.
 \section{Diffusion MRI}
 
 \begin{figure*}[t]
-    \includegraphics[width=\textwidth, height=150px]{missing}
-    \caption{Scheme of how a diffusion MRI works. (A) A first diffusion gradient
-             is applied, making the nuclei go off phase between them. (B) 
-             After a $\Delta$ time, the same gradient is applied in the opposite
-             direction. (C) The difference in phase is created by the diffusion
-             process. (D) The off phase precessing is translated into lesser
-             signal.}
+    \includegraphics[width=\textwidth]{3.mri/img/diffusion.png}
+    \caption{Simplified scheme of how diffusion is measured. We illustrated
+             in the same plane as the gradient's direction so simplify the figure.
+             (A) A first gradient field is applied, and the nuclei in the same
+             rows start to precess in phase. (B) After some time, a gradient
+             with the same strength is applied in the opposite direction. This
+             gradient should cancel the phase shift induced by the first one.
+             However, the particles undergoing diffusion would have change
+             place. (C) Nuclei precessing at different phases will cause a
+             destructive interference between them. (D) The off phase precessing
+             is translated into lesser signal respect to the image acquired with
+             no diffusion gradients.}
      \label{fig:diffusion_gradient}
 \end{figure*}
 
@@ -245,16 +256,16 @@ during the relaxation period in MRI can be affected by the process of diffusion.
 In order to characterize the effects of diffusion in nucleus relaxation, a
 new experiment is devised. Imagine that after applying the RF pulse to do
 slice selection, we apply two gradient fields (called diffusion gradients), one
-after the other, but in opposite directions (Fig. \ref{fig:diffusion_gradient} A).
+after the other, with the same strength but in opposite directions (Fig. \ref{fig:diffusion_gradient} A).
 As explained in section \ref{sec:nm}, this will induce two phase shifts to the nuclei.
 The first gradient will make them go off phase, while the second one should
 cancel the first, and put them back in phase. However, the particles undergoing
 diffusion would have changed place, and therefore, change their phase differently
-(Fig. \ref{fig:diffusion_gradient} B). The sections of the sample with nuclei
-precessing at different phase will cause a destructive interference between them,
+(Fig. \ref{fig:diffusion_gradient} B). Nuclei precessing at different phase on
+a same sections of the sample will cause a destructive interference between them,
 resulting in a lower signal. The ratio between the signal obtained with 
 diffusion gradients and the one without them quantifies the amount of ongoing
-diffusion (Fig. \ref{fig:diffusion_gradient} D).
+diffusion (Fig. \ref{fig:diffusion_gradient} C).
 
 In 1956, H.C. Torrey \cite{Torrey1956} extends the Bloch Equations~\cite{Bloch1946}
 in order to quantify the effects of diffusion in nucleus relaxation when
@@ -324,11 +335,13 @@ Fourier integral can be solved analytically, and the solution is the same
 as the one obtained by Stejskal and Tanner (Eq. \ref{eq:stejskal_tanner})
 
 \begin{figure*}[h]
-    \includegraphics[width=\textwidth, height=150px]{missing}
+    \includegraphics[width=\textwidth]{3.mri/img/models.png}
     \caption{Comparison of different models in the reconstruction of diffusion
-             signal. (A) Diffusion tensor imaging models the signal as tensors.
-             (B) Constrained Spherical Deconvolution models it as the convolution
-             between a response signal, and a kernel.}
+             signal: (A) Diffusion Tensor Imaging, (B) Mean Apparent Propagator (MAP)-MRI,
+             (C) Q-Ball Imaging, and (D) Watson distributions of NODDI. It can
+             be seen that DTI finds an
+             average orientation, where Q-Ball, MAPMRI and SMT find crossing
+             structures. This image was adapted from Fick~\cite{Fick2017} (2017).}
      \label{fig:dwi_models}
 \end{figure*}
 
@@ -346,7 +359,7 @@ $$
     \begin{pmatrix}
              D_{xx} & D_{xy} & D_{xz} \\
              D_{xy} & D_{yy} & D_{yz} \\
-             D_{xz} & D_{yz} & D_{zz}    
+             D_{xz} & D_{yz} & D_{zz} 
     \end{pmatrix}.
 $$
 
@@ -364,11 +377,14 @@ between the signal attenuation and the diffusion propagator
 different angles with different b-values. Either using one b-value (singel shell)
 or multiple b-values (multi shell), HARDI techniques rely on taking acquisitions
 across many different angles, in order to reconstruct the true diffusion propagator.
-Notable examples of HARDI are DSI~\cite{Wedeen2008},  QSI~\cite{Callaghan1991},
-Q-Ball Imaging~\cite{Tuch2004}, CHARMED~\cite{Assaf2005}, and
-Constrained Spherical Deconvolution~\cite{Tournier2004}. While each technique
+Notable examples of High Angular Resolution Diffusion Imaging (HARDI) are Diffusion
+Spectrum Imaging (DSI)~\cite{Wedeen2008}, Q-space Imaging (QSI)~\cite{Callaghan1991},
+Q-Ball Imaging~\cite{Tuch2004}, Composite hindered and restricted model of diffusion (CHARMED)~\cite{Assaf2005},
+Mean Apparent Propagator (MAP)-MRI~\cite{Ozarslan2013}, 
+Constrained Spherical Deconvolution~\cite{Tournier2004}, and Neurite
+Orientation Dispersion and Density Imaging ( NODDI~\cite{Zhang2012}. While each technique
 relies in different assumptions about the diffusion propagator,
-they all try to capture multiple fiber directions with in the same imaging
+they all try to capture multiple fiber directions within the same imaging
 voxel. HARDI acquisitions are currently being improved every day with better 
 material and better reconstruction algorithms.
 
@@ -394,7 +410,7 @@ The field of tractography is not exempt of problems, most state state-of-the-art
 algorithms create about four time more false‐positive tracts than true‐positive
 ones~\cite{Maier-hein2017}. Also, most of them suffer from gyral bias, in which tractography bundles
 are biased towards finishing in gyral crowns rather than sulcal banks~\cite{VanEssen2014}.
-However, tractography has shown to be able to being able to recover some major
+However, tractography has shown to be able to recover some major
 bundles in humans~\cite{Catani2008}. Also, it has been validated using high-resolution
 postmortem diffusion imaging and tractography in Old World monkeys. Particularly,
 Donahue et al.\cite{Donahue2016} found a correlation
@@ -412,8 +428,8 @@ activity, fMRI gives us a way to study brain function. While not central to our
 thesis, we do believe that at least a brief description of how functional MRI
 (fMRI) works should be given.
 
-When a region of the brain is activated by a cognitive task, the additional
-neural firing in a locally increased energy requirement~\cite{Glover2011}.
+When a region of the brain is activated by a cognitive task, the local firing
+of neurons generates a higher energy requirement~\cite{Glover2011}.
 The brain responds by adjusting its blood supply to the region in a process
 known as the haemodynamic response. This increase in blood flow produces an
 increase in the ratio of oxygenated hemoglobin relative to deoxygenated hemoglobin

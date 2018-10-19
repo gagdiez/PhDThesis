@@ -21,7 +21,7 @@ could provide key information in unraveling brain organization.
 Cerebral dissections~\cite{Meynert1872, Brodmann1909, Gray1918},
 and the injection of chemical markers~\cite{Schmahmann2006, Stephan2013} used to
 be the only way to map brain axonal connectivity. Such methodologies are highly
-invasive and can only be use in post-mortem studies. Nowadays, the advent of
+invasive and can only be used in post-mortem studies. Nowadays, the advent of
 Diffusion Magnetic Resonance Imaging (dMRI) allows to non-invasively quantify
 the diffusion of water molecules in live tissue as the white-matter. Under
 normal unhindered conditions, water particles diffuse randomly in a process
@@ -43,7 +43,7 @@ connectivity (extrinsic connectivity), and an efficient technique to divide the
 brain in regions with homogeneous extrinsic connectivity~\cite{Gallardo2017a}. Our
 connectivity model is based on histological results obtained in the macaque
 brain, and accounts for the across-subject variability in the human brain
-connectivity. Our parceling technique uses a hierarchical clustering approach,
+connectivity. Our parcellation technique uses a hierarchical clustering approach,
 letting us comprise multiple granularities of the same brain parcellation.
 Also, our technique can create both single subject and groupwise parcellations
 of the whole cortex, allowing to study brain connectivity at the single subject
@@ -74,14 +74,14 @@ brain. Some white matter pathologies, such as tumors or traumatic brain injury,
 hampers tractography, difficulting to infer which pathways are affected. We 
 present a technique that infers the affected tracts by aggregating spatial
 information from healthy subjects while taking into account the diffusion
-information of the patient. In particular, we register the tracts of each
-healthy subject to the patient, and make each healthy patient 'vote' for a
+information of the patient. Particularly, we register the tracts of each
+healthy subject to the patient, and make each healthy patient's 'vote' for a
 tract on each voxel of the DWI image of the patient. Our technique weights the
 vote of each subject based on how the voted pathway is supported by the patient's 
-diffusion data. This is, if the diffusion data of our patient is consistent with
+diffusion data, Meaning, if the diffusion data of our patient is consistent with
 the direction of the voted pathway, the vote has a higher weight. We show that
-our technique achieves higher precision than Majority Voting at the cost of
-having lower sensitivity.
+our technique achieves higher precision than Majority Voting\cite{Xu1992} at
+the cost of having lower sensitivity.
 
 \section*{Organization of this Thesis}
 
@@ -113,7 +113,7 @@ detect brain activation in response to functional or cognitive tasks in the
 brain using Functional MRI.
 
 \subsubsection{Chapter \ref{ch:brain_mapping}: Mapping the Brain: A review of brain parcellations.}
-Neuroscientist have long thought of the brain as a mosaic of interconnected
+Neuroscientists have long thought of the brain as a mosaic of interconnected
 regions. This simplification allows to abstract the complex neuronal network
 that underlies cognition. Until today, it's not clear that a unique and true
 division of the human brain exists. Different modalities have been used to
@@ -126,7 +126,7 @@ which they are based, and present the most notable parcellations of each.
 \subsubsection{Chapter \ref{ch:structural_parcellation}: Groupwise Structural Parcellation of the Whole Cortex: A Logistic Random Effects Model Based Approach}
 In this chapter, we propose a parsimonious model for the extrinsic connectivity
 and an efficient parceling technique based on clustering of tractograms. 
-Our technique allows the creation of single subject and groupwise parcellations
+Our parcellation technique allows the creation of single subject and groupwise parcellations
 of the whole cortex. We show that our technique creates parcellations in
 agreement with anatomical, structural and functional parcellations extant in 
 the literature.
@@ -143,7 +143,7 @@ our method achieves the highest number of correct matches.
 In this chapter, we introduce a label-fusion technique to infer the location of
 brain pathways on a target subject by aggregating information of template subjects.
 Our technique weights the vote on a Majority Voting based on how the
-voted pathway is supported by the target's diffusion data. This is, if the
+voted pathway is supported by the target's diffusion data. Meaning, if the
 diffusion data of our target is consistent with the direction of the voted pathway,
 the vote has a higher weight. We show that
 our technique achieves higher precision than Majority Voting at the cost of
