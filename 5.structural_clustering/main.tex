@@ -86,19 +86,19 @@ cortex in agreement with extant parcellations.
 We validate our technique by taking advantage of data available from the Human
 Connectome Project (HCP). Using our technique, we compute single subject and a
 groupwise parcellations. In this work we will focus on the groupwise case. For
-results of our method on the single-subject case please refer to \citet{Gallardo2017}.
+results of our method on the single-subject case please refer to Gallardo et al.~\cite{Gallardo2017}
 Here, we first assess the consistency of our groupwise parceling technique by
 comparing the groupwise parcellations of three disjoint groups of 46 subjects
 from the HCP. We also show that our technique computes a similar parcellation to
-the one obtained by \citet{ThiebautdeSchotten2016} when parceling only the frontal
+the one obtained by Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} when parceling only the frontal
 cortex. Later, to test the functional specialization of our frontal lobe parcels,
 we use a data-base of meta-analysis of fMRI studies \citep{Yarkoni2011}, as in
-\citet{ThiebautdeSchotten2016}. After, we show that our groupwise parcels subdivide
+Thiebaut de Schotten et al.~cite{ThiebautdeSchotten2016}. After, we show that our groupwise parcels subdivide
 some well-known anatomical structures by comparing our results against Desikan's
 atlas~\citep{Desikan2006}. Also, we show the functional specialization of some of
-our parcels by comparing against results from \citet{Glasser2013}. Finally, we
+our parcels by comparing against results from Glasser et al.~\cite{Glasser2013}. Finally, we
 compare our groupwise parcellation of 138 subjects against the multi-modal
-parcellation of \citet{Glasser2016}. We show that, while the parcellations
+parcellation of Glasser et al.~\cite{Glasser2016}. We show that, while the parcellations
 boundaries differ, our parcels show similar or better functional specialization,
 specially for motor related tasks.
 
@@ -110,6 +110,7 @@ data. We then discuss our results and position ourselves with respect to the sta
 of the art in the Discussion section. Finally, in the last section we provide our
 conclusions.
 %
+\vspace{20px}
 \section{Methods}
 %
 \subsection{Cortical Connectivity Model and Tractography}
@@ -123,8 +124,11 @@ intra-cluster and across-subject variability in the connectivity. We formalize t
 %
 \begin{equation}
     \label{eq:notation}
-    K = \bigcup_{i=1}^k K_i , \forall_{1 \leq i,j \leq k}, i \neq j \rightarrow K_i \cap K_j = \emptyset \land \on{conn}(K_i) \neq \on{conn}(K_j)
+    K = \bigcup_{i=1}^k K_i
 \end{equation}
+\begin{equation*}
+    \forall_{1 \leq i,j \leq k}, i \neq j \rightarrow K_i \cap K_j = \emptyset \land \on{conn}(K_i) \neq \on{conn}(K_j)
+\end{equation*}
 %
 where the set of points on the cortex $K$ is the disjoint union
 of each cluster $K_i$ and $\on{conn}(\cdot)$ is the extrinsic connectivity
@@ -147,13 +151,11 @@ trials, where we get a value for the connection from our seed with other points
 (1 if they connected by the streamline, 0 if not)~\citep{Behrens2003a}, then, we
 can model the tractogram of the subject $s$ in the seed-point $p$ as:
 %
-\begin{equation}
+\begin{align}
     \label{eq:tractogram}
-    T_{sp} = 
-      [P(\rv C_{spi}=1)]_{1 \leq i \leq n} =
-      [\theta_{spi}]_{1 \leq i \leq n}, ~~ \rv C_{spi} \sim \on{Bernoulli}(\theta_{spi})
-    \enspace,
-\end{equation}
+    T_{sp} &= [P(\rv C_{spi}=1)]_{1 \leq i \leq n} \\
+           &= [\theta_{spi}]_{1 \leq i \leq n}, ~~ \rv C_{spi} \sim \on{Bernoulli}(\theta_{spi}), \nonumber
+\end{align}
 %
 where $\rv C_{spi}$ is a Bernoulli random variable\footnote{For the sake of
 clarity we denote all random variables with a tilde, e.g. $\rv C$.} 
@@ -168,10 +170,10 @@ model, each element in a tractogram comes from a random variable depending on
 the point's cluster along with its intra-cluster and across-subject variability:
 \begin{equation}
     \label{eq:tractogram_rv}
-        p \in K_c \rightarrow
+        p \in K_c\rightarrow
         \rv T_{sp} = 
         [P(\rv C_{spi}=1 | \on{conn}(K_c), ~\rv \epsilon_{ci}, ~\rv \epsilon_{si})]_{1 \leq i \leq n}
-        \enspace ,
+        \enspace
 \end{equation}
 %
 in this case, the point $p$ belongs to the cluster $c$;  $\rv \epsilon_{ci}$ 
@@ -198,10 +200,11 @@ each point $p$:
 \begin{equation}
     \label{eq:ran_eff_model}
     \on{logit}(\rv T_{sp}) = \beta_{c} + \rv \epsilon_{c} + \rv \epsilon_{s} \in \R^n,
-    \quad
+\end{equation}
+\begin{equation*}
     ~ \rv \epsilon_{c} \sim \N(\vec 0, \sigma_c^2 Id),
     ~ \rv \epsilon_{s} \sim \N(\vec 0, \sigma_s^2 Id),
-\end{equation}
+\end{equation*}
 %
 where $\epsilon_{c}$ and $\epsilon_{s}$ represent the intra-cluster and 
 across-subject variability respectively. According to GLM theory 
@@ -212,10 +215,21 @@ transformed:
     \on{logit}^{-1}(\beta_c) = E(\rv T_{sp}) = \on{conn}(K_c) \enspace.
 \end{equation}
 
-The choice of logit as link function is based on the work of \citet{Pohl2007}.
-In their work, \citet{Pohl2007} show that logit function's codomain is a
+The choice of logit as link function is based on the work of Pohl et al.~\cite{Pohl2007}.
+In their work, Pohl et al.~\cite{Pohl2007} show that logit function's codomain is a
 Euclidean space, which allows us to transform and manipulate the tractograms 
 in a well-known space.
+%
+\begin{figure*}[t]
+    \includegraphics[width=\textwidth]{5.structural_clustering/img/groupwise_parcellations.png}
+    \caption{Groupwise parcellations of 3 disjoint groups of 46 people each.
+             We show results from the same dendrogram cut to get 6 parcels (upper)
+             and 55 parcels (lower). Labels with best overlap in upper figures share
+             the same color. Notice that there are two different shades of blue for 
+             the group C.}
+    \label{fig:groups}
+\end{figure*}
+
 %
 \subsection{Single Subject and Groupwise Parceling Methodologies}
 \label{sec:parceling_methodologies}
@@ -234,7 +248,7 @@ distributions, e.g. it is a Gaussian mixture model.
 
 To solve the Gaussian mixture model and find the clusters, we use a modified
 Agglomerative Hierarchical Clustering (AHC) algorithm. This was inspired by the
-method of \citet{Moreno-Dominguez2014}. To enforce the local coherence
+method of Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014}. To enforce the local coherence
 criterion we also modify the algorithm to accept one parameter: the minimum size
 of the resulting clusters. Clusters smaller than this size are merged with
 neighbors, i.e. physically close clusters in the cortex. As we are working in
@@ -252,12 +266,12 @@ direct seed correspondence across subjects, as in the HCP data set, our model
 lets us remove the subject variability of each seed's tractogram by calculating
 the expected value across subjects:
 %
-\begin{equation}
+\begin{align}
     \label{eq:expected_subject}
-    E_s(g(\rv T_{sp})) = E_s(\beta_{c} + \rv \epsilon_{c} + \rv \epsilon_{s}),
-    = \beta_{c} + \rv \epsilon_{c} + E_s(\rv \epsilon_{s})
-    = \beta_{c} + \rv \epsilon_{c}.
-\end{equation}
+    E_s(g(\rv T_{sp})) &= E_s(\beta_{c} + \rv \epsilon_{c} + \rv \epsilon_{s}), \\
+                       &= \beta_{c} + \rv \epsilon_{c} + E_s(\rv \epsilon_{s}) 
+                       = \beta_{c} + \rv \epsilon_{c}. \nonumber
+\end{align}
 % 
 where the last equality is due to $E_s(\rv \epsilon_s)=0$
 (Eq. \ref{eq:ran_eff_model}). Since in our model the variabilities are normally
@@ -266,6 +280,9 @@ subjects by averaging a seed's tractograms across subjects. This allows us to cr
 population-representative tractograms for each seed free of across-subject 
 variability, which then can be clustered to create a groupwise parcellation.
 %
+
+
+
 \section{Experiments and Results}
 %
 In the previous section we presented a model for the cortical extrinsic 
@@ -277,19 +294,19 @@ preprocessing step of tractography was made. Then, we elaborate
 in detail how we applied our technique. Later, we show that our groupwise 
 technique creates results consistent when parceling different groups. Also,
 we show that our techniques creates parcels in accordance with those by 
-\citet{ThiebautdeSchotten2016} when parceling only the frontal lobe. Then,
+Thiebaut de Schotten~\cite{ThiebautdeSchotten2016} when parceling only the frontal lobe. Then,
 we present a proof-of-principle that our parcels are related to brain anatomy
 and functional specialization. Most of the results in this section are focused
 in the groupwise case, for further information on the single-subject technique
-please refer to \citet{Gallardo2017}. Finally, we study the (dis)similarity
-between our groupwise parcellation and that of \citet{Glasser2016}.
+please refer to Gallardo et al.~\cite{Gallardo2017}. Finally, we study the (dis)similarity
+between our groupwise parcellation and that of Glasser et al.~\cite{Glasser2016}.
 %
 \subsection{Data and Preprocessing}
 %
 \subsubsection{Human Connectome Project Dataset}
 A total of 138 subjects (65 males and 73 females, ages 31-35) were randomly 
 selected from the group S500 of the Human Connectome Project (HCP). For
-information on the acquisition protocols please refer to \citet{VanEssen2012}.
+information on the acquisition protocols please refer to Van Essen et al.~\cite{VanEssen2012}.
 Every subject has been already preprocessed with the HCP minimum 
 pipeline~\citep{Glasser2013}. Also, each subject's cortical surface is
 coregistered and represented as a triangular mesh of approximately 32000
@@ -332,7 +349,7 @@ proposed technique (sec. \ref{sec:parceling_methodologies}). The obtained groupw
 parcellation at a granularity of 55 parcels is shown in fig.
 \ref{fig:single_and_group}.
 %
-\begin{figure*}
+\begin{figure*}[t]
     \includegraphics[width=\textwidth]{5.structural_clustering/img/single_and_group.png}
     \caption{Examples of two single-subject parcellations and the groupwise parcellations
     		 computed with our technique. All the parcellations shown have 55 parcels.
@@ -351,22 +368,13 @@ on each. The resulting groups had: 24 females, 22 males (group A); 23 females,
 their groupwise parcellation. The resulting parcellations at two different levels 
 of granularity are shown in fig. \ref{fig:groups}.
 %
-\begin{figure*}
-    \includegraphics[width=\textwidth]{5.structural_clustering/img/groupwise_parcellations.png}
-    \caption{Groupwise parcellations of 3 disjoint groups of 46 people each.
-             We show results from the same dendrogram cut to get 6 parcels (upper)
-             and 55 parcels (lower). Labels with best overlap in upper figures share
-             the same color. Notice that there are two different shades of blue for 
-             the group C.}
-    \label{fig:groups}
-\end{figure*}
 %
 To study the similarity between the obtained groupwise parcellations, we compared
 them at different levels of granularity using the adjusted Rand
 index~\citep{Hubert1985}. To have a baseline for the comparisons, we generated
 random parcellations of the cortex and computed the similarity between them. 
 We computed two types of random parcellations: The first one is an homogeneous
-random parcellation with $n$ parcels, inspired in a method used by \citet{Paristot2015}. 
+random parcellation with $n$ parcels, inspired in a method used by Parisot et al.~\cite{Paristot2015}. 
 To compute it, we start by choosing $n$ starting points in the cortex, then, we
 randomly expand each parcel
 on the cortex. By comparing these random parcellations between them we compute 
@@ -388,7 +396,7 @@ of granularity.
     \caption{Examples of synthetic parcellations created to compute a baseline
              adjusted rand index. Parcellations on the left were created by 
              dividing the brain in a homogeneous way, inspired by the random
-             parcellation presented in \citet{Paristot2015}. Parcellations on
+             parcellation presented in Parisot et al.~\cite{Paristot2015}. Parcellations on
              the right were created by randomly merging parcels of a coarse
              parcellation.}
     \label{fig:fake_parcels}
@@ -405,9 +413,9 @@ than 4 standard deviations from the comparison between synthetic hierarchical
 parcels. This results show that our groupwise parceling technique creates
 consistent parcellations.
 %
-\begin{figure*}
+\begin{figure*}[h]
     \centering
-    \includegraphics[width=\textwidth]{5.structural_clustering/img/real_vs_fake_parcellations.png}
+    \includegraphics[width=0.65\textwidth]{5.structural_clustering/img/real_vs_fake_parcellations.png}
     \caption{Adjusted Rand Index obtained when comparing: (red) Group A vs Group B;
              (blue) Group A vs Group C; (green) Group B vs Group C; (purple)
              Synthetic Homogeneous Parcels and (yellow) Synthetic hierarchical
@@ -418,17 +426,17 @@ consistent parcellations.
 \subsection{Relationship with a Frontal Lobe Parcellation}
 Here we assess the agreement of our technique with an state-of-the-art extrinsic 
 connectivity parceling technique. We do so by using our technique to parcellate 
-the frontal lobe and compare our result against that of \citet{ThiebautdeSchotten2016}. 
-In their work, \citet{ThiebautdeSchotten2016} use a principal component analysis (PCA)
+the frontal lobe and compare our result against that of Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016}. 
+In their work, Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} use a principal component analysis (PCA)
 statistical framework to parcellate the frontal lobe. They obtain a parcellation
 with 12 parcels. Then, they show that each one of these parcels possess a functional
 specialization by using the Decode tool\footnote{http://www.neurosynth.org/decode/}
 from Neurosynth \citep{Yarkoni2011}. 
 Thiebaut's parcellation is currently available in Neurovault \citep{Gorgolewski2016}
 as an annotated volume\footnote{http://neurovault.org/collections/1597/}, registered
-on the Colin27 template \citep{Holmes1996}. We downloaded this
+on the Collin27 template \citep{Collins1998}. We downloaded this
 parcellation and projected its parcels into a dense mesh representing the
-cortex of the Colin27 template. The dense mesh had the same amount of vertices
+cortex of the Collin27 template. The dense mesh had the same amount of vertices
 as our chosen HCP subjects, and such vertices were coregistered with the
 HCP subjects' cortical surfaces ones.
 
@@ -454,7 +462,7 @@ HCP subjects' cortical surfaces ones.
 % 
 \vspace{0.3cm}
 \caption*{Table 1. Spatial correlation value reported by Neurosynth for specific
-                   terms in each parcel of \citet{ThiebautdeSchotten2016} and
+                   terms in each parcel of Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} and
                    for our parcels. Enumeration comes from figure~\ref{fig:frontal}.} 
 \end{table*}
 
@@ -462,7 +470,7 @@ From the Desikan Atlas \citep{Desikan2006} of each of our HCP subjects, we
 derived a groupwise mask for the frontal lobe. Then, we computed a groupwise 
 parcellation with our technique, using only the tractograms in the mask. Figure
 \ref{fig:frontal} shows both the parcellation downloaded from Neurovault
-and our groupwise parcellation projected in the Colin template cortical surface.
+and our groupwise parcellation projected in the Collins template cortical surface.
 The figure shows our parcellation with 10 parcels since this level of
 granularity showed the best Rand index against the Thiebaut's parcellation.
 The colors of each parcel in our groupwise parcellation were picked in base to
@@ -475,9 +483,9 @@ specialization when processed with Neurosynth.
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{5.structural_clustering/img/frontal_lobe.png}
-    \caption{\citet{ThiebautdeSchotten2016} parcellation (left) and our groupwise
+    \caption{Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} parcellation (left) and our groupwise
     	     parcellation using only tractograms from the frontal lobe (right).
-             Our parcels are colored after the parcel from \citet{ThiebautdeSchotten2016}
+             Our parcels are colored after the parcel from Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016}
              with which they best overlap.}
     \label{fig:frontal}
 \end{figure*}
@@ -499,10 +507,10 @@ showed to be consistent, achieving an adjusted Rand index of $0.57 \rpm 0.04$.
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{5.structural_clustering/img/3groups_frontal.png}
-    \caption{\citet{ThiebautdeSchotten2016} parcellation (top-left) and our
+    \caption{Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} parcellation (top-left) and our
     		 frontal lobe groupwise parcellations computed over 3 disjoint 
              groups of subjects. Our parcels are colored after the parcel from
-             \citet{ThiebautdeSchotten2016} with which they best overlap.}
+             Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016} with which they best overlap.}
     \label{fig:indices_by_lobe}
 \end{figure*}
 %
@@ -547,7 +555,7 @@ and represent the average activation of 100 subjects. In particular, we used
 the maps related to 
 the following tasks: right hand, foot and tongue movement; face, shape
 recognition  and story categorization. For information on the functional tasks,
-acquisition and processing of this data please refer to \citet{Barch2013}. 
+acquisition and processing of this data please refer to Barch et al.~\cite{Barch2013}. 
 Figure \ref{fig:function_motor} shows our parcels projected over contrasts
 in motor tasks. In particular, our parcels are projected over the following
 contrasts: tongue-average; hand movement-average and foot movement-average. 
@@ -635,7 +643,7 @@ Story & \textbf{8} & -3.24 & 11.92 & 7.41 $\rpm$ 2.50 & 12.02\\ \bottomrule
 %
 \subsection{Relationship with a Multi-Modal Parcellation of the Cortex}
 Finally, we study the (dis)similarities between our groupwise parcellation and that
-of \citet{Glasser2016}. In their work, \citet{Glasser2016} compute a parcellation
+of Glasser et al.~\cite{Glasser2016}. In their work, Glasser et al.~\cite{Glasser2016} compute a parcellation
 of the whole cortex using information from different MRI modalities. In particular,
 they use information from task functional MRI; resting state functional MRI;
 myelin maps computed from T1 and T2 images and cortical thickness. It is important
@@ -645,7 +653,7 @@ their parcellation.
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{5.structural_clustering/img/glasser_and_me.png}
-    \caption{\citet{Glasser2016} parcellation (upper) and our
+    \caption{Glasser et al.~\cite{Glasser2016} parcellation (upper) and our
     		 groupwise parcellations computed from 138 HCP subjects. Both 
              parcellations contain 180 parcels. There's almost no overlap according
              to the adjusted Rand index between them (0.28).}
@@ -658,7 +666,7 @@ extracted a parcellation with the same number of parcels as Glasser's one. Figur
 \ref{fig:glasser_and_me} show both parcellations side by side. 
 We compared both parcellations using the adjusted Rand Index, obtaining a score
 of 0.28. Such low score indicates that there's almost no similarity between our
-result and that of \citet{Glasser2016}. Also, there's no relationship with
+result and that of Glasser et al.~\cite{Glasser2016}. Also, there's no relationship with
 our groupwise parcellation with 55 parcels used in the previous section since
 Glasser's parcels (finest) do not subdivide ours (coarsest).
 Since Glasser's parcellation comes from functional information in the HCP, we
@@ -671,10 +679,10 @@ In particular, histograms a; b and c in fig. \ref{fig:glasser_functional} show
 that their subdivisions of the sensori-motor cortex contain a wide range of 
 z-scores, centered in zero.
 
-\begin{figure*}
+\begin{figure*}[t!]
     \centering
     \includegraphics[width=\textwidth]{5.structural_clustering/img/glasser_functional.png}
-    \caption{\citet{Glasser2016} parcellation (upper) and histograms of 
+    \caption{Glasser et al.~\cite{Glasser2016} parcellation (upper) and histograms of 
              z-score contained in different parcels for different functional
              task. (a) Histogram for parcel 1 for the contrast related to
              Tongue movement. (b) Histogram for parcel 2 for the contrast
@@ -716,16 +724,16 @@ allows us to compute single and groupwise parcellations independently. By doing
 this, we avoid the need to impose constraints between our single and group
 parcellations~\citep{Clarkson2010, Roca2010, Paristot2015}.
 
-Inspired by \citet{Moreno-Dominguez2014}, our technique uses Hierarchical
+Inspired by Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014}, our technique uses Hierarchical
 Clustering to comprise multiple granularities of the same parcellation in a
 dendrogram. This allows us to overcome the need of other techniques~\citep{Paristot2015}
 to specify an expected number of clusters. Hence, we don’t need to recompute the
 whole pipeline each time a new parcellation is required. As in
-\citet{Moreno-Dominguez2014}, we also create the dendrogram using only one
+Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014}, we also create the dendrogram using only one
 comprehensive parameter: the minimum size of each cluster. This
 parameter imposes the local coherence criterion. Our fundamental difference
 with Moreno-Dominguez' technique is how we compare and merge tractograms during
-the clustering process. \citet{Moreno-Dominguez2014} use Centroid
+the clustering process. Moreno-Dominguez et al.~\cite{Moreno-Dominguez2014} use Centroid
 Clustering~\citep{Murtagh1985} with the cosine distance. This can lead to an
 erroneous parcellation since the centroid criterion doesn't minimize the cosine
 distance between points. Also, their method creates dendrograms with inversions
@@ -751,7 +759,7 @@ advantage is that we can retrieve a parcellation from the dendrogram using a
 simple technique: horizontal cut~\citep{Murtagh2011}. While other methods to cut
 the dendrogram exist~\citep{Murtagh2011}, horizontal cut is sufficient to solve
 our Gaussian Mixture Model (eq. \ref{eq:ran_eff_model}) as shown in
-\citet{Gallardo2017}. Finally, even if our algorithm is probably affected by
+Gallardo et al.~\cite{Gallardo2017}. Finally, even if our algorithm is probably affected by
 the dimensionality curse, our parcellations showed to be consistent
 across-groups and in agreement with extant parcellations in the literature.
 %
@@ -781,7 +789,7 @@ temporo-parietal system in pink.
 We showed that our technique obtains results similar to another method extant
 in the literature. We did so by parceling only the frontal and showing the visual
 similarity between our resulting parcels and those obtained by
-\citet{ThiebautdeSchotten2016}. Moreover, the blue, pink and green parcels
+Thiebaut de Schotten et al.~\cite{ThiebautdeSchotten2016}. Moreover, the blue, pink and green parcels
 in fig. \ref{fig:frontal} share not only similar boundaries and location, but
 also functional specialization (Table 1). In some cases our parcels possess even higher
 spatial-correlation with functional task according to
@@ -806,7 +814,7 @@ fact that the seeds located in the Cingulate will end up into the CF after being
 pushed in the white-matter. In the case of the Insula, each subdivision
 showed a specific pattern of connectivity as shown in fig. \ref{fig:conn_fing}. 
 These parcels show a gradient of connections from the occipital lobe to the frontal
-lobe consistent with that of \citet{Ghaziri2015}. In the
+lobe consistent with that of Ghaziri et al.~\cite{Ghaziri2015}. In the
 Lateral-Occipital region, we see a specific pattern of local connectivity which
 cannot be attributed to gyral bias since the Lateral-Occipital covers many sulci
 and gyrus. In the case of the fusiform, it is almost completely contained in one
@@ -845,13 +853,13 @@ specialization in the human brain cortex.
 %
 \subsection{Our Parcels Are Not Similar to Those Obtained by Glasser et al. (2016) But 
 			Possess Better Functional Specialization for Motor Tasks.}
-Our parcels were not related to those of \citet{Glasser2016}. This is shown by the
+Our parcels were not related to those of Glasser et al.~\cite{Glasser2016}. This is shown by the
 obtained adjusted Rand index score between them (0.28). It's important to remark that
-our parcels are purely based on extrinsic connectivity, meanwhile those of \citet{Glasser2016}
+our parcels are purely based on extrinsic connectivity, meanwhile those of Glasser et al.~\cite{Glasser2016}
 do not use dMRI information. Glasser's parcels are mostly based on myelin and functional information.
 In particular, their subdivision of the sensori-motor cortex (green parcels in fig.
 \ref{fig:glasser_and_me}) is mostly based in Myelin maps as shown in Figure 4.a of 
-\citet{Glasser2016}. Because of this, their parcels in the sensori-motor cortex contain 
+Glasser et al.~\cite{Glasser2016}. Because of this, their parcels in the sensori-motor cortex contain 
 a wide range of z-scores when compared with responses to functional stimuli as shown by
 histograms a; b and c in fig.
 \ref{fig:glasser_functional}. In contrast, our parcels in the sensori-motor cortex,
@@ -859,7 +867,7 @@ for a coarser parcellation, show a good overlap with function and are in agreeme
 the motor strip mapping as discussed in the previous section. Also, for the case of story
 categorization; shape recognition and face recognition, our parcels show a similar
 distribution of z-scores (fig. \ref{fig:function_motor}) than those with the highest 
-mean z-scores of \citet{Glasser2016} (parcels d; e and f of  fig. \ref{fig:glasser_functional}).
+mean z-scores of Glasser et al.~\cite{Glasser2016} (parcels d; e and f of  fig. \ref{fig:glasser_functional}).
 %
 \section{Conclusion}
 %

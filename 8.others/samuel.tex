@@ -11,9 +11,36 @@ and Samuel Deslauriers-Gauthier\footnotemark[2]
 \textbf{Abstract:} Information flow between brain regions characterizes their interaction during cognitive tasks. In studying information flow, the segmentation of the cortex into regions of consistent connectivity is crucial. However, most atlases are based on cytoarchitecture or anatomical landmarks and do not consider inter region connectivity. In this work we use a connectivity driven parcellation to retrieve the information flow between brain regions during a motor task. We show that our results are consistent with fMRI information.
 
 \textbf{Introduction:}
-Current theories hold that cognitive tasks emerge from the interaction of brain regions specialized in lower level cognitive tasks [cite]. The information flow trough axonal bundles between those regions characterizes their interactions. Diffusion MRI (dMRI) enables the in vivo exploration of brain long-range physical connections trough axonal bundles, namely extrinsic connectivity, by means of tractography$^1$. However, inherent limitations of dMRI make impossible to determine axonal bundles directionality$^3$. Hence, it's impossible to determinate how different regions interact based only in dMRI information.
+Current theories hold that cognitive tasks emerge from the interaction of brain
+regions specialized in lower level cognitive tasks [cite]. The information flow
+trough axonal bundles between those regions characterizes their interactions.
+Diffusion MRI (dMRI) enables the in vivo exploration of brain long-range physical
+connections trough axonal bundles, namely extrinsic connectivity, by means of
+tractography$^1$. However, inherent limitations of dMRI make impossible to
+determine axonal bundles directionality$^3$. Hence, it's impossible to determinate
+how different regions interact based only in dMRI information.
 
-Magnetoencephalography (MEG)$^*$ is a non-invasive method of measuring the electrical activity of the brain. However, to reconstruct the sources in the brain (the inverse problem) and detect electrical flow in the brain is challenging$^2$. In Deslauriers-Gauthier et al.$^5$, we presented a method to detect sources and the information flow between them in the white matter using a combination of diffusion MRI and EEG. The results presented were based on simulated EEG data and cortical regions obtained from an atlas. Most current atlases are based on cytoarchitecture or anatomical landmarks, lacking information about extrinsic connectivity. Using such parcellations introduce a bias in the estimation and can lead to erroneous connections and conclusions. In Gallardo et al. $^6$ we presented a technique to parcellate the whole cortex based on it's extrinsic connectivity. Here, we apply both techniques over a subject from the Human Connectome Project$^7$ to study the interaction between different brain regions during a hand-movement task. Briefly, we parcellate the subject's cortex based on it's extrinsic connectivity and then detect and estimate the information flow between parcels using connectivity and MEG data. We show that the inferred activated regions and information flow are consistent with results from functional MRI in a hand-movement task$^8$. This not only validates our electrical activity inferring technique$^5$ but also illustrates the strong relationship between axonal connectivity and functionality in hand-movement related tasks. 
+Magnetoencephalography (MEG)$^*$ is a non-invasive method of measuring the
+electrical activity of the brain. However, to reconstruct the sources in
+the brain (the inverse problem) and detect electrical flow in the brain is
+challenging$^2$. In Deslauriers-Gauthier et al.$^5$, we presented a method
+to detect sources and the information flow between them in the white matter
+using a combination of diffusion MRI and EEG. The results presented were based
+on simulated EEG data and cortical regions obtained from an atlas. Most current
+atlases are based on cytoarchitecture or anatomical landmarks, lacking
+information about extrinsic connectivity. Using such parcellations introduce
+a bias in the estimation and can lead to erroneous connections and conclusions.
+In Gallardo et al. $^6$ we presented a technique to parcellate the whole cortex
+based on it's extrinsic connectivity. Here, we apply both techniques over a
+subject from the Human Connectome Project$^7$ to study the interaction between
+different brain regions during a hand-movement task. Briefly, we parcellate the
+subject's cortex based on it's extrinsic connectivity and then detect and
+estimate the information flow between parcels using connectivity and MEG data.
+We show that the inferred activated regions and information flow are consistent
+with results from functional MRI in a hand-movement task$^8$. This not only
+validates our electrical activity inferring technique$^5$ but also illustrates
+the strong relationship between axonal connectivity and functionality in
+hand-movement related tasks. 
 
 \textbf{Methods:} 
 We applied our proposed algorithm to subject 109123 (Male, aged 32-35) of the Human Connectome Project. The MEG data consisted of averaged evoked responses of a motor task where the subject was asked to move either his left or right hand following a visual cue. Fiber orientation distribution functions where computed using constrained spherical deconvolution$^9$.

@@ -3,10 +3,10 @@
 
 \section{Overview}
 In order to infer connections running through the white-matter, or functional
-specialization in the grey-matter, neuroscientist have long relay in postmortem
+specialization in the grey-matter, neuroscientist have long relayed in postmortem
 studies or invasive techniques. The advent of Magnetic Resonance Imaging (MRI)
-allowed for the first time to study brain structure in vivo in a non-invasive
-way. Further developments opened the possibility to quantify which regions
+allowed for the first time to non-invasively study brain structure in vivo.
+Further developments opened the possibility to quantify which regions
 activate during a certain task (or in the absence of), and to estimate gross
 axonal connectivity. In this chapter, we start by introducing some concepts in
 nuclear physics and explain how they are applied in MRI to study the human
@@ -23,7 +23,7 @@ the subjects.
 \section{A Brief History on Brain Imaging}
 
 Magnetic Resonance Imaging (MRI) and its derivates are among the biggest advances,
-if not the biggest, in medicine of the last 50 years. They allows to study not
+if not the biggest, in medicine of the last 50 years. They allow to study not
 only the brain, but also other internal organs, with an unprecedented level of
 resolution, and in vivo. 
 
@@ -34,7 +34,7 @@ after, in 1950, Hahn~\cite{Hahn1950} observes that the physical process of diffu
 influences the signals measured using NMR. To quantify this influence,
 during 1965 Stejskal and Tanner~\cite{Stejskal1965} invent the Pulse Gradient
 Spin Echo sequence that allows to measure the amount of diffusion in a specific
-directions. A couple of years later, NMR use in medicine becomes promising after
+direction. A couple of years later, NMR use in medicine becomes promising after
 Raymond Damadian shows in 1971 that NMR could be used to differentiate healthy
 tissue from tumors~\cite{Reichson1971}. Soon after, in 1973, Paul Lauterbur
 proposes a method based on gradient magnetic fields to reconstruct two
@@ -49,14 +49,14 @@ efficient way to model diffusion in the brain, allowing to start tracking
 brain pathways. In 2003, Lauterbur and Mansfield jointly receive
 the Nobel Prize in Physiology and Medicine for their contributions in MRI.
 
-In the following sections we will review on a deeper way all of the non-invasive
+In the following sections we will review on a deeper way all the non-invasive
 techniques used in this thesis. We will put special emphasis in dMRI, since our
 main interest is brain connectivity. However, in order to explain diffusion MRI
 is necessary to explain MRI and the physics behind it: Nuclear Magnetism.
 
 \begin{figure}[h]
 \includegraphics[width=0.49\textwidth]{3.mri/img/spin.png}
-\caption{(A) When atomic nuclei rest under no constraints, they spins along
+\caption{(A) When atomic nuclei rest under no constraints, they spin along
          random directions. (B) However, when putted under the effect of a
          magnetic field, the spin of the nuclei will align to the magnetic
          field's direction and start to precess around it.}
@@ -144,13 +144,13 @@ tissue.
 \begin{figure*}[t]
     \includegraphics[width=\textwidth]{3.mri/img/mri.png}
     \caption{Simplified scheme of a MRI acquisition. (A) A MRI scanner is constantly
-             emitting an homogeneous magnetic field $\vec B_0$ an atomic nuclei
+             emitting a homogeneous magnetic field $\vec B_0$ an atomic nucleus
              are precessing around it. (B) A gradient magnetic field is emitted
              in order to change in a predictable way the frequency of the nuclei.
              (C) A radio frequency pulse is generated, making certain nuclei to
              resonate and moving their precession to the transversal plane.
              (D) Now the slice is selected, a frequency encoding gradient is
-             briefly applied to dephase nuclei in different vertical positions.
+             briefly applied to put out of phase nuclei in different vertical positions.
              (E) A phase encoding gradient is then turned on, to change in a predictable
              way the frequency in every horizontal position. (F) An acquisition
              is done and written down in the k-space.}
@@ -160,7 +160,7 @@ tissue.
 Having covered the necessary physical notions, we are now ready to introduce
 MRI. A MR scanner is a machine able to create strong magnetic fields and radio
 frequency pulses in different frequencies. Particularly, while functioning
-a MR scanner is constantly emitting an homogeneous magnetic field referred as $\vec B_0$
+a MR scanner is constantly emitting a homogeneous magnetic field referred as $\vec B_0$
 (Fig. \ref{fig:mri} A). If we place a coil in the plane transversal to $\vec B$,
 and emit a radio frequency pulse at the frequency of hydrogen, we will be
 able to measure a signal coming from the body. This measure will represent the
@@ -184,13 +184,13 @@ will induce a frequency to the nuclei with magnetic momentum $\vec \mu$ of:
 Then if a radio frequency (RF) pulse with a frequency of $w(z_0)$ is generated,
 only the spins in the position $z_0 \hat z$ will start to resonate. Therefore,
 the signal obtained by the transversal coil will only correspond to the spins in
-the slice at position $z_0 \hat z $ (Fig. \ref{fig:mri} C) . It's important to state that, because of
+the slice at position $z_0 \hat z $ (Fig. \ref{fig:mri} C). It is important to state that, because of
 hardware limitations, it's impossible to generate a RF pulse in an exact frequency.
 What actually happens is that the pulse is generated for a small slice of
 frequencies, meaning that the spins in a small band around $z_0$ will also
 resonate.
 
-So far, all of the spins inside of the slice are precessing in the same way.
+So far, all the spins inside of the slice are precessing in the same way.
 We can think of the slice as a two dimensional matrix, with two coordinates:
 $\hat x$ being the rows and $\hat y$ being the columns (Fig. \ref{fig:mri} B).
 In order to retrieve the signal generated at each position, two more gradients
@@ -199,10 +199,10 @@ gradient ($\vec G_{\phi}$).
 
 First, $\vec G_{\phi}$ is applied for a short period of time in one of
 the directions, lets say $\hat y$. Following the Larmor equation (eq. \ref{eq:larmor}),
-all of the spins along $\hat y$ start to precess at a frequency that depends
+all the spins along $\hat y$ start to precess at a frequency that depends
 on their position (Eq. \ref{eq:gradient}). After the gradient is shut down, the
 spins will return to precess all at the same velocity, but off phase, since they 
-where separated by the previous gradient. This is, the spins of each row will
+were separated by the previous gradient. This is, the spins of each row will
 have the same angular velocity, but a different phase (Fig. \ref{fig:mri} D).
 
 Then, $\vec G_{\nu}$ is applied in the orthogonal direction ($\hat y$).
@@ -212,7 +212,7 @@ oscillating at a different velocity, following the new gradient $\vec G_{\nu}$
 (Fig. \ref{fig:mri} E).
 
 If we sample the signal using a coil over the direction $\hat x$, we will obtain
-as many data points as columns. Each data point will have a mixture of all
+as many data points as columns. All data points will have a mixture of all
 the signals the rows (Fig. \ref{fig:mri} F).
 However, each data point will comprise the difference in phase and the
 difference in frequency that we applied to the matrix. By iteratively
@@ -242,8 +242,8 @@ transform of the k-space, decodes the image of the tissue being sampled.
 
 While NMRI allows to visualize the different tissue composition of the brain,
 diffusion MRI aims to quantify how the water molecules diffuse in the brain.
-This is of great importance because in fibrous structure such as white matter,
-water molecules tend to diffusion along fibers. Therefore, characterizing diffusion
+This is of great importance because in fibrous structures such as white matter,
+water molecules tend to diffuse along fibers. Therefore, characterizing diffusion
 can help to describe the underlying structure of the white matter. Now, we
 start by explaining the phenomenon of diffusion and its implications in MRI.
 
@@ -298,7 +298,7 @@ image acquired without diffusion gradients, and $D$ the diffusion coefficient.
 In 1985 Le Bihan \cite{LEBIHAN} proposed to gather all the parameters in a
 single one: 
 
-$$ b = \gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) $$ ,
+$$ b = \gamma^2 g^2 \delta^2 \left(\Delta - \frac{\delta}{3}\right) $$,
 
 simplifying the equation \ref{eq:stejskal_tanner} to:
 
@@ -308,7 +308,7 @@ where $b$ has a physical meaning, it represents the reciprocal of the diffusion
 intensity\cite{LEBIHAN}.
 
 In 1991 Callaghan et al. \cite{Callaghan1991} developed the q-space analysis.
-Based on the work of Stejskal and Tanner, Callaghan show that it's possible
+Based on the work of Stejskal and Tanner, Callaghan shows that it's possible
 to express the signal attenuation as:
 
 \begin{equation}
@@ -374,15 +374,15 @@ the isotropic diffusion and the crossing of fibers get modeled as spheres.
 Two factors drive newer imaging techniques: Callaghan's relationship~\cite{Callaghan1991}
 between the signal attenuation and the diffusion propagator 
 (Eq. ~\ref{eq:fourier_callaghan}), and the ability to acquire data across many
-different angles with different b-values. Either using one b-value (singel shell)
+angles with different b-values. Either using one b-value (single shell)
 or multiple b-values (multi shell), HARDI techniques rely on taking acquisitions
-across many different angles, in order to reconstruct the true diffusion propagator.
+across many angles, in order to reconstruct the true diffusion propagator.
 Notable examples of High Angular Resolution Diffusion Imaging (HARDI) are Diffusion
 Spectrum Imaging (DSI)~\cite{Wedeen2008}, Q-space Imaging (QSI)~\cite{Callaghan1991},
 Q-Ball Imaging~\cite{Tuch2004}, Composite hindered and restricted model of diffusion (CHARMED)~\cite{Assaf2005},
 Mean Apparent Propagator (MAP)-MRI~\cite{Ozarslan2013}, 
 Constrained Spherical Deconvolution~\cite{Tournier2004}, and Neurite
-Orientation Dispersion and Density Imaging ( NODDI~\cite{Zhang2012}. While each technique
+Orientation Dispersion and Density Imaging (NODDI)~\cite{Zhang2012}. While each technique
 relies in different assumptions about the diffusion propagator,
 they all try to capture multiple fiber directions within the same imaging
 voxel. HARDI acquisitions are currently being improved every day with better 
@@ -407,7 +407,7 @@ probabilistic map. This process of simulating the random walk of a water
 particles through the white matter is known as Tractography~\cite{Behrens2003a}.
 
 The field of tractography is not exempt of problems, most state state-of-the-art
-algorithms create about four time more false‐positive tracts than true‐positive
+algorithms create about four time more false-positive tracts than true-positive
 ones~\cite{Maier-hein2017}. Also, most of them suffer from gyral bias, in which tractography bundles
 are biased towards finishing in gyral crowns rather than sulcal banks~\cite{VanEssen2014}.
 However, tractography has shown to be able to recover some major
@@ -436,7 +436,7 @@ increase in the ratio of oxygenated hemoglobin relative to deoxygenated hemoglob
 in that specific area (BOLD contrast). Oxygenated hemoglobin is magnetically 
 indistinguishable from brain tissue. On the contrary, deoxygenated hemoglobin
 has 4 unpaired electrons and is highly paramagnetic\cite{Glover2011}. This
-results in local gradients that dephase the nuclei around it, causing destructive
+results in local gradients that put out of phase the surrounding nuclei, causing destructive
 interference in the observed MR signal. Using a special type of pulse sequence
 called gradient refocused echo~\cite{Elster1993} it is possible to make MR
 scanners sensible to this effect.
@@ -457,7 +457,7 @@ This chapter introduced the imaging techniques of MRI, Diffusion MRI and
 Functional MRI. These three methods provide means to study the brain anatomy,
 its axonal organization and function in a non-invasive way. Even when each
 technique has its own limitations, either in spatial or temporal resolution,
-they all allowed to highly advance the state of the art in neuroscience. In
+they all allowed to highly advance the state-of-the-art in neuroscience. In
 the next chapter we will see how these advances in imaging allowed to parcellate
 the brain, making it easier to study brain function.
 

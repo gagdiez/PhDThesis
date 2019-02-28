@@ -51,7 +51,7 @@ single and groupwise parcellations independently, without the need to impose
 constraints between both. Second, in comparing high-dimensional vectors with the
 Euclidean distance, we are probably affected by the curse of dimensionality~\cite{Beyer1999}.
 However, working with the Euclidean distance allows us to generate clusters with
-minimum intra-cluster variance by means of  Ward's Clustering.
+minimum intra-cluster variance by means of Ward's Clustering.
 
 The biggest limitations of our technique come from tractography, the tool
 we used to estimate the brain's extrinsic connectivity. Tractography suffers
@@ -124,21 +124,23 @@ higher weight.
 
 Our technique presents many advantages. First, our technique can achieve accurate
 segmentations even when inferring from few subjects. Second, our technique
-allows infering white matter pathways without the need of tracking. This is of
-special importance in the presence of brain pathology. Third, while we weight the
+allows inferring white matter pathways without the need of tracking. This is
+specially important in the presence of diffuse brain pathologies like traumatic
+brain injuries. Third, while we weight the
 votes of each tract based on dMRI information, we do not need to register
 DWIs. Registering DWIs is a highly time consuming task~\cite{ODonnell2017}.
 Instead, we register tracts across subjects and use them to estimate the diffusion
 information. Fourth, our technique obtains a higher precision than Majority
 Voting, as a trade-off, our technique possess a lower sensitivity. Meaning,
 our technique has less false positives at the cost of more true negatives.
-Fifth, in our simulated experiments, out technique did not label regions with
-severe pathologies.
+Fifth, in our simulated experiments, out technique was able to label a tract
+affected by a local lesion.
+
 
 As with every label-fusion technique, the main limitation of our technique
 is the necessity to do registration. While registration of healthy subjects
-is a well known and studied task, registering subject with a brain pathology
-is still an open problem. Most registering algorithms fail or return inaccurate
+is a well known and studied task, registering subject with severe brain pathologies
+as tumors is still an open problem. Most registering algorithms fail or return inaccurate
 registrations, hampered by the pathology~\cite{Lutkenhoff2014}. In such cases
 where the registration is highly inaccurate, our technique will most probably fail.
 
@@ -182,9 +184,11 @@ being used. This is, our matching technique could help to better understand
 the link between different brain atlases, and improve the comparisons of cortical
 areas between higher primates.
 
-Finally, our label-fusion technique needs more testing in clinical data before
-being able to use it to infer bundles affected by pathologies. Future work
-will aim to keep developing tests with which to benchmark our technique.
+Finally, our label-fusion technique could be use in precision medicine to
+interrogate diffuse pathologies like traumatic brain injuries, even in the presence of small lesions.
+Our technique could be used in the study of infiltrative brain tumors, where
+registration is less of a problem, and in the future, could be extended to larger
+tumors, due to the growing advances in registration based on tumor growth models. 
 
 \section{Conclusion}
 In this thesis we tackled the problem of brain parcellation based on structural

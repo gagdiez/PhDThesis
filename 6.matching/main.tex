@@ -46,8 +46,10 @@ technique that seeks the optimal way to transport mass between probability
 distributions. While KL divergence computes the difference between two
 distributions, OT computes a matching between them. In particular, our method
 adopts a discrete regularized version of Optimal Transport (OT), which has been
-presented in Gayraud et al.~\cite{nathalie} and Courty et al.~\cite{remi} as a
+presented in Gayraud et al.~\cite{Gayraud2017} and Courty et al.~\cite{Tuia2017} as a
 solution to the domain adaptation problem.
+
+
 
 \begin{figure*}[t!]
 \centering
@@ -100,7 +102,7 @@ Optimal Transport (OT) theory boils down to finding the optimal way to transport
 or redistribute mass from one probability distribution to another with respect
 to some cost function. In this work, since the datasets $X^a$ and $X^b$ are
 discrete datasets, we use their empirical probability distributions and apply
-the discrete formulation of OT~\cite{nathalie,remi} to solve the parcel matching
+the discrete formulation of OT~\cite{Gayraud2017,Tuia2017} to solve the parcel matching
 problem. A simplified example of how our method proceeds is presented in
 Figure~\ref{fig:otprob}.
 
@@ -158,7 +160,7 @@ denotes the set of all doubly stochastic matrices whose marginals are the probab
 \begin{equation}
 \gamma_0 = \argmin_{\gamma \in \mathcal{B}} \textnormal{~} \langle \gamma,C \rangle_F + \lambda \sum_{i,j} \gamma(i,j) \textnormal{~log~} \gamma(i,j)
 \end{equation}
-The matrix $C$, where $C(i,j) = \Vert x^a_i - x^b_j \Vert^2_2$, represents the cost of moving probability mass from location $x^a_j$ to location $x^b_i$, in terms of their squared Euclidean distance. The rightmost term is a regularization term based on the negative entropy of $\gamma$ allows us to solve this optimization problem using the Sinkhorn-Knopp algorithm~\cite{cuturi_sh} which improves the computation time.
+The matrix $C$, where $C(i,j) = \Vert x^a_i - x^b_j \Vert^2_2$, represents the cost of moving probability mass from location $x^a_j$ to location $x^b_i$, in terms of their squared Euclidean distance. The rightmost term is a regularization term based on the negative entropy of $\gamma$ allows us to solve this optimization problem using the Sinkhorn-Knopp algorithm~\cite{Cuturi2013} which improves the computation time.
 
 Matrix $\gamma_0$ contains information about the exchange of probability mass between the vectors of $X^a$ and $X^b$. By construction, this exchange depends on the selected cost function. The choice of the squared euclidean distance is motivated both by the fact that it renders the optimization problem convex and because it will allow the parcels to be matched according to the vicinity of their feature vectors. Hence, the origin feature vectors will distribute their corresponding probability mass to the target feature vectors that are closest to them. Consequently, we define $\hat{\mathbf{T}}:\Omega^a \rightarrow \Omega^b$ as $\hat{\mathbf{T}}(x^a_i) = x^b_{\hat{j}}$ where $\hat{j} = \argmax_{j} \gamma_0(i,j)$. Therefore, $i$ will be matched to the parcel $\hat{j}$ that it sent the most mass to.
 

@@ -1,18 +1,19 @@
-\documentclass[10pt, a4paper, twoside, twocolumn, openright]{book}
+\documentclass[a4paper, twoside, openright]{book}
 \parindent0pt  \parskip5pt             % make block paragraphs
-
-%\usepackage{mathtools}
+\usepackage[top=1in, bottom=1.5in, left=0.65in, right=0.65in]{geometry}
+\usepackage{mathtools}
 %\usepackage{algorithm2e}
 %\usepackage{comment}
-%\usepackage[utf8]{includeenc}
-%\usepackage{amssymb}
-%\usepackage{amsfonts}
 %\usepackage[utf8]{includeenc}
 %\usepackage{subcaption}
 %\usepackage[markers,nolists]{endfloat}
 %\captionsetup{compatibility=false}
 
-\usepackage{amsmath, amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{float}
+\usepackage{amsmath, amssymb, amsfonts}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -22,8 +23,7 @@
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage[super, sectionbib]{natbib}
 \usepackage{chapterbib}
-
-\exhyphenpenalty=100000
+\usepackage{pdfpages}
 
 \pagestyle{fancy}
 \fancyhead{}% clear headers
@@ -31,15 +31,17 @@
 
 \numberwithin{equation}{chapter}
 \fancyhead[LE,RO]{\leftmark}
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter. \MakeUppercase{#1}}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\small {\bf \thechapter}. {\MakeUppercase{#1}}}{}}
 \fancyfoot[RO, LE]{Page \thepage}
+
+\setlength{\headheight}{22pt}% ...at least 51.60004pt
 
 \newcommand{\on}{\operatorname}
 \newcommand{\rv}{\tilde}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathcal{N}}
 \newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
-\newcommand{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmax}{argmax}
 \newcommand{\argmin}{arg\,min}
 
 \newcommand{\chapterbib}{
@@ -47,33 +49,67 @@
     \bibliography{bibliography}
     }
 
-\titleformat{\chapter}[display]{\bfseries \LARGE}{Chapter \thechapter}{0pt}{}[\rule{\textwidth}{0.3pt}]
-\titleformat{\section}[block]{\bfseries \large}{\thesection.}{3pt}{}[\vspace{-12px}\rule{0.49\textwidth}{0.3pt}]
-\titleformat{\subsection}[block]{\bfseries \normalsize}{}{0pt}{\vspace{-10px}}[]
+\titleformat{\chapter}[display]
+    {\LARGE }
+    {Chapter \thechapter}
+    {3px}
+    {}
+    [\vspace{5pt} \hrule \hrule \vspace{10pt}]
+
+\titleformat{\part}[display]
+    {\selectfont\Huge}
+    {\hrule \center Part \thepart}
+    {0em}
+    {\center}
+    [\hrule \hrule]
+
+\titleformat{\section}[hang]
+    {} % "bch" - Bitstream Charter, "b" - bold
+    {\bfseries \large\thesection.} % label
+    {0em} % horizontal separation between label and title body
+    {\hspace{-0.4pt} \bfseries \large} % code preceding the title
+    [\hrule \vspace{5pt}] % optional code following the title body 
+
+\titleformat{\subsection}[hang]
+    {} % "bch" - Bitstream Charter, "b" - bold
+    {\bfseries \normalsize} % label
+    {0em} % horizontal separation between label and title body
+    {\bfseries \normalsize} % code preceding the title
+    [\vspace{-0.7em}] % optional code following the title body
+
+%\titleformat{\section}[block]{\bfseries \large}{\thesection.}{3pt}{}[\vspace{-12px}\rule{0.49\textwidth}{0.3pt}]
+%\titleformat{\subsection}[block]{\bfseries \normalsize}{}{0pt}{\vspace{-10px}}[]
+\titleformat{\subsubsection}[runin]{\bfseries \normalsize}{}{0pt}{}[]
 
 \titlespacing{\section}{0pc}{15px}{0pc} %left top ..
 \titlespacing{\chapter}{0pc}{0px}{1pc}
 
-\title{Gallardo's Thesis}
+\title{Inferring and Comparing Structural Parcellations of the Human Brain using Diffusion MRI}
 \author{Gallardo Guillermo}
 \date{\today}
 
 \begin{document}
+\setcounter{tocdepth}{1}
 
 \frontmatter
-    \maketitle
+    \includepdf[pages={1}]{english_cover.pdf}
+    \includepdf[pages={1}]{french_cover.pdf}
     \tableofcontents
+    \onecolumn
     \include{0.front/main}
-
-\mainmatter
+    \twocolumn
     \include{1.introduction/main}
+\mainmatter
+    \part{Background}
     \include{2.neuroanatomy/main}
     \include{3.mri/main}
     \include{4.brain_parcellation/main}
+    \part{Methods}
     \include{5.structural_clustering/main}
     \include{6.matching/main}
     \include{7.multiatlas/main}
-    %\include{8.conclusions/main}
+    \part{Conclusion}
+    \include{9.conclusions/main}
 
 %%%% BIBLIOGRAFIA
 %\bibliography{bibliography}
