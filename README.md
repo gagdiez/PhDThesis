@@ -1,6 +1,6 @@
 ![Screenshots](https://github.com/gagdiez/tesis/blob/master/4.brain_parcellation/img/structural.png)
 
-# Inferring and Comparing StructuralParcellations of the Human Brainusing Diffusion MRI - Guillermo Gallardo
+# Inferring and Comparing Structural Parcellations of the Human Brain Using Diffusion MRI - Guillermo Gallardo
 
 Understanding how brain connectivity is organized, and how this constrains brain functionality is a key question
 of neuroscience. The advent of Diffusion Magnetic Resonance Imaging (dMRI) permitted the in vivo estimation of 
